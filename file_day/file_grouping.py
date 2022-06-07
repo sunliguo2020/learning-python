@@ -28,7 +28,7 @@ file_428=0
 file_414 = 0
 file_1000=0
 
-DIR='./'
+DIR= '../Myfirst/'
 
 fileList = [name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR,name)) ]
 
