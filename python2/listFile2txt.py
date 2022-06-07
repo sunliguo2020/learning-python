@@ -21,7 +21,7 @@ def listFile2txt(dir,file,wildcard=".txt",resursion=0):
 file = open("outfile","w+")
 
 #listFile2txt(dir,file)
-filelist = os.walk("./").next()[2]
+filelist = os.walk("../Myfirst/").next()[2]
 
 file.write(repr(filelist).replace("', '",'\n').replace("['","").replace("']",""))
 file.seek(0)
