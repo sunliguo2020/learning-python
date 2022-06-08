@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>待办列表</title>
+</head>
+<body>
+<div><h3>新增代办项</h3>
+    <form action="/" method="post">
+        代办内容：<input type="text" name="content"><br>
+        截至时间：<input type="text" name="deadline"><br>
+        <input type="submit" name="submit" value="提交">
+    </form>
+    {%for data in datas%}
+    <div style="background-color:#eee;margin:10px;">
+        截至时间：{{data.deadline}}<br/>
+        代办内容：{{data.content}}<br/>
+
+    </div>
+    {% endfor%}
+</div>
+
+</body>
+</html>
