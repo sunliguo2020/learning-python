@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>下单区域</h2>
+<form method="post">
+    <input placeholder="输入数量" name="count"/>
+    <input placeholder="输入邮箱" name="email"/>
+    <input type="submit" value="提交">
+</form>
+<h2>订单列表</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>邮箱</th>
+        <th>数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in result_list%}
+    <tr>
+        <td>{{item[0]}}</td>
+        <td>{{item[1]}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
