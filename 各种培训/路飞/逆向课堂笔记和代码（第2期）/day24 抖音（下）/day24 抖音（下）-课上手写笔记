@@ -1,0 +1,169 @@
+day24 抖音（下）
+
+目标：获取视频评论。
+
+
+1.获取评论 GET请求 comment/list....
+	- URL参数
+		- cdid【搞定-UUID】
+		- oaid【搞定-空】
+		- openudid【搞定-随机值】
+		- install_id = iid
+		- device_id
+	- 请求头
+		- x-gorgon
+		- x-khronos
+	- cookie（可带可不带）
+		- install_id=449039179999342
+		- ttreq=
+		- odin_tt
+
+2.注册设备请求 POST，返回的值   https://log.snssdk.com/service/2/device_register/
+	- URL参数：没有新东西，根据之前的算法就可以全部搞定了。
+	- 请求体：如何加密； 明文是什么？
+	- 请求头
+		- x-gorgon
+		- x-khronos
+		- x-ss-stub
+
+	2.1 解决加密的问题
+		v6_1 =  https://log.snssdk.com/service/2/device_register/
+		v6_2 =  https://log.snssdk.com/service/2/device_register/?..........  &config_retry=b
+		v7   =  arg25转换成为字节   请求体
+
+		v8到底是
+			True，密文 【都可以】
+				请求体   ->  gzip压缩   ->   so(Encryptor.so中的 ttEncrypt)  -> 要发送的数据
+			False，明文【以前可以】
+				请求体   ->  gzip压缩   ->   要发送的数据
+
+			如果搞不定so文件，可以直接调用 frida-rpc（相当于我们直接调用手机中Encryptor.so中的 ttEncrypt函数，结果给我）。
+			   - 【PC 】 frida-rpc 脚本
+			   - 【手机】 frida启动+打开app
+
+		细化（密文）：
+			- 请求体明文到底是什么？ 可以去hook  com.ss.android.deviceregister.b.c 中的a方法
+			- gzip压缩
+				- Java中的gzip压缩 和 python中的gzip压缩 的结果是不同的。（有符号和无符号、3：10索引位置不同）
+				- python压缩后，把 3：10 索引位置换成0 
+			- frida-rpc调用so文件加密
+
+	2.2 x-ss-stub头
+		是POST请求独有的，GET请求无序携带。
+			String v3_1 = this.f.getBody().md5Stub();  # 猜测，对请求体进行md5加密。
+	        if(v3_1 != null) {
+	            v0_2.addHeader("X-SS-STUB", v3_1);
+	        }
+
+	    x-ss-stub头本质上就是对请求体（明文-gzip-so加密）进行md5加密（自己做其他记得hook校验）。
+
+
+
+	2.3 x-gorgon + x-khronos
+		- 可能是这个位置，也可能不是 --> hook校验
+			- 新知识
+				- com.ss.sys.ces.gg.tt$1 的 a方法
+				- 其他反编译工具JEB/GDA
+				- Hook内部函数+调用栈
+			- 新知识点 获取参数 str/int/ 对象（调用对象中的方法获取值）
+
+		- 在init_gorgon里面
+			- 参数：str是URL+URL参数；   map请求头
+
+			- 结果
+				{
+					"X-Khronos":...
+					"X-Gorgon":...
+				}
+
+
+			int currentTimeMillis = (int) (System.currentTimeMillis() / 1000);
+
+		- 参数:
+			"X-Khronos" ->  (int) (System.currentTimeMillis() / 1000);   -> 1649339089
+
+		- 参数：x-gorgon
+			String a5 = a.a(com.ss.sys.ces.a.leviathan(i2, currentTimeMillis, a.a(a2 + str7 + str8 + str9)));
+
+			- 第一步：a2 + str7 + str8 + str9
+				a2   = md5加密(请求URL参数拼接)   或  00000000000000000000000000000000
+				str7 = md5(请求体)=X-SS-STUB请求投的值【POST请求】；    "00000000000000000000000000000000" 【GET请求】
+				str8 = "00000000000000000000000000000000"【没有cookie】     cookie的值进行加密 【有cookie】
+				str9 = "00000000000000000000000000000000"
+				==》拼接起来。
+			- 第二步：a.a(第一步结果) 
+				->  缩短一倍的算法
+
+			- 第三步：com.ss.sys.ces.a.leviathan(   i2,    currentTimeMillis,     第二步结果      )
+				-> so文件的函数，基于frida-rpc调用
+					- i2=-1
+					- currentTimeMillis=时间戳
+					- 第二步结果
+
+			- 第四步：a.a(第三步结果)
+				直接参考java写python即可。
+
+
+3.实现代码时，抖音还挖坑了。
+	- URL的参数
+	- 请求体
+
+
+4.补充
+	- 运行，离不开谁设备 （frida-rpc去调用设备中函数）。
+		frida-rpc + Flask
+	- 能获取多少评论
+	- 增加评论，算法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
