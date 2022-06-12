@@ -1,0 +1,19 @@
+# ninja log v5
+0	64	1645706940	CMakeFiles/encrypt.dir/encrypt.c.o	ded55c9e0b82fb8d
+64	109	1645706940	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86_64/libencrypt.so	93e1d4ace251bba
+0	386	1645706941	CMakeFiles/native-lib.dir/native-lib.cpp.o	47f3e74af91463f2
+387	466	1645706941	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86_64/libnative-lib.so	c7b06d159fa17d05
+1	8	0	clean	f4e01d1b7ebad130
+0	90	1645713645	CMakeFiles/encrypt.dir/encrypt.c.o	ded55c9e0b82fb8d
+90	170	1645713645	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86_64/libencrypt.so	d90d2ed32525c7c3
+0	7	0	clean	f4e01d1b7ebad130
+0	66	1645714658	CMakeFiles/dynamic.dir/dynamic.c.o	989279417fcc8ab
+1	86	1645714658	CMakeFiles/encrypt.dir/encrypt.c.o	ded55c9e0b82fb8d
+66	136	1645714658	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86_64/libdynamic.so	37cae2ee2f6432b1
+136	187	1645714658	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86_64/libencrypt.so	b0e8abe2bf9b63e3
+1	9	0	clean	f4e01d1b7ebad130
+0	7	0	clean	f4e01d1b7ebad130
+1	68	1645714671	CMakeFiles/dynamic.dir/dynamic.c.o	989279417fcc8ab
+1	86	1645714671	CMakeFiles/encrypt.dir/encrypt.c.o	ded55c9e0b82fb8d
+68	118	1645714672	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86_64/libdynamic.so	37cae2ee2f6432b1
+118	168	1645714672	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86_64/libencrypt.so	b0e8abe2bf9b63e3
