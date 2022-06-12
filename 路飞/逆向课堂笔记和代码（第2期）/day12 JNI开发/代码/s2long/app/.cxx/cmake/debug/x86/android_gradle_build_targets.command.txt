@@ -1,0 +1,8 @@
+Executable : /Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/x86
+dynamic
+encrypt
+jvmArgs : 
+
