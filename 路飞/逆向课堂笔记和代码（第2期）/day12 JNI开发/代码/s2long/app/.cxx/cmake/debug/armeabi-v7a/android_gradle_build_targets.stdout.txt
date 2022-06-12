@@ -1,0 +1,5 @@
+ninja: Entering directory `/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/armeabi-v7a'
+[1/4] Building C object CMakeFiles/dynamic.dir/dynamic.c.o
+[2/4] Building C object CMakeFiles/encrypt.dir/encrypt.c.o
+[3/4] Linking C shared library /Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libdynamic.so
+[4/4] Linking C shared library /Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libencrypt.so
