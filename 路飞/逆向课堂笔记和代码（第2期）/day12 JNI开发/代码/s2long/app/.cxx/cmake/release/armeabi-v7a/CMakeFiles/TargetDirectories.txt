@@ -1,0 +1,4 @@
+/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/armeabi-v7a/CMakeFiles/dynamic.dir
+/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/armeabi-v7a/CMakeFiles/encrypt.dir
