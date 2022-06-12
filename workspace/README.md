@@ -1,1 +1,1 @@
-最早用的是eclipse编辑器
+大约2015年，刚开始学习python的时候用的是eclipse。
