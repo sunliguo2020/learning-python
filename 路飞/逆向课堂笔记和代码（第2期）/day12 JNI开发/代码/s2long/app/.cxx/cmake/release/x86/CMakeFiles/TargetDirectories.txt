@@ -1,4 +1,0 @@
-/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86/CMakeFiles/rebuild_cache.dir
-/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86/CMakeFiles/edit_cache.dir
-/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86/CMakeFiles/dynamic.dir
-/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86/CMakeFiles/encrypt.dir
