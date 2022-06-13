@@ -11,6 +11,9 @@ def make_pizza(size,*toppings):
     :param toppings:
     :return:
     """
-    print(f'\nMaking a {size}-inch pizza with the   folling toppings:')
+    print(f'\nMaking a {size}-inch pizza with the follwing toppings:')
     for topping in toppings:
         print(f'-{topping}')
+
+make_pizza('pepperoni')
+make_pizza(12,'mushrooms','green peppers','extra cheese')
