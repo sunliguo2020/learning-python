@@ -4,7 +4,7 @@
 @contact: QQ376440229
 @Created on: 2022/1/16 13:03
 """
-unprinted_designs = ['phone case','robot pendant','dodecahedron']
+unprinted_designs = ['phone case', 'robot pendant', 'dodecahedron']
 completed_designs = []
 
 while unprinted_designs:
