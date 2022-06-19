@@ -1,0 +1,353 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML>
+<!-- saved from -->
+
+
+
+   
+   
+<html>
+<head>
+	<title>铁塔-欢迎登录</title>
+	<meta charset="UTF-8">
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<meta content="IE=Edge http-equiv=X-UA-Compatible">
+	<link rel="stylesheet" type="text/css" 
+	href="/baf/css/login_itower/base.css">
+	<link rel="stylesheet" type="text/css" 
+href="/baf/css/login_itower/passport-2015.css">
+
+<style>
+div#verifyArea{
+	display: block;
+	height: 40px;
+	position: relative;
+}
+
+.verifyinputArea{
+	height: 38px;
+	vertical-align: middle;
+	float: left;
+}
+
+.verifyinputArea .input_tips{
+	top:8px;
+	position: absolute;
+	left: 13px;
+	font-size: 14px;
+	line-height: 16px;
+	color: #aaa;
+	cursor: text;
+}
+.verifyinputArea .inputOuter{
+	width: 180px;
+	height: 30px;
+	background: none;
+	border: 1px solid #96a5b4;
+	border-radius: 1px;
+}
+
+.verifyinputArea .inputstyle{
+	width: 178px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	top: 3px;
+	padding: 4px 10px 1px 11px;
+	left: 0px;
+	border-radius: 3px;
+	color: #333;
+	font-size: 14px;
+	position: relative;
+	line-height: 16px;
+	border: 0;
+	background: 0;
+}
+
+.verifyimgArea{
+	vertical-align: middle;
+	width: 90px;
+	float: right;
+	position: relative;
+	height: 23px;
+	cursor: pointer;
+}
+
+.verifyimgArea .verifyimg{
+	width: 68px;
+	height: 23px;
+	position: absolute;
+	left: 0;
+}
+
+.verifyimgArea .verifyimg_tips{
+	color: #225592;
+	top: 25px;
+	left: 0px;
+	position: absolute;
+}
+</style>
+
+<script type="text/javascript" src="/baf/js/jquery-1.6.4.js"></script>
+<script type="text/javascript" src="/baf/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/tongji.js"></script>
+</head>
+<body>
+<!-- 头部 -->
+<div class="w">
+	<!-- Logo信息 -->
+  <div id="logo">
+  <a href="#">
+	<img alt="铁塔"  src="/baf/css/login_itower/logo-201305-b.png" width="160" height="60" />
+	</a>
+	<span style="font-size:28px;vertical-align: middle;height:60px;line-height:60px;">运维监控(开通)系统</span>
+</div>
+
+</div>
+<!-- 正文 -->
+     <div id="content">
+            <div class="login-wrap">
+                <div class="w">
+                    <div class="login-form">
+                        <div class="login-box">
+                            <div class="mt">
+                                <h1>
+                                    登录
+                                </h1>
+                                <div class="extra-r"></div>
+                            </div>
+                            <div class="msg-wrap">
+                               
+                                <div id="msgWrap" class="msg-error hide"></div>
+                            </div>
+                            <div class="mc">
+                                <div class="form">
+                                    <form id="loginForm" method="post" >
+                                        <div class="item item-fore1">
+                                        <label class="login-label name-label"  for="loginName"></label>
+                                            <input id="loginName" class="itxt" tabindex="1" type="text" name="loginName" placeholder="用户名" autocomplete="off" />
+                                        </div>
+                                        <div id="entry" class="item item-fore2">
+                                         <label class="login-label pwd-label" for="password"></label>
+                                            <input id="password" class="itxt itxt-error" tabindex="2" type="password" name="password" placeholder="密码" autocomplete="off" /> 
+                                  
+                                        </div>
+                                       
+                                        <div class="verifyArea" id="verifyArea" style="display: block;">
+                                        	<div class="verifyinputArea" id="verifyinputArea">
+                                        		<label class="input_tips" id="vc_tips" for="verifycode" style="display: none;"></label>
+                                        		<div class="inputOuter">
+                                        			<input name="picCode" type="text" class="inputstyle verifycode" id="verifycode" placeholder="验证码" value="" tabindex="3">
+                                        		</div>
+                                        	</div>
+                                        	<div class="verifyimgArea" id="verifyimgArea">
+                                        		<img class="verifyimg" id="verifyimg" title="验证码" src="/servlet/ValidateCodeServlet" onclick="reloadVerifyCode()"><a tabindex="4"  onclick="reloadVerifyCode()" class="verifyimg_tips">看不清，换一张</a>
+                                        	</div>
+                                        </div>
+                                       
+                                        <div class="item item-fore3">
+                                            <div class="safe">
+                                                <span><input id="autologin" class="checkbox" tabindex="5" type="checkbox" name="chkRememberMe"  /> <label for="">自动登录</label></span> 
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="item item-fore5">
+                                            <div class="login-btn">
+                                                <input id="loginsubmit"  type="submit" class="btn-img btn-entry" tabindex="6"  name="loginsubmit" value="登    录" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-banner">
+                    <div class="w">
+                        <div id="banner-bg" class="i-inner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div class=w>
+
+<div class=copyright>Copyright&copy;2014-2015&nbsp;&nbsp;为了提高系统的使用性能，请尽量使用谷歌浏览器。外网用户可从谷歌 官网 在线安装。内网用户点击 下载地址 下载安装。
+</div>
+<div class="copyright" color="red"  >若使用IE浏览器，请设置成“<a href=# onclick="showWin();" >兼容模式</a>”。
+</div> </div>
+
+<script type=text/javascript>
+function showWin(){
+	
+	window.open ('/baf/jsp/uiframe/setIE.jsp','newwindow','height=540,width=1140,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no') 
+	
+}
+
+~function() {
+    var data = [{
+        src: "/baf/css/login_itower/banner01.png",
+        bgColor: "#e5ddc1",
+        weight: "4"
+    }, {
+    	src:"/baf/css/login_itower/banner02.png",
+    	bgColor:"#ffe7ac",
+    	weight: "4"
+    }];
+    var getRandom = function(arr) {
+            var _temp = 0,
+                _random = 0,
+                _weight, _newArr = [];
+            for (var i = 0; i < arr.length; i++) {
+                _weight = arr[i].weight ? parseInt(arr[i].weight) : 1;
+                _newArr[i] = [];
+                _newArr[i].push(_temp);
+                _temp += _weight;
+                _newArr[i].push(_temp);
+            }
+            _random = Math.ceil(_temp * Math.random());
+            for (var i = 0; i < _newArr.length; i++) {
+                if (_random > _newArr[i][0] && _random <= _newArr[i][1]) {
+                    return arr[i];
+                }
+            }
+        };
+    var tpl = '<div class="login-banner" style="background-color: {bgColor}">\		              <div class="w">\			         <div id="banner-bg"  clstag="pageclick|keycount|20150112ABD|46" class="i-inner" style="background: url({imgURI}) 0px 0px no-repeat;background-color: {bgColor}"></div>\		              </div>\		           </div>';
+    var bgData = getRandom(data);
+    var bannerHtml = tpl.replace(/{bgColor}/g, bgData.bgColor).replace(/{imgURI}/g, bgData.src);
+    $('.login-banner').replaceWith(bannerHtml);
+}();
+</script>
+<script type=text/javascript>
+ 
+ $(document).ready(function(){
+	 
+	 $("#loginForm").submit(function(){
+		 login();
+		 return false;
+	 });
+ });
+ 
+ function login(){
+	 
+	 var loginName = $("#loginName").val();
+	 var password = $("#password").val();
+	 
+	 if(loginName==""){
+		 showError("用户名不能为空！");
+		 return;
+	 }
+	 if(password==""){
+		 showError("密码不能为空！");
+		 return;
+	 }
+	 
+ 	var data = $("#loginForm").serialize();
+
+ 	data = serialize2json(data);
+	
+	var url = "/jf/login/checkLogin";
+
+	$.post(url,data,function(state){
+		var data=state.status;
+		var userid = state.userid;
+		var status = {
+			"-2" : "用户名密码不正确！",
+			"-1" : "登录失败，账号不存在！",
+			1  : "OK",
+			2  : "您的密码已到期，请修改密码！",
+			3  : "验证码输入错误！",
+			4  : "强制修改密码",
+			51 : "登录失败！系统要求绑定IP地址登录，请绑定IP地址！",
+			52 : "登录失败！您的登录IP与您绑定的IP不符！",
+			6  : "动态密码不正确，请点击获取!",
+			7  : "动态密码不正确，请重新输入!",
+			8  : "当前人员必须通过统一认证系统登录！",
+			9  : "有多个部门需选择一个",
+			10 : "您已经被选为试运行发布测试用户，系统将自动跳转到试运行服务器，请重新输入密码登录!",
+			11 : "密码不能再错一次，否则被锁定!",
+			12 : "输入密码错误次数"+3+"次被锁!解锁请联系管理员！",
+			13 : "您登陆的IP地址已经被限制登陆，请联系管理员解除限制！"
+		};
+		var msg = "";
+		var action = "";
+		
+		if(status[data]){
+			if(data == 1){
+				action = "/baf/jsp/uiframe/frame.xhtml";
+			}
+			else if(data==4){
+				action = "/baf/jsp/uiframe/changePassword.jsp";
+			}
+			else
+				msg = status[data];
+		}else{
+			if(data.indexOf("#")!= -1){
+				var state = data.split("#")[0];
+				var message = data.split("#")[1];
+				if(state == 5){
+					if(!message)
+						msg = status[51];
+					else
+						msg = status[52];
+				}
+				if(state == 10){
+					msg = status[10];
+					action = "http://"+message;
+				}
+				if(state == 11 || state == 12)
+					msg = message;
+			}else{
+				alert("出现未知错误无法处理");
+				return false;
+			}
+		}
+		if(msg){
+			reloadVerifyCode();
+			showError(msg);
+			return;
+		}
+
+		if(action){
+			location.href=action;
+			return;
+		}
+	
+		return false;
+	});
+}
+	//刷新验证码
+	function reloadVerifyCode(){
+		var timenow = new Date().getTime();                        
+		$("#verifyimg").attr("src","/servlet/ValidateCodeServlet?d="+timenow);
+	}
+
+ 
+ //显示错误信息
+ function showError(msg){
+	 $("#msgWrap").html("<b></b>"+msg);
+	 $("#msgWrap").removeClass("hide");
+ }
+ 
+function serialize2json(serial){
+	serial = decodeURIComponent(serial);
+	var arr = serial.split("&");
+	var result = {};
+	for(var i = 0, row ; row = arr[i] ; i++){
+		var member = row.split("=");
+		result[member[0]] = member[1];
+	}
+	return result;
+}
+</script>
+</body>
+</Html>
