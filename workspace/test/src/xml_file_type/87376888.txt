@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="GB2312"?>
+<root><data><Users><entity>		<!--产品实例id   引用用户编码-->		<PROD_INST_ID>1713040130795565</PROD_INST_ID>		
+      <!--区域编码-->		<LATN>0531</LATN>		
+      <!--申障号码-->		<BUSI_NBR>87376888</BUSI_NBR>		
+      <!--用户名      引用客户名-->		<USER_NAME>王信芳</USER_NAME>		
+      <!--用户帐号-->		<ACCOUNT/>		
+      <!--客户id-->		<CUST_ID>3121340298</CUST_ID>		
+      <!--客户名-->		<CUST_NAME>王信芳</CUST_NAME>		
+      <!--装机地址-->		<INSTALL_ADDR>山东省济南市长清区归德镇万　庄</INSTALL_ADDR>		
+      <!--联系人-->		<CNTCT_NAME/>		
+      <!--联系电话    引用手机号码-->		<CNTCT_NBR/>		
+      <!--产品编码     引用网别-->		<PROD>30</PROD>		
+      <!--品牌编码			BRAND_CODE-->		<BRAND>PTDH</BRAND>		
+      <!--套餐编码 引用产品编码-->		<COMBO>66018631</COMBO>		
+      <!--城市/农村：0城市，1农村-->		<CITY_TYPE/>		
+      <!--客户级别 引用了会员分级说明字段-->		<CUST_LEVEL>9</CUST_LEVEL>		
+      <!--客户类别 引用了客户类型字段-->		<CUST_TYPE>0</CUST_TYPE>		
+      <!--VIP级别 暂时为空-->		<VIP_LEVEL>09</VIP_LEVEL>		
+      <!--用户状态-->		<USER_STATE>开通</USER_STATE>		
+      <!--欠费状态   引用客户资料查询设备状态，暂时为空-->		<FEE_STATE>300</FEE_STATE>		
+      <!--战略分群 暂时没数据-->		<STRATE_GROUP>0</STRATE_GROUP>		
+      <!--客户属性  暂时没数据-->		<CUST_NATURE/>		
+      <!--子区域ID   暂时没数据-->		<ORG_ID>172006</ORG_ID>		
+      <!--用户局向  暂时为空-->		<USER_BRANCH/>	
+   <PROD_CLASS>PSTN</PROD_CLASS></entity></Users><cust_flag>0</cust_flag><custType>1</custType><retDesc/><retlatnid>101</retlatnid></data><return><code>1</code></return><retCode>1</retCode></root>

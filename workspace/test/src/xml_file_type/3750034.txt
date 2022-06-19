@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GB2312"?>
+<root><data><Users><entity>			
+      <PROD_INST_ID>2599110313753107</PROD_INST_ID>      
+      <LATN>0635</LATN>      
+      <BUSI_NBR>3750034</BUSI_NBR>      
+      <USER_NAME>罗希平</USER_NAME>      
+      <CUST_NAME>罗希平</CUST_NAME>      
+      <CUST_ID>3715032698558895</CUST_ID>      
+      <INSTALL_ADDR>山东省聊城市高唐县琉寺罗营6号</INSTALL_ADDR>      
+      <CNTCT_NBR/>      
+      <PROD>30</PROD>      
+      <BRAND>PTD1</BRAND>      
+      <COMBO>66018849</COMBO>      
+      <CITY_TYPE>6</CITY_TYPE>      
+      <CUST_TYPE>6</CUST_TYPE>      
+      <STRATE_GROUP>0</STRATE_GROUP>      
+      <VIP_LEVEL>09</VIP_LEVEL>      
+      <CUST_LEVEL>09</CUST_LEVEL>      
+      <USER_STATE>300</USER_STATE>      
+      <ORG_ID>172123</ORG_ID>      
+      <USER_BRANCH/>      
+      <CUST_NATURE/>      
+      <FEE_STATE>300</FEE_STATE>      
+      <CNTCT_NAME/>      
+      <ACCOUNT/>      
+      <CERTIFICATES>1</CERTIFICATES>      
+      <CERTIFICATES_NBR>372527195103295215</CERTIFICATES_NBR>      
+      <SPEED/>	
+   <PROD_CLASS>PSTN</PROD_CLASS></entity></Users><cust_flag>0</cust_flag><custType>1</custType><retDesc/><retlatnid>117</retlatnid></data><return><code>1</code></return><retCode>1</retCode></root>
