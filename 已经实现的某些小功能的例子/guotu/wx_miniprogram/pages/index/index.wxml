@@ -2,7 +2,8 @@
 <view class="menu">
 <view class='item'>
   <image src="/static/setup.bmp"></image>
-  <text >精品</text>
+  <text >查询IP地址是否已经在用</text>
+  <form></form>
 </view>
 <view class='item'>
   <image src="/static/setup.bmp"></image>

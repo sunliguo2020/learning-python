@@ -3,16 +3,19 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/redirect/redirect"
+    "pages/redirect/redirect",
+    "pages/main/main",
+    "pages/chaxunip/chaxunip"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#ddd",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "搜索ip地址",
-    "backgroundColor": "#eeeeee",
+    "navigationBarTitleText": "管理ip地址",
+    "backgroundColor": "#feab12",
     "backgroundTextStyle": "light"
   },
   "tabBar": {
+    "color": "#000",
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -21,9 +24,17 @@
         "selectedIconPath": "/static/setup.jpg"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "logs"
+        "pagePath": "pages/chaxunip/chaxunip",
+        "text": "查询IP",
+        "iconPath": "/static/setup.jpg",
+        "selectedIconPath": "/static/setup.jpg"
+      },
+      {
+        "pagePath": "pages/main/main",
+        "text": "我的",
+        "iconPath": "/static/setup.jpg"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
