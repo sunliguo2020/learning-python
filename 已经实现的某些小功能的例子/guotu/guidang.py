@@ -23,6 +23,7 @@ count = 0
 
 for file_path in walk_dir(dir_path):
     count += 1
+    #文件名包含手机mac地址的时间
     file_time = os.path.basename(file_path).split('_')[1]
     file_date_obj = datetime.strptime(file_time, '%Y%m%d%H%M%S')
 
@@ -37,6 +38,6 @@ for file_path in walk_dir(dir_path):
                 # if new_line_text[:4] not in line_list:
                 line_list.append(new_line_text[:4])
 
-with open('ip_arp_202204.csv', 'w', newline='') as fp:
+with open('ip_arp_202204-2.csv', 'w', newline='') as fp:
     csv_write = csv.writer(fp)
     csv_write.writerows(line_list)
