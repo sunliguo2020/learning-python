@@ -12,7 +12,7 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 ```
 
-查看数据库
+#### 查看数据库
 
 ```sql
 
@@ -21,26 +21,26 @@ shw create database 数据库名;
 
 ```
 
-修改数据库
+#### 修改数据库
 
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
-删除数据库
+#### 删除数据库
 
 ```sql
 drop database 数据库名
 ```
 
-使用数据库
+#### 使用数据库
 
 ```sql
 select database();
 use 数据库名;
 ```
 
-DDL操作表
+#### DDL操作表
 
 创建表
 
@@ -65,7 +65,7 @@ KEY `fn` ( `file_name` ) USING HASH
 ) ENGINE = MyISAM AUTO_INCREMENT = 6076474 DEFAULT CHARSET = utf8mb4;
 ```
 
-查看表
+#### 查看表
 
 ```sql
 show tables;
@@ -102,7 +102,7 @@ ADD PRIMARY KEY (`id`);
 
 ```
 
-删除表
+#### 删除表
 
 ```sql
 ---直接删除表名
@@ -111,7 +111,7 @@ drop table 表名;
 drop table if exists 表名;
 ```
 
-DML语句
+#### DML语句
 
 增 
 
@@ -154,7 +154,7 @@ SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%'
 
 ```
 
-limit的使用
+#### limit的使用
 
 ####limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
 
@@ -193,7 +193,7 @@ select distinct 列名 from   表名;
 
 
 
-pymysql
+#### pymysql
 
 ```python
 db = pymysql.connect(host ='localhost',
@@ -216,5 +216,13 @@ cur.fetchall()
 返回多个元组，即返回多个记录(rows),如果没有结果 则返回 ()
 
 需要注明：在MySQL中是NULL，而在Python中则是None
+```
+
+```
+result = cur.fetchone()
+        while result:
+            yield result
+            result = cur.fetchone()
+
 ```
 
