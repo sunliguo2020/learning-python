@@ -12,6 +12,7 @@ from bullet import Bullet
 from alien import Alien
 from time import sleep
 from game_stats import GameStats
+from button import Button
 
 
 class AlienInvasion:
@@ -37,6 +38,10 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
+
+        #创建Play按钮
+        self.play_button = Button(self,"Play")
+
 
     def _create_fleet(self):
         """创建外星人群"""
@@ -91,6 +96,16 @@ class AlienInvasion:
 
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+
+                self._check_play_button(mouse_pos)
+
+    def _check_play_button(self,mouse_pos):
+        """在玩家单击Play按钮时开始游戏"""
+        if self.play_button.rect.collidepoint(mouse_pos):
+            self.stats.game_active = True
+
 
     def _update_bullets(self):
         """更新子弹的位置并删除消失的子弹"""
@@ -133,6 +148,10 @@ class AlienInvasion:
             bullet.draw_bullet()
 
         self.aliens.draw(self.screen)
+
+        #如果游戏处于非活动状态，就绘制Play按钮。
+        if not self.stats.game_active:
+            self.play_button.draw_button()
         # 让最近绘制的屏幕可见
         pygame.display.flip()
 
