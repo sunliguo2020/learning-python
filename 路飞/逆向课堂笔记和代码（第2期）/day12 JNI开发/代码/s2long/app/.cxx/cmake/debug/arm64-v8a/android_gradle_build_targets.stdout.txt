@@ -1,5 +1,0 @@
-ninja: Entering directory `/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/arm64-v8a'
-[1/4] Building C object CMakeFiles/dynamic.dir/dynamic.c.o
-[2/4] Building C object CMakeFiles/encrypt.dir/encrypt.c.o
-[3/4] Linking C shared library /Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/arm64-v8a/libdynamic.so
-[4/4] Linking C shared library /Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/arm64-v8a/libencrypt.so
