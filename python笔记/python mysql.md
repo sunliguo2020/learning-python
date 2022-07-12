@@ -12,16 +12,8 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#### 查看数据库
-=======
-查看数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-查看数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
+#### 查看数据库
 ```sql
 
 show databases;
@@ -29,59 +21,31 @@ shw create database 数据库名;
 
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### 修改数据库
-=======
-修改数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-修改数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### 删除数据库
-=======
-删除数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-删除数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
 ```sql
 drop database 数据库名
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### 使用数据库
-=======
-使用数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-使用数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
 
 ```sql
 select database();
 use 数据库名;
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#### DDL操作表
-=======
-DDL操作表
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-DDL操作表
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
+#### DDL操作表
 创建表
 
 ```sql
@@ -105,15 +69,9 @@ KEY `fn` ( `file_name` ) USING HASH
 ) ENGINE = MyISAM AUTO_INCREMENT = 6076474 DEFAULT CHARSET = utf8mb4;
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### 查看表
-=======
-查看表
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-查看表
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
 
 ```sql
 show tables;
@@ -150,16 +108,8 @@ ADD PRIMARY KEY (`id`);
 
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#### 删除表
-=======
-删除表
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-删除表
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
+#### 删除表
 ```sql
 ---直接删除表名
 drop table 表名;
@@ -167,15 +117,9 @@ drop table 表名;
 drop table if exists 表名;
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### DML语句
-=======
-DML语句
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-DML语句
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
 
 增 
 
@@ -218,15 +162,9 @@ SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%'
 
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### limit的使用
-=======
-limit的使用
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-limit的使用
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
 
 ####limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
 
@@ -265,15 +203,9 @@ select distinct 列名 from   表名;
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 #### pymysql
-=======
-pymysql
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-pymysql
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
 ```python
 db = pymysql.connect(host ='localhost',
@@ -298,8 +230,7 @@ cur.fetchall()
 需要注明：在MySQL中是NULL，而在Python中则是None
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 ```
 result = cur.fetchone()
         while result:
@@ -307,8 +238,3 @@ result = cur.fetchone()
             result = cur.fetchone()
 
 ```
-
-=======
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
