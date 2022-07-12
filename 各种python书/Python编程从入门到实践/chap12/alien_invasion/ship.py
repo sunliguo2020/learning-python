@@ -14,7 +14,19 @@ class Ship:
         """初始化飞船并设置其初始位置"""
 
         self.screen = ai_game.screen
+<<<<<<< HEAD
         self.settings = ai_game.settings
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        self.settings = ai_game.mySettings
+=======
+        self.settings = ai_game.settings
+>>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
+=======
+        self.settings = ai_game.settings
+>>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+>>>>>>> fb000daa929b2eac49e0c37ed1c5c34f6051c950
         self.screen_rect = ai_game.screen.get_rect()
 
         # 加载飞船图像并获取其外接矩形
