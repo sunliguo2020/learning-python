@@ -1,14 +1,11 @@
 .idea
 <<<<<<< HEAD
-=======
-<<<<<<< HEAD
 <<<<<<< HEAD
 .csv
 =======
 >>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
 =======
 >>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
->>>>>>> fb000daa929b2eac49e0c37ed1c5c34f6051c950
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -16,9 +16,6 @@ class Bullet(Sprite):
         super().__init__()
         self.screen = ai_game.screen
 <<<<<<< HEAD
-        self.settings = ai_game.settings
-=======
-<<<<<<< HEAD
 <<<<<<< HEAD
         self.settings = ai_game.mySettings
 =======
@@ -27,7 +24,6 @@ class Bullet(Sprite):
 =======
         self.settings = ai_game.settings
 >>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
->>>>>>> fb000daa929b2eac49e0c37ed1c5c34f6051c950
         self.color = self.settings.bullet_color
 
         # 在（0，0）处创建一个表示子弹的矩形，再设置正确的位置
