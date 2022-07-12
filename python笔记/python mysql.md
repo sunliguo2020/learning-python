@@ -1,4 +1,4 @@
-python mysql
+# python mysql
 
 ddl操作数据库
 
