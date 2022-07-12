@@ -24,7 +24,7 @@ def get_data_from_mysql(table=''):
     # print(per)
 
     for i in range(0, per):
-        sql = f'select `id`,`idcard`,`personid` from `{table}` limit {i * 5000},5000;'
+        sql = f'select `id`,`idcard`,`personid` from `{table}` order by `mod_time` DESC limit {i * 5000},5000 ;'
         cur.execute(sql)
         inner_result = cur.fetchone()
         while inner_result:
@@ -42,9 +42,9 @@ if __name__ == '__main__':
     for i in get_data_from_mysql('PersonalId'):
         id, idcard, personid = i
         if personid is None:
-            sql1 = f'delete from `PersonalId` where id !={id} and idcard={idcard} and personid is Null '
+            sql1 = f'delete from `PersonalId` where id !={id} and idcard="{idcard}" and personid is Null '
         else:
-            sql1 = f'delete from `PersonalId` where id !={id} and idcard={idcard} and personid={personid} '
+            sql1 = f'delete from `PersonalId` where id !={id} and idcard="{idcard}" and personid="{personid}" '
         print(sql1)
         cur2.execute(sql1)
         print(cur2.rowcount)
