@@ -157,14 +157,12 @@ SELECT * FROM `shoujihao` WHERE `BUSI_NBR` LIKE '%13001500044%' ORDER BY `BUSI_N
 SELECT * FROM `crawl`.`guhua` WHERE `file_name` LIKE '%5406399%' ORDER BY `id` DESC LIMIT 0,1000
 SELECT * FROM `shoujihao` WHERE `CUST_ID` IS NULL LIMIT 0, 1000
 SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%' ORDER BY `INSTALL_ADDR` LIMIT 0,1000;
-不等于：
-		<>
+不等于：<>
 
 ```
 
 
 #### limit的使用
-
 
 ####limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
 
@@ -200,10 +198,6 @@ select distinct 列名 from   表名;
 
 
 判断NULL值只能用is null 或is not null 不能用 = 或者<>
-
-
-
-
 
 #### pymysql
 

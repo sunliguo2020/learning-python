@@ -3,9 +3,21 @@
 @author: sunliguo
 @contact: QQ376440229
 @Created on: 2022/7/12 16:11
+2022-07-21:发现一个问题:
+                    第一次查询的是全部的数据，然后轮询这些数据，在第二次删除不是第一次的数据。
+                    但是删除后，第一次的数据还有，这就把不该删除的都删除了。
+
 """
 import pymysql
 import math
+import logging
+
+
+logging.basicConfig(filename='del_dump_mysql.log',
+                    level=logging.DEBUG,
+                    filemode='a',
+                    encoding='utf-8',
+                    format='%(asctime)s-%(filename)s[line:%(lineno)d]-%(message)s')
 
 
 def get_data_from_mysql(table=''):
@@ -33,19 +45,31 @@ def get_data_from_mysql(table=''):
 
 
 if __name__ == '__main__':
+    table = 'PersonalId'
     conn2 = pymysql.Connect(host='192.168.1.207',
-                           user='root',
-                           password='admin',
-                           database='ziliao',
-                           port=3306)
+                            user='root',
+                            password='admin',
+                            database='ziliao',
+                            port=3306)
     cur2 = conn2.cursor()
     for i in get_data_from_mysql('PersonalId'):
         id, idcard, personid = i
+        #
+        # 先查询这条数据是否已经删除
+        check_sql = f"select * from {table} where id = {id}"
+        cur2.execute(check_sql)
+        result = cur2.fetchone()
+        if result is None:
+            logging.debug(f"{id},{idcard},{personid} 该条记录已经删除了。")
+
+            continue
+
         if personid is None:
-            sql1 = f'delete from `PersonalId` where id !={id} and idcard="{idcard}" and personid is Null '
+            sql1 = f'delete from `PersonalId` where id <> {id} and idcard="{idcard}" and personid is Null '
         else:
-            sql1 = f'delete from `PersonalId` where id !={id} and idcard="{idcard}" and personid="{personid}" '
+            sql1 = f'delete from `PersonalId` where id <> {id} and idcard="{idcard}" and personid="{personid}" '
         print(sql1)
+
         cur2.execute(sql1)
         print(cur2.rowcount)
         # break
