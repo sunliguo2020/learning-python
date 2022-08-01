@@ -1,4 +1,4 @@
-import turtle
+import turtle2
 
 turtle.width(10)
 
