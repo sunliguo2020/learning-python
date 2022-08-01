@@ -164,24 +164,22 @@ SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%'
 
 #### limit的使用
 
-####limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
+limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。
+
+如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
 
 ```sql
 select * from table limit [offset,]rows | rows ;
 ```
 
-
-
 例子：
 
-查询某列唯一值
+#### 查询某列唯一值
 
 ```sql
 
 select distinct 列名 from   表名;
 ```
-
-
 
 #### mysql 中null 和空值的区别
 
@@ -194,8 +192,6 @@ select distinct 列名 from   表名;
 空值表示一个杯子是真空状态，什么都没有。而NULL值是杯子中有空气。
 
 定义为NOT NULL的字段只能插入空值，不能插入NULL值，而NULL值可以插入空值，也可以插入NULL值。
-
-
 
 判断NULL值只能用is null 或is not null 不能用 = 或者<>
 
@@ -225,10 +221,11 @@ cur.fetchall()
 ```
 
 
-```
+```python
 result = cur.fetchone()
         while result:
             yield result
             result = cur.fetchone()
 
 ```
+

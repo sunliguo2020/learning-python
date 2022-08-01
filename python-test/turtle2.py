@@ -1,4 +1,4 @@
-from turtle import *
+from turtle2 import *
 color('red', 'yellow')
 begin_fill()
 while True:
