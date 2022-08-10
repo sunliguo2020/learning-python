@@ -23,6 +23,16 @@ count = 0
 
 for file_path in walk_dir(dir_path):
     count += 1
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    #文件名包含手机mac地址的时间
+=======
+>>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
+=======
+>>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24
     file_time = os.path.basename(file_path).split('_')[1]
     file_date_obj = datetime.strptime(file_time, '%Y%m%d%H%M%S')
 
@@ -37,6 +47,18 @@ for file_path in walk_dir(dir_path):
                 # if new_line_text[:4] not in line_list:
                 line_list.append(new_line_text[:4])
 
+<<<<<<< HEAD
 with open('ip_arp_202204.csv', 'w', newline='') as fp:
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+with open('ip_arp_202204-2.csv', 'w', newline='') as fp:
+=======
+with open('ip_arp_202204.csv', 'w', newline='') as fp:
+>>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
+=======
+with open('ip_arp_202204.csv', 'w', newline='') as fp:
+>>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24
     csv_write = csv.writer(fp)
     csv_write.writerows(line_list)
