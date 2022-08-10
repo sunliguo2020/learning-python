@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 title,price,mode,type,direction
 整租·坊子公安局宿舍 3室1厅 南/北,900元/月(季付价),整租,3室1厅1卫 95㎡,"
                           "
@@ -1303,3 +1304,8 @@ title,price,mode,type,direction
                           "
 整租·巴龙国际 3室1厅 南/北,1250元/月(年付价),整租,3室1厅1卫 100㎡ 精装修,"
                           "
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:007a1350ba7898150fbc71e309a3927ac4f2f7699c6782a58cfe3593dacd7b83
+size 72946
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24

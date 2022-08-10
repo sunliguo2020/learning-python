@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "GHO (CODE)","GHO (DISPLAY)","GHO (URL)","PUBLISHSTATE (CODE)","PUBLISHSTATE (DISPLAY)","PUBLISHSTATE (URL)","YEAR (CODE)","YEAR (DISPLAY)","YEAR (URL)","REGION (CODE)","REGION (DISPLAY)","REGION (URL)","COUNTRY (CODE)","COUNTRY (DISPLAY)","COUNTRY (URL)","Display Value","Numeric","Low","High","Comments"
 "VIOLENCE_HOMICIDENUM","Estimates of number of homicides","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=4464","PUBLISHED","Published","","2012","2012","","EMR","Eastern Mediterranean","","AFG","Afghanistan","","2180 [516 - 9030]","2180.00000","516.00000","9030.00000",""
 "VIOLENCE_HOMICIDENUM","Estimates of number of homicides","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=4464","PUBLISHED","Published","","2012","2012","","EUR","Europe","","ALB","Albania","","159 [130 - 188]","159.00000","130.00000","188.00000",""
@@ -387,3 +388,8 @@
 "VIOLENCE_HOMICIDERATE","Estimates of rates of homicides per 100 000 population","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=4465","PUBLISHED","Published","","2012","2012","","AFR","Africa","","TCD","Chad","","9.4 [2.1 - 38]","9.40000","2.10000","38.00000",""
 "VIOLENCE_HOMICIDERATE","Estimates of rates of homicides per 100 000 population","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=4465","PUBLISHED","Published","","2012","2012","","AFR","Africa","","GMB","Gambia","","9.4 [2.1 - 39.3]","9.40000","2.10000","39.30000",""
 "VIOLENCE_HOMICIDERATE","Estimates of rates of homicides per 100 000 population","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=4465","PUBLISHED","Published","","2012","2012","","AFR","Africa","","BFA","Burkina Faso","","9.8 [2.5 - 38.1]","9.80000","2.50000","38.10000",""
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:2b7cdd2ae300c1278650b36215ae32cf914e219a186fa5034d674e19e985098e
+size 107613
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24

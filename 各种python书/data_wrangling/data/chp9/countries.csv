@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿id;continent;name;capital;iso-2;iso-3;ioc;tld;currency;phone;utc;wiki;name_de;capital_de;wiki_de
 1;Asia;Afghanistan;Kabul;AF;AFG;AFG;.af;AFN;+93;270;;Afghanistan;Kabul;
 2;Africa;Egypt;Kairo;EG;EGY;EGY;.eg;EGP;+20;120;;Ägypten;Kairo;http://de.wikipedia.org/wiki/Ägypten
@@ -249,3 +250,8 @@
 248;Asia;Cyprus;Nikosia;CY;CYP;CYP;.cy;CYP;+357;;;Zypern, Republik;Nikosia;
 249;Europe;Hungary;Budapest;HU;HUN;HUN;.hu;HUF;+36;;;Ungarn;Budapest;
 250;Europe;Montenegro;Podgorica;ME;MNE;MNE;.me;;+382;;;Montenegro;Podgorica;
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:5791977a5a912cbdd875f749bc84fc7ff5be035be721b0d1037c4a84c122b845
+size 20992
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24

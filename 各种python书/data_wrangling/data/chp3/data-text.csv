@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "Indicator","PUBLISH STATES","Year","WHO region","World Bank income group","Country","Sex","Display Value","Numeric","Low","High","Comments"
 "Life expectancy at birth (years)","Published","1990","Europe","High-income","Andorra","Both sexes","77","77.00000","","",""
 "Life expectancy at birth (years)","Published","2000","Europe","High-income","Andorra","Both sexes","80","80.00000","","",""
@@ -4655,3 +4656,8 @@
 "Healthy life expectancy (HALE) at birth (years)","Published","2000","Africa","Upper-middle-income","South Africa","Male","49","49.00000","","",""
 "Healthy life expectancy (HALE) at birth (years)","Published","2000","Africa","Low-income","Zambia","Both sexes","36","36.00000","","",""
 "Healthy life expectancy (HALE) at birth (years)","Published","2012","Africa","Low-income","Zimbabwe","Female","51","51.00000","","",""
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:b3141cc1729cb2720319995c579bbc41303457f7e9d44047ae53b6efc7b937b5
+size 635684
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24

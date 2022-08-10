@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "GHO (CODE)","GHO (DISPLAY)","GHO (URL)","PUBLISHSTATE (CODE)","PUBLISHSTATE (DISPLAY)","PUBLISHSTATE (URL)","YEAR (CODE)","YEAR (DISPLAY)","YEAR (URL)","REGION (CODE)","REGION (DISPLAY)","REGION (URL)","WORLDBANKINCOMEGROUP (CODE)","WORLDBANKINCOMEGROUP (DISPLAY)","WORLDBANKINCOMEGROUP (URL)","COUNTRY (CODE)","COUNTRY (DISPLAY)","COUNTRY (URL)","SEX (CODE)","SEX (DISPLAY)","SEX (URL)","Display Value","Numeric","Low","High","Comments"
 "WHOSIS_000001","Life expectancy at birth (years)","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=65","PUBLISHED","Published","","1990","1990","","EUR","Europe","","WB_HI","High-income","","AND","Andorra","","BTSX","Both sexes","","77","77.00000","","",""
 "WHOSIS_000001","Life expectancy at birth (years)","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=65","PUBLISHED","Published","","2000","2000","","EUR","Europe","","WB_HI","High-income","","AND","Andorra","","BTSX","Both sexes","","80","80.00000","","",""
@@ -4655,3 +4656,8 @@
 "WHOSIS_000002","Healthy life expectancy (HALE) at birth (years)","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=66","PUBLISHED","Published","","2000","2000","","AFR","Africa","","WB_UMI","Upper-middle-income","","ZAF","South Africa","","MLE","Male","","49","49.00000","","",""
 "WHOSIS_000002","Healthy life expectancy (HALE) at birth (years)","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=66","PUBLISHED","Published","","2000","2000","","AFR","Africa","","WB_LI","Low-income","","ZMB","Zambia","","BTSX","Both sexes","","36","36.00000","","",""
 "WHOSIS_000002","Healthy life expectancy (HALE) at birth (years)","http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=66","PUBLISHED","Published","","2012","2012","","AFR","Africa","","WB_LI","Low-income","","ZWE","Zimbabwe","","FMLE","Female","","51","51.00000","","",""
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:73e45840d49d10b569395f725abbab91488387a030af7a8fdbbe2d9ec3d911b6
+size 1385499
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24

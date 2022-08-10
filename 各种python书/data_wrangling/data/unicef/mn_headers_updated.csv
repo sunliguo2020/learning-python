@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Name,Label,Question
 HH1,Cluster number,
 HH2,Household number,
@@ -223,3 +224,8 @@ wscore,Wealth index score,
 windex5,Wealth index quintiles,
 PSU,Primary sampling unit,
 strata,Stratum,
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:db60fd55830061cdbbdb89cd236669a453e52c7f5c5b7a4b28424563008dd6df
+size 21925
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24

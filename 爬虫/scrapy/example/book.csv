@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name,price
 A Light in the Attic,£51.77
 Tipping the Velvet,£53.74
@@ -1020,3 +1021,8 @@ Alice in Wonderland (Alice's Adventures in Wonderland #1),£55.53
 A Spy's Devotion (The Regency Spies of London #1),£16.97
 1st to Die (Women's Murder Club #1),£53.98
 "1,000 Places to See Before You Die",£26.08
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:9479428d4334a98d347642a44151ac359af3bc1a66f24cef855fab797443a3c0
+size 49516
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24

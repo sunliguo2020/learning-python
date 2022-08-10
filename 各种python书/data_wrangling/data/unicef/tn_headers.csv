@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HH1,Cluster number,
 HH2,Household number,
 TNLN,Net number,
@@ -22,3 +23,8 @@ windex5,Wealth index quintiles,
 hhweight,Household sample weight,
 PSU,Primary sampling unit,
 stratum,Strata,
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:22cdb49f4fd117e7d55c2aa639e61dde5daf6ec9e3708a43fee9606f7ceab54e
+size 1496
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24
