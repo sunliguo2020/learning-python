@@ -12,38 +12,78 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 ```
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+查看数据库
+
+=======
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 #### 查看数据库
 ```sql
 
 show databases;
-shw create database 数据库名;
+show create database 数据库名;
 
 ```
 
 
+<<<<<<< HEAD
 #### 修改数据库
+=======
+=======
+
+#### 修改数据库
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
+<<<<<<< HEAD
 
 #### 删除数据库
+=======
+<<<<<<< HEAD
+
+=======
+
+#### 删除数据库
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 drop database 数据库名
 ```
 
+<<<<<<< HEAD
 
 #### 使用数据库
 
+=======
+<<<<<<< HEAD
+
+=======
+
+#### 使用数据库
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 select database();
 use 数据库名;
 ```
 
+<<<<<<< HEAD
+=======
+
+
+
+
+#### DDL操作表
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 #### DDL操作表
 创建表
@@ -72,6 +112,10 @@ KEY `fn` ( `file_name` ) USING HASH
 
 #### 查看表
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 show tables;
@@ -108,6 +152,14 @@ ADD PRIMARY KEY (`id`);
 
 ```
 
+<<<<<<< HEAD
+=======
+
+
+
+#### 删除表
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 #### 删除表
 ```sql
@@ -120,6 +172,10 @@ drop table if exists 表名;
 
 #### DML语句
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 增 
 
@@ -157,6 +213,7 @@ SELECT * FROM `shoujihao` WHERE `BUSI_NBR` LIKE '%13001500044%' ORDER BY `BUSI_N
 SELECT * FROM `crawl`.`guhua` WHERE `file_name` LIKE '%5406399%' ORDER BY `id` DESC LIMIT 0,1000
 SELECT * FROM `shoujihao` WHERE `CUST_ID` IS NULL LIMIT 0, 1000
 SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%' ORDER BY `INSTALL_ADDR` LIMIT 0,1000;
+<<<<<<< HEAD
 不等于：
 		<>
 
@@ -166,7 +223,9 @@ SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%'
 #### limit的使用
 
 
-####limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
+limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
+
+不等于：<>
 
 ```sql
 select * from table limit [offset,]rows | rows ;
@@ -174,9 +233,13 @@ select * from table limit [offset,]rows | rows ;
 
 
 
+
 例子：
 
-查询某列唯一值
+
+
+#### 查询某列唯一值
+
 
 ```sql
 
@@ -197,15 +260,20 @@ select distinct 列名 from   表名;
 
 定义为NOT NULL的字段只能插入空值，不能插入NULL值，而NULL值可以插入空值，也可以插入NULL值。
 
+<<<<<<< HEAD
 
 
 判断NULL值只能用is null 或is not null 不能用 = 或者<>
 
+#### pymysql
 
 
+<<<<<<< HEAD
 
 
 #### pymysql
+=======
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```python
 db = pymysql.connect(host ='localhost',
@@ -231,10 +299,19 @@ cur.fetchall()
 ```
 
 
+<<<<<<< HEAD
 ```
+=======
+
+```python
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 result = cur.fetchone()
         while result:
             yield result
             result = cur.fetchone()
 
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
