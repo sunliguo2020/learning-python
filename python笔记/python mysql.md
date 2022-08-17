@@ -12,10 +12,7 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 ```
 
-<<<<<<< HEAD
-查看数据库
 
-=======
 
 #### 查看数据库
 ```sql
@@ -29,26 +26,22 @@ show create database 数据库名;
 =======
 
 #### 修改数据库
->>>>>>> 
+
 
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
-<<<<<<< HEAD
 
-=======
 
 #### 删除数据库
->>>>>>> 
+>
 
 ```sql
 drop database 数据库名
 ```
 
-<<<<<<< HEAD
 
-=======
 
 #### 使用数据库
 
@@ -56,8 +49,6 @@ drop database 数据库名
 select database();
 use 数据库名;
 ```
-
-
 
 
 
