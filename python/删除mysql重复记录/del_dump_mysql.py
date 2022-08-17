@@ -45,6 +45,7 @@ def get_data_from_mysql(table=''):
 
 
 if __name__ == '__main__':
+    count = 0
     table = 'PersonalId'
     conn2 = pymysql.Connect(host='192.168.1.207',
                             user='root',
@@ -53,6 +54,8 @@ if __name__ == '__main__':
                             port=3306)
     cur2 = conn2.cursor()
     for i in get_data_from_mysql('PersonalId'):
+        count +=1
+        print(f"count:{count}")
         id, idcard, personid = i
         #
         # 先查询这条数据是否已经删除
@@ -60,10 +63,10 @@ if __name__ == '__main__':
         cur2.execute(check_sql)
         result = cur2.fetchone()
         if result is None:
+            print(f"{id},{idcard},{personid} 该条记录已经删除了。")
             logging.debug(f"{id},{idcard},{personid} 该条记录已经删除了。")
-
             continue
-
+        #personid是否为空时，sql语句不同。
         if personid is None:
             sql1 = f'delete from `PersonalId` where id <> {id} and idcard="{idcard}" and personid is Null '
         else:
@@ -71,5 +74,5 @@ if __name__ == '__main__':
         print(sql1)
 
         cur2.execute(sql1)
-        print(cur2.rowcount)
+        print(f"删除的个数:{cur2.rowcount}")
         # break
