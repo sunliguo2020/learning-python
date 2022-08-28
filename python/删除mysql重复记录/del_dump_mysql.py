@@ -3,11 +3,8 @@
 @author: sunliguo
 @contact: QQ376440229
 @Created on: 2022/7/12 16:11
-<<<<<<< HEAD
-"""
-import pymysql
-import math
-=======
+
+
 2022-07-21:发现一个问题:
                     第一次查询的是全部的数据，然后轮询这些数据，在第二次删除不是第一次的数据。
                     但是删除后，第一次的数据还有，这就把不该删除的都删除了。
@@ -23,7 +20,6 @@ logging.basicConfig(filename='del_dump_mysql.log',
                     filemode='a',
                     encoding='utf-8',
                     format='%(asctime)s-%(filename)s[line:%(lineno)d]-%(message)s')
->>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 
 def get_data_from_mysql(table=''):
@@ -51,8 +47,7 @@ def get_data_from_mysql(table=''):
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     conn2 = pymysql.Connect(host='192.168.1.207',
                            user='root',
                            password='admin',
@@ -66,10 +61,9 @@ if __name__ == '__main__':
         else:
             sql1 = f'delete from `PersonalId` where id !={id} and idcard="{idcard}" and personid="{personid}" '
         print(sql1)
-=======
-=======
+
     count = 0
->>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+
     table = 'PersonalId'
     conn2 = pymysql.Connect(host='192.168.1.207',
                             user='root',
@@ -97,7 +91,7 @@ if __name__ == '__main__':
             sql1 = f'delete from `PersonalId` where id <> {id} and idcard="{idcard}" and personid="{personid}" '
         print(sql1)
 
->>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+
         cur2.execute(sql1)
         print(f"删除的个数:{cur2.rowcount}")
         # break
