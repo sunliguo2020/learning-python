@@ -13,12 +13,14 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
 查看数据库
-
 =======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+
 
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 #### 查看数据库
@@ -36,15 +38,19 @@ show create database 数据库名;
 =======
 
 #### 修改数据库
+<<<<<<< HEAD
 >>>>>>> 
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
-<<<<<<< HEAD
 
+<<<<<<< HEAD
 #### 删除数据库
 =======
 <<<<<<< HEAD
@@ -54,19 +60,26 @@ alter database 数据库名 default character set 字符集;
 #### 删除数据库
 >>>>>>> 
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+
+#### 删除数据库
+>
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 ```sql
 drop database 数据库名
 ```
 
-<<<<<<< HEAD
 
+<<<<<<< HEAD
 #### 使用数据库
 
 =======
 <<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 #### 使用数据库
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
@@ -78,8 +91,6 @@ use 数据库名;
 
 <<<<<<< HEAD
 =======
-
-
 
 
 #### DDL操作表
@@ -314,4 +325,14 @@ result = cur.fetchone()
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+重复字段：
+
+查询user表中，user_name字段值重复的数据及重复次数
+
+```
+select user_name,count(*) as count from user group by user_name having count>1;
+```
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
