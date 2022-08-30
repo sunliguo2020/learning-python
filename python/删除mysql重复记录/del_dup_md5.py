@@ -3,8 +3,9 @@
 @author: sunliguo
 @contact: QQ376440229
 @Created on: 2022-07-31 7:27
+
 lost数据表中数据可能在guhua和kuandai中存在
-只判断md5sum的值相同，就可以删除lost中的数据库
+只判断md5sum的值相同，就可以删除lost中的数据。
 """
 import pymysql
 import math

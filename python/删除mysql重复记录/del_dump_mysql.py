@@ -12,7 +12,6 @@ import pymysql
 import math
 import logging
 
-
 logging.basicConfig(filename='del_dump_mysql.log',
                     level=logging.DEBUG,
                     filemode='a',
@@ -21,6 +20,10 @@ logging.basicConfig(filename='del_dump_mysql.log',
 
 
 def get_data_from_mysql(table=''):
+    """
+    @param table:要查询的数据表
+    @return:
+    """
     conn = pymysql.Connect(host='192.168.1.207',
                            user='root',
                            password='admin',
@@ -54,7 +57,7 @@ if __name__ == '__main__':
                             port=3306)
     cur2 = conn2.cursor()
     for i in get_data_from_mysql('PersonalId'):
-        count +=1
+        count += 1
         print(f"count:{count}")
         id, idcard, personid = i
         #
@@ -66,7 +69,10 @@ if __name__ == '__main__':
             print(f"{id},{idcard},{personid} 该条记录已经删除了。")
             logging.debug(f"{id},{idcard},{personid} 该条记录已经删除了。")
             continue
-        #personid是否为空时，sql语句不同。
+        # personid是否为空时，sql语句不同。
+        else:
+            print(f"result的结果为:{result}")
+
         if personid is None:
             sql1 = f'delete from `PersonalId` where id <> {id} and idcard="{idcard}" and personid is Null '
         else:
@@ -75,4 +81,6 @@ if __name__ == '__main__':
 
         cur2.execute(sql1)
         print(f"删除的个数:{cur2.rowcount}")
+        if cur2.rowcount > 0:
+            logging.debug(f"删除{cur2.rowcount}条记录{sql1} ")
         # break
