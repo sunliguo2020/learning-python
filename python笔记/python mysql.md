@@ -1,4 +1,4 @@
-python mysql
+# python mysql
 
 ddl操作数据库
 
@@ -12,8 +12,17 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+查看数据库
+=======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 #### 查看数据库
 ```sql
 
@@ -23,37 +32,71 @@ show create database 数据库名;
 ```
 
 
+<<<<<<< HEAD
+#### 修改数据库
+=======
 =======
 
 #### 修改数据库
+<<<<<<< HEAD
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
 
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
 
+<<<<<<< HEAD
+#### 删除数据库
+=======
+<<<<<<< HEAD
+
+=======
+
+#### 删除数据库
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
 
 #### 删除数据库
 >
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 ```sql
 drop database 数据库名
 ```
 
 
+<<<<<<< HEAD
+#### 使用数据库
+
+=======
+<<<<<<< HEAD
+
+=======
+=======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 #### 使用数据库
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 select database();
 use 数据库名;
 ```
 
+<<<<<<< HEAD
+=======
 
 
 #### DDL操作表
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
+#### DDL操作表
 创建表
 
 ```sql
@@ -80,7 +123,10 @@ KEY `fn` ( `file_name` ) USING HASH
 
 #### 查看表
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 show tables;
@@ -117,12 +163,16 @@ ADD PRIMARY KEY (`id`);
 
 ```
 
+<<<<<<< HEAD
+=======
 
 
 
 #### 删除表
 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
+#### 删除表
 ```sql
 ---直接删除表名
 drop table 表名;
@@ -133,7 +183,10 @@ drop table if exists 表名;
 
 #### DML语句
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 增 
 
@@ -177,7 +230,9 @@ SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%'
 
 ```
 
-limit的使用
+
+#### limit的使用
+
 
 limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
 
@@ -224,6 +279,12 @@ select distinct 列名 from   表名;
 #### pymysql
 
 
+<<<<<<< HEAD
+
+
+#### pymysql
+=======
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```python
 db = pymysql.connect(host ='localhost',
@@ -249,15 +310,24 @@ cur.fetchall()
 ```
 
 
+<<<<<<< HEAD
+```
+=======
 
 ```python
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 result = cur.fetchone()
         while result:
             yield result
             result = cur.fetchone()
 
 ```
+<<<<<<< HEAD
+=======
 
+<<<<<<< HEAD
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
 重复字段：
 
 查询user表中，user_name字段值重复的数据及重复次数
@@ -265,3 +335,4 @@ result = cur.fetchone()
 ```
 select user_name,count(*) as count from user group by user_name having count>1;
 ```
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
