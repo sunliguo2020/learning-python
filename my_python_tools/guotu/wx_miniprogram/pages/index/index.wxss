@@ -1,0 +1,17 @@
+/* pages/index/index.wxss */
+.t1 {
+  color:#feddee
+}
+.menu{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+}
+.menu .item{
+  display: flex;
+  flex-direction: column;
+}
+.item image{
+  width: 100rpx;
+  height: 100rpx;
+}
