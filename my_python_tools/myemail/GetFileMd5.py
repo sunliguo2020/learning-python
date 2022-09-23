@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+返回给定文件的md5值
+"""
 import hashlib
 import os
 import datetime
@@ -5,8 +9,10 @@ import datetime
 
 def GetFileMd5(filename):
     if not os.path.isfile(filename):
+        print("找不到该文件")
         return
     myhash = hashlib.md5()
+
     # f =open(filename,'rb')
     with open(filename, 'rb') as f:
         while True:
@@ -16,6 +22,7 @@ def GetFileMd5(filename):
                 break
             myhash.update(b)
     # f.close()
+
     return myhash.hexdigest()
 
 
