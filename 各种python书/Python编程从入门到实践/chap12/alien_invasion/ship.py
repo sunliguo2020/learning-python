@@ -16,13 +16,27 @@ class Ship:
         self.screen = ai_game.screen
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         self.settings = ai_game.mySettings
 =======
         self.settings = ai_game.settings
+=======
+        self.settings = ai_game.settings
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        self.settings = ai_game.mySettings
+=======
+        self.settings = ai_game.settings
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 >>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
 =======
         self.settings = ai_game.settings
 >>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+<<<<<<< HEAD
+=======
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
         self.screen_rect = ai_game.screen.get_rect()
 
         # 加载飞船图像并获取其外接矩形
@@ -53,8 +67,17 @@ class Ship:
     def blitme(self):
         """在指定位置绘制飞船"""
         self.screen.blit(self.image, self.rect)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
     def center_ship(self):
         """让飞船在屏幕底端居中"""
         self.rect.midbottom = self.screen_rect.midbottom
         self.x = float(self.rect.x)
+<<<<<<< HEAD
+=======
+>>>>>>> 3834090fde219e5410786a486c94f6cf2329ea24
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc

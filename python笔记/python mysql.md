@@ -1,4 +1,4 @@
-python mysql
+# python mysql
 
 ddl操作数据库
 
@@ -14,58 +14,75 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-#### 查看数据库
-=======
-查看数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-查看数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
+=======
+<<<<<<< HEAD
+查看数据库
+=======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+#### 查看数据库
 ```sql
 
 show databases;
-shw create database 数据库名;
+show create database 数据库名;
 
 ```
 
-<<<<<<< HEAD
+
 <<<<<<< HEAD
 #### 修改数据库
 =======
-修改数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
 =======
-修改数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
+#### 修改数据库
+<<<<<<< HEAD
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
-<<<<<<< HEAD
+
 <<<<<<< HEAD
 #### 删除数据库
 =======
-删除数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
+<<<<<<< HEAD
+
 =======
-删除数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
+#### 删除数据库
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+
+#### 删除数据库
+>
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
 ```sql
 drop database 数据库名
 ```
 
-<<<<<<< HEAD
+
 <<<<<<< HEAD
 #### 使用数据库
+
 =======
-使用数据库
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
+<<<<<<< HEAD
+
 =======
-使用数据库
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+=======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+
+#### 使用数据库
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 select database();
@@ -73,15 +90,13 @@ use 数据库名;
 ```
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-#### DDL操作表
 =======
-DDL操作表
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-DDL操作表
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
+
+#### DDL操作表
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+
+#### DDL操作表
 创建表
 
 ```sql
@@ -105,15 +120,13 @@ KEY `fn` ( `file_name` ) USING HASH
 ) ENGINE = MyISAM AUTO_INCREMENT = 6076474 DEFAULT CHARSET = utf8mb4;
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### 查看表
+
+<<<<<<< HEAD
 =======
-查看表
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-查看表
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```sql
 show tables;
@@ -151,15 +164,15 @@ ADD PRIMARY KEY (`id`);
 ```
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-#### 删除表
 =======
-删除表
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-删除表
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
+
+
+#### 删除表
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+
+#### 删除表
 ```sql
 ---直接删除表名
 drop table 表名;
@@ -167,15 +180,13 @@ drop table 表名;
 drop table if exists 表名;
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #### DML语句
+
+<<<<<<< HEAD
 =======
-DML语句
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-DML语句
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 增 
 
@@ -213,22 +224,19 @@ SELECT * FROM `shoujihao` WHERE `BUSI_NBR` LIKE '%13001500044%' ORDER BY `BUSI_N
 SELECT * FROM `crawl`.`guhua` WHERE `file_name` LIKE '%5406399%' ORDER BY `id` DESC LIMIT 0,1000
 SELECT * FROM `shoujihao` WHERE `CUST_ID` IS NULL LIMIT 0, 1000
 SELECT * FROM `ziliao`.`shoujihao` WHERE `id` = '36' AND `BUSI_NBR` LIKE '%156%' ORDER BY `INSTALL_ADDR` LIMIT 0,1000;
+<<<<<<< HEAD
 不等于：
 		<>
 
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#### limit的使用
-=======
-limit的使用
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-limit的使用
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
 
-####limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
+#### limit的使用
+
+
+limit关键字可以接受1个或者两个参数，且这个参数需是整数常量。如果是两个参数，第一个表示返回记录行的偏移量，第二个表示返回记录行的最大数目。一个数的话，默认初识记录为0.
+
+不等于：<>
 
 ```sql
 select * from table limit [offset,]rows | rows ;
@@ -236,9 +244,13 @@ select * from table limit [offset,]rows | rows ;
 
 
 
+
 例子：
 
-查询某列唯一值
+
+
+#### 查询某列唯一值
+
 
 ```sql
 
@@ -259,21 +271,20 @@ select distinct 列名 from   表名;
 
 定义为NOT NULL的字段只能插入空值，不能插入NULL值，而NULL值可以插入空值，也可以插入NULL值。
 
+<<<<<<< HEAD
 
 
 判断NULL值只能用is null 或is not null 不能用 = 或者<>
 
+#### pymysql
 
 
 <<<<<<< HEAD
-<<<<<<< HEAD
+
+
 #### pymysql
 =======
-pymysql
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
-pymysql
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
 ```python
 db = pymysql.connect(host ='localhost',
@@ -298,17 +309,30 @@ cur.fetchall()
 需要注明：在MySQL中是NULL，而在Python中则是None
 ```
 
-<<<<<<< HEAD
+
 <<<<<<< HEAD
 ```
+=======
+
+```python
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 result = cur.fetchone()
         while result:
             yield result
             result = cur.fetchone()
 
 ```
+<<<<<<< HEAD
+=======
 
+<<<<<<< HEAD
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 =======
->>>>>>> 9033d61e7ecebbe38dfa95274e33c88795190172
-=======
->>>>>>> 784558807086f17f7daecab3309a3392ab8b04c8
+重复字段：
+
+查询user表中，user_name字段值重复的数据及重复次数
+
+```
+select user_name,count(*) as count from user group by user_name having count>1;
+```
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
