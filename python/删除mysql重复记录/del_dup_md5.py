@@ -60,12 +60,12 @@ if __name__ == '__main__':
 
     for item in loop_data_from_mysql(table='lost'):
         count += 1
-        if count <2:
+        if count <0:
             continue
         print(f"{count}:判断{item[1]}")
         id = item[0]
         md5sum = item[1]
-        sql2 = f'select md5sum from `kuandai` where `md5sum` = "{md5sum}"'
+        sql2 = f'select md5sum from `guhua` where `md5sum` = "{md5sum}"'
         # print(sql2)
         cur2.execute(sql2)
         result = cur2.fetchone()
