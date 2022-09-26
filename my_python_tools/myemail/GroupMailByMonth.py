@@ -46,6 +46,8 @@ if __name__ == "__main__":
             # 返回message对象
             msg = get_message(mail_file_path)
             datestring = get_date(msg)
+            if datestring is None:
+                continue
             print("datestring=" + datestring)
             # 没有逗号，直接跳过
             if ',' not in datestring:
