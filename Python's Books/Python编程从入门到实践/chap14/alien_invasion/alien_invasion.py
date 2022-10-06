@@ -13,6 +13,7 @@ from alien import Alien
 from time import sleep
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard
 
 
 class AlienInvasion:
@@ -28,10 +29,13 @@ class AlienInvasion:
             (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
 
-        # 设置背景颜色
-        self.bg_color = (230, 230, 230)
+        # 创建存储游戏统计信息的实例
+        # 并创建得分牌
         # 创建一个用于存储游戏统计信息的实例
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
+        # 设置背景颜色
+        self.bg_color = (230, 230, 230)
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -39,9 +43,8 @@ class AlienInvasion:
 
         self._create_fleet()
 
-        #创建Play按钮
-        self.play_button = Button(self,"Play")
-
+        # 创建Play按钮
+        self.play_button = Button(self, "Play")
 
     def _create_fleet(self):
         """创建外星人群"""
@@ -101,13 +104,14 @@ class AlienInvasion:
 
                 self._check_play_button(mouse_pos)
 
-    def _check_play_button(self,mouse_pos):
+    def _check_play_button(self, mouse_pos):
         """在玩家单击Play按钮时开始游戏"""
         if self.play_button.rect.collidepoint(mouse_pos):
-            #重置游戏设置
+            # 重置游戏设置
             self.settings.initialize_dynamic_setting()
             self.stats.game_active = True
-
+            self.sb.prep_score()
+            self.sb.prep_level()
 
     def _update_bullets(self):
         """更新子弹的位置并删除消失的子弹"""
@@ -126,11 +130,20 @@ class AlienInvasion:
         # 检查是否有子弹击中了外星人
         # 如果是，就删除相应的子弹和外星人
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if collisions:
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
+            self.sb.prep_score()
+            self.sb.check_high_score()
         if not self.aliens:
             # 删除现有的子弹并创建一群外星人。
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            #提高等级
+            self.stats.level+=1
+            self.sb.prep_level()
 
     def run_game(self):
         """开始游戏的主循环"""
@@ -151,8 +164,10 @@ class AlienInvasion:
             bullet.draw_bullet()
 
         self.aliens.draw(self.screen)
+        # 显示得分
+        self.sb.show_socre()
 
-        #如果游戏处于非活动状态，就绘制Play按钮。
+        # 如果游戏处于非活动状态，就绘制Play按钮。
         if not self.stats.game_active:
             self.play_button.draw_button()
         # 让最近绘制的屏幕可见
