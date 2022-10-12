@@ -12,17 +12,17 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 
 
-def walk_dir(dir):
+def walk_dir(directory):
     """
     遍历文件夹，返回各个文件的路径
-    :param dir:
+    :param directory:
     :return:
     """
 
-    if not os.path.isdir(dir):
-        print(f"{dir}不是一个目录")
+    if not os.path.isdir(directory):
+        print(f"{directory}不是一个目录")
         return -1
-    for root, dirs, files in os.walk(dir):
+    for root, dirs, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(root, file)
             yield file_path
@@ -57,5 +57,8 @@ def RenameFileName(mail_file_path=''):
 if __name__ == '__main__':
     # RenameFileName(root_dir=r'F:\eml_new\2015-09')
     with ThreadPoolExecutor() as t:
-        for i in walk_dir(r'F:\eml_new'):
+        for i in walk_dir(r'F:\eml\a'):
+            # 已经改名的情况
+            # if len(os.path.basename(i)) == 36:
+            #     continue
             t.submit(RenameFileName, i)
