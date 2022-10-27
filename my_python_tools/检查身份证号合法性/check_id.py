@@ -60,7 +60,7 @@ def check_id_data(n):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("参数少于1个")
+        print("参数少于1个,缺少要检查的身份证文本文件!")
         sys.exit(-1)
     file_name = sys.argv[1]
     with open(file_name, encoding='utf-8') as f:
