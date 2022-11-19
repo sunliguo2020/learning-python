@@ -224,14 +224,15 @@ db = pymysql.connect(host ='localhost',
                     password='123456',
                     database='userinfo',
                     charset = 'utf-8')
+#创建游标对象
 cur = db.cursor()
 sql = "insert into userinfo (username,password) values ('vera','1234')"
+#使用execute()方法执行sql查询
 cur.execute(sql)
 ```
 
 ```sql
 cur.fetchone()
-
 返回单个的元组，也就是一条记录(row)，如果没有结果 则返回 None
 
 cur.fetchall() 
@@ -239,6 +240,13 @@ cur.fetchall()
 返回多个元组，即返回多个记录(rows),如果没有结果 则返回 ()
 
 需要注明：在MySQL中是NULL，而在Python中则是None
+```
+
+```py
+ #执行单条sql语句,接收的参数为sql语句本身和使用的参数列表,返回值为受影响的行数
+ execute(self, query, args):
+#执行单条sql语句,但是重复执行参数列表里的参数,返回值为受影响的行数
+　executemany(self, query, args):
 ```
 
 
@@ -252,6 +260,29 @@ result = cur.fetchone()
 
 ```
 
+##### 在使用pymysql的executemany方法时，需要注意的几个问题
+
+1、在写sql语句时，不管字段为什么类型，占位符统一使用%s,且不能加上引号。例如
+
+```python
+sql="insert into tablename (id,name) values (%s,%s)"
+```
+
+2、添加的数据的格式必须为list[tuple(),tuple(),tuple()]或者tuple(tuple(),tuple(),tuple())例如
+
+```python
+values=[(1,"zhangsan"),(2,"lisi")]
+#或者
+values=((1,"zhangsan"),(2,"lisi"))
+```
+
+最后，通过executemany插入
+
+```python
+cursor.executemany(sql,values) 
+```
+
+
 
 重复字段：
 
@@ -260,3 +291,4 @@ result = cur.fetchone()
 ```sql
 select user_name,count(*) as count from user group by user_name having count>1;
 ```
+
