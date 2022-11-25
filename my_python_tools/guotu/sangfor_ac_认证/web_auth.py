@@ -56,5 +56,6 @@ def web_auth(username='林萍', pwd='zrzy@2021'):
             and json_data.get('msg') == 'logon success':
         return 1
 
+
 if __name__ == '__main__':
     pass
