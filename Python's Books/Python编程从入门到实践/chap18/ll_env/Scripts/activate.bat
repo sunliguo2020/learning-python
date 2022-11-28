@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=F:\github\learning-python\各种python书\Python编程从入门到实践\chap18\learning_log\ll_env
+set VIRTUAL_ENV=D:\github\learning-python\Python's Books\Python编程从入门到实践\chap18\ll_env
 
 if not defined PROMPT set PROMPT=$P$G
 
@@ -25,6 +25,7 @@ if defined _OLD_VIRTUAL_PATH set PATH=%_OLD_VIRTUAL_PATH%
 if not defined _OLD_VIRTUAL_PATH set _OLD_VIRTUAL_PATH=%PATH%
 
 set PATH=%VIRTUAL_ENV%\Scripts;%PATH%
+set VIRTUAL_ENV_PROMPT=(ll_env) 
 
 :END
 if defined _OLD_CODEPAGE (
