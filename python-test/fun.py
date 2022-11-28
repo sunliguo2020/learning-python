@@ -13,7 +13,11 @@ def f():
 
 s(f)"""
 
+
 import turtle
+
+
+import turtle2
 
 import turtle2
 

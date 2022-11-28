@@ -35,6 +35,7 @@ def get_date(msg):
 
 
 if __name__ == "__main__":
+
     root_dir = r'Y:\email'
     new_email_dir = r'Y:\email_new'
 
@@ -46,8 +47,10 @@ if __name__ == "__main__":
             # 返回message对象
             msg = get_message(mail_file_path)
             datestring = get_date(msg)
+
             if datestring is None:
                 continue
+
             print("datestring=" + datestring)
             # 没有逗号，直接跳过
             if ',' not in datestring:
@@ -63,6 +66,7 @@ if __name__ == "__main__":
             mail_month = str(mail_date)[:7]
             print(mail_month)
 
+
             new_email_moth_dir = os.path.join(new_email_dir,mail_month)
             if not os.path.exists(new_email_moth_dir):
                 os.mkdir(new_email_moth_dir)
@@ -72,3 +76,10 @@ if __name__ == "__main__":
                     shutil.move(mail_file_path, new_email_moth_dir)
                 except Exception as e:
                     print(f"移动过程中出错,{e}")
+
+            if not os.path.exists("e:\\" + mail_month):
+                os.mkdir("e:\\" + mail_month)
+            else:
+                print("e:\\" + mail_month)
+
+                shutil.move(mail_file_path, "e:\\" + mail_month)
