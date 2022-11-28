@@ -9,10 +9,6 @@
 
 from GetFileMd5 import GetFileMd5
 import os
-<<<<<<< HEAD
-=======
-
->>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 from concurrent.futures import ThreadPoolExecutor
 
 
@@ -59,18 +55,6 @@ def RenameFileName(mail_file_path=''):
 
 
 if __name__ == '__main__':
-    # RenameFileName(root_dir=r'F:\eml_new\2015-09')
-    with ThreadPoolExecutor() as t:
-        for i in walk_dir(r'F:\eml\a'):
-            # 已经改名的情况
-            # if len(os.path.basename(i)) == 36:
-            #     continue
-            t.submit(RenameFileName, i)
-<<<<<<< HEAD
-=======
-
-
-if __name__ == '__main__':
     root_dir = r'F:\mail'
     count = 0
 for (root, dirs, files) in os.walk(root_dir):
@@ -94,5 +78,4 @@ for (root, dirs, files) in os.walk(root_dir):
             try:
                 os.renames(mail_file_path, new_file_path)
             except Exception as e:
-                print("重命名过程中出错：",e)
->>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
+                print("重命名过程中出错：", e)
