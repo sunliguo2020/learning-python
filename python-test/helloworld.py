@@ -37,7 +37,13 @@ def Move_File(srcfile, dstfile):
 
 # 按照文件大小分类
 def Fenlei_file(srcfile):
+<<<<<<< HEAD
     global file_1000, file_1215, file_414, file_zero
+=======
+
+    global file_1000, file_1215, file_414, file_zero
+
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
     if (srcfile.endswith(".txt") or srcfile.endswith('.xml')):
         file_size = os.path.getsize(srcfile)
         print("file %s 's size is %r" % (srcfile, file_size))
@@ -72,7 +78,13 @@ for i in range(0,len(a),3):
 [a[i:i+3] for i in xrange(0,len(a),3)]
 """
 for i in fileList:
+<<<<<<< HEAD
     print("Total:%r\t" % (Total), end="")
+=======
+
+    print("Total:%r\t" % (Total), end="")
+
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
     Fenlei_file(i)
     Total = Total - 1
 

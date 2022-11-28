@@ -13,8 +13,15 @@ def f():
 
 s(f)"""
 
+
 import turtle
 
+<<<<<<< HEAD
+=======
+
+import turtle2
+
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 import turtle2
 
 t =turtle.Pen()

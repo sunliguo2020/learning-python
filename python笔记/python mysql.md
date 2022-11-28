@@ -12,7 +12,25 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 ```
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+查看数据库
+=======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 #### 查看数据库
 ```sql
 
@@ -21,30 +39,109 @@ show create database 数据库名;
 
 ```
 
+<<<<<<< HEAD
 #### 修改数据库
+=======
+<<<<<<< HEAD
+#### 修改数据库
+=======
+
+<<<<<<< HEAD
+#### 修改数据库
+=======
+=======
+
+#### 修改数据库
+<<<<<<< HEAD
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
 
+<<<<<<< HEAD
 
 #### 删除数据库
 
+=======
+<<<<<<< HEAD
+
+#### 删除数据库
+
+=======
+<<<<<<< HEAD
+#### 删除数据库
+=======
+<<<<<<< HEAD
+
+=======
+
+#### 删除数据库
+>>>>>>> 
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+
+#### 删除数据库
+>
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 
 ```sql
 drop database 数据库名
 ```
 
 
+<<<<<<< HEAD
 
 #### 使用数据库
 
+=======
+<<<<<<< HEAD
+
+#### 使用数据库
+
+=======
+<<<<<<< HEAD
+#### 使用数据库
+
+=======
+<<<<<<< HEAD
+
+=======
+=======
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+
+#### 使用数据库
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 
 ```sql
 select database();
 use 数据库名;
 ```
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+
+#### DDL操作表
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 #### DDL操作表
 创建表
 
@@ -72,7 +169,18 @@ KEY `fn` ( `file_name` ) USING HASH
 
 #### 查看表
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 
 ```sql
 show tables;
@@ -109,8 +217,25 @@ ADD PRIMARY KEY (`id`);
 
 ```
 
+<<<<<<< HEAD
 
 
+=======
+<<<<<<< HEAD
+
+
+=======
+<<<<<<< HEAD
+=======
+
+
+
+#### 删除表
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 #### 删除表
 ```sql
 ---直接删除表名
@@ -122,12 +247,30 @@ drop table if exists 表名;
 
 #### DML语句
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 
 增 
 
 ```sql
 insert into users values('leanna',2111,2);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 insert into shoujihao (PROD_INST_ID,CUST_ID,LATN,BUSI_NBR,USER_NAME,CUST_NAME,INSTALL_ADDR,CERTIFICATES_NBR,mod_time) select * from ziliao_old.phone limit 1;
 ```
 
@@ -136,18 +279,43 @@ insert into shoujihao (PROD_INST_ID,CUST_ID,LATN,BUSI_NBR,USER_NAME,CUST_NAME,IN
 ```sql
 delete from users where projid = %d;
 delete from shoujihao where `mod_time` = '';
+<<<<<<< HEAD
 delete from PersonalId where personid is NULL;
+=======
+<<<<<<< HEAD
+delete from PersonalId where personid is NULL;
+=======
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 ```
 
 改
 
 ```sql
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 update users set projid = 4 where projid = 2;
 update  shoujihao  set `INSTALL_ADDR` = '' where `INSTALL_ADDR` is NULL limit 100000;
 update shoujihao set `DUSI_ID` =''  ,INSTLL_ADDR='' where xxx;
 UPDATE 表名 SET 字段名=replace(字段名, ‘被替换字符串’, '用来替换的字符串') ;
 UPDATE kuandai SET `INSTALL_ADDR`=replace(INSTALL_ADDR, "'", '') ;
 
+<<<<<<< HEAD
+=======
+=======
+	update users set projid = 4 where projid = 2;
+
+​	update  shoujihao  set `INSTALL_ADDR` = '' where `INSTALL_ADDR` is NULL limit 100000;
+
+​	update shoujihao set `DUSI_ID` =''  ,INSTLL_ADDR='' where xxx;
+ UPDATE 表名 SET 字段名=replace(字段名, ‘被替换字符串’, '用来替换的字符串') ;
+ mysql> UPDATE kuandai SET `INSTALL_ADDR`=replace(INSTALL_ADDR, "'", '') ;
+Query OK, 65 rows affected (6.90 sec)
+Rows matched: 750210  Changed: 65  Warnings: 0
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 ```
 
 查
@@ -204,6 +372,10 @@ select distinct 列名 from   表名;
 
 定义为NOT NULL的字段只能插入空值，不能插入NULL值，而NULL值可以插入空值，也可以插入NULL值。
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 
 判断NULL值只能用is null 或is not null 不能用 = 或者<>
 
@@ -217,6 +389,25 @@ select count(*) from PersonalId where personid is not NULL;
 
 #### pymysql
 
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+
+
+判断NULL值只能用is null 或is not null 不能用 = 或者<>
+
+#### pymysql
+
+
+<<<<<<< HEAD
+
+
+#### pymysql
+=======
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 
 ```python
 db = pymysql.connect(host ='localhost',
@@ -224,15 +415,33 @@ db = pymysql.connect(host ='localhost',
                     password='123456',
                     database='userinfo',
                     charset = 'utf-8')
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 #创建游标对象
 cur = db.cursor()
 sql = "insert into userinfo (username,password) values ('vera','1234')"
 #使用execute()方法执行sql查询
+<<<<<<< HEAD
+=======
+=======
+cur = db.cursor()
+sql = "insert into userinfo (username,password) values ('vera','1234')"
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 cur.execute(sql)
 ```
 
 ```sql
 cur.fetchone()
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 返回单个的元组，也就是一条记录(row)，如果没有结果 则返回 None
 
 cur.fetchall() 
@@ -242,6 +451,10 @@ cur.fetchall()
 需要注明：在MySQL中是NULL，而在Python中则是None
 ```
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 ```py
  #执行单条sql语句,接收的参数为sql语句本身和使用的参数列表,返回值为受影响的行数
  execute(self, query, args):
@@ -253,12 +466,28 @@ cur.fetchall()
 
 ```python
 
+<<<<<<< HEAD
+=======
+=======
+
+<<<<<<< HEAD
+```
+=======
+
+```python
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 result = cur.fetchone()
         while result:
             yield result
             result = cur.fetchone()
 
 ```
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 
 ##### 在使用pymysql的executemany方法时，需要注意的几个问题
 
@@ -284,11 +513,35 @@ cursor.executemany(sql,values)
 
 
 
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+>>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+=======
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 重复字段：
 
 查询user表中，user_name字段值重复的数据及重复次数
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
 ```sql
 select user_name,count(*) as count from user group by user_name having count>1;
 ```
 
+<<<<<<< HEAD
+=======
+=======
+```
+select user_name,count(*) as count from user group by user_name having count>1;
+```
+>>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
+>>>>>>> 9fea01ce2b50beffd7fb016f8b33d6f7166ad34f
