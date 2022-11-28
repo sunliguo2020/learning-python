@@ -13,6 +13,9 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 ```
 
 <<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -23,6 +26,7 @@ CREATE DATABASE `guotu` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin';
 
 
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 #### 查看数据库
 ```sql
 
@@ -31,6 +35,9 @@ show create database 数据库名;
 
 ```
 
+<<<<<<< HEAD
+#### 修改数据库
+=======
 
 <<<<<<< HEAD
 #### 修改数据库
@@ -45,11 +52,17 @@ show create database 数据库名;
 
 >>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
 
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 ```sql
 alter database 数据库名 default character set 字符集;
 ```
 
 
+<<<<<<< HEAD
+
+#### 删除数据库
+
+=======
 <<<<<<< HEAD
 #### 删除数据库
 =======
@@ -65,12 +78,18 @@ alter database 数据库名 default character set 字符集;
 #### 删除数据库
 >
 >>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 
 ```sql
 drop database 数据库名
 ```
 
 
+<<<<<<< HEAD
+
+#### 使用数据库
+
+=======
 <<<<<<< HEAD
 #### 使用数据库
 
@@ -83,6 +102,7 @@ drop database 数据库名
 
 #### 使用数据库
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 
 ```sql
 select database();
@@ -91,11 +111,14 @@ use 数据库名;
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 
 
 #### DDL操作表
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 #### DDL操作表
 创建表
 
@@ -124,9 +147,13 @@ KEY `fn` ( `file_name` ) USING HASH
 #### 查看表
 
 <<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
 =======
 
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 
 ```sql
 show tables;
@@ -164,6 +191,10 @@ ADD PRIMARY KEY (`id`);
 ```
 
 <<<<<<< HEAD
+
+
+=======
+<<<<<<< HEAD
 =======
 
 
@@ -172,6 +203,7 @@ ADD PRIMARY KEY (`id`);
 
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 #### 删除表
 ```sql
 ---直接删除表名
@@ -184,15 +216,22 @@ drop table if exists 表名;
 #### DML语句
 
 <<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
 =======
 
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 
 增 
 
 ```sql
 insert into users values('leanna',2111,2);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 insert into shoujihao (PROD_INST_ID,CUST_ID,LATN,BUSI_NBR,USER_NAME,CUST_NAME,INSTALL_ADDR,CERTIFICATES_NBR,mod_time) select * from ziliao_old.phone limit 1;
 ```
 
@@ -201,11 +240,23 @@ insert into shoujihao (PROD_INST_ID,CUST_ID,LATN,BUSI_NBR,USER_NAME,CUST_NAME,IN
 ```sql
 delete from users where projid = %d;
 delete from shoujihao where `mod_time` = '';
+<<<<<<< HEAD
+delete from PersonalId where personid is NULL;
+=======
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 ```
 
 改
 
 ```sql
+<<<<<<< HEAD
+update users set projid = 4 where projid = 2;
+update  shoujihao  set `INSTALL_ADDR` = '' where `INSTALL_ADDR` is NULL limit 100000;
+update shoujihao set `DUSI_ID` =''  ,INSTLL_ADDR='' where xxx;
+UPDATE 表名 SET 字段名=replace(字段名, ‘被替换字符串’, '用来替换的字符串') ;
+UPDATE kuandai SET `INSTALL_ADDR`=replace(INSTALL_ADDR, "'", '') ;
+
+=======
 	update users set projid = 4 where projid = 2;
 
 ​	update  shoujihao  set `INSTALL_ADDR` = '' where `INSTALL_ADDR` is NULL limit 100000;
@@ -215,6 +266,7 @@ delete from shoujihao where `mod_time` = '';
  mysql> UPDATE kuandai SET `INSTALL_ADDR`=replace(INSTALL_ADDR, "'", '') ;
 Query OK, 65 rows affected (6.90 sec)
 Rows matched: 750210  Changed: 65  Warnings: 0
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 ```
 
 查
@@ -273,6 +325,21 @@ select distinct 列名 from   表名;
 
 <<<<<<< HEAD
 
+判断NULL值只能用is null 或is not null 不能用 = 或者<>
+
+```sql
+select count(*) from PersonalId where personid is NULL;
+select count(*) from PersonalId where personid is not NULL;
+```
+
+
+
+
+#### pymysql
+
+=======
+<<<<<<< HEAD
+
 
 判断NULL值只能用is null 或is not null 不能用 = 或者<>
 
@@ -285,6 +352,7 @@ select distinct 列名 from   表名;
 #### pymysql
 =======
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 
 ```python
 db = pymysql.connect(host ='localhost',
@@ -292,14 +360,24 @@ db = pymysql.connect(host ='localhost',
                     password='123456',
                     database='userinfo',
                     charset = 'utf-8')
+<<<<<<< HEAD
+#创建游标对象
 cur = db.cursor()
 sql = "insert into userinfo (username,password) values ('vera','1234')"
+#使用execute()方法执行sql查询
+=======
+cur = db.cursor()
+sql = "insert into userinfo (username,password) values ('vera','1234')"
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 cur.execute(sql)
 ```
 
 ```sql
 cur.fetchone()
+<<<<<<< HEAD
+=======
 
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 返回单个的元组，也就是一条记录(row)，如果没有结果 则返回 None
 
 cur.fetchall() 
@@ -309,6 +387,19 @@ cur.fetchall()
 需要注明：在MySQL中是NULL，而在Python中则是None
 ```
 
+<<<<<<< HEAD
+```py
+ #执行单条sql语句,接收的参数为sql语句本身和使用的参数列表,返回值为受影响的行数
+ execute(self, query, args):
+#执行单条sql语句,但是重复执行参数列表里的参数,返回值为受影响的行数
+　executemany(self, query, args):
+```
+
+
+
+```python
+
+=======
 
 <<<<<<< HEAD
 ```
@@ -316,6 +407,7 @@ cur.fetchall()
 
 ```python
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 result = cur.fetchone()
         while result:
             yield result
@@ -323,16 +415,51 @@ result = cur.fetchone()
 
 ```
 <<<<<<< HEAD
+
+##### 在使用pymysql的executemany方法时，需要注意的几个问题
+
+1、在写sql语句时，不管字段为什么类型，占位符统一使用%s,且不能加上引号。例如
+
+```python
+sql="insert into tablename (id,name) values (%s,%s)"
+```
+
+2、添加的数据的格式必须为list[tuple(),tuple(),tuple()]或者tuple(tuple(),tuple(),tuple())例如
+
+```python
+values=[(1,"zhangsan"),(2,"lisi")]
+#或者
+values=((1,"zhangsan"),(2,"lisi"))
+```
+
+最后，通过executemany插入
+
+```python
+cursor.executemany(sql,values) 
+```
+
+
+
+=======
+<<<<<<< HEAD
 =======
 
 <<<<<<< HEAD
 >>>>>>> 4d0ede0c3f44f1883275844924f649f10fe155bc
 =======
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7
 重复字段：
 
 查询user表中，user_name字段值重复的数据及重复次数
 
+<<<<<<< HEAD
+```sql
+select user_name,count(*) as count from user group by user_name having count>1;
+```
+
+=======
 ```
 select user_name,count(*) as count from user group by user_name having count>1;
 ```
 >>>>>>> 44cd2abc499f1b697db5f17c13be08680ed0ce00
+>>>>>>> 916441d61397f5ac1f8eb6cb97f9b7ebf1e5cdb7

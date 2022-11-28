@@ -25,6 +25,7 @@ def get_file_md5sum(filename):
 
     return myhash.hexdigest()
 
+
 def walk_dir(dir):
     """
     遍历文件夹，返回各个文件的路径
@@ -35,7 +36,7 @@ def walk_dir(dir):
     if not os.path.isdir(dir):
         print(f"{dir}不是一个目录")
         return -1
-    for root,dirs,files in os.walk(dir):
+    for root, dirs, files in os.walk(dir):
         for file in files:
-            file_path = os.path.join(root,file)
-            yield  file_path
+            file_path = os.path.join(root, file)
+            yield file_path
