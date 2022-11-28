@@ -1,0 +1,19 @@
+#coding:utf-8
+import json
+dict1 = {'data_info': '正常', 'currentCount': 5, 'count': 5, 'totalPages': 1, 'currentPage': 1, 'status': 'OK', 'billList': [{'st_areamanager': '0153795', 'rownum_': 1, 'reply_time': '2017-12-11 07:46:21', 'handlertime': '接单时间:2017-12-11 07:46:21', 'createinfo': None, 'st_ifbuyeletric': 'Y', 'businesstype': '设备告警工单', 'revert_time': None, 'regionid': '0106893', 'billisovertime': 'N', 'billid': 715458678, 'billsn': 'FS-37-001-20171211-336736', 'business_type': 'FSU', 'taskid': 715458691, 'createtime': '2017-12-11 07:38:48', 'dispatch_time': '2017-12-11 07:38:48', 'billstatus': 'ISSTAND', 'stationname': '寿光长兴化工', 'faulttype': 'OTHER', 'st_sitesource': '2', 'st_waittime': '30', 'istemperature': None, 'billtitle': 'FSU离线', 'stationid': '013278735', 'alarmactivecount': 1}, {'st_areamanager': '0153795', 'rownum_': 2, 'reply_time': '2017-12-11 07:47:13', 'handlertime': '接单时间:2017-12-11 07:47:13', 'createinfo': None, 'st_ifbuyeletric': 'N', 'businesstype': '设备告警工单', 'revert_time': None, 'regionid': '0106893', 'billisovertime': 'N', 'billid': 715441266, 'billsn': 'FS-37-001-20171211-334950', 'business_type': 'FSU', 'taskid': 715441189, 'createtime': '2017-12-11 07:14:12', 'dispatch_time': '2017-12-11 07:14:12', 'billstatus': 'ISSTAND', 'stationname': '寿光市新华书店A-电信', 'faulttype': 'GENERELEC_FAULT', 'st_sitesource': '4', 'st_waittime': '2', 'istemperature': None, 'billtitle': '交流输入停电告警（1#）', 'stationid': '013278440', 'alarmactivecount': 1}, {'st_areamanager': '0153795', 'rownum_': 3, 'reply_time': '2017-12-11 07:47:17', 'handlertime': '接单时间:2017-12-11 07:47:17', 'createinfo': None, 'st_ifbuyeletric': 'Y', 'businesstype': '设备告警工单', 'revert_time': None, 'regionid': '0106893', 'billisovertime': 'N', 'billid': 715440952, 'billsn': 'FS-37-001-20171211-335010', 'business_type': 'FSU', 'taskid': 715440877, 'createtime': '2017-12-11 07:13:47', 'dispatch_time': '2017-12-11 07:13:47', 'billstatus': 'ELECTRIC_JUDGE', 'stationname': '新华书店-49', 'faulttype': 'GENERELEC', 'st_sitesource': '2', 'st_waittime': '30', 'istemperature': None, 'billtitle': '交流输入停电告警（1#）', 'stationid': '013278621', 'alarmactivecount': 1}, {'st_areamanager': '0153795', 'rownum_': 4, 'reply_time': '2017-12-11 06:32:05', 'handlertime': '接单时间:2017-12-11 06:32:05', 'createinfo': None, 'st_ifbuyeletric': 'Y', 'businesstype': '设备告警工单', 'revert_time': None, 'regionid': '0106893', 'billisovertime': 'N', 'billid': 715389796, 'billsn': 'FS-37-001-20171211-329080', 'business_type': 'FSU', 'taskid': 715389800, 'createtime': '2017-12-11 06:12:58', 'dispatch_time': '2017-12-11 06:12:58', 'billstatus': 'ISSTAND', 'stationname': '寿光北关村', 'faulttype': 'OTHER', 'st_sitesource': '1', 'st_waittime': '5', 'istemperature': None, 'billtitle': 'FSU离线', 'stationid': '4293A0FB524A06ABE0530D801DAC62BA', 'alarmactivecount': 1}, {'st_areamanager': '0153795', 'rownum_': 5, 'reply_time': '2017-12-11 06:09:02', 'handlertime': '接单时间:2017-12-11 06:09:02', 'createinfo': None, 'st_ifbuyeletric': 'Y', 'businesstype': '设备告警工单', 'revert_time': None, 'regionid': '0106893', 'billisovertime': 'N', 'billid': 715384189, 'billsn': 'FS-37-001-20171211-328082', 'business_type': 'FSU', 'taskid': 715384177, 'createtime': '2017-12-11 06:07:45', 'dispatch_time': '2017-12-11 06:07:45', 'billstatus': 'ISSTAND', 'stationname': '清水泊', 'faulttype': 'OTHER', 'st_sitesource': '2', 'st_waittime': '30', 'istemperature': None, 'billtitle': 'FSU离线', 'stationid': '013278362', 'alarmactivecount': 1}]}
+
+#print(dict1)
+
+#print(dict1['data_info'])
+#print(dict1['billList'][1]['handlertime'])
+
+for key,value in dict1.items():
+    print(key,"values:",dict1[key])
+    #print(dict1[key])
+
+print(type(dict1['currentPage']))
+
+if dict1['data_info'] == "正常" and dict1['currentPage'] == 1:
+    print("diata_info values 正常")
+    
+print(len(dict1['billList']))

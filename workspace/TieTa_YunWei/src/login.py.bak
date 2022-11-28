@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+'''
+Created on 2016-8-8
+
+@author: sunliguo
+'''
+import urllib,urllib2,cookielib
+
+loginUrl = "http://101.227.240.110:8989/baf/jsp/uiframe/login.jsp"
+CaptchaUrl = "http://101.227.240.110:8989/servlet/ValidateCodeServlet "
+
+cookie = cookielib.CookieJar()
+opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+urllib2.install_opener(opener)
+
+urllib2.urlopen(loginUrl)
+
+print "cookie =" ,cookie
+#首先获取验证码，人工分析
+CapPicReq = urllib2.urlopen(CaptchaUrl)
+with open("cappic.jpg","wb") as f:
+    f.write(CapPicReq.read()) 
+code = raw_input("输入验证码：")
+loginData = {'loginName':'sdwfmps',
+             'password':'chenzhong123456',
+             'picCode':code}
+loginDataEncode = urllib.urlencode(loginData)
+
+print "loginDataEncode = ",loginDataEncode
+
+res = urllib2.urlopen(loginUrl,loginDataEncode)
+print res.read()

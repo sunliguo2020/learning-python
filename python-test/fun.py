@@ -14,6 +14,9 @@ def f():
 s(f)"""
 
 import turtle
+
+import turtle2
+
 t =turtle.Pen()
 
 for x in range(360):
