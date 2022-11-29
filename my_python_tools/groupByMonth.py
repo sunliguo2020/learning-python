@@ -22,11 +22,11 @@ for parent, dirnames, filesnames in os.walk(pwd):
         monthDir = time.strftime('%Y%m', time.gmtime(os.path.getmtime(file)))
 
         # 创建年月的文件夹
-        if monthDir not in os.listdir('./'):
+        if monthDir not in os.listdir('../python-test/'):
             os.mkdir(monthDir)
         # 判断是否有重名的文件
         if not os.path.isfile('./' + monthDir + '/' + os.path.basename(file)) and os.path.isdir(
-                os.path.join('./', monthDir)):
+                os.path.join('../python-test/', monthDir)):
             # print(monthDir)
             print('move' + './' + monthDir + '/' + os.path.basename(file))
             shutil.move(file, './' + monthDir)
