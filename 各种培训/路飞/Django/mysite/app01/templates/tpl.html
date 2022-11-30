@@ -1,11 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>tpl</title>
+    <link rel = 'stylesheet' href="">
 </head>
 <body>
 <ul>tpl</ul>
 <ul>这是个测试{{a1}}</ul>
-
+<img src="/static/img/1.jpg">
+<img src="{% static 'img/1.jpg' %}">
+</body>
 </html>
