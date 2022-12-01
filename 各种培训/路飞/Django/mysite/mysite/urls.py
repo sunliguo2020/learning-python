@@ -23,8 +23,10 @@ urlpatterns = [
     path('user/list/', views.user_list),
     path('user/add/', views.user_add),
     path('tpl/', views.tpl),
-    #联通新闻中心
-    path('news/',views.news),
-    #请求和响应
-    path('something/',views.something),
+    # 联通新闻中心
+    path('news/', views.news),
+    # 请求和响应
+    path('something/', views.something),
+    # 用户登录
+    path('login/', views.login),
 ]

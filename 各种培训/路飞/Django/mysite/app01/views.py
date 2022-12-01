@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse,redirect
+from django.shortcuts import render, HttpResponse, redirect
+
 
 # Create your views here.
 def index(request):
@@ -50,5 +51,25 @@ def something(request):
     # return HttpResponse('返回内容')
     # 5、【相应】读取HTML内容+渲染（替换）->字符串，返回给浏览器
     # return render(request,"someting.html",{"title":"来了"})
-    #6、【相应】 redirect 让浏览器重定向
+    # 6、【相应】 redirect 让浏览器重定向
     return redirect("http://blog.sunliguo.com")
+
+
+def login(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+    else:
+        # 用户post请求
+        """<QueryDict: {'csrfmiddlewaretoken': ['yqXuI23rNzIvOpUuLWqcm7XbXVY668IXrHZcvjW4OD0pdLF9h3D5b1hkTozZFyH0'],
+         'user': ['ll_admin'], 
+         'pwd': ['tongmingao']}>"""
+
+        print(request.POST)
+        username = request.POST.get('user')
+        pwd = request.POST.get('pwd')
+
+        if username == 'root' and pwd == '123':
+
+            return HttpResponse('登录成功!')
+        else:
+            return render(request, 'login.html', {"err_msg": "用户名或密码错误!"})
