@@ -23,5 +23,8 @@ urlpatterns = [
     path('user/list/', views.user_list),
     path('user/add/', views.user_add),
     path('tpl/', views.tpl),
-    path('news/',views.news)
+    #联通新闻中心
+    path('news/',views.news),
+    #请求和响应
+    path('something/',views.something),
 ]
