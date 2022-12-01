@@ -9,7 +9,30 @@
 <body>
 <ul>tpl</ul>
 <ul>这是个测试{{a1}}</ul>
-<img src="/static/img/1.jpg">
-<img src="{% static 'img/1.jpg' %}">
+<h1>模板语言的学习{{a2}}</h1>
+<div>{{a2.0}}</div>
+<div>{{a2.1}}</div>
+<div>{{a2.2}}</div>
+<div>
+    {% for item in a2 %}
+        <span>{{ item }}</span>
+    {% endfor %}
+
+</div>
+<hr/>
+{{a3}}
+
+{{a3.role}}
+<ul>
+{% for item in a3.items %}
+<li>{{item}}</li>
+{%endfor%}}
+</ul>
+<hr/>
+{{ a3.item }}
+
+<img src="/static/img/1.jpg" width=40%,heigh =30%>
+<img src="{% static 'img/1.jpg' %}" width="20px",heigh="40px">
+
 </body>
 </html>
