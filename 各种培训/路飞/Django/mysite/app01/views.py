@@ -73,3 +73,22 @@ def login(request):
             return HttpResponse('登录成功!')
         else:
             return render(request, 'login.html', {"err_msg": "用户名或密码错误!"})
+
+
+from app01 import models
+
+
+def orm(request):
+    # 新建数据
+    models.Department.objects.create(title='销售部')
+    # 删除数据
+    models.Department.objects.filter(id=1).delete()
+    models.Department.objects.all().delete()
+    # 获取数据
+    data_list = models.UserInfo.objects.all()
+    print(data_list)
+    for item in data_list:
+        print(item.id, item.name)
+    # 更新数据
+    models.UserInfo.objects.filter(id='1').update(age=19)
+    return HttpResponse('成功')
