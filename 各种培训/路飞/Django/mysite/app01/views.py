@@ -1,4 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
+from app01 import models
+from app01.models import UserInfo
 
 
 # Create your views here.
@@ -75,9 +77,6 @@ def login(request):
             return render(request, 'login.html', {"err_msg": "用户名或密码错误!"})
 
 
-from app01 import models
-
-
 def orm(request):
     # 新建数据
     models.Department.objects.create(title='销售部')
@@ -92,3 +91,35 @@ def orm(request):
     # 更新数据
     models.UserInfo.objects.filter(id='1').update(age=19)
     return HttpResponse('成功')
+
+
+def info_list(request):
+    # 1、获取数据库中所有的用户信息
+    # [对象,对象,对象]
+    data_list = UserInfo.objects.all()
+    print(data_list)
+
+    return render(request, 'info_list.html', {"info_list": data_list})
+
+
+def info_add(request):
+    if request.method == "GET":
+        return render(request, 'info_add.html')
+
+    # 获取用户提交的数据
+    user = request.POST.get('user')
+    pwd = request.POST.get('pwd')
+    age = request.POST.get('age')
+
+    # 添加到数据库
+
+    UserInfo.objects.create(name=user, password=pwd, age=age)
+
+    # return HttpResponse('添加成功')
+    return redirect('/info/list')
+
+
+def info_delete(request):
+    nid = request.GET.get('nid')
+    UserInfo.objects.filter(id=nid).delete()
+    return redirect('/info/list/')

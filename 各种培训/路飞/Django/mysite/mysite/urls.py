@@ -31,4 +31,12 @@ urlpatterns = [
     path('login/', views.login),
     # 测试orm
     path('orm/', views.orm),
+
+    # 案例用户管理
+    path('info/list/', views.info_list),
+    # 添加用户
+    path('info/add/', views.info_add),
+    # 删除用户
+    path('info/delete/', views.info_delete),
+
 ]
