@@ -39,3 +39,12 @@ def depart_edit(request, nid):
     title = request.POST.get('title')
     models.Department.objects.filter(id=nid).update(title=title)
     return redirect("/depart/list/")
+
+
+def user_list(request):
+    """用户管理"""
+
+    query_set = models.UserInfo.objects.all()
+    for obj in query_set:
+        print(obj.id,obj.name)
+    return render(request,'user_list.html',{"user_list":query_set})
