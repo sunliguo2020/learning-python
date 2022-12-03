@@ -59,27 +59,12 @@
                 </tbody>
             </table>
         </div>
+        <div class="clearfix" >
+            <ul class="pagination">
+             {{ page_string }}
+            </ul>
+        </div>
     </div>
 
-    <ul class="pagination">
-
-        {{ page_string }}
-        <li>
-            <form style="float:left;margin-lef:-1px" method="get">
-
-                <input style="postion:relative;float:left;display:inline-block;width: 80px;border-radius: 0;"
-                       type="text" name="page" class="form-control" placeholder="页码">
-
-            <button style="border-radius: 0" class="btn btn-default" type="submit">跳转</button>
-
-            </form>
-        </li>
-    </ul>
-
-
-
     </div>
-
-
-
 {% endblock %}
