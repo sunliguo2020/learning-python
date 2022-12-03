@@ -201,6 +201,9 @@ def prettynum_list(request):
     # 数据总条数
     total_count = models.PrettyNum.objects.filter(**data_dict).order_by("-level").count()
     total_page_count, div = divmod(total_count, page_size)
+    #判断总条数小与page_size
+    if total_page_count == 0 :
+        total_page_count = 1
     if div:
         total_page_count + 1
 
@@ -210,6 +213,8 @@ def prettynum_list(request):
 
     start = (page - 1) * page_size
     end = (page) * page_size
+
+    print(page,total_count,total_page_count,start,end)
 
     prettynum_list_all = models.PrettyNum.objects.filter(**data_dict).order_by("-level")[start:end]
 
@@ -298,6 +303,7 @@ class MobileEditModelForm(forms.ModelForm):
         # 当前编辑的哪一行的id
         # self.instance.pk
         txt_mobible = self.cleaned_data['mobile']
+
         if len(txt_mobible) != 11:
             # 验证不通过
             raise ValidationError("格式错误")
