@@ -18,7 +18,7 @@ class UserInfo(models.Model):
     password = models.CharField(verbose_name='密码', max_length=10)
     age = models.IntegerField(verbose_name='年龄')
     account = models.DecimalField(verbose_name='账户余额', max_digits=10, decimal_places=2, default=0)
-    create_time = models.DateTimeField(verbose_name="入职时间")
+    create_time = models.DateField(verbose_name="入职时间")
     #无约束
     # depart_id = models.BigIntegerField(verbose_name="部门ID")
     #有约束
