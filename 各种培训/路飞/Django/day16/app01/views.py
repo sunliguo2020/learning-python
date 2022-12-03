@@ -45,8 +45,8 @@ def user_list(request):
     """用户管理"""
 
     query_set = models.UserInfo.objects.all()
-    for obj in query_set:
-        print(obj.id, obj.name)
+    # for obj in query_set:
+    #     print(obj.id, obj.name)
     return render(request, 'user_list.html', {"user_list": query_set})
 
 
@@ -68,7 +68,7 @@ def user_add(request):
     ctime = request.POST.get('ctime')
     gd = request.POST.get('gd')
     dp = request.POST.get('dp')
-    #添加到数据库中
+    # 添加到数据库中
     models.UserInfo.objects.create(name=name,
                                    password=pwd,
                                    age=age,
@@ -79,7 +79,45 @@ def user_add(request):
     return redirect('/user/list/')
 
 
-def user_delete(request,nid):
+def user_delete(request, nid):
     """"删除用户"""
     models.UserInfo.objects.filter(id=nid).delete()
     return redirect("/user/list/")
+
+
+from django import forms
+
+
+class UserModelForm(forms.ModelForm):
+    name = forms.CharField(min_length=3,label='用户名')
+    class Meta:
+        model = models.UserInfo
+        fields = ['name', 'password', 'age','account','create_time', 'gender', 'dpart']
+
+        widgets = {
+            "name": forms.TextInput(attrs={'class': "form-control"})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            # print(type(field))
+            # print(name, field)
+            field.widget.attrs = {"class": "form-control","placeholder":field.label}
+
+
+def user_model_add(request):
+    """添加用户（ModelForm版本）"""
+    if request.method == 'GET':
+        form = UserModelForm()
+
+        return render(request, 'user_model_form_add.html', {'form': form})
+    #用户POST提交的数据
+    form = UserModelForm(data = request.POST)
+    if form.is_valid():
+        #如果数据合法，保存到数据库
+        # print(form.cleaned_data)
+        form.save()
+        return redirect('/user/list/')
+    else:#校验失败，显示错误信息
+        return render(request, 'user_model_form_add.html', {'form': form})

@@ -8,6 +8,9 @@ class Department(models.Model):
     """部门表"""
     title = models.CharField(verbose_name='标题', max_length=32)
 
+    def __str__(self):
+        return self.title
+
 
 class UserInfo(models.Model):
     """员工表"""
@@ -24,7 +27,7 @@ class UserInfo(models.Model):
     #级联删除
     # dpart = models.ForeignKey(to="Department",to_field='id',on_delete=models.CASCADE)
     #置空
-    dpart = models.ForeignKey(to="Department",to_field='id',null=True,blank=True,on_delete=models.SET_NULL)
+    dpart = models.ForeignKey(verbose_name="部门名",to="Department",to_field='id',null=True,blank=True,on_delete=models.SET_NULL)
     gender_choices = (
         (1,'男'),
         (2,'女'),
