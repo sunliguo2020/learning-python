@@ -68,6 +68,7 @@ def user_add(request):
     ctime = request.POST.get('ctime')
     gd = request.POST.get('gd')
     dp = request.POST.get('dp')
+    #添加到数据库中
     models.UserInfo.objects.create(name=name,
                                    password=pwd,
                                    age=age,
@@ -76,3 +77,9 @@ def user_add(request):
                                    gender=gd,
                                    dpart_id=dp)
     return redirect('/user/list/')
+
+
+def user_delete(request,nid):
+    """"删除用户"""
+    models.UserInfo.objects.filter(id=nid).delete()
+    return redirect("/user/list/")
