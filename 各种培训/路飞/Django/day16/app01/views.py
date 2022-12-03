@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from app01 import models
+from django.utils.safestring import mark_safe
 
 
 # Create your views here.
@@ -176,17 +177,96 @@ def user_edit(request, nid):
 # 靓号管理
 def prettynum_list(request):
     """靓号显示"""
+    # 创建测试数据
+    # for i in range(300):
+    #     models.PrettyNum.objects.create(mobile='15244425554',price=102,level=1,status=1)
+
     data_dict = {}
-    search_data = request.GET.get('q')
+    search_data = request.GET.get('q', "")
+
     if search_data:
         data_dict['mobile__contains'] = search_data
 
     # res = models.PrettyNum.objects.filter(**data_dict)
 
-    prettynum_list_all = models.PrettyNum.objects.filter(**data_dict).order_by("-level")
+    # 根据用户想要访问的页码，计算出起止位置
+    # page =1
+    try:
+        page = int(request.GET.get('page',1))
+    except Exception as e:
+        page = 1
+
+    page_size = 10
+
+    # 数据总条数
+    total_count = models.PrettyNum.objects.filter(**data_dict).order_by("-level").count()
+    total_page_count, div = divmod(total_count, page_size)
+    if div:
+        total_page_count + 1
+
+    # 当前页大于总页数
+    if page > total_page_count:
+        page = total_page_count
+
+    start = (page - 1) * page_size
+    end = (page) * page_size
+
+    prettynum_list_all = models.PrettyNum.objects.filter(**data_dict).order_by("-level")[start:end]
+
+    # 计算出当前显示的前5页和后5页
+    plus = 5
+    if total_page_count <= 2 * plus + 1:
+        # 数据库内容比较少
+        start_page = 1
+        end_page = total_page_count
+    else:
+        if page <= plus:
+            start_page = 1
+            end_page = 2 * plus + 1
+        else:
+            # 当前页>5
+            # 当前页+5>总页数
+            if page + plus > total_page_count:
+                start_page = total_page_count - 2 * plus
+                end_page = total_page_count
+            else:
+                start_page = page - plus
+                end_page = page + plus
+
+    # 页码
+
+    page_str_list = []
+    page_str_list.append(f'<li ><a href="?page=1">首页</a></li>')
+    # 上一页
+    if page > 1:
+        prev = f'<li ><a href="?page={page - 1}">上一页</a></li>'
+    else:
+        prev = f'<li ><a href="?page=1">上一页</a></li>'
+
+    page_str_list.append(prev)
+
+    for i in range(start_page, end_page + 1):
+        if i == page:
+            ele = f'<li class="active"><a href="?page={i}">{i}</a></li>'
+        else:
+            ele = f'<li><a href="?page={i}">{i}</a></li>'
+        page_str_list.append(ele)
+
+    # 下一页
+    if page + 1 <= total_page_count:
+        prev = f'<li ><a href="?page={page + 1}">下一页</a></li>'
+    else:
+        prev = f'<li ><a href="?page={total_page_count}">下一页</a></li>'
+
+    page_str_list.append(prev)
+    page_str_list.append(f'<li ><a href="?page={total_page_count}">尾页</a></li>')
+
+    page_string = mark_safe("".join(page_str_list))
+
     # for item in prettynum_list_all:
     #     print(item.id,item.mobile)
-    return render(request, "prettypnum_list.html", {"num_list": prettynum_list_all, "search_data": search_data})
+    return render(request, "prettypnum_list.html",
+                  {"num_list": prettynum_list_all, "search_data": search_data, "page_string": page_string})
 
 
 def prettynum_add(request):

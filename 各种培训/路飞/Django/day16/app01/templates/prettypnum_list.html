@@ -17,7 +17,7 @@
                         <button class="btn btn-default" type="submit">
                             <span class="glyphicon glyphicon-search " aria-hidden="true"> </span>
                         </button>
-                    </span>
+                        </span>
                 </form>
 
             </div>
@@ -48,7 +48,7 @@
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.mobile }}</td>
                     <td>{{ item.price }}</td>
-                    <td>{{ item.get_level_display}}</td>
+                    <td>{{ item.get_level_display }}</td>
                     <td>{{ item.get_status_display }}</td>
                     <td>
                         <a class="btn btn-primary btn-xs" href="/prettynum/{{ item.id }}/edit/">编辑</a>
@@ -60,6 +60,20 @@
             </table>
         </div>
     </div>
+
+    <ul class="pagination">
+
+      {{ page_string }}
+    </ul>
+
+    <form method="get" >
+    <div class="input-group" style="20px">
+        <input type="text" name="page" class="form-control" placeholder="页码">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">跳转</button>
+        </span>
+    </div>
+    </form>
 
     </div>
 
