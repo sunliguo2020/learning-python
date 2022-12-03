@@ -95,15 +95,24 @@ class UserModelForm(forms.ModelForm):
         model = models.UserInfo
         fields = ['name', 'password', 'age', 'account', 'create_time', 'gender', 'dpart']
 
-        widgets = {
-            "name": forms.TextInput(attrs={'class': "form-control"})
-        }
+        # widgets = {
+        #     "name": forms.TextInput(attrs={'class': "form-control"})
+        # }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for name, field in self.fields.items():
-            # print(type(field))
-            # print(name, field)
+            field.widget.attrs = {"class": "form-control", "placeholder": field.label}
+
+
+class MobileModelForm(forms.ModelForm):
+    class Meta:
+        model = models.PrettyNum
+        fields = ['mobile', 'price', 'level', 'status']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
             field.widget.attrs = {"class": "form-control", "placeholder": field.label}
 
 
@@ -139,3 +148,44 @@ def user_edit(request, nid):
         return redirect('/user/list/')
 
     return render(request, 'user_edit.html', {'form': form})
+
+
+# 靓号管理
+def prettynum_list(request):
+    prettynum_list_all = models.PrettyNum.objects.all()
+    # for item in prettynum_list_all:
+    #     print(item.id,item.mobile)
+    return render(request, "prettypnum_list.html", {"num_list": prettynum_list_all})
+
+
+def prettynum_add(request):
+    if request.method == "GET":
+        form = MobileModelForm()
+        return render(request, "prettynum_add.html", {"form": form})
+    form = MobileModelForm(data=request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('/prettynum/list/')
+    else:
+        return render(request, "prettynum_add.html", {"form": form})
+
+
+def prettynum_edit(request, nid):
+    """靓号编辑"""
+    row_obj = models.PrettyNum.objects.filter(id=nid).first()
+    if request.method == "GET":
+        form = MobileModelForm(instance=row_obj)
+        return render(request, "prettynum_edit.html", {"form": form})
+
+    form = MobileModelForm(data=request.POST, instance=row_obj)
+    if form.is_valid():
+        form.save()
+        return redirect("/prettynum/list/")
+
+    return render(request, 'prettynum_edit.html', {"form": form})
+
+def prettynum_delete(request,nid):
+    """靓号删除"""
+    models.PrettyNum.objects.filter(id=nid).delete()
+    return redirect('/prettynum/list')
+
