@@ -175,10 +175,18 @@ def user_edit(request, nid):
 
 # 靓号管理
 def prettynum_list(request):
-    prettynum_list_all = models.PrettyNum.objects.all().order_by("-level")
+    """靓号显示"""
+    data_dict = {}
+    search_data = request.GET.get('q')
+    if search_data:
+        data_dict['mobile__contains'] = search_data
+
+    # res = models.PrettyNum.objects.filter(**data_dict)
+
+    prettynum_list_all = models.PrettyNum.objects.filter(**data_dict).order_by("-level")
     # for item in prettynum_list_all:
     #     print(item.id,item.mobile)
-    return render(request, "prettypnum_list.html", {"num_list": prettynum_list_all})
+    return render(request, "prettypnum_list.html", {"num_list": prettynum_list_all, "search_data": search_data})
 
 
 def prettynum_add(request):
@@ -207,7 +215,7 @@ class MobileEditModelForm(forms.ModelForm):
             field.widget.attrs = {"class": "form-control", "placeholder": field.label}
 
     def clean_mobile(self):
-        #当前编辑的哪一行的id
+        # 当前编辑的哪一行的id
         # self.instance.pk
         txt_mobible = self.cleaned_data['mobile']
         if len(txt_mobible) != 11:

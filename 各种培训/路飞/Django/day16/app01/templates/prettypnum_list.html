@@ -1,55 +1,68 @@
-{%  extends "layout.html" %}
+{% extends "layout.html" %}
 {% block title %}
     靓号列表
 {% endblock %}
-{%  block content %}
+{% block content %}
 
     <div class="container">
         <div style="margin-bottom: 10px">
-            <a class="btn btn-success" href="/prettynum/add/" >
+            <a class="btn btn-success" href="/prettynum/add/">
                 <span class="glyphicon glyphicon-plus-sign " aria-hidden="true"></span>
                 新建靓号</a>
-        </div>
-        <div class="bs-example" data-example-id="panel-without-body-with-table">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>靓号列表
-                </div>
+            <div style="float:right;width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" name='q' class="form-control" placeholder="搜索" value="{{ search_data }}">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search " aria-hidden="true"> </span>
+                        </button>
+                    </span>
+                </form>
 
-                <!-- Table -->
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>手机号码</th>
-                        <th>价格</th>
-                        <th>Level</th>
-                        <th>status</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in num_list %}
-                        <tr>
-                        <th scope="row">{{ item.id }}</th>
-                        <td>{{ item.mobile }}</td>
-                        <td>{{ item.price }}</td>
-                        <td>{{ item.get_level_display }}</td>
-                        <td>{{ item.get_status_display}}</td>
-                        <td>
-                            <a class="btn btn-primary btn-xs" href="/prettynum/{{item.id }}/edit/">编辑</a>
-                            <a class="btn btn-danger btn-xs" href="/prettynum/{{ item.id }}/delete/">删除</a>
-                        </td>
-                    {% endfor %}
-
-                    </tbody>
-                </table>
             </div>
         </div>
+    </div>
+    <div class="bs-example" data-example-id="panel-without-body-with-table">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>靓号列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>手机号码</th>
+                    <th>价格</th>
+                    <th>等级</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in num_list %}
+                    <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.mobile }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.get_level_display}}</td>
+                    <td>{{ item.get_status_display }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="/prettynum/{{ item.id }}/edit/">编辑</a>
+                        <a class="btn btn-danger btn-xs" href="/prettynum/{{ item.id }}/delete/">删除</a>
+                    </td>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     </div>
 
 
 
-{%  endblock %}
+{% endblock %}
