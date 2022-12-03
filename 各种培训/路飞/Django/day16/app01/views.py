@@ -46,5 +46,33 @@ def user_list(request):
 
     query_set = models.UserInfo.objects.all()
     for obj in query_set:
-        print(obj.id,obj.name)
-    return render(request,'user_list.html',{"user_list":query_set})
+        print(obj.id, obj.name)
+    return render(request, 'user_list.html', {"user_list": query_set})
+
+
+def user_add(request):
+    """添加用户"""
+    if request.method == "GET":
+        content = {
+            "gender_choice": models.UserInfo.gender_choices,
+            "depart_list": models.Department.objects.all(),
+
+        }
+
+        return render(request, 'user_add.html', content)
+    # 获取用户提交的数据
+    name = request.POST.get('name')
+    age = request.POST.get('age')
+    pwd = request.POST.get('pwd')
+    ac = request.POST.get('ac')
+    ctime = request.POST.get('ctime')
+    gd = request.POST.get('gd')
+    dp = request.POST.get('dp')
+    models.UserInfo.objects.create(name=name,
+                                   password=pwd,
+                                   age=age,
+                                   account=ac,
+                                   create_time=ctime,
+                                   gender=gd,
+                                   dpart_id=dp)
+    return redirect('/user/list/')

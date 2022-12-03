@@ -1,11 +1,18 @@
 {% extends "layout.html" %}
+{% block title %}
+    用户列表
+{% endblock %}
 {% block content %}
-    <title>用户列表</title>
+
     <div class="container">
         <div style="margin-bottom: 10px">
-            <a class="btn btn-success" href="/depart/add/" target="_blank">
+            <a class="btn btn-success" href="/user/add/" >
                 <span class="glyphicon glyphicon-plus-sign " aria-hidden="true"></span>
-                新建用户</a></div>
+                新建用户</a>
+            <a class="btn btn-success" href="/user/add/" target="_blank">
+                <span class="glyphicon glyphicon-plus-sign " aria-hidden="true"></span>
+                新建用户ModeForm</a>
+        </div>
         <div class="bs-example" data-example-id="panel-without-body-with-table">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
