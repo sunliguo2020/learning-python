@@ -2,6 +2,8 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from app01 import models
 from django.utils.safestring import mark_safe
+from django.core.validators import RegexValidator
+from django import forms
 
 
 # Create your views here.
@@ -87,9 +89,6 @@ def user_delete(request, nid):
     return redirect("/user/list/")
 
 
-from django import forms
-
-
 class UserModelForm(forms.ModelForm):
     name = forms.CharField(min_length=3, label='用户名')
 
@@ -105,9 +104,6 @@ class UserModelForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for name, field in self.fields.items():
             field.widget.attrs = {"class": "form-control", "placeholder": field.label}
-
-
-from django.core.validators import RegexValidator
 
 
 class MobileModelForm(forms.ModelForm):
@@ -192,7 +188,7 @@ def prettynum_list(request):
     # 根据用户想要访问的页码，计算出起止位置
     # page =1
     try:
-        page = int(request.GET.get('page',1))
+        page = int(request.GET.get('page', 1))
     except Exception as e:
         page = 1
 
@@ -201,8 +197,8 @@ def prettynum_list(request):
     # 数据总条数
     total_count = models.PrettyNum.objects.filter(**data_dict).order_by("-level").count()
     total_page_count, div = divmod(total_count, page_size)
-    #判断总条数小与page_size
-    if total_page_count == 0 :
+    # 判断总条数小与page_size
+    if total_page_count == 0:
         total_page_count = 1
     if div:
         total_page_count + 1
@@ -214,7 +210,7 @@ def prettynum_list(request):
     start = (page - 1) * page_size
     end = (page) * page_size
 
-    print(page,total_count,total_page_count,start,end)
+    print(page, total_count, total_page_count, start, end)
 
     prettynum_list_all = models.PrettyNum.objects.filter(**data_dict).order_by("-level")[start:end]
 
