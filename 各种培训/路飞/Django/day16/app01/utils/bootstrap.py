@@ -7,7 +7,7 @@
 from django import forms
 
 
-class BootStrapModelForm(forms.ModelForm):
+class BootStrap:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # 循环ModelForm中所有的字段，给每一个字段的插件设置
@@ -21,3 +21,11 @@ class BootStrapModelForm(forms.ModelForm):
                     "class": "form-control",
                     "placeholder": field.label
                 }
+
+
+class BootStrapModelForm(BootStrap, forms.ModelForm):
+    pass
+
+
+class BootStrapForm(BootStrap, forms.Form):
+    pass

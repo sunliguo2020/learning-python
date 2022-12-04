@@ -9,6 +9,7 @@ from app01.utils.bootstrap import BootStrapModelForm
 from django import forms
 from app01 import models
 from app01.utils.encrypt import md5
+from app01.utils.bootstrap import BootStrapForm
 
 
 class MobileEditModelForm(BootStrapModelForm):
@@ -148,3 +149,26 @@ class AdminResetModelForm(BootStrapModelForm):
             raise ValidationError("密码不一致")
         # 返回什么，此字段以后保存到数据库中就是什么
         return confirm
+
+
+class LoginForm(BootStrapForm):
+    username = forms.CharField(
+        label="用户名",
+        widget=forms.TextInput,
+        required=True,
+    )
+    password = forms.CharField(
+        label="密码",
+        widget=forms.PasswordInput(render_value=True),
+        required=True,
+    )
+
+    def clean_password(self):
+        pwd = self.cleaned_data.get('password')
+        return md5(pwd)
+
+
+class LoginModelForm(forms.ModelForm):
+    class Meta:
+        model = models.Admin
+        fields = ['username', 'password']

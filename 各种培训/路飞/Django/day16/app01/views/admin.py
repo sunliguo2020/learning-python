@@ -13,6 +13,7 @@ from app01.utils.form import AdminModelForm, AdminEditModelForm, AdminResetModel
 
 def admin_list(request):
     """管理员列表"""
+
     # 构造搜索
     data_dict = {}
     search_data = request.GET.get('q', "")
