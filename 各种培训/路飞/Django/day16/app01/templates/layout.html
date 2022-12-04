@@ -40,17 +40,15 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">登录</a></li>
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">孙立国 <span class="caret"></span></a>
+                       aria-expanded="false">{{ request.session.info.name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人资料</a></li>
                         <li><a href="#">我的信息</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">注销</a></li>
+                        <li><a href="/logout/">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,7 +62,7 @@
 
 <script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
-{%  block js %} {% endblock %}
+{% block js %} {% endblock %}
 
 </body>
 </html>
