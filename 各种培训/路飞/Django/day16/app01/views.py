@@ -13,12 +13,12 @@ def depart_list(request):
     """部门列表"""
     # 数据库总所有的部门信息
     queryset = models.Department.objects.all()
-    page_object = Pagination(request,queryset,page_size=2)
-    context ={
+    page_object = Pagination(request, queryset, page_size=2)
+    context = {
         "queryset": page_object.page_queryset,
-        "page_string":page_object.html()
+        "page_string": page_object.html()
     }
-    return render(request, "depart_list.html",context)
+    return render(request, "depart_list.html", context)
 
 
 def depart_add(request):
@@ -55,10 +55,10 @@ def user_list(request):
     """用户管理"""
 
     query_set = models.UserInfo.objects.all()
-    page_object = Pagination(request,query_set,page_size=2)
+    page_object = Pagination(request, query_set, page_size=2)
     context = {
-        "user_list":page_object.page_queryset,
-        "page_string":page_object.html()
+        "user_list": page_object.page_queryset,
+        "page_string": page_object.html()
     }
 
     return render(request, 'user_list.html', context)
@@ -193,13 +193,14 @@ def prettynum_list(request):
     if search_data:
         data_dict['mobile__contains'] = search_data
 
-    query_set = models.PrettyNum.objects.filter(**data_dict).order_by("-level")
+    query_set = models.PrettyNum.objects.filter(**data_dict).order_by("mobile")
 
-    page_object = Pagination(request, query_set,page_size=20)
+    page_object = Pagination(request, query_set, page_size=20)
 
-    context = {"num_list": page_object.page_queryset,
-               "search_data": search_data,
-               "page_string": page_object.html()}
+    context = {
+        "num_list": page_object.page_queryset,
+        "search_data": search_data,
+        "page_string": page_object.html()}
 
     return render(request, "prettypnum_list.html", context)
 
@@ -262,3 +263,42 @@ def prettynum_delete(request, nid):
     """靓号删除"""
     models.PrettyNum.objects.filter(id=nid).delete()
     return redirect('/prettynum/list')
+
+
+class ShoujihaoModelsForm(forms.ModelForm):
+    class Meta:
+        model = models.Shoujihao
+        fields = ['PROD_INST_ID',
+                  'CUST_ID',
+                  'LATN',
+                  'BUSI_NBR',
+                  'USER_NAME',
+                  'CUST_NAME',
+                  'INSTALL_ADDR',
+                  'CERTIFICATES_NBR',
+                  'mod_time']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs = {"class": "form-control", "placeholder": field.label}
+
+
+def shoujihao_list(request):
+    queryset = models.Shoujihao.objects.filter()
+    page_object = Pagination(request, queryset)
+
+    context = {
+        "queryset": page_object.page_queryset,
+        "page_string": page_object.html(),
+    }
+
+    return render(request, 'shoujihao_list.html', context)
+
+
+def shoujihao_edit(request,nid):
+    if request.method == "GET":
+        row_obj = models.Shoujihao.objects.filter(id=nid).first()
+        form = ShoujihaoModelsForm(instance=row_obj)
+        return render(request,"shoujihao_edit.html",{"form":form})
+
+    return None

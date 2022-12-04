@@ -37,4 +37,8 @@ urlpatterns = [
     path('prettynum/<int:nid>/edit/', views.prettynum_edit),
     path('prettynum/<int:nid>/delete/', views.prettynum_delete),
 
+    #手机号管理
+    path('shoujihao/list/',views.shoujihao_list),
+    path('shoujihao/<int:nid>/edit/',views.shoujihao_edit),
+
 ]

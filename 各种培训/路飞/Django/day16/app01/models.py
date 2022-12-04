@@ -39,15 +39,30 @@ class UserInfo(models.Model):
 class PrettyNum(models.Model):
     """靓号表"""
     mobile = models.CharField(max_length=11, verbose_name='手机号')
-    price = models.IntegerField(verbose_name='价格',default=0,null=True,blank=True)
+    price = models.IntegerField(verbose_name='价格', default=0, null=True, blank=True)
     level_choices = (
         (1, '1级'),
         (2, '2级'),
         (3, '3级'),
     )
-    level = models.SmallIntegerField(verbose_name="等级",choices=level_choices, default=1)
+    level = models.SmallIntegerField(verbose_name="等级", choices=level_choices, default=1)
     status_choice = (
         (1, "已占用"),
         (2, "未占用"),
     )
-    status = models.SmallIntegerField(choices=status_choice, verbose_name="状态",default=2)
+    status = models.SmallIntegerField(choices=status_choice, verbose_name="状态", default=2)
+
+
+class Shoujihao(models.Model):
+    """
+    联通手机号信息
+    """
+    PROD_INST_ID = models.CharField(max_length=32)
+    CUST_ID = models.CharField(max_length=32)
+    LATN = models.CharField(max_length=32, verbose_name='区号')
+    BUSI_NBR = models.CharField(max_length=32, verbose_name='号码')
+    USER_NAME = models.CharField(max_length=32)
+    CUST_NAME = models.CharField(max_length=32)
+    INSTALL_ADDR = models.CharField(max_length=32, verbose_name="安装地址")
+    CERTIFICATES_NBR = models.CharField(max_length=32, verbose_name="身份证号")
+    mod_time = models.DateTimeField(verbose_name="修改时间")
