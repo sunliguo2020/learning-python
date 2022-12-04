@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from app01.utils.bootstrap import BootStrapModelForm
 from django import forms
 from app01 import models
+from app01.utils.encrypt import md5
 
 
 class MobileEditModelForm(BootStrapModelForm):
@@ -75,3 +76,28 @@ class MobileModelForm(BootStrapModelForm):
         if models.PrettyNum.objects.filter(mobile=txt_mobible).exists():
             raise ValidationError("手机号已经存在")
         return txt_mobible
+
+
+class AdminModelForm(BootStrapModelForm):
+    confirm_password = forms.CharField(max_length=32,
+                                       label='确认密码',
+                                       widget=forms.PasswordInput(render_value=True))
+
+    class Meta:
+        model = models.Admin
+        fields = ['username', 'password', 'confirm_password']
+        widgets = {
+            "password": forms.PasswordInput(render_value=True)
+        }
+
+    def clean_password(self):
+        pwd = self.cleaned_data.get('password')
+        return md5(pwd)
+
+    def clean_confirm_password(self):
+        pwd = self.cleaned_data.get('password')
+        confirm = md5(self.cleaned_data.get('confirm_password'))
+
+        if confirm != pwd:
+            raise ValidationError("密码不一致")
+        return confirm
