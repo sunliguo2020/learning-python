@@ -4,7 +4,7 @@
 @contact: QQ376440229
 @Created on: 2022/12/4 16:55
 """
-from django.shortcuts import render, HttpResponse,redirect
+from django.shortcuts import render, redirect
 from app01.utils.form import LoginForm
 from app01 import models
 
@@ -26,8 +26,7 @@ def login(request):
 
         # 用户名和密码正确
         # 网站生成随机字符串；写到用户浏览器的cookie中；再写入到sessions中;
-        request.session['info'] = {'id':admin_object.id,'name':admin_object.username}
+        request.session['info'] = {'id': admin_object.id, 'name': admin_object.username}
         return redirect('/admin/list')
-
 
     return render(request, 'login.html', {"form": form})
