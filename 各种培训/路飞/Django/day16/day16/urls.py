@@ -15,30 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01 import views
+from app01.views import depart, pretty, shoujihao, user
 
 urlpatterns = [
     # 部门管理
     # path('admin/', admin.site.urls),
-    path('depart/list/', views.depart_list),
-    path('depart/add/', views.depart_add),
-    path('depart/delete/', views.depart_delete),
-    path('depart/<int:nid>/edit/', views.depart_edit),
+    path('depart/list/', depart.depart_list),
+    path('depart/add/', depart.depart_add),
+    path('depart/delete/', depart.depart_delete),
+    path('depart/<int:nid>/edit/', depart.depart_edit),
     # 用户管理
-    path('user/list/', views.user_list),
-    path('user/add/', views.user_add),
-    path('user/model/add/', views.user_model_add),
-    path('user/<int:nid>/delete/', views.user_delete),
-    path('user/<int:nid>/edit/', views.user_edit),
+    path('user/list/', user.user_list),
+    path('user/add/', user.user_add),
+    path('user/model/add/', user.user_model_add),
+    path('user/<int:nid>/delete/', user.user_delete),
+    path('user/<int:nid>/edit/', user.user_edit),
 
     # 靓号管理
-    path('prettynum/list/', views.prettynum_list),
-    path('prettynum/add/', views.prettynum_add),
-    path('prettynum/<int:nid>/edit/', views.prettynum_edit),
-    path('prettynum/<int:nid>/delete/', views.prettynum_delete),
+    path('prettynum/list/', pretty.prettynum_list),
+    path('prettynum/add/', pretty.prettynum_add),
+    path('prettynum/<int:nid>/edit/', pretty.prettynum_edit),
+    path('prettynum/<int:nid>/delete/', pretty.prettynum_delete),
 
-    #手机号管理
-    path('shoujihao/list/',views.shoujihao_list),
-    path('shoujihao/<int:nid>/edit/',views.shoujihao_edit),
+    # 手机号管理
+    path('shoujihao/list/', shoujihao.shoujihao_list),
+    path('shoujihao/<int:nid>/edit/', shoujihao.shoujihao_edit),
 
 ]
