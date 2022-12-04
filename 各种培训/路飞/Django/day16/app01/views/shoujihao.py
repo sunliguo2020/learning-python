@@ -7,7 +7,7 @@
 from django.shortcuts import render, redirect
 from app01 import models
 from app01.utils.pageination import Pagination
-from app01.utils.form import MobileEditModelForm, MobileModelForm, ShoujihaoModelsForm, UserModelForm
+from app01.utils.form import ShoujihaoModelsForm
 
 
 def shoujihao_list(request):
@@ -39,6 +39,7 @@ def shoujihao_edit(request, nid):
 
     return None
 
-def shoujihao_delete(request,nid):
+
+def shoujihao_delete(request, nid):
     models.Shoujihao.objects.filter(id=nid).delete()
     return redirect('/shoujihao/list')

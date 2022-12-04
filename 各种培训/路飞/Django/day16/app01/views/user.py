@@ -28,7 +28,6 @@ def user_add(request):
         content = {
             "gender_choice": models.UserInfo.gender_choices,
             "depart_list": models.Department.objects.all(),
-
         }
 
         return render(request, 'user_add.html', content)
@@ -61,7 +60,6 @@ def user_model_add(request):
     """添加用户（ModelForm版本）"""
     if request.method == 'GET':
         form = UserModelForm()
-
         return render(request, 'user_model_form_add.html', {'form': form})
     # 用户POST提交的数据
     form = UserModelForm(data=request.POST)

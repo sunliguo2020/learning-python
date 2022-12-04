@@ -11,7 +11,6 @@ from app01.utils.form import MobileEditModelForm, MobileModelForm, ShoujihaoMode
 
 
 
-# 靓号管理
 def prettynum_list(request):
     """靓号显示"""
     # 创建测试数据

@@ -100,4 +100,18 @@ class AdminModelForm(BootStrapModelForm):
 
         if confirm != pwd:
             raise ValidationError("密码不一致")
+        # 返回什么，此字段以后保存到数据库中就是什么
         return confirm
+
+
+class AdminEditModelForm(BootStrapModelForm):
+    class Meta:
+        model = models.Admin
+        fields = ['username']
+
+    def clean_username(self):
+        # 检查用户名是否已经存在
+        username_txt = self.cleaned_data.get('username')
+        if models.Admin.objects.filter(username=username_txt).exists():
+            raise ValidationError("用户名已经存在")
+        return username_txt
