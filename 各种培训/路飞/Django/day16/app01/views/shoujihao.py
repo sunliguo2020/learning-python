@@ -10,14 +10,22 @@ from app01.utils.pageination import Pagination
 from app01.utils.form import MobileEditModelForm, MobileModelForm, ShoujihaoModelsForm, UserModelForm
 
 
-
 def shoujihao_list(request):
-    queryset = models.Shoujihao.objects.filter()
+    # 构造搜索
+    data_dict = {}
+    search_data = request.GET.get('q', "")
+
+    if search_data:
+        # 查询条件
+        data_dict['BUSI_NBR__contains'] = search_data
+
+    queryset = models.Shoujihao.objects.filter(**data_dict)
     page_object = Pagination(request, queryset)
 
     context = {
         "queryset": page_object.page_queryset,
         "page_string": page_object.html(),
+        "search_data": search_data,
     }
 
     return render(request, 'shoujihao_list.html', context)
@@ -30,3 +38,7 @@ def shoujihao_edit(request, nid):
         return render(request, "shoujihao_edit.html", {"form": form})
 
     return None
+
+def shoujihao_delete(request,nid):
+    models.Shoujihao.objects.filter(id=nid).delete()
+    return redirect('/shoujihao/list')

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01.views import depart, pretty, shoujihao, user
+from app01.views import depart, pretty, shoujihao, user,admin
 
 urlpatterns = [
     # 部门管理
@@ -40,5 +40,9 @@ urlpatterns = [
     # 手机号管理
     path('shoujihao/list/', shoujihao.shoujihao_list),
     path('shoujihao/<int:nid>/edit/', shoujihao.shoujihao_edit),
+    path('shoujihao/<int:nid>/delete/',shoujihao.shoujihao_delete),
+
+    #管理员管理
+    path('admin/list/',admin.admin_list)
 
 ]

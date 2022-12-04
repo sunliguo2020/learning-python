@@ -66,3 +66,9 @@ class Shoujihao(models.Model):
     INSTALL_ADDR = models.CharField(max_length=32, verbose_name="安装地址")
     CERTIFICATES_NBR = models.CharField(max_length=32, verbose_name="身份证号")
     mod_time = models.DateTimeField(verbose_name="修改时间")
+
+
+class Admin(models.Model):
+    """管理员"""
+    username = models.CharField(verbose_name="用户名",max_length=32)
+    password = models.CharField(verbose_name="密码",max_length=64)
