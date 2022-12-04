@@ -37,6 +37,7 @@
                     <th>ID</th>
                     <th>管理员</th>
                     <th>密码</th>
+                    <th>重置密码</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -46,7 +47,7 @@
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.username }}</td>
                     <td>{{ item.password}}</td>
-
+                    <th><a href="/admin/{{ item.id }}/reset/">重置密码</a></th>
                     <td>
                         <a class="btn btn-primary btn-xs" href="/admin/{{ item.id }}/edit/">编辑</a>
                         <a class="btn btn-danger btn-xs" href="/admin/{{ item.id }}/delete/">删除</a>

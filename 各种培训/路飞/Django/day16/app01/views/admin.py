@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 
 from app01 import models
 from app01.utils.pageination import Pagination
-from app01.utils.form import AdminModelForm, AdminEditModelForm
+from app01.utils.form import AdminModelForm, AdminEditModelForm, AdminResetModelForm
 
 
 def admin_list(request):
@@ -57,8 +57,34 @@ def admin_edit(request, nid):
         form = AdminEditModelForm(instance=row_object)
 
         return render(request, "change.html", {"title": title, "form": form})
-    form = AdminEditModelForm(instance=row_object,data=request.POST)
+    form = AdminEditModelForm(instance=row_object, data=request.POST)
     if form.is_valid():
         form.save()
         return redirect('/admin/list')
     return render(request, "change.html", {"title": title, "form": form})
+
+
+def admin_delete(request, nid):
+    models.Admin.objects.filter(id=nid).delete()
+    return redirect("/admin/list")
+
+
+def admin_reset(request, nid):
+    """
+
+    :param request:
+    :param nid:
+    :return:
+    """
+    row_object = models.Admin.objects.filter(id=nid).first()
+    if not row_object:
+        return render(request, 'error.html', {"error_msg": "此管理员不存在!"})
+    title = f"重置密码：{row_object.username}"
+    if request.method == "GET":
+        form = AdminResetModelForm()
+        return render(request, 'change.html', {"title": title, "form": form})
+    form = AdminResetModelForm(instance=row_object, data=request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect("/admin/list")
+    return render(request, 'change.html', {"title": title, "form": form})

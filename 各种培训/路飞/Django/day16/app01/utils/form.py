@@ -112,6 +112,39 @@ class AdminEditModelForm(BootStrapModelForm):
     def clean_username(self):
         # 检查用户名是否已经存在
         username_txt = self.cleaned_data.get('username')
-        if models.Admin.objects.filter(username=username_txt).exists():
+
+        if models.Admin.objects.exclude(id=self.instance.pk).filter(username=username_txt).exists():
             raise ValidationError("用户名已经存在")
         return username_txt
+
+
+class AdminResetModelForm(BootStrapModelForm):
+    confirm_password = forms.CharField(max_length=32,
+                                       label='确认密码',
+                                       widget=forms.PasswordInput(render_value=True))
+
+    class Meta:
+        model = models.Admin
+        fields = ['password', 'confirm_password']
+        widgets = {
+            "password": forms.PasswordInput(render_value=True)
+        }
+
+    def clean_password(self):
+        pwd = self.cleaned_data.get('password')
+        md5_pwd = md5(pwd)
+
+        # 去数据库校验当前密码和输入的密码是否一致
+        if models.Admin.objects.filter(id=self.instance.pk, password=md5_pwd).exists():
+            raise ValidationError("不能和以前的密码相同")
+
+        return md5(pwd)
+
+    def clean_confirm_password(self):
+        pwd = self.cleaned_data.get('password')
+        confirm = md5(self.cleaned_data.get('confirm_password'))
+
+        if confirm != pwd:
+            raise ValidationError("密码不一致")
+        # 返回什么，此字段以后保存到数据库中就是什么
+        return confirm
