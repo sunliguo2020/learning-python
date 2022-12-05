@@ -29,8 +29,10 @@ def depart_add(request):
         return render(request, 'depart_add.html')
     # 获取用户通过post提交的数据
     title = request.POST.get('title')
-    #判断部门是否已经存在
+
     # 保存到数据库
+    if models.Department.objects.filter(title=title):
+        return render(request, 'error.html', {"error_msg": "此部门已经存在!"})
     models.Department.objects.create(title=title)
     # 重定向到部门列表
     return redirect('/depart/list/')
@@ -52,4 +54,3 @@ def depart_edit(request, nid):
     title = request.POST.get('title')
     models.Department.objects.filter(id=nid).update(title=title)
     return redirect("/depart/list/")
-
