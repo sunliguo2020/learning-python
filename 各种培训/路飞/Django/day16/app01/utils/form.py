@@ -13,6 +13,8 @@ from app01.utils.bootstrap import BootStrapForm
 
 
 class MobileEditModelForm(BootStrapModelForm):
+    """靓号编辑"""
+
     # mobile = forms.CharField(disabled=True, label='手机号')
     class Meta:
         model = models.PrettyNum
@@ -30,28 +32,6 @@ class MobileEditModelForm(BootStrapModelForm):
         if models.PrettyNum.objects.exclude(id=self.instance.pk).filter(mobile=txt_mobible).exists():
             raise ValidationError("手机号已经存在")
         return txt_mobible
-
-
-class ShoujihaoModelsForm(BootStrapModelForm):
-    class Meta:
-        model = models.Shoujihao
-        fields = ['PROD_INST_ID',
-                  'CUST_ID',
-                  'LATN',
-                  'BUSI_NBR',
-                  'USER_NAME',
-                  'CUST_NAME',
-                  'INSTALL_ADDR',
-                  'CERTIFICATES_NBR',
-                  'mod_time']
-
-
-class UserModelForm(BootStrapModelForm):
-    name = forms.CharField(min_length=3, label='用户名')
-
-    class Meta:
-        model = models.UserInfo
-        fields = ['name', 'password', 'age', 'account', 'create_time', 'gender', 'dpart']
 
 
 class MobileModelForm(BootStrapModelForm):
@@ -77,6 +57,28 @@ class MobileModelForm(BootStrapModelForm):
         if models.PrettyNum.objects.filter(mobile=txt_mobible).exists():
             raise ValidationError("手机号已经存在")
         return txt_mobible
+
+
+class ShoujihaoModelsForm(BootStrapModelForm):
+    class Meta:
+        model = models.Shoujihao
+        fields = ['PROD_INST_ID',
+                  'CUST_ID',
+                  'LATN',
+                  'BUSI_NBR',
+                  'USER_NAME',
+                  'CUST_NAME',
+                  'INSTALL_ADDR',
+                  'CERTIFICATES_NBR',
+                  'mod_time']
+
+
+class UserModelForm(BootStrapModelForm):
+    name = forms.CharField(min_length=3, label='用户名')
+
+    class Meta:
+        model = models.UserInfo
+        fields = ['name', 'password', 'age', 'account', 'create_time', 'gender', 'dpart']
 
 
 class AdminModelForm(BootStrapModelForm):

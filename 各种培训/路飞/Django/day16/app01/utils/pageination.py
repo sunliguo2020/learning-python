@@ -32,7 +32,9 @@
     </div>
 
 """
+import copy
 from django.utils.safestring import mark_safe
+from django.http.request import QueryDict
 
 
 class Pagination(object):
@@ -46,10 +48,10 @@ class Pagination(object):
         :param plus:显示当前页前几页或后几页
         :param page_param:在url中传递的获取分页的参数，例如：/?page=
         """
-        from django.http.request import QueryDict
-        import copy
+
         query_dict = copy.deepcopy(request.GET)
-        query_dict._mutable =True
+        query_dict._mutable = True
+        # print(query_dict)
         self.query_dict = query_dict
         # query_dict.setlist['page',[11]]
         # print(query_dict.urlencode())
@@ -59,7 +61,7 @@ class Pagination(object):
             page = int(page)
         else:
             page = 1
-        #当前页
+        # 当前页
         self.page = page
         self.page_size = page_size
         self.start = (page - 1) * page_size
@@ -102,7 +104,7 @@ class Pagination(object):
         page_str_list.append(f'<li ><a href="?{self.query_dict.urlencode()}">首页</a></li>')
         # 上一页
         if self.page > 1:
-            self.query_dict.setlist(self.page_param,[self.page-1])
+            self.query_dict.setlist(self.page_param, [self.page - 1])
             prev = f'<li ><a href="?{self.query_dict.urlencode()}">上一页</a></li>'
         else:
             self.query_dict.setlist(self.page_param, [1])

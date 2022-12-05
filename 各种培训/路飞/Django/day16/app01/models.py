@@ -58,12 +58,12 @@ class Shoujihao(models.Model):
     联通手机号信息
     """
     PROD_INST_ID = models.CharField(max_length=32)
-    CUST_ID = models.CharField(max_length=32)
+    CUST_ID = models.CharField(max_length=32,null=True,blank=True,)
     LATN = models.CharField(max_length=32, verbose_name='区号')
     BUSI_NBR = models.CharField(max_length=32, verbose_name='号码')
     USER_NAME = models.CharField(max_length=32)
     CUST_NAME = models.CharField(max_length=32)
-    INSTALL_ADDR = models.CharField(max_length=32, verbose_name="安装地址")
+    INSTALL_ADDR = models.CharField(max_length=32,null=True,blank=True, verbose_name="安装地址")
     CERTIFICATES_NBR = models.CharField(max_length=32, verbose_name="身份证号")
     mod_time = models.DateTimeField(verbose_name="修改时间")
 
