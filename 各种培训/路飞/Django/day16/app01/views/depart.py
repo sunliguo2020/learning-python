@@ -15,7 +15,7 @@ def depart_list(request):
     """部门列表"""
     # 数据库总所有的部门信息
     queryset = models.Department.objects.all()
-    page_object = Pagination(request, queryset, page_size=2)
+    page_object = Pagination(request, queryset, page_size=10)
     context = {
         "queryset": page_object.page_queryset,
         "page_string": page_object.html()
@@ -29,6 +29,7 @@ def depart_add(request):
         return render(request, 'depart_add.html')
     # 获取用户通过post提交的数据
     title = request.POST.get('title')
+    #判断部门是否已经存在
     # 保存到数据库
     models.Department.objects.create(title=title)
     # 重定向到部门列表
