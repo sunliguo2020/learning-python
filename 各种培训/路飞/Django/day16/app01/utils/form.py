@@ -175,6 +175,11 @@ class LoginForm(BootStrapForm):
         widget=forms.PasswordInput(render_value=True),
         required=True,
     )
+    code = forms.CharField(
+        label="验证码",
+        widget=forms.TextInput,
+        required=True,
+    )
 
     def clean_password(self):
         pwd = self.cleaned_data.get('password')
