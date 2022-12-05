@@ -22,7 +22,7 @@ def shoujihao_list(request):
         # 查询条件
         data_dict['BUSI_NBR__contains'] = search_data
 
-    queryset = models.Shoujihao.objects.filter(**data_dict)
+    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('mod_time')
     page_object = Pagination(request, queryset)
 
     context = {
