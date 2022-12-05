@@ -42,6 +42,7 @@ urlpatterns = [
     path('shoujihao/list/', shoujihao.shoujihao_list),
     path('shoujihao/<int:nid>/edit/', shoujihao.shoujihao_edit),
     path('shoujihao/<int:nid>/delete/',shoujihao.shoujihao_delete),
+    path('shoujihao/<int:nid>/hide/',shoujihao.shoujihao_active),
 
     #管理员管理
     path('admin/list/',admin.admin_list),

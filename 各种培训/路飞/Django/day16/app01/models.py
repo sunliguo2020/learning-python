@@ -66,6 +66,7 @@ class Shoujihao(models.Model):
     INSTALL_ADDR = models.CharField(max_length=32,null=True,blank=True, verbose_name="安装地址")
     CERTIFICATES_NBR = models.CharField(max_length=32, verbose_name="身份证号")
     mod_time = models.DateTimeField(verbose_name="修改时间")
+    is_active = models.BooleanField(verbose_name="删除标志",default=True)
 
 
 class Admin(models.Model):

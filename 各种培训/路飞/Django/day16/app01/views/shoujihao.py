@@ -22,7 +22,10 @@ def shoujihao_list(request):
         # 查询条件
         data_dict['BUSI_NBR__contains'] = search_data
 
-    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('mod_time')
+    #是否显示某条数据
+    data_dict['is_active'] = True
+
+    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('BUSI_NBR')
     page_object = Pagination(request, queryset)
 
     context = {
@@ -64,6 +67,21 @@ def shoujihao_delete(request, nid):
     :return:
     """
     models.Shoujihao.objects.filter(id=nid).delete()
+    query_dict = copy.deepcopy(request.GET)
+    query_dict._mutable = True
+    # print(query_dict)
+    # 删除后，跳转的页面包含上一页的查询参数
+    return redirect(f'/shoujihao/list/?{query_dict.urlencode()}')
+
+
+def shoujihao_active(request,nid):
+    """
+    隐藏某行数据
+    :param request:
+    :param nid:
+    :return:
+    """
+    models.Shoujihao.objects.filter(id=nid).update(is_active=False)
     query_dict = copy.deepcopy(request.GET)
     query_dict._mutable = True
     # print(query_dict)
