@@ -6,7 +6,7 @@ from django.db import models
 # create database gx_day16 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 class Department(models.Model):
     """部门表"""
-    title = models.CharField(verbose_name='标题', max_length=32)
+    title = models.CharField(unique=True,verbose_name='标题', max_length=32)
 
     def __str__(self):
         return self.title
