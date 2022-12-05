@@ -82,6 +82,9 @@ class UserModelForm(BootStrapModelForm):
 
 
 class AdminModelForm(BootStrapModelForm):
+    """
+    新建管理员
+    """
     confirm_password = forms.CharField(max_length=32,
                                        label='确认密码',
                                        widget=forms.PasswordInput(render_value=True))
@@ -92,6 +95,14 @@ class AdminModelForm(BootStrapModelForm):
         widgets = {
             "password": forms.PasswordInput(render_value=True)
         }
+
+    def clean_username(self):
+        # 检查管理员是否已经存在
+        username_txt = self.cleaned_data.get('username')
+        # 查询数据库中是否存在此管理员
+        if models.Admin.objects.filter(username=username_txt).first():
+            raise ValidationError("此管理员已经存在!")
+        return username_txt
 
     def clean_password(self):
         pwd = self.cleaned_data.get('password')
@@ -115,7 +126,7 @@ class AdminEditModelForm(BootStrapModelForm):
     def clean_username(self):
         # 检查用户名是否已经存在
         username_txt = self.cleaned_data.get('username')
-
+        # 除了此id外没有是这个名的管理员
         if models.Admin.objects.exclude(id=self.instance.pk).filter(username=username_txt).exists():
             raise ValidationError("用户名已经存在")
         return username_txt
