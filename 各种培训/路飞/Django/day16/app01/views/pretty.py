@@ -10,7 +10,6 @@ from app01.utils.pageination import Pagination
 from app01.utils.form import MobileEditModelForm, MobileModelForm, ShoujihaoModelsForm, UserModelForm
 
 
-
 def prettynum_list(request):
     """靓号显示"""
     # 创建测试数据
@@ -67,4 +66,3 @@ def prettynum_delete(request, nid):
     """靓号删除"""
     models.PrettyNum.objects.filter(id=nid).delete()
     return redirect('/prettynum/list')
-

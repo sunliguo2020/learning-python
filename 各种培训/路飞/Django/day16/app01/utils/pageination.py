@@ -34,7 +34,6 @@
 """
 import copy
 from django.utils.safestring import mark_safe
-from django.http.request import QueryDict
 
 
 class Pagination(object):

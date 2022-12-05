@@ -31,6 +31,7 @@ def login(request):
 
     return render(request, 'login.html', {"form": form})
 
+
 def logout(request):
     """注销"""
     request.session.clear()

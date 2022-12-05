@@ -36,6 +36,12 @@ def shoujihao_list(request):
 
 
 def shoujihao_edit(request, nid):
+    """
+
+    :param request:
+    :param nid:
+    :return:
+    """
     row_obj = models.Shoujihao.objects.filter(id=nid).first()
     if request.method == "GET":
         form = ShoujihaoModelsForm(instance=row_obj)
@@ -51,6 +57,12 @@ def shoujihao_edit(request, nid):
 
 
 def shoujihao_delete(request, nid):
+    """
+
+    :param request:
+    :param nid:
+    :return:
+    """
     models.Shoujihao.objects.filter(id=nid).delete()
     query_dict = copy.deepcopy(request.GET)
     query_dict._mutable = True
