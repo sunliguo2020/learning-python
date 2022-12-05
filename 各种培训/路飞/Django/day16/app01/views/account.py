@@ -12,8 +12,13 @@ from app01 import models
 def login(request):
     """登录"""
     if request.method == 'GET':
+        # 判断已经登陆过，就直接进入
+        if request.session.get('info'):
+            return redirect('/admin/list/')
+        # 没有登陆过
         form = LoginForm()
         return render(request, 'login.html', {"form": form})
+
     form = LoginForm(data=request.POST)
     if form.is_valid():
         # 验证成功，获取到的用户名和密码
