@@ -58,8 +58,8 @@
                         <td>{{ item.mod_time|date:"Y-m-d h:m:s" }}</td>
                         <td>
                             <a class="btn btn-primary btn-xs" href="/shoujihao/{{ item.id }}/edit/">编辑</a>
-                            <a class="btn btn-danger btn-xs"  href="/shoujihao/{{ item.id }}/delete/?{{ query_dict }}">删除</a>
-                            <a class="btn btn-danger btn-xs"  href="/shoujihao/{{ item.id }}/hide/?{{ query_dict }}">隐</a>
+                            <!--<a class="btn btn-danger btn-xs"  href="/shoujihao/{{ item.id }}/delete/?{{ query_dict }}">删除</a> -->
+                            <a class="btn btn-danger btn-xs"  href="/shoujihao/{{ item.id }}/hide/?{{ query_dict }}">隐藏</a>
                         </td>
                     {% endfor %}
 

@@ -22,10 +22,10 @@ def shoujihao_list(request):
         # 查询条件
         data_dict['BUSI_NBR__contains'] = search_data
 
-    #是否显示某条数据
+    # 是否显示某条数据
     data_dict['is_active'] = True
 
-    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('BUSI_NBR')
+    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('BUSI_NBR','mod_time')
     page_object = Pagination(request, queryset)
 
     context = {
@@ -74,7 +74,7 @@ def shoujihao_delete(request, nid):
     return redirect(f'/shoujihao/list/?{query_dict.urlencode()}')
 
 
-def shoujihao_active(request,nid):
+def shoujihao_active(request, nid):
     """
     隐藏某行数据
     :param request:

@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01.views import depart, pretty, shoujihao, user,admin
-from app01.views import account
+from app01.views import depart, pretty, shoujihao, user, admin
+from app01.views import account, task
 
 urlpatterns = [
     # 部门管理
@@ -41,19 +41,24 @@ urlpatterns = [
     # 手机号管理
     path('shoujihao/list/', shoujihao.shoujihao_list),
     path('shoujihao/<int:nid>/edit/', shoujihao.shoujihao_edit),
-    path('shoujihao/<int:nid>/delete/',shoujihao.shoujihao_delete),
-    path('shoujihao/<int:nid>/hide/',shoujihao.shoujihao_active),
+    path('shoujihao/<int:nid>/delete/', shoujihao.shoujihao_delete),
+    path('shoujihao/<int:nid>/hide/', shoujihao.shoujihao_active),
 
-    #管理员管理
-    path('admin/list/',admin.admin_list),
-    path('admin/add/',admin.admin_add),
-    path('admin/<int:nid>/edit/',admin.admin_edit),
-    path('admin/<int:nid>/delete/',admin.admin_delete),
-    path('admin/<int:nid>/reset/',admin.admin_reset),
+    # 管理员管理
+    path('admin/list/', admin.admin_list),
+    path('admin/add/', admin.admin_add),
+    path('admin/<int:nid>/edit/', admin.admin_edit),
+    path('admin/<int:nid>/delete/', admin.admin_delete),
+    path('admin/<int:nid>/reset/', admin.admin_reset),
 
-    #登录
-    path('login/',account.login),
-    path('logout/',account.logout),
-    path('image/code/',account.image_code),
+    # 登录
+    path('login/', account.login),
+    path('logout/', account.logout),
+    path('image/code/', account.image_code),
+
+    # 任务管理
+    path('task/list/', task.task_list),
+    path('task/ajax/', task.task_ajax),
+    path('task/add/', task.task_add),
 
 ]

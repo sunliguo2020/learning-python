@@ -190,3 +190,12 @@ class LoginModelForm(forms.ModelForm):
     class Meta:
         model = models.Admin
         fields = ['username', 'password']
+
+
+class TaskModelForm(BootStrapModelForm):
+    class Meta:
+        model = models.Task
+        fields = "__all__"
+        widgets={
+            "detail":forms.TextInput
+        }
