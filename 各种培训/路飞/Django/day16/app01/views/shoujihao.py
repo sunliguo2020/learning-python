@@ -25,7 +25,7 @@ def shoujihao_list(request):
     # 是否显示某条数据
     data_dict['is_active'] = True
 
-    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('BUSI_NBR','mod_time')
+    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('BUSI_NBR', 'mod_time')
     page_object = Pagination(request, queryset)
 
     context = {
@@ -61,7 +61,7 @@ def shoujihao_edit(request, nid):
 
 def shoujihao_delete(request, nid):
     """
-
+    删除手机号的某行记录
     :param request:
     :param nid:
     :return:
@@ -87,3 +87,35 @@ def shoujihao_active(request, nid):
     # print(query_dict)
     # 删除后，跳转的页面包含上一页的查询参数
     return redirect(f'/shoujihao/list/?{query_dict.urlencode()}')
+
+
+def shoujihao_test(request):
+    """
+    手机号数据库测试
+    :param request:
+    :return:
+    """
+    # 查询所有没有隐藏的数据
+    queryset = models.Shoujihao.objects.filter(is_active=True)
+    print(type(queryset))  # print(type(queryset))
+
+    print(queryset.values)
+    # <bound method QuerySet.values of <QuerySet [<Shoujihao: Shoujihao object (1)>, <Shoujihao: Shoujihao object (2)>, <Shoujihao: Shoujihao object (3)>, <Shoujihao: Shoujihao object (4)>, <Shoujihao: Shoujihao object (5)>, <Shoujihao: Shoujihao object (6)>, <Shoujihao: Shoujihao object (7)>, <Shoujihao: Shoujihao object (8)>, <Shoujihao: Shoujihao object (9)>, <Shoujihao: Shoujihao object (10)>, <Shoujihao: Shoujihao object (11)>, <Shoujihao: Shoujihao object (12)>, <Shoujihao: Shoujihao object (13)>, <Shoujihao: Shoujihao object (14)>, <Shoujihao: Shoujihao object (15)>, <Shoujihao: Shoujihao object (16)>, <Shoujihao: Shoujihao object (17)>, <Shoujihao: Shoujihao object (18)>, <Shoujihao: Shoujihao object (19)>, <Shoujihao: Shoujihao object (20)>, '...(remaining elements truncated)...']>>
+
+    # for value in queryset.values():
+    #     print(value)
+    # print(len(queryset.values('BUSI_NBR').distinct()))
+
+    # 手机号和身份证号都不重复的数据
+    for item in queryset.values('id', 'BUSI_NBR', 'CERTIFICATES_NBR').distinct()[:10]:
+        print(item)  # {'id': 1, 'BUSI_NBR': '13065049970', 'CERTIFICATES_NBR': '37012419961118754X'}
+        id, phone, idcard = item.values()
+        # print(id,phone,idcard)
+        # new_quereyset = models.Shoujihao.objects.exclude(id=id, is_active=False).filter(BUSI_NBR__contains=phone,
+        #                                                                                 CERTIFICATES_NBR__contains=idcard).update(
+        #     is_active=False)
+        # # print(new_quereyset)
+    context = {
+        # "queryset": queryset
+    }
+    return render(request, 'shoujihao_list.html', context)
