@@ -196,6 +196,6 @@ class TaskModelForm(BootStrapModelForm):
     class Meta:
         model = models.Task
         fields = "__all__"
-        widgets={
-            "detail":forms.TextInput
+        widgets = {
+            "detail": forms.TextInput
         }

@@ -11,7 +11,8 @@
                                 <div class="form-group" style="position:relative;margin-bottom: 20px;">
                                     <label>{{ field.label }}</label>
                                     {{ field }}
-                                    <span class="error-msg" style="color: red;position: absolute">{{ field.errors.0 }}</span>
+                                    <span class="error-msg"
+                                          style="color: red;position: absolute">{{ field.errors.0 }}</span>
                                 </div>
                             </div>
                         {% endfor %}
@@ -22,25 +23,71 @@
                     </div>
                 </form>
             </div>
+
         </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>任务列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>标题</th>
+                    <th>级别</th>
+                    <th>负责人</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in queryset %}
+                    <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.get_level_display }}</td>
+                    <td>{{ item.user }}</td>
+
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="">编辑</a>
+                        <a class="btn btn-danger btn-xs" href="">删除</a>
+                    </td>
+                {% endfor %}
+
+
+                </tbody>
+
+            </table>
+        </div>
+        <div class="clearfix">
+            <ul class="pagination">
+                {{ page_string }}
+            </ul>
+        </div>
+        <div style="height: 1000px"></div>
         <hr/>
-        <h1>Ajax学习</h1>
-        <h3>示例1</h3>
-        <input id='btn1' type="button" class="btn btn-primary" value="点击1">
 
-        <h3>示例2</h3>
-        <input type="text" id='txtUser' placeholder="姓名">
-        <input type="text" id='txtAge' placeholder="年龄">
-        <input id='btn2' type="button" class="btn btn-primary" value="点击2">
+        <div>
+            <h1>Ajax学习</h1>
+            <h3>示例1</h3>
+            <input id='btn1' type="button" class="btn btn-primary" value="点击1">
 
-        <h3>示例3</h3>
-        <form id="form3">
-            <input type="text" id='txtUser' placeholder="姓名" name='username'>
-            <input type="text" id='txtAge' placeholder="年龄" name="age">
-            <input type="text" id='txtEmail' placeholder="邮箱" name="email">
-            <input type="text" id='txtMore' placeholder="介绍" name="more">
-            <input id='btn3' type="button" class="btn btn-primary" value="点击3">
-        </form>
+            <h3>示例2</h3>
+            <input type="text" id='txtUser' placeholder="姓名">
+            <input type="text" id='txtAge' placeholder="年龄">
+            <input id='btn2' type="button" class="btn btn-primary" value="点击2">
+
+            <h3>示例3</h3>
+            <form id="form3">
+                <input type="text" id='txtUser' placeholder="姓名" name='username'>
+                <input type="text" id='txtAge' placeholder="年龄" name="age">
+                <input type="text" id='txtEmail' placeholder="邮箱" name="email">
+                <input type="text" id='txtMore' placeholder="介绍" name="more">
+                <input id='btn3' type="button" class="btn btn-primary" value="点击3">
+            </form>
+        </div>
     </div>
 {% endblock %}
 
@@ -120,10 +167,12 @@
                     success: function (res) {
                         if (res.status) {
                             alert("添加成功");
+                            //用js实现页面的刷新
+                            location.reload();
                         } else {
-                            $.each(res.error,function(name,data){
+                            $.each(res.error, function (name, data) {
                                 //console.log(name,data);
-                                $("#id_"+name).next().text(data[0]);
+                                $("#id_" + name).next().text(data[0]);
                             })
                         }
                     }

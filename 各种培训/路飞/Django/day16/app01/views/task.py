@@ -10,11 +10,22 @@ from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from app01.utils.form import TaskModelForm
+from app01 import models
+from app01.utils.pageination import Pagination
 
 
 def task_list(request):
+    """任务列表"""
+    # 去数据库获取所有的任务
+    queryset = models.Task.objects.all().order_by('-id')
+    page_object = Pagination(request,queryset,page_size=5)
     form = TaskModelForm()
-    return render(request, 'task_list.html', {'form': form})
+    context = {
+        "form": form,
+        'queryset': page_object.page_queryset,
+        'page_string':page_object.html()
+    }
+    return render(request, 'task_list.html', context)
 
 
 @csrf_exempt
@@ -74,12 +85,12 @@ def task_add(request):
     # <QueryDict: {'lvevel': ['1'], 'title': ['dsfdsf'], 'detail': ['sss'], 'user': ['8']}>
 
     # 1、用户发送过来的数据进行表单校验。
-    form = TaskModelForm(data = request.POST)
+    form = TaskModelForm(data=request.POST)
     if form.is_valid():
         form.save()
         data_dict = {'status': True}
         return HttpResponse(json.dumps(data_dict))
     # print(type(form.errors))
-    #<class 'django.forms.utils.ErrorDict'>
-    data_dict = {'status': False,"error":form.errors}
+    # <class 'django.forms.utils.ErrorDict'>
+    data_dict = {'status': False, "error": form.errors}
     return HttpResponse(json.dumps(data_dict))
