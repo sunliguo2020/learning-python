@@ -66,8 +66,14 @@ def admin_edit(request, nid):
 
 
 def admin_delete(request, nid):
-    models.Admin.objects.filter(id=nid).delete()
-    return redirect("/admin/list")
+    # 不能删除自己
+    # print(request.session.get('info').get('id'))
+    cur_user_id = request.session.get('info').get('id')
+    if nid != cur_user_id:
+        models.Admin.objects.filter(id=nid).delete()
+        return redirect("/admin/list")
+    else:
+        return render(request,'error.html',{"error_msg":"不能删除当前用户"})
 
 
 def admin_reset(request, nid):
