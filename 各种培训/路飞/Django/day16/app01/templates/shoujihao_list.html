@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="/prettynum/add/">
+                <span class="glyphicon glyphicon-plus-sign " aria-hidden="true"></span>
+                新建手机号</a>
+            <div style="float:right;width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" name='q' class="form-control" placeholder="搜索" value="{{ search_data }}">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search " aria-hidden="true"> </span>
+                        </button>
+                        </span>
+                </form>
+
+            </div>
+
+        </div>
+        <div class="bs-example" data-example-id="panel-without-body-with-table">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>手机号列表
+                </div>
+
+                <!-- Table -->
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>PROD_INST_ID</th>
+                        <th>CUST_ID</th>
+                        <th>LATN</th>
+                        <th>手机号</th>
+                        <th>用户名</th>
+                        <th>CUST_NAME</th>
+                        <th>安装地址</th>
+                        <th>身份证</th>
+                        <th>修改时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in queryset %}
+                        <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.PROD_INST_ID }}</td>
+                        <td>{{ item.CUST_ID }}</td>
+                        <td>{{ item.LATN }}</td>
+                        <td>{{ item.BUSI_NBR }}</td>
+                        <td>{{ item.USER_NAME }}</td>
+                        <td>{{ item.CUST_NAME }}</td>
+                        <td>{{ item.INSTALL_ADDR }}</td>
+                        <td>{{ item.CERTIFICATES_NBR }}</td>
+                        <td>{{ item.mod_time|date:"Y-m-d h:m:s" }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/shoujihao/{{ item.id }}/edit/">编辑</a>
+                            <!--<a class="btn btn-danger btn-xs"  href="/shoujihao/{{ item.id }}/delete/?{{ query_dict }}">删除</a> -->
+                            <a class="btn btn-danger btn-xs"  href="/shoujihao/{{ item.id }}/hide/?{{ query_dict }}">隐藏</a>
+                        </td>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix">
+                <ul class="pagination">
+                    {{ page_string }}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -75,7 +75,6 @@ for i in range(0,len(a),3):
 """
 for i in fileList:
 
-    print("Total:%r\t" % (Total), end="")
 
     print("Total:%r\t" % (Total), end="")
 

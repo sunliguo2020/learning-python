@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+</head>
+<body>
+<h1>info列表</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>年龄</th>
+        <th>操作</th>
+    </tr>
+    <tbody>
+    {% for item in info_list%}
+    <tr>
+        <td>{{ item.id}}</td>
+        <td>{{ item.name}}</td>
+        <td>{{ item.password}}</td>
+        <td>{{ item.age}}</td>
+        <td><a href="/info/delete/?nid={{item.id}}">删除</a></td>
+    </tr>
+    {%endfor%}
+    </tbody>
+    </thead>
+
+
+</table>
+
+</body>
+</html>

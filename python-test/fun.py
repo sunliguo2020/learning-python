@@ -15,8 +15,6 @@ s(f)"""
 
 
 import turtle
-import turtle2
-import turtle2
 
 t =turtle.Pen()
 

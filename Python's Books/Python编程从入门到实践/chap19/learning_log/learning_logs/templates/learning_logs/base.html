@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习笔记</title>
+</head>
+<body>
+<p>
+    <a href="{% url 'learning_logs:index' %}">Learning Log</a>-
+    <a href="{% url 'learning_logs:topics' %}">Topics</a>
+
+</p>
+{% block content %}
+{% endblock %}
+</body>
+</html>
