@@ -21,7 +21,7 @@ from app01.views import account, task
 
 urlpatterns = [
 
-    path('admin/', djadmin.site.urls),
+    path('djadmin/', djadmin.site.urls),
     # 部门管理
     path('depart/list/', depart.depart_list),
     path('depart/add/', depart.depart_add),
