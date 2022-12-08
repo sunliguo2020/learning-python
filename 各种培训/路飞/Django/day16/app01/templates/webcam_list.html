@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+
+            <div style="float:right;width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" name='q' class="form-control" placeholder="搜索" value="{{ search_data }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search " aria-hidden="true"> </span>
+                            </button>
+                        </span>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="bs-example" data-example-id="panel-without-body-with-table">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>监控截图列表
+                </div>
+
+                <!-- Table -->
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ip地址</th>
+                        <th>截图</th>
+                        <th>学校</th>
+                        <th>截图时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in queryset %}
+                        <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.ipaddr }}</td>
+                        <td class="col-xs-6">
+                            <a href="/static/webcam/{{ item.file_path }}">
+                                <img style="width: 250px;" src="/static/webcam/{{ item.file_path }}">
+                            </a>
+                        </td>
+                        <td>{{ item.school }}</td>
+
+                        <td>{{ item.capture_date|date:"Y-m-d H:m:s" }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/shoujihao/{{ item.id }}/edit/">编辑</a>
+                            <a class="btn btn-danger btn-xs"
+                               href="/shoujihao/{{ item.id }}/delete/?{{ query_dict }}">删除</a>
+                        </td>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix">
+                <ul class="pagination">
+                    {{ page_string }}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

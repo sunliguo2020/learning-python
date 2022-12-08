@@ -17,7 +17,7 @@ from django.contrib import admin as djadmin
 
 from django.urls import path
 from app01.views import depart, pretty, shoujihao, user, admin
-from app01.views import account, task
+from app01.views import account, task,webcam
 
 urlpatterns = [
 
@@ -63,5 +63,8 @@ urlpatterns = [
     path('task/list/', task.task_list),
     path('task/ajax/', task.task_ajax),
     path('task/add/', task.task_add),
+
+    # 监控截图管理
+    path('webcam/list/', webcam.webcam_list)
 
 ]

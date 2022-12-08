@@ -6,7 +6,7 @@ from django.db import models
 # create database gx_day16 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 class Department(models.Model):
     """部门表"""
-    title = models.CharField(unique=True,verbose_name='标题', max_length=32)
+    title = models.CharField(unique=True, verbose_name='标题', max_length=32)
 
     def __str__(self):
         return self.title
@@ -58,21 +58,21 @@ class Shoujihao(models.Model):
     联通手机号信息
     """
     PROD_INST_ID = models.CharField(max_length=32)
-    CUST_ID = models.CharField(max_length=32,null=True,blank=True,)
+    CUST_ID = models.CharField(max_length=32, null=True, blank=True, )
     LATN = models.CharField(max_length=32, verbose_name='区号')
-    BUSI_NBR = models.CharField(max_length=32, verbose_name='号码',db_index=True)
-    USER_NAME = models.CharField(max_length=32,db_index=True)
-    CUST_NAME = models.CharField(max_length=32,db_index=True)
-    INSTALL_ADDR = models.CharField(max_length=32,null=True,blank=True, verbose_name="安装地址")
-    CERTIFICATES_NBR = models.CharField(max_length=32, verbose_name="身份证号",db_index=True)
-    mod_time = models.DateTimeField(verbose_name="修改时间",db_index=True)
-    is_active = models.BooleanField(verbose_name="删除标志",default=True)
+    BUSI_NBR = models.CharField(max_length=32, verbose_name='号码', db_index=True)
+    USER_NAME = models.CharField(max_length=32, db_index=True)
+    CUST_NAME = models.CharField(max_length=32, db_index=True)
+    INSTALL_ADDR = models.CharField(max_length=32, null=True, blank=True, verbose_name="安装地址")
+    CERTIFICATES_NBR = models.CharField(max_length=32, verbose_name="身份证号", db_index=True)
+    mod_time = models.DateTimeField(verbose_name="修改时间", db_index=True)
+    is_active = models.BooleanField(verbose_name="删除标志", default=True)
 
 
 class Admin(models.Model):
     """管理员"""
-    username = models.CharField(verbose_name="用户名",max_length=32)
-    password = models.CharField(verbose_name="密码",max_length=64)
+    username = models.CharField(verbose_name="用户名", max_length=32)
+    password = models.CharField(verbose_name="密码", max_length=64)
 
     def __str__(self):
         return self.username
@@ -80,13 +80,34 @@ class Admin(models.Model):
 
 class Task(models.Model):
     """"任务"""
-    level_choices=(
-        (1,"紧急"),
-        (2,"重要"),
-        (3,"临时"),
+    level_choices = (
+        (1, "紧急"),
+        (2, "重要"),
+        (3, "临时"),
 
     )
-    level = models.SmallIntegerField(verbose_name='级别',choices=level_choices,default=1)
-    title = models.CharField(verbose_name="标题",max_length=64)
+    level = models.SmallIntegerField(verbose_name='级别', choices=level_choices, default=1)
+    title = models.CharField(verbose_name="标题", max_length=64)
     detail = models.TextField(verbose_name="详细信息")
-    user = models.ForeignKey(verbose_name='负责人',to='Admin',on_delete=models.CASCADE)
+    user = models.ForeignKey(verbose_name='负责人', to='Admin', on_delete=models.CASCADE)
+
+
+class Webcam(models.Model):
+    """
+    监控截图管理
+    """
+    ipaddr = models.CharField(verbose_name="ip地址",max_length=16)
+    file_name = models.CharField(verbose_name="文件名",max_length=16, default=None)
+    file_path = models.CharField(max_length=64)
+    capture_date = models.DateTimeField(verbose_name="截图时间")
+    school = models.ForeignKey(to="School",on_delete=models.SET_NULL,blank=True,null=True,verbose_name="学校")
+
+
+class School(models.Model):
+    """
+    学校信息
+    """
+    school_name = models.CharField(max_length=12)
+
+    def __str__(self):
+        return self.school_name
