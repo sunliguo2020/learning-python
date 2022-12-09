@@ -96,11 +96,11 @@ class Webcam(models.Model):
     """
     监控截图管理
     """
-    ipaddr = models.CharField(verbose_name="ip地址",max_length=16)
-    file_name = models.CharField(verbose_name="文件名",max_length=16, default=None)
+    ipaddr = models.CharField(verbose_name="ip地址", max_length=16)
+    file_name = models.CharField(verbose_name="文件名", max_length=16, default=None)
     file_path = models.CharField(max_length=64)
     capture_date = models.DateTimeField(verbose_name="截图时间")
-    school = models.ForeignKey(to="School",on_delete=models.SET_NULL,blank=True,null=True,verbose_name="学校")
+    school = models.ForeignKey(to="School", on_delete=models.SET_NULL, blank=True, null=True, verbose_name="学校")
 
 
 class School(models.Model):
@@ -111,3 +111,10 @@ class School(models.Model):
 
     def __str__(self):
         return self.school_name
+
+
+class WebcamPic(models.Model):
+    file_name = models.CharField(verbose_name="文件名称", max_length=128)
+    md5sum = models.CharField(verbose_name="MD5值", max_length=32, unique=True)
+    blob = models.BinaryField()
+    mod_time = models.DateTimeField(verbose_name="修改时间")

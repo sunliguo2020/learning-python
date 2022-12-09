@@ -65,6 +65,7 @@ urlpatterns = [
     path('task/add/', task.task_add),
 
     # 监控截图管理
-    path('webcam/list/', webcam.webcam_list)
+    path('webcam/list/', webcam.webcam_list),
+    path('webcam/insertdb/', webcam.insert_db),
 
 ]
