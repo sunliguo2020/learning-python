@@ -75,7 +75,7 @@ def new_entry(request, topic_id):
 
 def edit_entry(request, entry_id):
     """编辑既有条目。"""
-    entry = Entry.objcts.get(id=entry_id)
+    entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
 
     if request.method != 'POST':
