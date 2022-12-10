@@ -5,7 +5,8 @@
 @Created on: 2022/12/10 9:33
 """
 from django.urls import path, re_path
-from app2 import views
+from . import views
+from .views_class import TestTemplateViews,TestListView,TestDetailView
 
 urlpatterns = [
     path('app2/index/', views.index),
@@ -23,5 +24,12 @@ urlpatterns = [
     path('app2/userinfo/<int:id>/', views.userinfo, name='app2_userinfo'),
 
     # 视图类
-    path('indexpage/', views.IndexPageView.as_view())  # 视图类在调用的时，只能是函数的方式，而不能是类的方式。将视图类as_views()转化为视图函数
+    # 视图类在调用的时，只能是函数的方式，而不能是类的方式。将视图类as_views()转化为视图函数
+    path('indexpage/', views.IndexPageView.as_view()),
+    # 通用视图类 TemplateView
+    path('app2/test_templateview/', TestTemplateViews.as_view()),
+    # 列表视图类 ListView
+    path('app2/test_listview/', TestListView.as_view()),
+    # 详细视图类 DetailView
+    path('app2/test_detailview/<int:userid>/', TestDetailView.as_view()),
 ]
