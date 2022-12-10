@@ -185,6 +185,10 @@ class LoginForm(BootStrapForm):
         pwd = self.cleaned_data.get('password')
         return md5(pwd)
 
+    class Meta:
+        fields = '__all__'
+        model = models.Order
+
 
 class LoginModelForm(forms.ModelForm):
     class Meta:
@@ -199,3 +203,22 @@ class TaskModelForm(BootStrapModelForm):
         widgets = {
             "detail": forms.TextInput
         }
+
+
+class OrderModelForm(BootStrapModelForm):
+    class Meta:
+        model = models.Order
+        # fields = "__all__"
+        exclude = ['oid']
+        labels = {
+            "title": "订单名称",
+            "price": '商品价格'
+        }
+        # error_messages = {
+        #     'title': {'required':"订单名称不能为空！"},
+        #     'price':{'required':'价格不能为空!'},
+        #     'admin':{'required':'管理员不能为空!'}
+        # }
+
+        def __str__(self):
+            return '我'

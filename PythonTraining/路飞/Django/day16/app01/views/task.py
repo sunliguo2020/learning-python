@@ -18,12 +18,13 @@ def task_list(request):
     """任务列表"""
     # 去数据库获取所有的任务
     queryset = models.Task.objects.all().order_by('-id')
-    page_object = Pagination(request,queryset,page_size=5)
+    page_object = Pagination(request, queryset, page_size=5)
+
     form = TaskModelForm()
     context = {
         "form": form,
         'queryset': page_object.page_queryset,
-        'page_string':page_object.html()
+        'page_string': page_object.html()
     }
     return render(request, 'task_list.html', context)
 

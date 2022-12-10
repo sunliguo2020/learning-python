@@ -17,7 +17,7 @@ from django.contrib import admin as djadmin
 
 from django.urls import path
 from app01.views import depart, pretty, shoujihao, user, admin
-from app01.views import account, task,webcam
+from app01.views import account, task,webcam,order
 
 urlpatterns = [
 
@@ -67,5 +67,9 @@ urlpatterns = [
     # 监控截图管理
     path('webcam/list/', webcam.webcam_list),
     path('webcam/insertdb/', webcam.insert_db),
+
+    # 订单管理
+    path('order/list/',order.order_list),
+    path('order/add/',order.order_add),
 
 ]
