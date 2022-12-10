@@ -1,0 +1,32 @@
+<div>
+    接收变量
+    <br>
+    {{info }}
+    <table border="1">
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username}}</td>
+            <td>{{ user.status}}</td>
+            <td>{{ user.createdate}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <table >
+        <tr>
+            {% if page_obj.has_previous %}
+            <td>
+                <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+            </td>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <td>
+                <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            </td>
+            {% endif %}
+
+        </tr>
+    </table>
+
+</div>
