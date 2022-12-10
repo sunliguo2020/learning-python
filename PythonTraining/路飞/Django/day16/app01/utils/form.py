@@ -209,7 +209,7 @@ class OrderModelForm(BootStrapModelForm):
     class Meta:
         model = models.Order
         # fields = "__all__"
-        exclude = ['oid']
+        exclude = ['oid','admin']
         labels = {
             "title": "订单名称",
             "price": '商品价格'
