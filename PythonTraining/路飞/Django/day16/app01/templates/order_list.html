@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                     {% for item in queryset %}
-                        <tr>
+                        <tr uid="{{ item.id }}">
                         <th scope="row">{{ item.id }}</th>
                         <td>{{ item.oid }}</td>
                         <td>{{ item.title }}</td>
@@ -39,7 +39,8 @@
 
                         <td>
                             <a class="btn btn-primary btn-xs" href="">编辑</a>
-                            <a class="btn btn-danger btn-xs" href="">删除</a>
+                            <input uid="{{ item.id }}" class="btn btn-danger btn-xs btn-delete" type="button"
+                                   value="删除">
                         </td>
                     {% endfor %}
 
@@ -89,14 +90,35 @@
             </div>
         </div>
     </div>
+    <!--删除对话框-->
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+
+
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+
+                <h4>是否确认删除?</h4>
+                <p style="margin:10px 0px ;">所有相关的数据都将被删除!</p>
+                <p style="text-align: right;">
+                    <button id="btnConfirmDelete" type="button" class="btn btn-danger">确 定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                </p>
+            </div>
+
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block js %}
     <script type="text/javascript">
+        var DELETE_ID;
         $(function () {
             bindBtnAddEvent();
             bindBtnSaveEvent();
+            bindBtnDeleteEvent();
+            bindBtnConfirmDeleteEvent();
         })
 
         function bindBtnAddEvent() {
@@ -144,6 +166,52 @@
 
                 });
             });
+        }
+
+        function bindBtnDeleteEvent() {
+            $(".btn-delete").click(function () {
+                // alert("点击了删除")
+                //显示删除对话框
+                $('#deleteModal').modal('show')
+                //var uid = $(this).attr('uid')
+                //console.log(uid)
+                DELETE_ID = $(this).attr('uid');
+            });
+        }
+
+        function bindBtnConfirmDeleteEvent() {
+            $("#btnConfirmDelete").click(function () {
+                //点击确认按钮
+                //alert('xxx')
+                $.ajax({
+                    url: '/order/delete/',
+                    type: 'get',
+                    dataType: "json",
+                    data: {
+                        'uid': DELETE_ID
+                    },
+                    success: function (res) {
+                        if (res.status) {
+                            //隐藏对话框
+                            $('#deleteModal').modal('hide')
+
+                            //在页面上删除当前一行数据
+                            $("tr[uid='"+DELETE_ID+"'").remove();
+                            // 要删除的id置空
+                            DELETE_ID = 0
+
+                            //刷新页面
+                            //location.reload();
+                        } else {
+                            //删除失败
+                            alert(res.error);
+                        }
+
+
+                    }
+                })
+            })
+
         }
     </script>
 {% endblock %}

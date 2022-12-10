@@ -7,7 +7,6 @@
 import datetime
 import random
 
-
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 from app01.utils.form import OrderModelForm
@@ -23,8 +22,8 @@ def order_list(request):
     form = OrderModelForm()
     context = {
         'form': form,
-        'queryset':page_object.page_queryset,
-        "page_string": page_object.html(),
+        'queryset': page_object.page_queryset,
+        "pagestring": page_object.html(),
     }
     return render(request, 'order_list.html', context)
 
@@ -36,7 +35,6 @@ def order_add(request):
     :param request:
     :return:
     """
-
 
     form = OrderModelForm(data=request.POST)
     if form.is_valid():
@@ -117,3 +115,19 @@ def order_add(request):
         error: {title: ["这个字段是必填项。"], price: ["这个字段是必填项。"], admin: ["这个字段是必填项。"]}
         status: false
         '''
+
+
+def order_delete(request):
+    if request.method == "GET":
+        uid = request.GET.get('uid')
+        # print('uid=', uid)
+        if not uid:
+            return JsonResponse({"status": False, 'error': '参数有误!'})
+        exist = models.Order.objects.filter(id=uid).exists()
+        # print('exist=', exist)
+        if not exist:
+            return JsonResponse({"status": False, 'error': "此id不存在!"})
+
+        models.Order.objects.filter(id=uid).delete()
+
+    return JsonResponse({"status": True})
