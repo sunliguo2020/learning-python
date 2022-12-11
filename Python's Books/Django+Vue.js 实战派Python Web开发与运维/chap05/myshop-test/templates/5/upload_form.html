@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form enctype="multipart/form-data"  method="post">
+    {% csrf_token %}
+    {{ form_obj.as_p}}
+    <br>
+    <input type="submit" value="文件上传">
+    <img src="/media/{{user.headimg}}">
+</form>
+</body>
+</html>
