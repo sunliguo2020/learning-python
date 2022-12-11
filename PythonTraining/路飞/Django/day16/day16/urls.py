@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin as djadmin
-
-from django.urls import path
+from django.urls import path ,re_path
+from django.conf import settings
 from app01.views import depart, pretty, shoujihao, user, admin
 from app01.views import account, task,webcam,order
+from django.views.static import serve
 
 urlpatterns = [
-
+    re_path('media/(?P<path>.*)',serve,{"document_root":settings.MEDIA_ROOT}),
     path('djadmin/', djadmin.site.urls),
     # 部门管理
     path('depart/list/', depart.depart_list),
@@ -66,7 +67,8 @@ urlpatterns = [
 
     # 监控截图管理
     path('webcam/list/', webcam.webcam_list),
-    path('webcam/insertdb/', webcam.insert_db),
+    path('webcam/upload/', webcam.upload),
+    path('webcam/<int:nid>/delete/', webcam.webcam_delete),
 
     # 订单管理
     path('order/list/',order.order_list),

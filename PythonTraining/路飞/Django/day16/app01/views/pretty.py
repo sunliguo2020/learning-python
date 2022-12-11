@@ -53,7 +53,7 @@ def prettynum_edit(request, nid):
     if request.method == "GET":
         form = MobileEditModelForm(instance=row_obj)
         return render(request, "prettynum_edit.html", {"form": form})
-
+    # 修改已有的数据 post过来的数据和数据库中的哪一行先关联
     form = MobileEditModelForm(data=request.POST, instance=row_obj)
     if form.is_valid():
         form.save()

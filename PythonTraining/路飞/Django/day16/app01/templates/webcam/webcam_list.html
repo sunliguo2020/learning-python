@@ -24,15 +24,21 @@
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>监控截图列表
                 </div>
+                <div>
+                    <form method="post" enctype="multipart/form-data" action="/webcam/upload/">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value="上传">
+                    </form>
+                </div>
 
                 <!-- Table -->
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>ip地址</th>
+                        <th>文件名</th>
                         <th>截图</th>
-                        <th>学校</th>
                         <th>截图时间</th>
                         <th>操作</th>
                     </tr>
@@ -41,19 +47,19 @@
                     {% for item in queryset %}
                         <tr>
                         <th scope="row">{{ item.id }}</th>
-                        <td>{{ item.ipaddr }}</td>
+                        <td>{{ item.file_name }}</td>
                         <td class="col-xs-6">
-                            <a href="/static/webcam/{{ item.file_path }}">
-                                <img style="width: 250px;" src="/static/webcam/{{ item.file_path }}">
+                            <a href="/media/{{ item.img }}">
+                                <img style="width: 250px;" src="/media/{{ item.img }}">
                             </a>
                         </td>
-                        <td>{{ item.school }}</td>
+                        <td>{{ item.create_datetime }}</td>
 
                         <td>{{ item.capture_date|date:"Y-m-d H:m:s" }}</td>
                         <td>
                             <a class="btn btn-primary btn-xs" href="/shoujihao/{{ item.id }}/edit/">编辑</a>
                             <a class="btn btn-danger btn-xs"
-                               href="/shoujihao/{{ item.id }}/delete/?{{ query_dict }}">删除</a>
+                               href="/webcam/{{ item.id }}/delete/?{{ query_dict }}">删除</a>
                         </td>
                     {% endfor %}
 

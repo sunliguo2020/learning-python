@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -115,23 +116,24 @@ class School(models.Model):
 
 class WebcamPic(models.Model):
     file_name = models.CharField(verbose_name="文件名称", max_length=128)
-    md5sum = models.CharField(verbose_name="MD5值", max_length=32, unique=True)
-    blob = models.BinaryField()
-    mod_time = models.DateTimeField(verbose_name="修改时间")
+    img = models.FileField(verbose_name='监控截图', upload_to='webcam', default=None)
+    create_datetime = models.DateTimeField(verbose_name="上传时间", default=timezone.now)
+
+    class Meta:
+        verbose_name = '监控截图'
 
 
 class Order(models.Model):
     """
     订单
     """
-    oid = models.CharField(verbose_name='订单号',max_length=64)
-    title = models.CharField(verbose_name='名称',max_length=32)
+    oid = models.CharField(verbose_name='订单号', max_length=64)
+    title = models.CharField(verbose_name='名称', max_length=32)
     price = models.IntegerField(verbose_name='价格')
 
     status_choices = (
-        (1,'未支付'),
-        (2,'已支付'),
+        (1, '未支付'),
+        (2, '已支付'),
     )
-    status = models.SmallIntegerField(verbose_name='订单状态',choices=status_choices,default=1)
-    admin = models.ForeignKey(verbose_name='管理员',to=Admin,on_delete=models.CASCADE)
-
+    status = models.SmallIntegerField(verbose_name='订单状态', choices=status_choices, default=1)
+    admin = models.ForeignKey(verbose_name='管理员', to=Admin, on_delete=models.CASCADE)

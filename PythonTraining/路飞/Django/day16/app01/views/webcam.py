@@ -8,13 +8,15 @@ import csv
 import datetime
 import os
 
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from app01 import models
 from app01.utils.pageination import Pagination
 
 from django.conf import settings
 from app01.utils.encrypt import file_md5sum
 from app01.utils.insertdb_blob import file_blob
+
+from app01.utils.form import UploadWebcamModelForm
 
 
 def webcam_list(request):
@@ -23,36 +25,17 @@ def webcam_list(request):
     :param request:
     :return:
     """
-    queryset = models.Webcam.objects.all()
-
+    queryset = models.WebcamPic.objects.all()
     page_object = Pagination(request, queryset)
 
+    form = UploadWebcamModelForm()
     context = {
         "queryset": page_object.page_queryset,
-        "page_string": page_object.html()
+        "page_string": page_object.html(),
+        'form': form,
     }
 
-    # 测试Django读取本地文件,注意路径问题
-    csv_rows = []
-    webcam_pic_dir = os.path.join(settings.BASE_DIR, 'app01/static/webcam')
-    for root, dirs, files in os.walk(webcam_pic_dir):
-        for item in files:
-            file_name = item
-            file_path = os.path.join(root, item).replace('./static/webcam', "")
-            print(file_path)
-            ipaddr = file_name.split('_')[0]
-            print(ipaddr)
-            capture_time_str = file_name.split('_')[4]
-            # print(capture_time)
-            capture_time = datetime.datetime.strptime(capture_time_str, '%Y%m%d%H%M%S')
-            print(capture_time)
-            csv_rows.append((ipaddr, file_name, capture_time, file_name))
-
-        with open('./webcam.csv', 'w', newline='') as fp:
-            csv_writer = csv.writer(fp)
-            csv_writer.writerows(csv_rows)
-
-    return render(request, 'webcam_list.html', context)
+    return render(request, 'webcam/webcam_list.html', context)
 
 
 def insert_db(request):
@@ -73,6 +56,7 @@ def insert_db(request):
                 # break
 
         return capture_time
+
     webcam_pic_dir = os.path.join(settings.BASE_DIR, 'app01/static/webcam')
 
     for root, dirs, files in os.walk(webcam_pic_dir):
@@ -83,7 +67,38 @@ def insert_db(request):
             mod_time = webcam_datetime(each_file)
 
             if not models.WebcamPic.objects.filter(md5sum=md5sum).exists():
-                models.WebcamPic.objects.create(file_name=each_file,md5sum=md5sum,blob=blob,mod_time=mod_time)
+                models.WebcamPic.objects.create(file_name=each_file, md5sum=md5sum, blob=blob, mod_time=mod_time)
             # break
 
     return HttpResponse('插入数据库成功!')
+
+
+def upload(request):
+    """
+    上传监控截图
+    :param request:
+    :return:
+    """
+    if request.method == "GET":
+        form = UploadWebcamModelForm()
+        return render(request, 'webcam/webcam_upload.html', {"form": form})
+    form = UploadWebcamModelForm(request.POST, request.FILES)
+
+    if form.is_valid():
+        # print(form.cleaned_data)
+        """
+        {'file_name': '33', 'img': <InMemoryUploadedFile: WIN_20221202_19_17_52_Pro.jpg (image/jpeg)>, 'create_datetime': datetime.datetime(2022, 12, 11, 20, 4)}
+        """
+        # print(form.instance) #WebcamPic object (None)
+        # print(form.cleaned_data) #{'img': <InMemoryUploadedFile: WIN_20221202_19_17_52_Pro.jpg (image/jpeg)>}
+        # print(form.cleaned_data.get('img'))
+
+        # 不用用户输入文件名
+        form.instance.file_name = form.cleaned_data.get('img')
+        form.save()
+    return redirect('/webcam/list/')
+
+
+def webcam_delete(request, nid):
+    models.WebcamPic.objects.filter(id=nid).delete()
+    return redirect('/webcam/list/')

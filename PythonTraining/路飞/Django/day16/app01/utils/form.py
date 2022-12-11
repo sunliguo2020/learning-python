@@ -209,11 +209,12 @@ class OrderModelForm(BootStrapModelForm):
     class Meta:
         model = models.Order
         # fields = "__all__"
-        exclude = ['oid','admin']
+        exclude = ['oid', 'admin']
         labels = {
             "title": "订单名称",
             "price": '商品价格'
         }
+
         # error_messages = {
         #     'title': {'required':"订单名称不能为空！"},
         #     'price':{'required':'价格不能为空!'},
@@ -222,3 +223,18 @@ class OrderModelForm(BootStrapModelForm):
 
         def __str__(self):
             return '我'
+
+
+class UploadWebcamModelForm(BootStrapModelForm):
+    bootstrap_exclude_fields = ['img']
+
+    # img.widgets=
+    class Meta:
+        model = models.WebcamPic
+        fields = ['img']
+        # exclude  = ['file_name']
+        # multiple="multiple"
+        widgets = {
+            # 'img':forms.(attrs={'multiple':'multiple'}),
+            # 'img':
+        }
