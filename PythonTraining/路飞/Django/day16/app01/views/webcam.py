@@ -15,8 +15,26 @@ from app01.utils.pageination import Pagination
 from django.conf import settings
 from app01.utils.encrypt import file_md5sum
 from app01.utils.insertdb_blob import file_blob
-
 from app01.utils.form import UploadWebcamModelForm
+
+
+def webcam_datetime(file_full_name):
+    """根据文件名解析出截图的时间
+    172.21.65.169_admin_dahua_rstp_20221106090114_channel_27.jpg
+    1、解析出包含日期时间的字符串 20221209081512  14个字符，全是数字，以202开头
+
+    """
+    capture_time = datetime.datetime.now()
+
+    # 去掉扩展名
+    file_name = os.path.splitext(file_full_name)[0]
+
+    for capture_time_str in file_name.split('_'):
+
+        if len(capture_time_str) == 14 and capture_time_str.isdigit():
+            capture_time = datetime.datetime.strptime(capture_time_str, '%Y%m%d%H%M%S')
+
+    return capture_time
 
 
 def webcam_list(request):
@@ -40,22 +58,6 @@ def webcam_list(request):
 
 def insert_db(request):
     """将截图插入到数据库中"""
-
-    def webcam_datetime(file_full_name):
-        """根据文件名解析出截图的时间
-        172.21.65.169_admin_dahua_rstp_20221106090114_channel_27.jpg
-        1、解析出包含日期时间的字符串 20221209081512  14个字符，全是数字，以202开头
-
-        """
-        capture_time = datetime.datetime.now()
-        file_name = os.path.split(file_full_name)[0]
-        for capture_time_str in file_name.split('_'):
-            print(capture_time_str)
-            if len(capture_time_str) == 14 and capture_time_str.isdigit():
-                capture_time = datetime.datetime.strptime(capture_time_str, '%Y%m%d%H%M%S')
-                # break
-
-        return capture_time
 
     webcam_pic_dir = os.path.join(settings.BASE_DIR, 'app01/static/webcam')
 
@@ -82,7 +84,8 @@ def upload(request):
     if request.method == "GET":
         form = UploadWebcamModelForm()
         return render(request, 'webcam/webcam_upload.html', {"form": form})
-    form = UploadWebcamModelForm(request.POST, request.FILES)
+
+    form = UploadWebcamModelForm(data=request.POST, files=request.FILES)
 
     if form.is_valid():
         # print(form.cleaned_data)
@@ -95,10 +98,26 @@ def upload(request):
 
         # 不用用户输入文件名
         form.instance.file_name = form.cleaned_data.get('img')
+        # print(form.instance.file_name)
+        form.instance.capture_datetime = webcam_datetime(str(form.instance.file_name))
         form.save()
     return redirect('/webcam/list/')
 
 
 def webcam_delete(request, nid):
+    """
+    截图删除记录及文件
+    :param request:
+    :param nid:
+    :return:
+    """
+
+    # 删除文件
+    file_path = models.WebcamPic.objects.filter(id=nid).values('img')
+    print(file_path[0].get('img'))
+    file_full_path = os.path.join(settings.MEDIA_ROOT,file_path[0].get('img'))
+    if os.path.isfile(file_full_path):
+        os.remove(file_full_path)
+    # 删除截图记录
     models.WebcamPic.objects.filter(id=nid).delete()
     return redirect('/webcam/list/')
