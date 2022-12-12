@@ -93,17 +93,6 @@ class Task(models.Model):
     user = models.ForeignKey(verbose_name='负责人', to='Admin', on_delete=models.CASCADE)
 
 
-class Webcam(models.Model):
-    """
-    监控截图管理
-    """
-    ipaddr = models.CharField(verbose_name="ip地址", max_length=16)
-    file_name = models.CharField(verbose_name="文件名", max_length=16, default=None)
-    file_path = models.CharField(max_length=64)
-    capture_date = models.DateTimeField(verbose_name="截图时间")
-    school = models.ForeignKey(to="School", on_delete=models.SET_NULL, blank=True, null=True, verbose_name="学校")
-
-
 class School(models.Model):
     """
     学校信息
@@ -115,16 +104,15 @@ class School(models.Model):
 
 
 class WebcamPic(models.Model):
-    file_name = models.CharField(verbose_name="文件名称", max_length=128,unique=True)
+    file_name = models.CharField(verbose_name="文件名称", max_length=128, unique=True)
     img = models.FileField(verbose_name='监控截图', upload_to='webcam', default=None)
     create_datetime = models.DateTimeField(verbose_name="上传时间", auto_now_add=True)
-    capture_datetime = models.DateTimeField(verbose_name="截图时间",null=True,blank=True)
+    capture_datetime = models.DateTimeField(verbose_name="截图时间", null=True, blank=True)
     ip_addr = models.GenericIPAddressField(null=True)
+    school = models.ForeignKey(to="School", on_delete=models.SET_NULL, blank=True, null=True, verbose_name="学校")
 
     class Meta:
         verbose_name = '监控截图'
-
-
 
 
 class Order(models.Model):
