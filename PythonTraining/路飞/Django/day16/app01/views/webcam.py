@@ -37,6 +37,16 @@ def webcam_datetime(file_full_name):
     return capture_time
 
 
+def webcam_ip(file_full_name):
+    """
+    从文件名解析出ip地址
+    :param file_full_name:
+    :return:
+    """
+    file_name = os.path.splitext(file_full_name)[0]
+    return file_name.split('_')[0]
+
+
 def webcam_list(request):
     """
     显示图片列表
@@ -57,7 +67,7 @@ def webcam_list(request):
         "queryset": page_object.page_queryset,
         "page_string": page_object.html(),
         'form': form,
-        'search_data':search_data,
+        'search_data': search_data,
     }
 
     return render(request, 'webcam/webcam_list.html', context)
@@ -107,8 +117,9 @@ def upload(request):
         form.instance.file_name = form.cleaned_data.get('img')
         # 判断文件名是否已经存在，没有找到提示错误的方法
         if not models.WebcamPic.objects.filter(file_name=form.cleaned_data.get('img')).exists():
-            # print(form.instance.file_name)
+            print(type(form.instance.file_name))
             form.instance.capture_datetime = webcam_datetime(str(form.instance.file_name))
+            form.instance.ip_addr = webcam_ip(str(form.instance.file_name))
             form.save()
         else:
             print('文件名已经存在')
@@ -126,7 +137,7 @@ def webcam_delete(request, nid):
     # 删除文件
     file_path = models.WebcamPic.objects.filter(id=nid).values('img')
     print(file_path[0].get('img'))
-    file_full_path = os.path.join(settings.MEDIA_ROOT,file_path[0].get('img'))
+    file_full_path = os.path.join(settings.MEDIA_ROOT, file_path[0].get('img'))
     if os.path.isfile(file_full_path):
         os.remove(file_full_path)
     # 删除截图记录
