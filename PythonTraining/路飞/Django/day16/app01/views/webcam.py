@@ -43,7 +43,13 @@ def webcam_list(request):
     :param request:
     :return:
     """
-    queryset = models.WebcamPic.objects.all().order_by("-capture_datetime")
+    data_dict = {}
+    search_data = request.GET.get('q', "")
+
+    if search_data:
+        data_dict['file_name__contains'] = search_data
+
+    queryset = models.WebcamPic.objects.filter(**data_dict).order_by("-capture_datetime")
     page_object = Pagination(request, queryset)
 
     form = UploadWebcamModelForm()
@@ -51,6 +57,7 @@ def webcam_list(request):
         "queryset": page_object.page_queryset,
         "page_string": page_object.html(),
         'form': form,
+        'search_data':search_data,
     }
 
     return render(request, 'webcam/webcam_list.html', context)
