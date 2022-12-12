@@ -4,7 +4,7 @@
 @contact: QQ376440229
 @Created on: 2022/12/4 13:40
 """
-from django.shortcuts import render, redirect,HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 
 from app01 import models
 from app01.utils.pageination import Pagination
@@ -73,8 +73,9 @@ def admin_delete(request, nid):
         models.Admin.objects.filter(id=nid).delete()
         return redirect("/admin/list")
     else:
-        return render(request,'error.html',{"error_msg":"不能删除当前用户"})
+        return render(request, 'error.html', {"error_msg": "不能删除当前用户"})
         # return HttpResponse('<script type="text/javascript">alert("xxx")</script>')
+
 
 def admin_reset(request, nid):
     """

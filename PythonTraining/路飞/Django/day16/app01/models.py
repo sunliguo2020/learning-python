@@ -115,13 +115,15 @@ class School(models.Model):
 
 
 class WebcamPic(models.Model):
-    file_name = models.CharField(verbose_name="文件名称", max_length=128)
+    file_name = models.CharField(verbose_name="文件名称", max_length=128,unique=True)
     img = models.FileField(verbose_name='监控截图', upload_to='webcam', default=None)
     create_datetime = models.DateTimeField(verbose_name="上传时间", auto_now_add=True)
     capture_datetime = models.DateTimeField(verbose_name="截图时间",null=True,blank=True)
 
     class Meta:
         verbose_name = '监控截图'
+
+
 
 
 class Order(models.Model):

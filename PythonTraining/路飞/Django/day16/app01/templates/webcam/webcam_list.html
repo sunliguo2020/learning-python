@@ -28,6 +28,7 @@
                     <form method="post" enctype="multipart/form-data" action="/webcam/upload/">
                         {% csrf_token %}
                         {{ form }}
+                        <span style="color: red">{{ form.errors.0 }}</span>
                         <input type="submit" value="上传">
                     </form>
                 </div>
@@ -39,8 +40,8 @@
                         <th>ID</th>
                         <th>文件名</th>
                         <th>截图</th>
-                        <th>上传时间</th>
                         <th>截图时间</th>
+                        <th>上传时间</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -56,10 +57,8 @@
                         </td>
                         <td>{{ item.capture_datetime|date:"Y-m-d H:m:s" }}</td>
                         <td>{{ item.create_datetime|date:"Y-m-d H:m:s"}}</td>
-
-
                         <td>
-                            <a class="btn btn-primary btn-xs" href="/shoujihao/{{ item.id }}/edit/">编辑</a>
+                            <a class="btn btn-primary btn-xs" href="">编辑</a>
                             <a class="btn btn-danger btn-xs"
                                href="/webcam/{{ item.id }}/delete/?{{ query_dict }}">删除</a>
                         </td>
