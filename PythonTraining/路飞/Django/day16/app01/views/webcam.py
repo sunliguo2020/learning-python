@@ -43,7 +43,7 @@ def webcam_list(request):
     :param request:
     :return:
     """
-    queryset = models.WebcamPic.objects.all()
+    queryset = models.WebcamPic.objects.all().order_by("-capture_datetime")
     page_object = Pagination(request, queryset)
 
     form = UploadWebcamModelForm()
