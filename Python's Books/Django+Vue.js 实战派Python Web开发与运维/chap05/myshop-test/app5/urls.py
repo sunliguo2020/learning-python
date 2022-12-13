@@ -16,6 +16,8 @@ urlpatterns = [
     path('userinfoform/', views.userinfo_form),
     path('userinfomsgform/', views.userinfo_msg_form),
     path('userimg/', views.imgfileform),
-    re_path('media/(?P<path>.*)', serve, {"document_root": settings.MEDIA_ROOT})
+    re_path('media/(?P<path>.*)', serve, {"document_root": settings.MEDIA_ROOT}),
+
+    path('user/add/',views.user_add),
 
 ]

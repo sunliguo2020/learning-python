@@ -102,25 +102,24 @@ class ImgFileForm(forms.Form):
 
 class UserBaseInfoModelForm(forms.ModelForm):
     class Meta:
-
         # 定义关联模型
         model = models.UserBaseInfo
         # 定义需要在表单中展示的字段
 
-        fields = ['username',
-                  'password',
-                  'age',
-                  'mobile',
-                  'status',
-                  ]
+        # # fields = ['username',
+        #           'password',
+        #           'age',
+        #           'mobile',
+        #           'status',
+        #           # ]
         # 如果要显示全部字段
-        # fields = '__all__'
+        fields = '__all__'
 
         # 如果在Models中定义了名称，则在这里不再定义
-        labels = {
-            'age': '年龄',
-            'mobile': '手机信息',
-        }
+        # labels = {
+        #     'age': '年龄',
+        #     'mobile': '手机信息',
+        # }
         # 将文本框渲染为密码输入框
         widgets = {
             "password": forms.widgets.PasswordInput(attrs={
@@ -148,3 +147,11 @@ class UserBaseInfoModelForm(forms.ModelForm):
                 'required': '用户状态不能为空',
             }
         }
+
+    # 校验手机号的局部函数
+    def clean_mobile(self):
+        mobile = self.cleand_data.get('mobile')
+        mobile_re = re.compile(r'^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$')
+        if not mobile_re.match(mobile):
+            raise ValidationError('手机号码格式错误')
+        return mobile

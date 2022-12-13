@@ -1,7 +1,7 @@
 import os.path
 
-from django.shortcuts import render, HttpResponse
-from .forms import UserInfoForm, UserInfo_Msg_form, ImgFileForm
+from django.shortcuts import render, HttpResponse, redirect
+from .forms import UserInfoForm, UserInfo_Msg_form, ImgFileForm, UserBaseInfoModelForm
 from .models import ImgFile
 
 
@@ -104,7 +104,7 @@ def imgfileform(request):
             name = f.cleaned_data['name']
             headimg = f.cleaned_data['headimg']
             # print(type(headimg)) #<class 'django.core.files.uploadedfile.InMemoryUploadedFile'>
-            userimg = ImgFile(name=name,headimg=headimg)
+            userimg = ImgFile(name=name, headimg=headimg)
             # print(userimg)
             # userimg.name = name
             # userimg.heading = headimg
@@ -112,3 +112,24 @@ def imgfileform(request):
             # print(type(userimg)) #<class 'app5.models.ImgFile'>
             print('上传成功')
             return render(request, '5/upload_form.html', {"form_obj": f, 'user': userimg})
+
+
+def user_add(request):
+    if request.method == "GET":
+        form = UserBaseInfoModelForm()
+        # print(type(form))
+        # for item in form:
+        #     print(item)
+        #     print(type(item))
+        context = {
+            'form': form
+        }
+        return render(request, 'user_add.html', context)
+    form = UserBaseInfoModelForm(data=request.POST)
+    context = {
+        'form': form
+    }
+    if form.is_valid():
+        form.save()
+        return redirect('/user/list')
+    return render(request, 'user_add.html', context)
