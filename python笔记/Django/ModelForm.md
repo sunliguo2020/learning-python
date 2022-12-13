@@ -80,12 +80,12 @@ def order_list(request):
 
 ```html
 <form id="formAdd">
-     <div class="clearfix">
-          {% for field in form %}
-          <div class="col-xs-6">
-     <div class="form-group" style="position:relative;margin-bottom: 20px;">
-             <label>{{ field.label }}</label>
-               {{ field }}
+    <div class="clearfix">
+        {% for field in form %}
+        <div class="col-xs-6">
+            <div class="form-group" style="position:relative;margin-bottom: 20px;">
+                <label>{{ field.label }}</label>
+                {{ field }}
    <span class="error-msg"  style="color: red;position: absolute">{{ field.errors.0 }}</span>
      </div>
          </div>
@@ -155,4 +155,55 @@ class OrderModelForm(BootStrapModelForm):
 ##### 默认的错误信息
 
 ![image-20221210155735563](assets/image-20221210155735563.png)
+
+#### 遍历form
+
+```python
+    form = UserBaseInfoModelForm()
+    print(type(form))
+    for item in form:
+        print(item)
+        print(type(item))
+```
+
+```python
+
+<class 'app5.forms.UserBaseInfoModelForm'>
+<input type="text" name="username" maxlength="30" required id="id_username">
+<class 'django.forms.boundfield.BoundField'>
+<input type="password" name="password" class="password" maxlength="20" required id="id_password">
+<class 'django.forms.boundfield.BoundField'>
+<input type="text" name="status" maxlength="1" required id="id_status">
+<class 'django.forms.boundfield.BoundField'>
+<input type="text" name="createdate" required id="id_createdate">
+<class 'django.forms.boundfield.BoundField'>
+[13/Dec/2022 19:08:18] "GET /user/add/ HTTP/1.1" 200 801
+
+```
+
+#### 处理模型表单数据
+
+提供了save方法，用于将表单绑定的数据直接保存到数据库中。
+
+###### 1、接受POST请求提交的数据，直接保存到数据库中，返回一个模型对象。
+
+```python
+f = UserInfoBaseModelForm(request.POST)
+new_userinfo = f.save()
+```
+
+###### 2、调用表单类生成类实例，完成数据显示
+
+```python
+a = UserInfoBaseModel.objects.get(id=1)
+f = UserBaseModelForm(instance=a)
+```
+
+###### 3、调用表单类生成实例，完成数据修改
+
+```python
+a = UserInfoBaseModel.objects.get(id=1)
+f = UserInfoBaseModelForm(request.POST,instance = a)
+new_userinfo = f.save()
+```
 
