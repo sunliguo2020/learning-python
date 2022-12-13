@@ -7,6 +7,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 import re
+from . import models
 
 
 def mobile_validate(value):
@@ -97,3 +98,53 @@ class UserInfo_Msg_form(forms.Form):
 class ImgFileForm(forms.Form):
     name = forms.CharField()
     headimg = forms.FileField(label='头像')
+
+
+class UserBaseInfoModelForm(forms.ModelForm):
+    class Meta:
+
+        # 定义关联模型
+        model = models.UserBaseInfo
+        # 定义需要在表单中展示的字段
+
+        fields = ['username',
+                  'password',
+                  'age',
+                  'mobile',
+                  'status',
+                  ]
+        # 如果要显示全部字段
+        # fields = '__all__'
+
+        # 如果在Models中定义了名称，则在这里不再定义
+        labels = {
+            'age': '年龄',
+            'mobile': '手机信息',
+        }
+        # 将文本框渲染为密码输入框
+        widgets = {
+            "password": forms.widgets.PasswordInput(attrs={
+                "class": "password",
+
+            }, render_value=True)
+        }
+
+        error_message = {
+            "username": {'required': '用户姓名不能为空',
+                         'min_length': '长度最少6位',
+                         'invalid': '输入正确的姓名'},
+            'password': {
+                'max_length': '密码最长为10位',
+                'required': '密码不能为空',
+                'min_length': '密码最少6位'
+            },
+            "age": {
+                'required': '年龄不能为空',
+            },
+            'mobile': {
+                'required': '手机号码不能为空',
+            },
+            'status': {
+                'required': '用户状态不能为空',
+            }
+        }
