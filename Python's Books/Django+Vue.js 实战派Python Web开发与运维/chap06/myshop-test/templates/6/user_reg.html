@@ -1,0 +1,32 @@
+{% load static %}
+<form action="" method='post'>
+    {% csrf_token %}
+    <div class='input-group mb-3'>
+        <input type="text" class="form-control" name="username" placeholder="用户名">
+
+    </div>
+    <div class='input-group mb-3'>
+        <input type="email" class="form-control" name="email" placeholder="邮箱">
+
+    </div>
+    <div class='input-group mb-3'>
+        <input type="password" class="form-control" name="password" placeholder="密码">
+
+    </div>
+    <div class='input-group mb-3'>
+        <input type="password" class="form-control" name="re-password" placeholder="重复密码">
+
+    </div>
+    <div class='row'>
+        <div class='col-8'>
+            <label for="agreeTerms">
+                {{info}}
+            </label>
+        </div>
+        <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">注册</button>
+
+        </div>
+    </div>
+
+</form>
