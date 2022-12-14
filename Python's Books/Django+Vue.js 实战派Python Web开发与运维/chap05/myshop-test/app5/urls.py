@@ -19,5 +19,7 @@ urlpatterns = [
     re_path('media/(?P<path>.*)', serve, {"document_root": settings.MEDIA_ROOT}),
 
     path('user/add/',views.user_add),
+    path('ajax_login/',views.ajax_login),
+    path('ajax_login_data/',views.ajax_login_data),
 
 ]

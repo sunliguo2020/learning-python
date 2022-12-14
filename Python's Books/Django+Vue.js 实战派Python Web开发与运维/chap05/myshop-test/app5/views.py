@@ -1,5 +1,6 @@
 import os.path
 
+from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import UserInfoForm, UserInfo_Msg_form, ImgFileForm, UserBaseInfoModelForm
 from .models import ImgFile
@@ -133,3 +134,19 @@ def user_add(request):
         form.save()
         return redirect('/user/list')
     return render(request, 'user_add.html', context)
+
+
+def ajax_login(request):
+    return render(request, '5/ajax.html')
+
+
+def ajax_login_data(request):
+    # 获取用户名和密码
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    print(username,password)
+    # 判断并返回JSON数据
+    if username == 'admin' and password == '123':
+        return JsonResponse({'code': 1, "msg": '登录成功'})
+    else:
+        return JsonResponse({'code': 0, 'msg': '登录失败'})

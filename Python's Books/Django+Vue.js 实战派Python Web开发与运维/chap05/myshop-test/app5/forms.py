@@ -155,3 +155,11 @@ class UserBaseInfoModelForm(forms.ModelForm):
         if not mobile_re.match(mobile):
             raise ValidationError('手机号码格式错误')
         return mobile
+
+    # 全局函数，用来校验多个数据
+    def clean(self):
+        password = self.cleaned_data.get('password')
+        confirm_password = self.cleaned_data.get('confirm_password')
+
+        if password != confirm_password:
+            raise forms.ValidationError('两次密码输入不一样')
