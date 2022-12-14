@@ -131,3 +131,56 @@ def order_delete(request):
         models.Order.objects.filter(id=uid).delete()
 
     return JsonResponse({"status": True})
+
+
+def order_detail(request):
+    """
+    根据订单id获取订单详情
+    """
+    # 方法一
+    # uid = request.GET.get('uid')
+    # row_obj = models.Order.objects.filter(id=uid).first()
+    # if not row_obj:
+    #     return JsonResponse({"status": False, 'error': "数据不存在!"})
+    # # 从数据库中获取到一个对象，row_object
+    # result = {
+    #     'status': True,
+    #     'data':
+    #         {
+    #             'title': row_obj.title,
+    #             'price': row_obj.price,
+    #             'status': row_obj.status,
+    #         }
+    # }
+    #
+    # return JsonResponse(result})
+
+    # 方法二
+    uid = request.GET.get('uid')
+    row_dict = models.Order.objects.filter(id=uid).values('title', 'price', 'status').first()
+    if not row_dict:
+        return JsonResponse({"status": False, 'error': "数据不存在!"})
+    # 从数据库中获取到一个对象，row_object
+    result = {
+        'status': True,
+        'data': row_dict
+    }
+
+    return JsonResponse(result)
+
+
+@csrf_exempt
+def order_edit(request):
+    """
+    编辑订单
+    """
+    uid = request.GET.get('uid')
+    row_obj = models.Order.objects.filter(id=uid).first()
+    if not row_obj:
+        return JsonResponse({"status": False, 'tips': "数据不存在!"})
+
+    form = OrderModelForm(data=request.POST, instance=row_obj)
+    if form.is_valid():
+        form.save()
+        return JsonResponse({'status': True})
+    return JsonResponse({'status': False, 'error': form.errors})

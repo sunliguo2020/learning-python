@@ -38,7 +38,8 @@
                         <td>{{ item.admin.username }}</td>
 
                         <td>
-                            <a class="btn btn-primary btn-xs" href="">编辑</a>
+                            <input uid="{{ item.id }}" type="button" class="btn btn-primary btn-xs btn-edit"
+                                   value="编辑">
                             <input uid="{{ item.id }}" class="btn btn-danger btn-xs btn-delete" type="button"
                                    value="删除">
                         </td>
@@ -57,7 +58,7 @@
     </div>
 
 
-    <!-- 新建订单对话框 -->
+    <!-- 新建或编辑 订单对话框 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -91,7 +92,6 @@
         </div>
     </div>
     <!--删除对话框-->
-    <!-- Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
 
@@ -114,16 +114,23 @@
 {% block js %}
     <script type="text/javascript">
         var DELETE_ID;
+        var EDIT_ID;
         $(function () {
             bindBtnAddEvent();
             bindBtnSaveEvent();
             bindBtnDeleteEvent();
             bindBtnConfirmDeleteEvent();
+            bindBtnEditEvent();
         })
 
         function bindBtnAddEvent() {
             $('#btnAdd').click(function () {
+                //将正在编辑的id置空
+                EDIT_ID = undefined;
                 // 点击新建按钮显示对话框
+                //清空对话框的数据
+                $("#formAdd")[0].reset()
+                $('#myModalLabel').text('新建')
                 $('#myModal').modal('show');
             });
         }
@@ -133,38 +140,79 @@
             $('#btnSave').click(function () {
 
                 //alert('保存');
-
                 //清除错误信息
                 //$(".error-msg").empty();
                 $(".error-msg").empty()
-                //向后台发送信息
+                if (EDIT_ID) {
+                    //编辑
+                    doEdit()
+                } else {
+                    //添加
+                    doAdd()
+                }
+            });
+        }
 
-                $.ajax({
-                    url: '/order/add/',
-                    type: 'post',
-                    data: $("#formAdd").serialize(),
-                    dataType: "JSON",
-                    success: function (res) {
-                        // console.log(res)
-                        if (res.status) {
-                            //alert("创建成功");
-                            //清空表单
-                            $("#formAdd")[0].reset();
-                            //关闭对话框
-                            $('#myModal').modal('hide');
-                            //用js实现页面的刷新
-                            location.reload();
-                        } else {
-                            //把错误信息显示在对话框中
-                            $.each(res.error, function (name, errorList) {
-                                $("#id_" + name).next().text(errorList[0]);
-                            })
-                        }
-                        ;
-
+        function doAdd() {
+            //向后台发送信息
+            $.ajax({
+                url: '/order/add/',
+                type: 'post',
+                data: $("#formAdd").serialize(),
+                dataType: "JSON",
+                success: function (res) {
+                    // console.log(res)
+                    if (res.status) {
+                        //alert("创建成功");
+                        //清空表单
+                        $("#formAdd")[0].reset();
+                        //关闭对话框
+                        $('#myModal').modal('hide');
+                        //用js实现页面的刷新
+                        location.reload();
+                    } else {
+                        //把错误信息显示在对话框中
+                        $.each(res.error, function (name, errorList) {
+                            $("#id_" + name).next().text(errorList[0]);
+                        })
                     }
+                    ;
 
-                });
+                }
+
+            });
+        }
+
+        function doEdit() {
+            //向后台发送信息
+            $.ajax({
+                url: '/order/edit/?uid=' + EDIT_ID,
+                type: 'post',
+                data: $("#formAdd").serialize(),
+                dataType: "JSON",
+                success: function (res) {
+                    // console.log(res)
+                    if (res.status) {
+                        //清空表单
+                        $("#formAdd")[0].reset();
+                        //关闭对话框
+                        $('#myModal').modal('hide');
+                        //用js实现页面的刷新
+                        location.reload();
+                    } else {
+                        if (res.tips){
+                            alert(res.tips)
+                            location.reload();
+                        }else{
+                            //把错误信息显示在对话框中
+                        $.each(res.error, function (name, errorList) {
+                            $("#id_" + name).next().text(errorList[0]);
+                        })
+                        }
+                    };
+
+                }
+
             });
         }
 
@@ -196,7 +244,7 @@
                             $('#deleteModal').modal('hide')
 
                             //在页面上删除当前一行数据
-                            $("tr[uid='"+DELETE_ID+"'").remove();
+                            $("tr[uid='" + DELETE_ID + "'").remove();
                             // 要删除的id置空
                             DELETE_ID = 0
 
@@ -212,6 +260,42 @@
                 })
             })
 
+        }
+
+        function bindBtnEditEvent() {
+            $('.btn-edit').click(function () {
+                var uid = $(this).attr('uid');
+                EDIT_ID = uid
+                //alert('点击了编辑');
+                //发送ajax去后台获取当前行的相关数据  /order/detail/?uid=123
+                $.ajax({
+                    url: "/order/detail/",
+                    data: {
+                        'uid': uid,
+                    },
+                    type: "get",
+                    dataType: "JSON",
+                    success: function (res) {
+                        //alert(currentId)
+                        if (res.status) {
+                            //console.log(res.data)
+                            //清空对话框的数据
+                            $("#formAdd")[0].reset()
+                            //将数值复制到对话框中的标签
+                            $.each(res.data, function (name, value) {
+                                $("#id_" + name).val(value);
+                            })
+                            $('#myModalLabel').text('编辑')
+                            $('#myModal').modal('show');
+                        } else {
+                            alert(res.error);
+                        }
+                    }
+                })
+
+                //在对话框默认看到
+            })
+            ;
         }
     </script>
 {% endblock %}

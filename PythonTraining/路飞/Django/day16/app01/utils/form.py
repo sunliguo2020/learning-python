@@ -79,6 +79,18 @@ class UserModelForm(BootStrapModelForm):
     class Meta:
         model = models.UserInfo
         fields = ['name', 'password', 'age', 'account', 'create_time', 'gender', 'dpart']
+        '''widgets = {
+            'name': forms.TextInput(attrs={'class': "form-control"}),
+            "password": forms.PasswordInput(attrs={'class': 'form-control'}),
+            'age': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            # 循环找到所有的插件 ，添加 class='form-control'
+            for name, field in self.fields.items():
+                # print(name,field)
+                field.widget.attrs = {'class': 'form-control'}'''
 
 
 class AdminModelForm(BootStrapModelForm):
