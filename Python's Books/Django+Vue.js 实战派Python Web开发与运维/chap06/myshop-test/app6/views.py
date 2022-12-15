@@ -9,7 +9,8 @@ def user_reg(request):
     if request.method == 'POST':
         uname = request.POST.get('username', '')
         pwd = request.POST.get('password', '')
-        if User.objects.filter(username=uname):
+        print('uname=', uname)
+        if User.objects.filter(username=uname).exists():
             info = '用户已经存在'
         else:
             d = dict(username=uname,
@@ -18,6 +19,7 @@ def user_reg(request):
                      is_staff=1,
                      is_active=1,
                      is_superuser=1)
+            print(d)
             user = User.objects.create_user(**d)
             info = '注册成功，请登录'
         return render(request, '6/user_reg.html', {'info': info})
