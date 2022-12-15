@@ -117,7 +117,7 @@ def upload(request):
         form.instance.file_name = form.cleaned_data.get('img')
         # 判断文件名是否已经存在，没有找到提示错误的方法
         if not models.WebcamPic.objects.filter(file_name=form.cleaned_data.get('img')).exists():
-            print(type(form.instance.file_name))
+            # print(type(form.instance.file_name))
             form.instance.capture_datetime = webcam_datetime(str(form.instance.file_name))
             form.instance.ip_addr = webcam_ip(str(form.instance.file_name))
             form.save()

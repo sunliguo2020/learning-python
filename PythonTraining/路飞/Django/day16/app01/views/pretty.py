@@ -24,7 +24,7 @@ def prettynum_list(request):
 
     query_set = models.PrettyNum.objects.filter(**data_dict).order_by("mobile")
 
-    page_object = Pagination(request, query_set, page_size=20)
+    page_object = Pagination(request, query_set, page_size=10)
 
     context = {
         "num_list": page_object.page_queryset,

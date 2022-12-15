@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin as djadmin
-from django.urls import path ,re_path
+from django.urls import path, re_path
 from django.conf import settings
 from app01.views import depart, pretty, shoujihao, user, admin
-from app01.views import account, task,webcam,order
+from app01.views import account, task, webcam, order, chart
 from django.views.static import serve
 
 urlpatterns = [
-    re_path('media/(?P<path>.*)',serve,{"document_root":settings.MEDIA_ROOT}),
+    re_path('media/(?P<path>.*)', serve, {"document_root": settings.MEDIA_ROOT}),
     path('djadmin/', djadmin.site.urls),
     # 部门管理
     path('depart/list/', depart.depart_list),
@@ -71,10 +71,14 @@ urlpatterns = [
     path('webcam/<int:nid>/delete/', webcam.webcam_delete),
 
     # 订单管理
-    path('order/list/',order.order_list),
-    path('order/add/',order.order_add),
-    path('order/delete/',order.order_delete),
-    path('order/detail/',order.order_detail),
-    path('order/edit/',order.order_edit),
+    path('order/list/', order.order_list),
+    path('order/add/', order.order_add),
+    path('order/delete/', order.order_delete),
+    path('order/detail/', order.order_detail),
+    path('order/edit/', order.order_edit),
+
+    # 数据统计
+    path('chart/list/', chart.chart_list),
+    path('chart/edit/', chart.chart_edit),
 
 ]

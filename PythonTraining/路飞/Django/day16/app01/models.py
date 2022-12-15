@@ -60,13 +60,13 @@ class Shoujihao(models.Model):
     """
     PROD_INST_ID = models.CharField(max_length=32)
     CUST_ID = models.CharField(max_length=32, null=True, blank=True, )
-    LATN = models.CharField(max_length=32, verbose_name='区号')
+    LATN = models.CharField(max_length=6, verbose_name='区号')
     BUSI_NBR = models.CharField(max_length=32, verbose_name='号码', db_index=True)
     USER_NAME = models.CharField(max_length=32, db_index=True)
     CUST_NAME = models.CharField(max_length=32, db_index=True)
     INSTALL_ADDR = models.CharField(max_length=32, null=True, blank=True, verbose_name="安装地址")
     CERTIFICATES_NBR = models.CharField(max_length=32, verbose_name="身份证号", db_index=True)
-    mod_time = models.DateTimeField(verbose_name="修改时间", db_index=True)
+    mod_time = models.DateTimeField(verbose_name="采集时间", db_index=True)
     is_active = models.BooleanField(verbose_name="删除标志", default=True)
 
 

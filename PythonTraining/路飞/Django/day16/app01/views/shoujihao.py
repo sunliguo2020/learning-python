@@ -25,7 +25,7 @@ def shoujihao_list(request):
     # 是否显示某条数据
     data_dict['is_active'] = True
 
-    queryset = models.Shoujihao.objects.filter(**data_dict).order_by('BUSI_NBR', 'mod_time')
+    queryset = models.Shoujihao.objects.filter(**data_dict)[:1000]
     page_object = Pagination(request, queryset)
 
     context = {
