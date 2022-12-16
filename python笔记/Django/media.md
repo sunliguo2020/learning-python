@@ -11,7 +11,7 @@ urlpatterns = [
 2、在settins.py设置
 
 ```
-MEDIA_ROOT = os.path.join(BASEDIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 ```
 
