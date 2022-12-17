@@ -68,7 +68,7 @@ def archive_ip(dir_path, dst_csv):
 if __name__ == '__main__':
     # file_name = '10.155.88.254_20220624110506_arp.log'
     # 要导入的文件夹
-    dir_path = r'D:\睿智\国土局\政务网\10.155.88.254_arp\202208'
-    dst_csv = r'd:\ip_arp_202208.csv'
+    dir_path = r'D:\睿智\国土局\政务网\10.155.88.254_arp\202211'
+    dst_csv = r'd:\ip_arp_202211.csv'
     if os.path.isdir(dir_path):
         archive_ip(dir_path, dst_csv)
