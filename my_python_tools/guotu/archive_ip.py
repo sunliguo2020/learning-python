@@ -35,34 +35,39 @@ def walk_dir(file_dir):
             yield file_path
 
 
-# file_name = '10.155.88.254_20220624110506_arp.log'
-# 要导入的文件夹
-dir_path = r'D:\睿智\国土局\政务网\10.155.88.254_arp\202204'
-line_list = []
-count = 0
+def archive_ip(dir_path, dst_csv):
+    line_list = []
+    count = 0
+    for file_path in walk_dir(dir_path):
+        count += 1
+        # 文件名包含手机mac地址的时间
+        file_time = os.path.basename(file_path).split('_')[1]
+        # 采集时间
+        file_date_obj = datetime.strptime(file_time, '%Y%m%d%H%M%S')
 
-for file_path in walk_dir(dir_path):
-    count += 1
-    # 文件名包含手机mac地址的时间
-    file_time = os.path.basename(file_path).split('_')[1]
-    # 采集时间
-    file_date_obj = datetime.strptime(file_time, '%Y%m%d%H%M%S')
+        print(count, file_time, len(line_list))
+        # 打开每一个文件
+        with open(file_path) as fp:
+            for line in fp:
+                new_line_text = line.split()
+                if len(new_line_text) == 6:
+                    # print(new_line)
+                    # 删除vlan列
+                    del new_line_text[2]
+                    # 将采集时间插入到接口的后面
+                    new_line_text.insert(3, file_date_obj)
 
-    print(count, file_time, len(line_list))
-    # 打开每一个文件
-    with open(file_path) as fp:
-        for line in fp:
-            new_line_text = line.split()
-            if len(new_line_text) == 6:
-                # print(new_line)
-                # 删除vlan列
-                del new_line_text[2]
-                # 将采集时间插入到接口的后面
-                new_line_text.insert(3, file_date_obj)
+                    # if new_line_text[:4] not in line_list:
+                    line_list.append(new_line_text[:4])
 
-                # if new_line_text[:4] not in line_list:
-                line_list.append(new_line_text[:4])
+    with open(dst_csv, 'w', newline='') as fp:
+        csv_write = csv.writer(fp)
+        csv_write.writerows(line_list)
 
-with open(r'D:\ip_arp_202204.csv', 'w', newline='') as fp:
-    csv_write = csv.writer(fp)
-    csv_write.writerows(line_list)
+
+if __name__ == '__main__':
+    # file_name = '10.155.88.254_20220624110506_arp.log'
+    # 要导入的文件夹
+    dir_path = r'D:\睿智\国土局\政务网\10.155.88.254_arp\202205'
+    dst_csv = r'd:\ip_arp_202205.csv'
+    archive_ip(dir_path, dst_csv)
