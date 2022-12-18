@@ -62,7 +62,9 @@ def new_entry(request, topic_id):
         # post 提交的数据：对数据进行处理
         form = EntryForm(data=request.POST)
         if form.is_valid():
+            # 让Django创建一个新的条目对象，并将其赋值给new_entry,但不保存到数据库中。
             new_entry = form.save(commit=False)
+            # 将其与正确的主题相关联
             new_entry.topic = topic
             new_entry.save()
             return redirect('learning_logs:topic', topic_id=topic_id)

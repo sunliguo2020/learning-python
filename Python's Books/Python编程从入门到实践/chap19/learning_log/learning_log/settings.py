@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 我的应用程序
     'learning_logs',
+    'users',
     # 'pizzas',
     # 默认添加的应用程序
     'django.contrib.admin',
