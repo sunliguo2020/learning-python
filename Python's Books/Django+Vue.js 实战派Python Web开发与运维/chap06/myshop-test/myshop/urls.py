@@ -19,5 +19,5 @@ from app6 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/reg/', views.user_reg),  # 访问路由，指定视图函数
+    path('reg/', views.user_reg),  # 访问路由，指定视图函数
 ]

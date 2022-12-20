@@ -30,8 +30,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.auth',  # 权限管理模块
+    'django.contrib.contenttypes', # 内容类型，用于关联模型
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
