@@ -4,6 +4,7 @@
 @contact: QQ376440229
 @Created on: 2020/11/5 19:17
 """
+from pprint import pprint
 
 
 class Dog:
@@ -36,3 +37,12 @@ print(f"\nYour dog's name is {your_dog.name}")
 print(f"Your dog is {your_dog.age} years old.")
 
 your_dog.sit()
+pprint(your_dog.__dict__)
+
+your_dog.name = 'gao'
+pprint(your_dog.__dict__)
+
+your_dog.gender = 'mele'
+pprint(your_dog.__dict__)
+
+pprint(my_dog.__dict__)
