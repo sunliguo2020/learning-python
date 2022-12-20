@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.urls import reverse
 
 from app6.models import MyUser
@@ -117,3 +117,9 @@ def user_index(request):
 @login_required()
 def user_edit(request):
     return render(request,'6/user_edit.html')
+
+
+
+
+def test(request):
+    return HttpResponse('我也执行了')

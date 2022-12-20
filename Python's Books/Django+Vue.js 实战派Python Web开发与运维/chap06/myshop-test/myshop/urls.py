@@ -25,4 +25,5 @@ urlpatterns = [
     path('myuser_login/', views.myuser_login, name='app6_myuser_login'),
     path('myuser_login/', views.myuser_logout, name='app6_myuser_logout'),
     path('index/',views.user_index),
+    path('app6/test/',views.test)
 ]
