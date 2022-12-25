@@ -28,10 +28,10 @@ class UserRegForm(forms.Form):
                                    'min_length': '长度最少为6位',
                                })
     password = forms.CharField(label='密码', min_length=6, max_length=10,
-                               widget=forms.widget.PasswordInput(
+                               widget=forms.widgets.PasswordInput(
                                    attrs={
-                                       'class': 'form-control', },
-                                   render_value=True,
+                                       "class": 'password',
+                                   }, render_value=True
                                ),
                                error_messages={
                                    'max_length': '密码最长为10位',
@@ -40,7 +40,7 @@ class UserRegForm(forms.Form):
                                }
                                )
     re_password = forms.CharField(label='确认密码', min_length=6, max_length=10,
-                                  widget=forms.widget.PasswordInput(
+                                  widget=forms.widgets.PasswordInput(
                                       attrs={
                                           'class': 'form-control',
 
