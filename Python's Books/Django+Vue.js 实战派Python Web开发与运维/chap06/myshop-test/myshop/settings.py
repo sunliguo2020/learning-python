@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'app6.middle.mymiddle.AuthMiddleware1',
     'app6.middle.mymiddle.AuthMiddleware2',
-    'app6.middle.permmiddleware.PermissionMiddleWare',
+    # 'app6.middle.permmiddleware.PermissionMiddleWare',
 ]
 
 ROOT_URLCONF = 'myshop.urls'
