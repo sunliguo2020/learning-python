@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'apps.users',
     'ckeditor',
     'ckeditor_uploader',
-
 ]
 
 MIDDLEWARE = [
@@ -59,7 +58,7 @@ ROOT_URLCONF = 'myshop_back.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,6 +116,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -127,8 +127,8 @@ AUTH_USER_MODEL = 'users.MyUser'
 
 MEDIA_URL = '/uploads/'  # 上传图片的路径
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')  # 上传图片的根路径
-CKEDITOR_UPLOAD_PATH='upload/'
-CKEDITOR_IMAGE_BACKEND='pillow'
+CKEDITOR_UPLOAD_PATH = 'upload/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 # 富文本编辑器ckeditor配置
 CKEDITOR_CONFIGS = {
     'default': {
