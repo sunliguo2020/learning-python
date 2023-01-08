@@ -10,6 +10,9 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from django.views.static import serve
 from django.conf import settings
-
+from apps.users import views
 urlpatterns = [
+    path('user_reg/', views.user_reg),
+    path('user_login/', views.user_login),
+    path('ajax_login_data/', views.ajax_login_data),
 ]

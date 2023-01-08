@@ -24,7 +24,7 @@ class MyUser(AbstractUser):
     sex = models.IntegerField(default=0, choices=SEX)
     birthday = models.DateField(blank=True, null=True)
     nickname=models.CharField('昵称',blank=True,max_length=50)
-    # user_img = models.ImageField("头像", upload_to="user_img", default="")
+    user_img = models.ImageField("头像", upload_to="user_img", default="")
     level = models.IntegerField(default=4, choices=LEVEL)
     status = models.IntegerField(default=0, choices=STATUS)
     create_time = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
