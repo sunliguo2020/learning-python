@@ -1,0 +1,137 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+ {% block ext_css %}
+<link rel="stylesheet" href="{% static 'dist/css/common.css'%}">
+ {% endblock %}
+
+ {% block content%}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">
+                            会员模块                    <small>列表</small>
+                        </h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/admin/index/index.html">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="/admin/Article/index.html">会员模块</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--内容开始-->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 search-collapse">
+                    <form id="search_form">
+                        <div class="select-list">
+                            <ul>
+                                <li>
+                                    <label>分类： </label>
+                                    <select id="search_cate_id" name="cate_id">
+                                        <option value="">所有</option>
+                                        <option value="1">钻石卡会员</option>
+                                        <option value="2">金卡会员</option>
+                                        <option value="3">银卡会员</option>
+                                        <option value="4">寂寞卡会员</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label>名称： </label>
+
+                                    <input type="text" id="search_title" name="title" value="" />
+                                </li>
+                                <li>
+                                    <label>状态： </label>
+                                    <select id="search_status" name="status">
+                                        <option value="">所有</option>
+                                        <option value="0">正常</option>
+                                        <option value="1">异常</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                    <a class="btn btn-warning btn-rounded btn-sm" onclick="resetPre()"><i class="fas fa-sync-alt"></i>&nbsp;重置</a>
+                                    <input class="hide" type="submit" name="btnSave" value="提交" onclick="$.table.search();return false;" />
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12 select-table table-striped">
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <a class="btn btn-success" onclick="$.operate.add()">
+                            <i class="fa fa-plus"></i> 新增
+                        </a>
+                        <a class="btn btn-primary single disabled" onclick="$.operate.edit()">
+                            <i class="fa fa-edit"></i> 修改
+                        </a>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
+                            <i class="fa fa-times"></i> 删除
+                        </a>
+                        <a class="btn btn-warning" onclick="$.table.export()">
+                            <i class="fa fa-download"></i> 导出
+                        </a>
+                    </div>
+
+                    <table id="bootstrap-table"></table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script src="{% static 'plugins/bootstrap-table/bootstrap-table.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-table/bootstrap-table-zh-CN.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-table/bootstrap-table.min.css' %}"></script>
+
+<script>
+    InitMainTable();
+    function InitMainTable() {
+        $('#bootstrap-table').bootstrapTable({
+            url: '/member/ajax_member/',         //请求后台的URL（*）
+            method: 'get',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            //queryParams: oTableInit.queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            clickToSelect: true,                //是否启用点击选中行
+            uniqueId: "member_id",              //每一行的唯一标识，一般为主键列
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'username',
+                title: '账号'
+            }, {
+                field: 'truename',
+                title: '真实姓名'
+            }, {
+                field: 'sex',
+                title: '性别'
+            }, {
+                field: 'birthday',
+                title: '生日'
+            },]
+        });
+    };
+</script>
+{% endblock %}

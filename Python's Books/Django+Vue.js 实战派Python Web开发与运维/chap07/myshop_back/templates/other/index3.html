@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据概览</title>
+    <link href="/static/images3/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/images3/common.css">
+    <link rel="stylesheet" href="/static/images3/data_text.css">
+    <link rel="stylesheet" href="/static/images3/foundation-datepicker.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!--header开始-->
+    <div class="header">
+        <div class="header_logo fl">
+            <a href="#">人员位置信息可视化大屏</a>
+        </div>
+        <div class="header_nav fl">
+            <ul>
+                <li>
+                    <img src="/static/images3/nav_1.png" alt="">
+                    <a href="/index3" class="nav_current">疆内外人员流动</a>
+                </li>
+                <li>
+                    <img src="/static/images3/nav_2.png" alt="">
+                    <a href="/index3_xj" class="">疆内人员流动</a>
+                </li>
+                <li>
+                    <img src="/static/images3/nav_3.png" alt="">
+                    <a href="/index3_1" class="">人员轨迹热力</a>
+                </li>
+                <li>
+                    <img src="/static/images3/nav_4.png" alt="">
+                    <a href="#" class="">区域监控</a>
+                </li>
+                <li>
+                    <img src="/static/images3/nav_5.png" alt="">
+                    <a href="#">人员轨迹</a>
+                </li>
+                <li>
+                    <img src="/static/images3/nav_6.png" alt="">
+                    <a href="/index">其他待定</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!--header结束-->
+
+    <!--content开始-->
+    <div class="data_content">
+        <div class="data_time">
+            <img src="/static/images3/data_time.png" alt="" class="fl">
+            <input type="text" value="" id="demo-1" style="background: #04425f;width: 80px;" placeholder="选择日期">
+        </div>
+
+        <div class="data_main">
+            <div class="main_left fl">
+                <div class="left_1">
+                    <div class="main_title">
+                        <img src="/static/images3/title_1.png" alt="">
+                        类型统计
+                    </div>
+                    <div id="chart_1" class="chart"
+                        style="width: 100%; height: 280px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;"
+                        _echarts_instance_="ec_1594606532356">
+                        <div
+                            style="position: relative; overflow: hidden; width: 317px; height: 280px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+                            <canvas data-zr-dom-id="zr_0" width="317" height="280"
+                                style="position: absolute; left: 0px; top: 0px; width: 317px; height: 280px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="left_2">
+                    <div class="main_title">
+                        <img src="/static/images3/title_2.png" alt="">
+                        状态统计
+                    </div>
+                    <div id="chart_2" class="chart"
+                        style="width: 100%; height: 280px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;"
+                        _echarts_instance_="ec_1594606532357">
+                        <div
+                            style="position: relative; overflow: hidden; width: 317px; height: 280px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+                            <canvas data-zr-dom-id="zr_0" width="317" height="280"
+                                style="position: absolute; left: 0px; top: 0px; width: 317px; height: 280px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_center fl">
+                <div class="center_text">
+                    <div class="main_title">
+                        <img src="/static/images3/title_3.png" alt="">
+                        分布地图
+                    </div>
+                    <div id="chart4"
+                        style="width: 100%; height: 666px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;"
+                        _echarts_instance_="ec_1594029582595">
+                        <div
+                            style="position: relative; overflow: hidden; width: 541px; height: 432px; padding: 0px; margin: 0px; border-width: 0px;">
+                            <canvas data-zr-dom-id="zr_0" width="541" height="432"
+                                style="position: absolute; left: 0px; top: 0px; width: 541px; height: 432px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas><canvas
+                                data-zr-dom-id="zr_2" width="541" height="432"
+                                style="position: absolute; left: 0px; top: 0px; width: 541px; height: 432px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_right fr">
+                <div class="right_1">
+                    <div class="main_title">
+                        <img src="/static/images3/title_4.png" alt="">
+                        人员流动
+                    </div>
+                    <div class="choice">
+                        <label for="">类型：</label>
+                        <select name="" id="">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                        </select>
+                    </div>
+                    <div id="chart_3" class="echart"
+                        style="width: 100%; height: 280px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;"
+                        _echarts_instance_="ec_1594606532358">
+                        <div
+                            style="position: relative; overflow: hidden; width: 317px; height: 280px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+                            <canvas data-zr-dom-id="zr_0" width="317" height="280"
+                                style="position: absolute; left: 0px; top: 0px; width: 317px; height: 280px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+                        </div>
+                        <div
+                            style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px/21px &quot;Microsoft YaHei&quot;; padding: 5px; left: 68px; top: 119px;">
+                            0<br><span
+                                style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#ffff43;"></span>120
+                        </div>
+                    </div>
+                </div>
+                <div class="right_2">
+                    <div class="main_title">
+                        <img src="/static/images3/title_5.png" alt="">
+                        统计信息
+                    </div>
+                    <div id="chart_4" class="echart fl"
+                        style="width: 80%; height: 230px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;"
+                        _echarts_instance_="ec_1594606532359">
+                        <div
+                            style="position: relative; overflow: hidden; width: 253px; height: 230px; padding: 0px; margin: 0px; border-width: 0px;">
+                            <canvas data-zr-dom-id="zr_0" width="253" height="230"
+                                style="position: absolute; left: 0px; top: 0px; width: 253px; height: 230px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="fr chart_text">
+                        <p>同比</p>
+                        <p><img src="/static/images3/down.png" alt="">2%</p>
+                        <p><img src="/static/images3/up.png" alt="">4%</p>
+                        <p><img src="/static/images3/down.png" alt="">5%</p>
+                        <p><img src="/static/images3/down.png" alt="">3%</p>
+                    </div>
+                    <div style="width: 80%;" class="text_sum">
+                        <div class="fl" style="width:30%">332</div>
+                        <div class="fl" style="width:40%">统计</div>
+                        <div class="fr" style="width:30%">505</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--content结束-->
+
+
+    <!--注销模态框  开始-->
+    <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">注销</h4>
+                </div>
+                <div class="modal-body">
+                    <p>确认退出该系统吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--注销模态框  结束-->
+    <style>
+        .btnbox {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .btnbox a {
+            margin: 0 3px;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 18px;
+            padding: 8px 25px;
+            text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s;
+        }
+
+        .btnbox .btn1 {
+            background: linear-gradient(60deg, #26c6da, #00acc1);
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14), 0 7px 10px -5px rgba(0, 188, 212, .4);
+        }
+
+        .btnbox .btn2 {
+            background: linear-gradient(60deg, #66bb6a, #43a047);
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14), 0 7px 10px -5px rgba(76, 175, 80, .4);
+        }
+
+        .btnbox a:hover {
+            background: #47c8ff
+        }
+    </style>
+    <!---end-->
+
+
+    <script src="/static/images3/jquery-2.2.1.min.js"></script>
+    <script src="/static/images3/bootstrap.min.js"></script>
+    <script src="/static/images3/common.js"></script>
+    <script src="/static/images3/echarts.min.js"></script>
+    <script src="/static/images3/echart_map_all.js"></script>
+    <script src="/static/images3/china.js"></script>
+    <script src="/static/images3/foundation-datepicker.js"></script>
+    <script src="/static/images3/foundation-datepicker.zh-CN.js"></script>
+    <script>
+        $('#demo-1').fdatepicker();
+
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        var checkin = $('#dpd1').fdatepicker({
+            onRender: function (date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.update(newDate);
+            }
+            checkin.hide();
+            $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').fdatepicker({
+            onRender: function (date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            checkout.hide();
+        }).data('datepicker');
+    </script>
+    <div class="datepicker datepicker-dropdown dropdown-menu" style="display: none; top: 134px; left: 65px;">
+        <div class="datepicker-minutes" style="display: none;">
+            <table class=" table-condensed">
+                <thead>
+                    <tr>
+                        <th class="prev" style="visibility: visible;"><i class="fa fa-chevron-left fi-arrow-left"></i>
+                        </th>
+                        <th colspan="5" class="date-switch">13 七月 2020</th>
+                        <th class="next" style="visibility: visible;"><i class="fa fa-chevron-right fi-arrow-right"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7"><span class="minute active">0:00</span><span class="minute">0:05</span><span
+                                class="minute">0:10</span><span class="minute">0:15</span><span
+                                class="minute">0:20</span><span class="minute">0:25</span><span
+                                class="minute">0:30</span><span class="minute">0:35</span><span
+                                class="minute">0:40</span><span class="minute">0:45</span><span
+                                class="minute">0:50</span><span class="minute">0:55</span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="7" class="today" style="display: none;">今天</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="datepicker-hours" style="display: none;">
+            <table class=" table-condensed">
+                <thead>
+                    <tr>
+                        <th class="prev" style="visibility: visible;"><i class="fa fa-chevron-left fi-arrow-left"></i>
+                        </th>
+                        <th colspan="5" class="date-switch">13 七月 2020</th>
+                        <th class="next" style="visibility: visible;"><i class="fa fa-chevron-right fi-arrow-right"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7"><span class="hour active">0:00</span><span class="hour">1:00</span><span
+                                class="hour">2:00</span><span class="hour">3:00</span><span
+                                class="hour">4:00</span><span class="hour">5:00</span><span
+                                class="hour">6:00</span><span class="hour">7:00</span><span
+                                class="hour">8:00</span><span class="hour">9:00</span><span
+                                class="hour">10:00</span><span class="hour">11:00</span><span
+                                class="hour">12:00</span><span class="hour">13:00</span><span
+                                class="hour">14:00</span><span class="hour">15:00</span><span
+                                class="hour">16:00</span><span class="hour">17:00</span><span
+                                class="hour">18:00</span><span class="hour">19:00</span><span
+                                class="hour">20:00</span><span class="hour">21:00</span><span
+                                class="hour">22:00</span><span class="hour">23:00</span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="7" class="today" style="display: none;">今天</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="datepicker-days" style="display: block;">
+            <table class=" table-condensed">
+                <thead>
+                    <tr>
+                        <th class="prev" style="visibility: visible;"><i class="fa fa-chevron-left fi-arrow-left"></i>
+                        </th>
+                        <th colspan="5" class="date-switch">七月 2020</th>
+                        <th class="next" style="visibility: visible;"><i class="fa fa-chevron-right fi-arrow-right"></i>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="dow">日</th>
+                        <th class="dow">一</th>
+                        <th class="dow">二</th>
+                        <th class="dow">三</th>
+                        <th class="dow">四</th>
+                        <th class="dow">五</th>
+                        <th class="dow">六</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day   old">28</td>
+                        <td class="day   old">29</td>
+                        <td class="day   old">30</td>
+                        <td class="day  ">1</td>
+                        <td class="day  ">2</td>
+                        <td class="day  ">3</td>
+                        <td class="day  ">4</td>
+                    </tr>
+                    <tr>
+                        <td class="day  ">5</td>
+                        <td class="day  ">6</td>
+                        <td class="day  ">7</td>
+                        <td class="day  ">8</td>
+                        <td class="day  ">9</td>
+                        <td class="day  ">10</td>
+                        <td class="day  ">11</td>
+                    </tr>
+                    <tr>
+                        <td class="day  ">12</td>
+                        <td class="day   active">13</td>
+                        <td class="day  ">14</td>
+                        <td class="day  ">15</td>
+                        <td class="day  ">16</td>
+                        <td class="day  ">17</td>
+                        <td class="day  ">18</td>
+                    </tr>
+                    <tr>
+                        <td class="day  ">19</td>
+                        <td class="day  ">20</td>
+                        <td class="day  ">21</td>
+                        <td class="day  ">22</td>
+                        <td class="day  ">23</td>
+                        <td class="day  ">24</td>
+                        <td class="day  ">25</td>
+                    </tr>
+                    <tr>
+                        <td class="day  ">26</td>
+                        <td class="day  ">27</td>
+                        <td class="day  ">28</td>
+                        <td class="day  ">29</td>
+                        <td class="day  ">30</td>
+                        <td class="day  ">31</td>
+                        <td class="day   new">1</td>
+                    </tr>
+                    <tr>
+                        <td class="day   new">2</td>
+                        <td class="day   new">3</td>
+                        <td class="day   new">4</td>
+                        <td class="day   new">5</td>
+                        <td class="day   new">6</td>
+                        <td class="day   new">7</td>
+                        <td class="day   new">8</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="7" class="today" style="display: none;">今天</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="datepicker-months" style="display: none;">
+            <table class="table-condensed">
+                <thead>
+                    <tr>
+                        <th class="prev" style="visibility: visible;"><i class="fa fa-chevron-left fi-arrow-left"></i>
+                        </th>
+                        <th colspan="5" class="date-switch">2020</th>
+                        <th class="next" style="visibility: visible;"><i class="fa fa-chevron-right fi-arrow-right"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7"><span class="month">一</span><span class="month">二</span><span
+                                class="month">三</span><span class="month">四</span><span class="month">五</span><span
+                                class="month">六</span><span class="month active">七</span><span
+                                class="month">八</span><span class="month">九</span><span class="month">十</span><span
+                                class="month">十一</span><span class="month">十二</span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="7" class="today" style="display: none;">今天</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="datepicker-years" style="display: none;">
+            <table class="table-condensed">
+                <thead>
+                    <tr>
+                        <th class="prev" style="visibility: visible;"><i class="fa fa-chevron-left fi-arrow-left"></i>
+                        </th>
+                        <th colspan="5" class="date-switch">2020-2029</th>
+                        <th class="next" style="visibility: visible;"><i class="fa fa-chevron-right fi-arrow-right"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7"><span class="year old">2019</span><span class="year active">2020</span><span
+                                class="year">2021</span><span class="year">2022</span><span
+                                class="year">2023</span><span class="year">2024</span><span
+                                class="year">2025</span><span class="year">2026</span><span
+                                class="year">2027</span><span class="year">2028</span><span
+                                class="year">2029</span><span class="year old">2030</span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="7" class="today" style="display: none;">今天</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div><a class="button datepicker-close tiny alert right" style="width: auto; display: none;"><i
+                class="fa fa-remove fa-times fi-x"></i></a>
+    </div>
+</body>
+
+</html>

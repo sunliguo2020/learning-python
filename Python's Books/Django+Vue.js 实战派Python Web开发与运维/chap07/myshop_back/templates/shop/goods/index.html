@@ -1,0 +1,157 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+ {% block ext_css %}
+<link rel="stylesheet" href="{% static 'dist/css/common.css'%}">
+ {% endblock %}
+
+ {% block content%}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">
+                            商品模块                    <small>列表</small>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--内容开始-->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 search-collapse">
+                    <form id="search_form">
+                        <div class="select-list">
+                            <ul>
+                                <li>
+                                    <label>分类： </label>
+                                    <select id="cate_id">
+                                        <option selected value=''>请选择...</option>
+                                        {% for key,value in cates.items %}
+                                            <option value={{key}}>{{ value|safe}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </li>
+                                <li>
+                                    <label>商品名称： </label>
+
+                                    <input type="text" id="goodname" name="goodname" value="" />
+                                </li>
+                                <li>
+                                    <label>状态： </label>
+                                    <select id="status" name="status">
+                                        <option value="">所有</option>
+                                        <option value="0">正常</option>
+                                        <option value="1">下架</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary btn-rounded btn-sm" id="btn_search"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                    
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12 select-table table-striped">
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <a class="btn btn-success" href="{% url 'good_add' %}">
+                            <i class="fa fa-plus"></i> 新增
+                        </a>
+                    </div>
+
+                    <table id="bootstrap-table"></table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script src="{% static 'plugins/bootstrap-table/bootstrap-table.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-table/bootstrap-table-zh-CN.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-table/bootstrap-table.min.css' %}"></script>
+
+<script>
+    InitMainTable();
+    function InitMainTable() {
+        $('#bootstrap-table').bootstrapTable({
+            url: '/goods/ajax_goods/',         //请求后台的URL（*）
+            method: 'get',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParams: function (params){
+                var temp={
+                    page:(params.offset/params.limit)+1,//当前页数
+                    cate_id:$("#cate_id").val(),
+                    goodname:$("#goodname").val(),
+                    status:$("#status").val()
+                };
+                return temp;
+            },//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            uniqueId: "id",              //每一行的唯一标识，一般为主键列
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'name',
+                title: '商品名称'
+            }, {
+                field: 'market_price',
+                title: '市场价'
+            }, {
+                field: 'price',
+                title: '销售价'
+            }, {
+                field: 'category_id',
+                title: '商品分类'
+            },
+            {
+                field: 'click_num',
+                title: '点击量'
+            }
+            , {
+                field: 'amount',
+                title: '销售量'
+            },
+            {
+                title : '操作',
+                field : 'id',
+                formatter : operation,//进行操作
+            }
+            ]
+        });
+    };
+
+
+//删除、编辑操作
+function operation(value, row, index) {
+	var htm = "<button class='btn btn-primary btn-edit'>修改</button>  <button class='btn btn-danger btn-del'>删除</button>"
+	return htm;
+}
+
+//查询按钮事件
+$('#btn_search').click(function() {
+	$('#bootstrap-table').bootstrapTable('refresh', {
+		url : '/goods/ajax_goods/'
+	});
+})
+
+</script>
+{% endblock %}
