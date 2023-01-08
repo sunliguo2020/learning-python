@@ -3,10 +3,20 @@
 @author: sunliguo
 @contact: QQ376440229
 @Created on: 2023-01-07 7:59
+单链表的实现与基本操作
+
 """
 
 
 class Node:
+    """
+    节点类
+    两个属性：
+        数据域data
+        指针域next
+    一个方法：
+        has_value
+    """
     def __init__(self, data):
         self.data = data
         self.next = None
