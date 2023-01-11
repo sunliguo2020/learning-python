@@ -5,6 +5,7 @@
 
 import scrapy
 
+
 # 爬虫获取到的数据需要组装成Item对象
 class MovieItem(scrapy.Item):
     # define the fields for your item here like:
