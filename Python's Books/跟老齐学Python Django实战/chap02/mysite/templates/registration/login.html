@@ -21,7 +21,14 @@
                 </label>
                 <div class="col-md-6 text-left">{{ form.password }}</div>
             </div>
-
+            <div>
+                {%  if form.erros %}
+                <p class="errornote">
+                    {{ form.errors }}
+                </p>
+                {% endif %}
+                {{ form.errors }}
+            </div>
             <input type="submit" value="Login">
         </form>
 
