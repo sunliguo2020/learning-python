@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os.path
 from pathlib import Path
 
-import django.contrib.staticfiles.finders
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +24,7 @@ SECRET_KEY = 'django-insecure-5z8p6=ml9aam414lw+^u=@g1$o0m3gz8c(npa4rd7415=j7_&t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -57,7 +55,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -114,11 +112,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-django.contrib.staticfiles.finders.FileSystemFinder
+# django.contrib.staticfiles.finders.FileSystemFinder
 STATIC_URL = '/static/'
-STATIFILES_DIRS = (os.path.join(BASE_DIR, 'static'))
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 登录成功后跳转的地址
+LOGIN_REDIRECT_URL = '/blog'
