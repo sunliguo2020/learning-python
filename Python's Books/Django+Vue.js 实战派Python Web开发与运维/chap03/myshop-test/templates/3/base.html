@@ -1,0 +1,29 @@
+<html>
+<head>
+    {% block title %}
+    <title>这是母版页</title>
+    {% endblock %}
+</head>
+<body>
+<table border="1" style="width:700px;">
+    <tr>
+        <td colspan="2" ,style="height:30px;text-align:center;">这是TOP区域，一般用于导航</td>
+
+    </tr>
+    <tr style="vertical-align: middle;height: 300px;">
+        <td style="width: 200px;">这是左边的菜单</td>
+        <td style="width:500px">
+            {% block content %}
+            这个区域随着内容页的变化而变化
+            {% endblock %}
+
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="height:30px;text-align: center;">这是版权区域</td>
+
+    </tr>
+</table>
+</body>
+</html>

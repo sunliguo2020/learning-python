@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default col-md-6 col-md-offset-3">
+            <div class="panel-heading">
+                <h3 class="panel-title">新建用户</h3>
+            </div>
+            <div class="panel-body">
+                <form method="post" class="panel-body " novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                        <span style="color: red">{{ field.errors.0 }}</span>
+                        <!--<input type="text" class="form-control" placeholder="姓名" name="name"/>
+                    </div>-->
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js' %}"></script>
+    <script>
+        $("#id_create_time").datepicker({
+            language: 'zh-CN', //语言
+            autoclose: true, //选择后自动关闭
+            clearBtn: true,//清除按钮
+            format: "yyyy-mm-dd"//日期格式
+        });
+    </script>
+{% endblock %}

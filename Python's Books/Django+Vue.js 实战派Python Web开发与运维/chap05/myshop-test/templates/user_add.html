@@ -1,0 +1,16 @@
+{{ form.as_p }}
+{{ form.as_ui }}
+{{ form.as_table }}
+
+<br>
+<form action="" method="post" novalidate>
+{% csrf_token %}
+{%  for field in form %}
+
+    <label>{{ field.label }}</label>:
+    {{ field }}
+    <span >{{ field.errors.0 }}</span>
+{% endfor %}
+{{  form.errors }}
+<button type="submit" value="提交">提交</button>
+</form>

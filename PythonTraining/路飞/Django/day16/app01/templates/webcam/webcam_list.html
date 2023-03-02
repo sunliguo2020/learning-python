@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <div>
+                <form method="post" enctype="multipart/form-data" action="/webcam/upload/">
+                    {% csrf_token %}
+                    {{ form }}
+                    <span style="color: red">{{ form.errors.0 }}</span>
+                    <input type="submit" value="上传">
+                </form>
+            </div>
+            <div style="float:right;width: 200px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" name='q' class="form-control" placeholder="搜索" value="{{ search_data }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search " aria-hidden="true"> </span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="bs-example" data-example-id="panel-without-body-with-table">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">监控截图列表</span>
+
+                </div>
+
+                <div>
+                    <!-- Table -->
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>IP地址</th>
+                            <th>截图</th>
+                            <th>截图时间</th>
+                            <th>上传时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in queryset %}
+                            <tr>
+                            <th scope="row">{{ item.id }}</th>
+                            <td title="{{ item.file_name }}">{{ item.ip_addr }}</td>
+                            <td>
+                                <a href="/media/{{ item.img }}">
+                                    <img style="width: 250px;" src="/media/{{ item.img }}">
+                                </a>
+                            </td>
+                            <td>{{ item.capture_datetime|date:"Y-m-d H:m:s" }}</td>
+                            <td>{{ item.create_datetime|date:"Y-m-d H:m:s" }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="">编辑</a>
+                                <a class="btn btn-danger btn-xs"
+                                   href="/webcam/{{ item.id }}/delete/?{{ query_dict }}">删除</a>
+                            </td>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="clearfix">
+                    <ul class="pagination">
+                        {{ page_string }}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+{% endblock %}

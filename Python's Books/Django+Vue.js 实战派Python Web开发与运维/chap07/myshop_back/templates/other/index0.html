@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 71.1458px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3546a8cb72e8fb1d148fddb77edaf17d"></script>
+    <script type="text/javascript" src="/static/images/Heatmap_min.js"></script>
+    <script type="text/javascript" src="/static/images/rem.js"></script>
+    <link rel="stylesheet" href="/static/images/style.css">
+    <title>人员流动大数据平台-首页</title>
+<link rel="stylesheet" href="/static/images/layer.css" id="layui_layer_skinlayercss" style=""><link type="text/css" rel="stylesheet" href="/static/images/laydate.css"><link type="text/css" rel="stylesheet" href="/static/images/laydate(1).css" id="LayDateSkin"></head>
+
+<body style="visibility: visible;">
+    <div class="container-flex" tabindex="0" hidefocus="true">
+        <div class="box-left">
+            <div class="left-top">
+                <div class="current-num">
+                    <div>当前流动人数</div>
+                    <p>123,456,789</p>
+                </div>
+            </div>
+            <div class="left-center">
+                <div class="title-box">
+                    <h6>流动人员占比</h6>
+                </div>
+                <div class="chart-box pie-chart">
+                    <div id="pie" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1594029582589"><div style="position: relative; overflow: hidden; width: 172px; height: 218px; padding: 0px; margin: 0px; border-width: 0px; cursor: pointer;"><canvas data-zr-dom-id="zr_0" width="172" height="218" style="position: absolute; left: 0px; top: 0px; width: 172px; height: 218px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px / 21px &quot;Microsoft YaHei&quot;; padding: 5px; left: 0px; top: 68px;"></div></div>
+                    <div>
+                        <div class="pie-data">
+
+                        <p><span><i class="legend" style="background:#0e94eb"></i></span>乌鲁木齐<span class="pie-number" style="color:#0e94eb">192581</span>30.87%</p><p><span><i class="legend" style="background:#c440ef"></i></span>喀什<span class="pie-number" style="color:#c440ef">215635</span>34.08%</p><p><span><i class="legend" style="background:#efb013"></i></span>阿克苏<span class="pie-number" style="color:#efb013">224585</span>35.49%</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="left-bottom">
+                <div class="title-box">
+                    <h6>新疆人员流动数据</h6>
+                    <img class="line-img" src="/static/images/line-blue.png" alt="">
+                    <button id="filBtn1"><img src="/static/images/select_icon.png" alt="">筛选</button>
+                </div>
+                <div class="chart-box">
+                    <div id="gdMap" class="gd-map" _echarts_instance_="ec_1594029582591" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 344px; height: 227px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="344" height="227" style="position: absolute; left: 0px; top: 0px; width: 344px; height: 227px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+                    <div id="gdMaps" class="gd-map" _echarts_instance_="ec_1594029582592" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 778px; height: 415px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="778" height="415" style="position: absolute; left: 0px; top: 0px; width: 778px; height: 415px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="box-center">
+            <div class="center-top">
+                <h1>人员流动大数据平台</h1>
+            </div>
+            <div class="center-center">
+                <div class="weather-box">
+                    <div class="data">
+                        <p class="time" id="time">18:00:29</p>
+                        <p id="date"><span>2020/7/6</span><span>pm</span><span>周1</span></p>
+                    </div>
+                </div>
+                <img src="/static/images/line_bg.png" alt="">
+                <div class="select-box">
+                    <ul id="barType">
+                        <li class="active" data-value="1">出疆</li>
+                        <li data-value="2" class="">入疆</li>
+                    </ul>
+                    <div data-type="2">
+                        <div class="select" tabindex="0" hidefocus="true">
+                            <div class="select-div">
+                                公司
+                            </div>
+                            <ul class="select-ul company">
+                                <li class="active" data-value="">条件1</li>
+                                <li data-value="1">1</li>
+                                <li data-value="2">2</li>
+                                <li data-value="2">3</li>
+                            </ul>
+                        </div>
+                        <div class="select" tabindex="0" hidefocus="true">
+                            <div class="select-div">
+                                默认
+                            </div>
+                            <ul class="select-ul">
+                                <li class="active" data-value="">条件2</li>
+                                <li data-value="0">1</li>
+                                <li data-value="1">2</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-bottom">
+                <div class="chart-box">
+                    <div id="chart4" style="width: 100%; height: 95%; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1594029582595"><div style="position: relative; overflow: hidden; width: 541px; height: 432px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="541" height="432" style="position: absolute; left: 0px; top: 0px; width: 541px; height: 432px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas><canvas data-zr-dom-id="zr_2" width="541" height="432" style="position: absolute; left: 0px; top: 0px; width: 541px; height: 432px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="box-right">
+            <div class="right-top">
+                <div class="title-box">
+                    <h6 id="barTitle">流动数据</h6>
+                    <img class="line-img" src="/static/images/line-blue.png" alt="">
+                    <button data-state="1" id="tabBtn1"><img src="/static/images/chart_icon.png" alt=""><span>图表</span></button>
+                </div>
+                <p class="unit"></p>
+                <div class="chart-box">
+                    <div id="chart3" style="width: 100%; height: 100%; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1594029582593"><div style="position: relative; overflow: hidden; width: 344px; height: 282px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="344" height="282" style="position: absolute; left: 0px; top: 0px; width: 344px; height: 282px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div></div></div>
+                </div>
+
+            </div>
+            <div class="right-center">
+                <div class="title-box">
+                    <p id="switchBtn"><span class="active" data-datatype="income">入疆</span><img class="line-img" src="/static/images/line-blue.png" alt=""><span data-datatype="expend">出疆</span></p>
+                    <img class="line-img" src="/static/images/line-blue.png" alt="">
+                    <button id="dateBtn1"><img src="/static/images/data_icon.png" alt="">日期</button>
+                </div>
+                <div class="data-box">
+                    <p class="data-number" id="totalProfit">123,456人</p>
+                    <div class="time-box" id="timeBox">
+                        <div class="time-div">
+                            <input class="time-input" type="text" value="" id="startTime">
+                            <img src="/static/images/selsct_time.png" alt="">
+                        </div>
+                        <div class="time-div end">
+                            <input class="time-input" type="text" value="" id="endTime">
+                            <img src="/static/images/selsct_time.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-bottom">
+                <div class="title-box">
+                    <button id="setBtn111"><img src="/static/images/settings_icon.png" alt="">待定</button>
+                </div>
+                <div class="data-box">
+                    <div class="settings-box">
+                        <p><img src="/static/images/teacher_icon.png" alt="">版权所有：<span id="name_a">数据中心</span><span id="date_a"></span></p>
+                        <p><img src="/static/images/people_iocn.png" alt="">版权所有：<span id="lea_a">数据中心</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="pop-up">
+            <span class="close-pop"></span>
+            <h2 class="title">占比</h2>
+            <div class="chart-box pie-chart">
+                <div id="pie1" _echarts_instance_="ec_1594029582590" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 369px; height: 394px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="369" height="394" style="position: absolute; left: 0px; top: 0px; width: 369px; height: 394px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+
+            </div>
+        </div>
+
+        <div class="pop-up">
+            <span class="close-pop"></span>
+            <h2 class="title">新疆流动数据 </h2>
+
+            <div class="chart-box pop-chart">
+                <div id="gdMaps" class="gd-map" _echarts_instance_="ec_1594029582592" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 778px; height: 415px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="778" height="415" style="position: absolute; left: 0px; top: 0px; width: 778px; height: 415px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+            </div>
+        </div>
+
+        <div class="pop-up">
+            <span class="close-pop"></span>
+            <div class="cont-div">
+                <div class="chart-box pop-charts">
+                    <div id="chart4s" style="width: 100%; height: 95%; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1594029582596"><div style="position: relative; overflow: hidden; width: 593px; height: 460px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="593" height="460" style="position: absolute; left: 0px; top: 0px; width: 593px; height: 460px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas><canvas data-zr-dom-id="zr_2" width="593" height="460" style="position: absolute; left: 0px; top: 0px; width: 593px; height: 460px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+                </div>
+            </div>
+            <div class="cont-div">
+                <h2 class="title" id="barTitles">派件数据</h2>
+                <button class="btn-class" data-state="1" id="tabBtns"><img src="/static/images/chart_icon.png" alt=""><span>图表</span></button>
+                <div class="chart-box pop-chart">
+                    <div id="chart3s" style="width: 100%; height: 90%; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1594029582594"><div style="position: relative; overflow: hidden; width: 791px; height: 420px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="791" height="420" style="position: absolute; left: 0px; top: 0px; width: 791px; height: 420px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+                </div>
+            </div>
+            <div class="cont-div">
+                <h2 class="title" id="titles"></h2>
+                <button class="btn-class" id="dateBtns1"><img src="/static/images/data_icon.png" alt="">日期</button>
+                <div class="data-box  pop-time">
+                    <div class="time-box" id="timeBoxs">
+                        <div class="time-div">
+                            <input class="time-input" type="text" value="" id="startTimes">
+                            <img src="/static/images/selsct_time.png" alt="">
+                        </div>
+                        <div class="time-div end">
+                            <input class="time-input" type="text" value="" id="endTimes">
+                            <img src="/static/images/selsct_time.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="pop-data-box" id="totalProfits">
+                    <p></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script type="text/javascript" src="/static/images/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/images/layer.min.js"></script>
+<script type="text/javascript" src="/static/images/laydate.js"></script>
+<script type="text/javascript" src="/static/images/echarts.min.js"></script>
+<script type="text/javascript" src="/static/images/china.js"></script>
+<script type="text/javascript" src="/static/images/xinjiang.js"></script>
+<script type="text/javascript" src="/static/images/base.js"></script>
+<script type="text/javascript" src="/static/images/hotmap.js"></script>
+<script type="text/javascript">
+    $('document').ready(function () {
+        $("body").css('visibility', 'visible');
+        var localData = [$('#teacher').val(), $('#start').val() + '/' + $('#end').val(), $('#leader').val()]
+        localStorage.setItem("data", localData);
+        $('#conBtn').on('click', function () {
+            localData = [$('#teacher').val(), $('#start').val() + '/' + $('#end').val(), $('#leader').val()]
+            if (typeof (Storage) !== "undefined") {
+                localStorage.setItem("data", localData);
+                var arr = localStorage.getItem("data").split(',');
+                $('#name_a').html(arr[0]);
+                $('#date_a').html(arr[1]);
+                $('#lea_a').html(arr[2]);
+            }
+        })
+        $('#fangda').on('click', function () {
+            if ($(this).siblings('ul').is(":hidden")) {
+                $(this).addClass('active').siblings('ul').show();
+            } else {
+                $(this).removeClass('active').siblings('ul').hide();
+            }
+        })
+
+        $('.modal-btn>li').on('click', function () {
+            var index = $(this).index();
+            if (index <= 2) {
+                $('.container').attr('style', 'visibility: visible').find('.pop-up').eq(index).attr('style', 'visibility: visible').siblings().attr('style', 'visibility: hidden');
+            } else if (index > 2 && index < 5) {
+                $('.container').attr('style', 'visibility: visible').find('.pop-up').eq(3).attr('style', 'visibility: visible').siblings().attr('style', 'visibility: hidden');
+                if (index != 3) {
+                    $('.pop-data .ranking-box').hide();
+                } else {
+                    $('.pop-data .ranking-box').show();
+                }
+                $('.cont-div').eq(index - 3).attr('style', 'visibility: visible').siblings('.cont-div').attr('style', 'visibility: hidden');
+            } else if (index == 5) {
+                $('.container').attr('style', 'visibility: visible').find('.pop-up').eq(3).attr('style', 'visibility: visible').siblings().attr('style', 'visibility: hidden');
+                $('.pop-data .ranking-box').hide();
+                if ($('#switchBtn').find('.active').data('datatype') == "income") {
+                    $('#titles').html('收入数据');
+                    $('#totalProfits').html('123,4565人');
+                    $('.cont-div').eq(2).attr('style', 'visibility: visible').siblings('.cont-div').attr('style', 'visibility: hidden');
+                } else if ($('#switchBtn').find('.active').data('datatype') == 'expend') {
+                    $('#titles').html('支出数据');
+                    $('#totalProfits').html('321114人');
+                    $('.cont-div').eq(2).attr('style', 'visibility: visible').siblings('div').attr('style', 'visibility: hidden');
+                }
+            }
+        })
+    })
+</script>
+	<style>
+.btnbox{position: fixed; bottom: 20px; width: 100%; text-align: center; z-index: 1000;}
+.btnbox a{ margin:0 3px;border-radius: 30px; color: #fff; font-size: 18px; padding:8px 25px; text-shadow: -1px -1px 0px rgba(0,0,0,0.2); transition:all 0.5s;}
+.btnbox .btn1{background: linear-gradient(60deg,#26c6da,#00acc1);box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(0,188,212,.4);}
+
+.btnbox .btn2{background: linear-gradient(60deg,#66bb6a,#43a047);box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(76,175,80,.4);
+}
+.btnbox a:hover{background: #47c8ff}
+	</style>
+
+</body></html>

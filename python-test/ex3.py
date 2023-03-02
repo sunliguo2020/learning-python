@@ -2,17 +2,17 @@
 
 """
 @author: sunliguo
-
 @contact: QQ376440229
-
 @Created on: 2020/3/8 13:04
 """
 
-a="sdfsadf"
+a = "sdfsadf"
 print(id(a))
+
+
 def fu1():
-  #  print(id(a))
-    a="test a"
+    #  print(id(a))
+    a = "test a"
     print(a)
     print(id(a))
 

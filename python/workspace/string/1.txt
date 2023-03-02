@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GB2312"?>
+<root><data><Users><entity>
+      <PROD_INST_ID>3609020520231318</PROD_INST_ID>
+      <LATN>0536</LATN>
+      <BUSI_NBR>15653613200</BUSI_NBR>
+      <USER_NAME>▒▒▒▒ϼ</USER_NAME>
+      <CUST_NAME>▒▒▒▒ϼ</CUST_NAME>
+      <CUST_ID>2613062277330925</CUST_ID>
+      <INSTALL_ADDR/>
+      <CNTCT_NBR/>
+      <PROD>BANDVIP</PROD>
+      <BRAND>BD00</BRAND>
+      <COMBO>53611000</COMBO>
+      <CITY_TYPE>5</CITY_TYPE>
+      <CUST_TYPE>5</CUST_TYPE>
+      <STRATE_GROUP>0</STRATE_GROUP>
+      <VIP_LEVEL>09</VIP_LEVEL>
+      <CUST_LEVEL>09</CUST_LEVEL>
+      <USER_STATE>300</USER_STATE>
+      <ORG_ID>172062</ORG_ID>
+      <USER_BRANCH/>
+      <CUST_NATURE/>
+      <FEE_STATE>300</FEE_STATE>
+      <CNTCT_NAME/>
+      <ACCOUNT/>
+      <CERTIFICATES>1</CERTIFICATES>
+      <CERTIFICATES_NBR>370104197912223327</CERTIFICATES_NBR>
+      <SPEED/>
+   <PROD_CLASS>BANDVIP</PROD_CLASS></entity></Users><cust_flag>0</cust_flag><custType>1</custType><retDesc/><retlatnid>106</retlatnid></data><return><code>1</code></return><retCode>1</retCode></root>

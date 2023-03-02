@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>会员信息新增</title>
+  <link rel="stylesheet" href="{% static  '/dist/css/adminlte.min.css'%}">
+</head>
+<body>
+<div class="wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <ol class="breadcrumb float-sm-left">
+              <li class="breadcrumb-item"><a href="#">商品分类</a></li>
+              <li class="breadcrumb-item active">商品分类增加</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+        <form novalidate enctype="multipart/form-data" action="" method="post"  class="form-horizontal"  >
+    {% csrf_token  %}
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">商品分类添加</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="{{form_obj.name.id_for_label}}">{{form_obj.name.label}}</label>
+                {{form_obj.name}}
+              </div>
+              <div class="form-group">
+                <label for="{{form_obj.parent_id.id_for_label}}">{{form_obj.parent_id.label}}</label>
+                {{form_obj.parent_id}}
+                <!--
+                <select id="parent_id" class="form-control custom-select">
+                  <option selected disabled>请选择...</option>
+                  {% for key,value in cates.items %}
+                      <option value={{key}}>{{ value|safe}}</option>
+                  {% endfor %}
+                </select>
+                -->
+              </div>
+              <div class="form-group">
+                <label for="{{form_obj.sort.id_for_label}}">{{form_obj.sort.label}}</label>
+                {{form_obj.sort}}
+              </div>
+              <div class="form-group">
+                    <label for="{{form_obj.logo.id_for_label}}">{{form_obj.logo.label}}</label>
+                    <div class="custom-file">
+                     {{form_obj.logo}}
+                      <label class="custom-file-label" for="customFile">选择图片
+                      </label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                <a href="#" class="btn btn-secondary">取消</a>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  {{ info }}
+                </div>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </section>
+</div>
+</body>
+</html>

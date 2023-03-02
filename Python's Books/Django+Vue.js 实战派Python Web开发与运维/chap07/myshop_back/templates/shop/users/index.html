@@ -1,0 +1,209 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+ {% block ext_css %}
+<link rel="stylesheet" href="{% static 'dist/css/common.css'%}">
+ {% endblock %}
+
+ {% block content%}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="m-0">
+                            用户模块                    <small>列表</small>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--内容开始-->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 search-collapse">
+                    <form id="search_form" method="get">
+                        {% csrf_token %}
+                        <div class="select-list">
+                            <ul>
+                                <li>
+                                    <label>分类： </label>
+                                    <select id="search_level" name="level">
+                                        <option value="">所有</option>
+                                        <option value="1" {% if level == '1' %} selected="selected" {% endif %}>寂寞卡会员</option>
+                                        <option value="2" {% if level == '2' %} selected="selected" {% endif %}>钻石卡会员</option>
+                                        <option value="3" {% if level == '3' %} selected="selected" {% endif %}>金卡会员</option>
+                                        <option value="4" {% if level == '4' %} selected="selected" {% endif %}>银卡会员</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label>名称： </label>
+                                    <input type="text" id="search_truename" name="truename" value="{{truename}}" />
+                                </li>
+                                <li>
+                                    <label>状态： </label>
+                                    <select id="search_status" name="status">
+                                        <option value="">所有</option>
+                                        <option value="0" {% if status == '0' %} selected="selected" {% endif %}>正常</option>
+                                        <option value="1" {% if status == '1' %} selected="selected" {% endif %}>异常</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <input type="submit" value="查询" class="btn" />
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12 select-table table-striped">
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <a class="btn btn-success" href="/member/add/">
+                            <i class="fa fa-plus"></i> 新增
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="col-sm-12 main">
+        <br>
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>账号</th>
+                            <th>真实姓名</th>
+                            <th>性别</th>
+                            <th>生日</th>
+                            <th>email</th>
+                            <th>手机</th>
+                            <th>添加时间</th>
+                            <th>用户头像</th>
+                            <th>功能操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for per in users %}
+                        <tr>
+                            <td>{{ per.username }}</td>
+                            <td>{{ per.truename }}</td>
+                            <td>{{ per.sex }}</td>
+                            <td>{{ per.birthday }}</td>
+                            <td>{{ per.email }}</td>
+                            <td>{{ per.mobile }}</td>
+                            <td>{{ per.add_time }}</td>
+                            <td width="5%"><img src="/media/{{ per.user_img }}" width="100px" height="100px" /></td>
+                            <td width="20%">
+                                <a class="btn btn-primary single" href="#">
+                                    <i class="fa fa-edit"></i> 修改
+                                </a>
+                                <a class="btn btn-danger" href="javascript:void(0)" onclick="showDeleteModal(this)">删除</a>
+                                <input type="hidden" id="id_hidden" value={{ per.id }}>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7">无相关记录！</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="Contacts Page Navigation">
+        <ul class="pagination justify-content-center m-2">
+            {% if users.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="/users/index/?page={{ users.previous_page_number }}&level={{level}}&username={{username}}&status={{status}}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for pg in users.paginator.page_range %}
+            {% if users.number == pg %}
+            <li class="page-item active">
+                <a class="page-link" href="">{{ pg }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="/users/index/?page={{pg}}&level={{level}}&username={{username}}&status={{status}}">{{ pg }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+
+            {% if users.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="/users/index/?page={{ users.next_page_number }}&level={{level}}&username={{username}}&status={{status}}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+<!-- 信息删除确认 -->
+<div class="modal fade" id="delModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="float:left">提示信息</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <p id="info">您确认要删除当前数据吗？</p>
+                <input type="hidden" id="del_id">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a id="delButton" class="btn btn-success" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // 打开模态框并设置需要删除的ID
+    function showDeleteModal(obj) {
+        var $tds = $(obj).parent().children();// 获取到所有列
+        var delete_id = $($tds[2]).val();// 获取隐藏的ID
+        console.log(delete_id)
+        $("#del_id").val(delete_id);// 给模态框中需要删除的ID赋值
+        $("#delModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    };
+
+    $(function () {
+        // 模态框的确定按钮的点击事件
+        $("#delButton").click(function () {
+            var id = $("#del_id").val();
+            // ajax异步删除
+            $.ajax({
+                url: "/users/del/" + id + "/",
+                type: "GET",
+                success: function (result) {
+                    if (result.code == "200") {
+                        $("#delModal").modal("hide");
+                        window.location.href = "/users/index/";
+                    }
+                }
+            })
+        });
+    });
+</script>
+{% endblock %}

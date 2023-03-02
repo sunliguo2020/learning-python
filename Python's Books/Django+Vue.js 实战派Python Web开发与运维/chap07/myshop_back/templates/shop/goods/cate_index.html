@@ -1,0 +1,165 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+ {% block ext_css %}
+<link rel="stylesheet" href="{% static 'dist/css/common.css'%}">
+ {% endblock %}
+
+ {% block content%}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="m-0">
+                            商品分类模块                    <small>列表</small>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--内容开始-->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 search-collapse">
+                    <form id="search_form">
+                        <div class="select-list">
+                            <ul>
+                                <li>
+                                    <label>名称： </label>
+                                    <input type="text" id="search_title" name="title" value="" />
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                    <input class="hide" type="submit" name="btnSave" value="提交" onclick="$.table.search();return false;" />
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12 select-table table-striped">
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <a class="btn btn-success" href="{% url 'cate_add' %}" target="_blank">
+                            <i class="fa fa-plus"></i> 新增
+                        </a>
+                        <a class="btn btn-primary single disabled" onclick="$.operate.edit()">
+                            <i class="fa fa-edit"></i> 修改
+                        </a>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
+                            <i class="fa fa-times"></i> 删除
+                        </a>
+                        <a class="btn btn-warning" onclick="$.table.export()">
+                            <i class="fa fa-download"></i> 导出
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="col-sm-12 main">
+        <br>
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>分类名称</th>
+                            <th>父级分类</th>
+                            <th>Logo</th>
+                            <th>排序</th>
+                            <th>创建时间</th>
+                            <th>修改时间</th>
+                            <th>功能操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for per in cates %}
+                        <tr>
+                            <td>{{ per.name }}</td>
+                            <td>{{ per.parent_id }}</td>
+                            <td width="5%"><img src="/media/{{ per.logo }}" width="100px" height="100px"/></td>
+                            <td>{{ per.sort }}</td>
+                            <td>{{ per.create_time }}</td>
+                            <td>{{ per.update_time }}</td>
+                            <td width="20%">
+                            <a class="btn btn-primary single disabled" onclick="$.operate.edit()">
+                            <i class="fa fa-edit"></i> 修改
+                            </a>
+                            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
+                                <i class="fa fa-times"></i> 删除
+                            </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7">无相关记录！</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="Contacts Page Navigation">
+        <ul class="pagination justify-content-center m-2">
+            {% if cates.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ cates.previous_page_number }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for pg in cates.paginator.page_range %}
+            {% if cates.number == pg %}
+            <li class="page-item active">
+                <a class="page-link" href="?page={{pg}}">{{ pg }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{pg}}">{{ pg }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+
+            {% if cates.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ cates.next_page_number }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+	<!-- 信息删除确认 -->
+<div class="modal fade" id="delcfmModel">
+		<div class="modal-dialog">
+			<div class="modal-content message_align">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">提示信息</h4>
+				</div>
+				<div class="modal-body">
+					<p>您确认要删除吗？</p>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="url" />
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<a onclick="urlSubmit()" class="btn btn-success"
+						data-dismiss="modal">确定</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
