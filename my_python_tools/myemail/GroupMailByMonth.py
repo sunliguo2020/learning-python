@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     for root, dirs, files in os.walk(root_dir):
         for filename in files:
-            # 文件全路径
+            # 源mail文件路径
             mail_file_path = os.path.join(root, filename)
             print(mail_file_path)
             # 返回message对象
@@ -63,10 +63,11 @@ if __name__ == "__main__":
             # mail_date=datetime.strptime(datestring[5:24],'%d %b %Y %H:%M:%S')
             mail_date = datetime.strptime(' '.join((datestring.split(',')[1]).lstrip().split()[0:3]), '%d %b %Y')
             mail_month = str(mail_date)[:7]
-            print(mail_month)
+            print(f"这个文件{filename},年月份为：{mail_month}")
 
 
             new_email_moth_dir = os.path.join(new_email_dir,mail_month)
+
             if not os.path.exists(new_email_moth_dir):
                 os.mkdir(new_email_moth_dir)
             else:
@@ -75,11 +76,4 @@ if __name__ == "__main__":
                     shutil.move(mail_file_path, new_email_moth_dir)
                 except Exception as e:
                     print(f"移动过程中出错,{e}")
-
-            if not os.path.exists("e:\\" + mail_month):
-                os.mkdir("e:\\" + mail_month)
-            else:
-                print("e:\\" + mail_month)
-
-                shutil.move(mail_file_path, "e:\\" + mail_month)
 
