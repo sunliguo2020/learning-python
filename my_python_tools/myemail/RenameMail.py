@@ -9,6 +9,7 @@
 
 import os
 import logging
+import re
 
 from GetFileMd5 import GetFileMd5
 
@@ -20,18 +21,18 @@ logging.basicConfig(filename='rename_eml.log', level=logging.DEBUG,
 
 def walk_dir(directory):
     """
-    遍历文件夹，返回各个文件的路径
-    :param directory:
+    :param directory: 遍历文件夹，返回各个文件的路径
     :return:
     """
 
     if not os.path.isdir(directory):
         print(f"{directory}不是一个目录")
         return -1
-    for root, dirs, files in os.walk(directory):
+
+    for root, dirs, files in os.walk(directory, topdown=False):
         for file in files:
-            file_path = os.path.join(root, file)
-            yield file_path
+            # 文件的全路径
+            yield os.path.join(root, file)
 
 
 def rename_eml_file_name(mail_file_path=''):
@@ -41,6 +42,13 @@ def rename_eml_file_name(mail_file_path=''):
     @return:
     """
     if os.path.isfile(mail_file_path) and mail_file_path.endswith('.eml'):
+
+        # 判断一下是不是已经修改了文件名
+        file_name = os.path.basename(mail_file_path).replace('.eml', "")
+        if re.findall(r"([a-fA-F\d]{32})", file_name) and len(file_name) == 32:
+            print(f"{mail_file_path}可能已经修改过文件名！")
+            return
+
         # 获取mail文件的md5值
         md5sum = GetFileMd5(mail_file_path)
         # 文件md5获取失败，则继续
