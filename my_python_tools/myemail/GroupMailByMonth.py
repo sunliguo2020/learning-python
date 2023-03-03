@@ -36,7 +36,7 @@ def get_date(msg):
 
 if __name__ == "__main__":
 
-    root_dir = r'F:\eml'
+    root_dir = r'F:\email'
     new_email_dir = r'F:\eml_new'
 
     for root, dirs, files in os.walk(root_dir, topdown=False):
@@ -75,7 +75,13 @@ if __name__ == "__main__":
                 os.makedirs(new_email_moth_day_dir)
 
             print(f"新目录为：{new_email_moth_day_dir}")
-            try:
-                shutil.move(mail_file_path, new_email_moth_day_dir)
-            except Exception as e:
-                print(f"移动过程中出错,{e}")
+
+            # 文件已经存在则删除
+            if os.path.isfile(os.path.join(new_email_moth_day_dir,filename)):
+                print(f'{filename}已经存在!准备删除！')
+                os.remove(mail_file_path)
+            else:
+                try:
+                    shutil.move(mail_file_path, new_email_moth_day_dir)
+                except Exception as e:
+                    print(f"移动过程中出错,{e}")
