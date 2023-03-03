@@ -36,10 +36,10 @@ def get_date(msg):
 
 if __name__ == "__main__":
 
-    root_dir = r'Y:\email'
-    new_email_dir = r'Y:\email_new'
+    root_dir = r'F:\eml'
+    new_email_dir = r'F:\eml_new'
 
-    for root, dirs, files in os.walk(root_dir):
+    for root, dirs, files in os.walk(root_dir, topdown=False):
         for filename in files:
             # 源mail文件路径
             mail_file_path = os.path.join(root, filename)
@@ -51,6 +51,7 @@ if __name__ == "__main__":
                 continue
 
             print("datestring=" + datestring)
+
             # 没有逗号，直接跳过
             if ',' not in datestring:
                 print(", not in datestting")
@@ -58,22 +59,23 @@ if __name__ == "__main__":
             else:
                 print(",in the datestring")
 
-            print(' '.join((datestring.split(',')[1]).lstrip().split()[0:3]))
+            # print(' '.join((datestring.split(',')[1]).lstrip().split()[0:3]))
             # Wed, 5 Nov 2014 16:12:05 +0800
             # mail_date=datetime.strptime(datestring[5:24],'%d %b %Y %H:%M:%S')
             mail_date = datetime.strptime(' '.join((datestring.split(',')[1]).lstrip().split()[0:3]), '%d %b %Y')
             mail_month = str(mail_date)[:7]
-            print(f"这个文件{filename},年月份为：{mail_month}")
+            mail_day = str(mail_date)[:10]
 
+            print(f"这个文件{filename},日期时间：{mail_date}年月份为：{mail_month},日为{mail_day}")
 
-            new_email_moth_dir = os.path.join(new_email_dir,mail_month)
+            # 最后文件路径为 年份-月份/年-月-日 的形式。例如：2016-07/2016-07-06
+            new_email_moth_day_dir = os.path.join(new_email_dir, mail_month, mail_day)
 
-            if not os.path.exists(new_email_moth_dir):
-                os.mkdir(new_email_moth_dir)
-            else:
-                print(new_email_moth_dir)
-                try:
-                    shutil.move(mail_file_path, new_email_moth_dir)
-                except Exception as e:
-                    print(f"移动过程中出错,{e}")
+            if not os.path.exists(new_email_moth_day_dir):
+                os.makedirs(new_email_moth_day_dir)
 
+            print(f"新目录为：{new_email_moth_day_dir}")
+            try:
+                shutil.move(mail_file_path, new_email_moth_day_dir)
+            except Exception as e:
+                print(f"移动过程中出错,{e}")
