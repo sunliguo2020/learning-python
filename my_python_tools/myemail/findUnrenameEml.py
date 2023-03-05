@@ -11,7 +11,7 @@ import re
 import shutil
 
 if __name__ == '__main__':
-    eml_path = r"f:\eml"
+    eml_path = r"f:\eml_new"
     new_eml_path = r'f:\email'
 
     for root, dirs, files in os.walk(eml_path, topdown=False):
@@ -22,6 +22,9 @@ if __name__ == '__main__':
             file_name = filename.replace('.eml', '')
             if not re.findall(r"([a-fA-F\d]{32})", file_name) or len(file_name) != 32:
                 print(f'准备移动{filename}')
-                shutil.move(file_path, new_eml_path)
+                try:
+                    shutil.move(file_path, new_eml_path)
+                except Exception as e:
+                    print(f'移动过程中出错,{e}')
             else:
                 print(f"{filename}已经改过名了！")
