@@ -18,6 +18,8 @@ logging.basicConfig(filename='rename_eml.log', level=logging.DEBUG,
                     encoding='utf-8',
                     format='%(asctime)s-%(filename)s[line:%(lineno)d]-%(message)s')
 
+from concurrent.futures import  ThreadPoolExecutor
+
 
 def walk_dir(directory):
     """
@@ -69,10 +71,15 @@ def rename_eml_file_name(mail_file_path=''):
                 # print("重命名过程中出错：", e)
                 logging.debug(f"重命名{mail_file_path}失败,错误为{e}")
         else:
+            print(f'已经存在改名的文件{file_name}')
             logging.debug(f"{os.path.basename(mail_file_path)}已经存在该md5值的文件")
+            # 删除已经改名的文件（存在重复文件）
+            print(f"准备删除这个文件{file_name}")
+            os.remove(mail_file_path)
 
 
 if __name__ == '__main__':
-    root_dir = r'F:\eml'
-    for item in walk_dir(root_dir):
-        rename_eml_file_name(item)
+    root_dir = r'F:\email'
+    with ThreadPoolExecutor() as t:
+        for item in walk_dir(root_dir):
+            t.submit(rename_eml_file_name,item)
