@@ -75,6 +75,7 @@ def rename_eml_file_name(mail_file_path=''):
             logging.debug(f"{os.path.basename(mail_file_path)}已经存在该md5值的文件")
             # 删除已经改名的文件（存在重复文件）
             print(f"准备删除这个文件{file_name}")
+            logging.debug(f"准备删除这个文件{file_name}")
             os.remove(mail_file_path)
 
 
