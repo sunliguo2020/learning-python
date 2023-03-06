@@ -4,6 +4,7 @@
 """
 import os
 import email
+import re
 from datetime import datetime
 import shutil
 
@@ -20,9 +21,15 @@ def read_mail(filepath):
 
 # 返回messages对象
 def get_message(filepath):
-    if os.path.exists(filepath):
-        with open(filepath, encoding="utf8", errors='ignore') as fp:
-            return email.message_from_file(fp)
+    print(f"参数为：{filepath},{type(filepath)}")
+    if os.path.isfile(filepath):
+        print(f"{filepath}文件存在")
+        try:
+            with open(filepath, encoding="utf8", errors='ignore') as fp:
+                return email.message_from_file(fp)
+        except Exception as e:
+            print(f"get_message 打开文件失败{e}")
+            return -1
     else:
         print("not found file")
 
@@ -41,11 +48,20 @@ if __name__ == "__main__":
 
     for root, dirs, files in os.walk(root_dir, topdown=False):
         for filename in files:
+
+            # 如果没有改名则继续
+            file_name = filename.replace('.eml', '')
+            if not re.findall(r"([a-fA-F\d]{32})", file_name) or len(file_name) != 32:
+                continue
+
             # 源mail文件路径
             mail_file_path = os.path.join(root, filename)
             print(mail_file_path)
             # 返回message对象
             msg = get_message(mail_file_path)
+            if msg == -1 :
+                continue
+
             datestring = get_date(msg)
             if datestring is None:
                 continue
@@ -62,7 +78,12 @@ if __name__ == "__main__":
             # print(' '.join((datestring.split(',')[1]).lstrip().split()[0:3]))
             # Wed, 5 Nov 2014 16:12:05 +0800
             # mail_date=datetime.strptime(datestring[5:24],'%d %b %Y %H:%M:%S')
-            mail_date = datetime.strptime(' '.join((datestring.split(',')[1]).lstrip().split()[0:3]), '%d %b %Y')
+            try:
+                mail_date = datetime.strptime(' '.join((datestring.split(',')[1]).lstrip().split()[0:3]), '%d %b %Y')
+            except Exception as e:
+                print('日期解析错误!')
+                continue
+
             mail_month = str(mail_date)[:7]
             mail_day = str(mail_date)[:10]
 
@@ -77,7 +98,7 @@ if __name__ == "__main__":
             print(f"新目录为：{new_email_moth_day_dir}")
 
             # 文件已经存在则删除
-            if os.path.isfile(os.path.join(new_email_moth_day_dir,filename)):
+            if os.path.isfile(os.path.join(new_email_moth_day_dir, filename)):
                 print(f'{filename}已经存在!准备删除！')
                 os.remove(mail_file_path)
             else:
