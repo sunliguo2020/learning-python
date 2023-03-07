@@ -157,26 +157,38 @@ uid=990
 停止： uwsgi --stop uwsgi.pid
 ```
 
-##### static 403 问题  权限问题
+#### 7、settings的设置
 
-
+##### 1、允许授权主机的访问
 
 ```python
-2022/12/18 22:01:01 [error] 1399687#0: *1613824 open() "/root/ITAM/static/js/jquery-3.6.1.min.js" failed (13: Permission denied), client: 223.97.151.137, server: guotu.sunliguo.com:8080, request: "GET /static/js/jquery-3.6.1.min.js HTTP/1.1", host: "blog.sunliguo.com:8080", referrer: "http://blog.sunliguo.com:8080/computer/list/"
+ALLOWED_HOSTS = ['*']
+```
+
+##### 2、处理静态文件
+
+把各个包中的静态文件收集到settings.py中定义的STATIC_ROOT目录中
+
+```python
+(venv) root@3865u:/www/sgy# python manage.py collectstatic
+
+154 static files copied to '/www/sgy/static'.
 
 ```
 
-```python
-#配置nginx上传文件最大限制
-client_max_ody_size 50m;
+3、关闭调试模式
+
+```python 
+DEBUG=False
 ```
 
-```python
-2022/12/18 22:23:49 [error] 1400074#0: *1613981 client intended to send too large body: 64673387 bytes, client: 223.97.151.137, server: guotu.sunliguo.com:8080, request: "POST /ip/multi/ HTTP/1.1", host: "blog.sunliguo.com:8080", referrer: "http://blog.sunliguo.com:8080/ip/list/"
+4、安装相关包
 
-```
 
-#### 7、nginx 配置
+
+
+
+#### 8、nginx 配置
 
 ```python
 server {
@@ -214,6 +226,88 @@ tcp        0      0 127.0.0.1:53306         0.0.0.0:*               LISTEN      
 tcp6       0      0 :::3306                 :::*                    LISTEN      796676/mysqld
 tcp6       0      0 :::80                   :::*                    LISTEN      332263/nginx: maste
 [root@aliyun ~]#
+
+```
+
+#### 常见问题：
+
+##### 1、启动uwsgi出现no internal routing support, rebuild with pcre support
+
+
+需要注意的是pip install uwsgi 要加上–no-cache-dir，pip 可以强制下载重新编译安装的库，不然pip会直接从缓存中拿出了上次编译后的 uwsgi 文件，并没有重新编译一份。
+
+ubuntu环境下
+pip uninstall uwsgi
+
+sudo apt-get install libpcre3 libpcre3-dev
+
+pip install uwsgi --no-cache-dir
+
+centos环境下
+pip uninstall uwsgi
+yum install -y pcre pcre-devel pcre-static
+pip install uwsgi --no-cache-dir
+
+##### 2、static 403 问题  权限问题
+
+
+
+```python
+2022/12/18 22:01:01 [error] 1399687#0: *1613824 open() "/root/ITAM/static/js/jquery-3.6.1.min.js" failed (13: Permission denied), client: 223.97.151.137, server: guotu.sunliguo.com:8080, request: "GET /static/js/jquery-3.6.1.min.js HTTP/1.1", host: "blog.sunliguo.com:8080", referrer: "http://blog.sunliguo.com:8080/computer/list/"
+
+```
+
+```python
+#配置nginx上传文件最大限制
+client_max_ody_size 50m;
+```
+
+```python
+2022/12/18 22:23:49 [error] 1400074#0: *1613981 client intended to send too large body: 64673387 bytes, client: 223.97.151.137, server: guotu.sunliguo.com:8080, request: "POST /ip/multi/ HTTP/1.1", host: "blog.sunliguo.com:8080", referrer: "http://blog.sunliguo.com:8080/ip/list/"
+
+```
+
+##### 3、uWSGI running as root, you can use --uid/--gid/--chroot options
+
+```python
+修改uWSGI的配置文件，增加如下内容：
+
+uid = www-data 
+gid = www-data
+这里指定了实例的配置中设置UID和GID，可以解除这个告警。
+```
+
+##### 4、chdir(): Permission denied [core/uwsgi.c line 2625
+
+##### 5、--- no python application found, check your startup logs for errors ---
+
+```python
+ File "/www/venv/lib/python3.9/site-packages/django/db/backends/mysql/base.py", line 15, in <modu
+le>
+    import MySQLdb as Database
+ModuleNotFoundError: No module named 'MySQLdb'
+
+```
+
+
+
+__init__.py
+
+ import pymysql
+pymysql.install_as_MySQLdb() 
+
+6、AttributeError at /shoujihao/list/
+
+```
+'str' object has no attribute 'utcoffset'
+```
+
+```python
+root@3865u:~# mysql_tzinfo_to_sql /usr/share/zoneinfo/|mysql -uroot -p mysql
+Enter password:
+Warning: Unable to load '/usr/share/zoneinfo//leap-seconds.list' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo//leapseconds' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo//tzdata.zi' as time zone. Skipping it.
 
 ```
 
