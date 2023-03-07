@@ -5,12 +5,14 @@ from scrapy import Request
 
 class DaglSpider(scrapy.Spider):
     name = 'dagl'
-    allowed_domains = ['127.0.0.1:8000']
-    start_urls = ['http://127.0.0.1:8000/personid/list/?page=123']
+    allowed_domains = ['192.168.1.21']
+    start_urls = ['http://192.168.1.21/personid/list/?page=13672']  #daglperosn detail
+    # start_urls = ['http://192.168.1.21/person/list/?page=16435']
 
     def parse(self, response):
 
-        list_items = response.xpath('//tr/td[2]/a')
+        list_items = response.xpath('//tr/td[2]/a') # daglperson_detail
+        # list_items = response.xpath('//tr/td[7]/a[4]')
         for list_item in list_items:
             url = list_item.xpath('@href')
             url = response.urljoin(url.extract_first())
