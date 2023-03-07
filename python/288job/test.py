@@ -6,6 +6,6 @@
 """
 import requests
 
-url  = 'https://www.288job.cn/job/'
+url = 'https://www.288job.cn/job/'
 resp = requests.get(url)
 print(resp.text)
