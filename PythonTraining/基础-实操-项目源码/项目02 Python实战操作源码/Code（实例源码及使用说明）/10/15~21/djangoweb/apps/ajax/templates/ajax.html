@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+    <script src={% static 'js/jquery.min.js' %}></script>
+</head>
+<body>
+
+{#遍历一级菜单#}
+<li>
+	<span>省份</span>
+	<select name="bus_style" id="bus_style">
+        <option></option>
+        {% for item in type %}
+		<option value="{{item.id}}">{{item.name}}</option>
+        {% endfor %}
+	</select>
+</li>
+
+<li>
+	<span>市</span>
+    <select name="det_style" id="det_style"></select>
+</li>
+<script>
+$("#bus_style").change(function(){
+	var type_id = $('#bus_style').val()
+	$.ajax({
+		url: '/ajax/type_detail',
+		data:{'type_id':type_id},
+		type: 'GET',
+		dataType: 'json',
+		success: function (data){
+			var content='';
+			$.each(data, function(i, item){
+				content+='<option value='+item.fields.id+'>'+item.fields.name+'</option>'
+			});
+			$('#det_style').html(content)
+		},
+	});
+});
+</script>
+
+</body>
+</html>

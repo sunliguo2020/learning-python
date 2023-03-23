@@ -1,0 +1,1 @@
+﻿    运行本程序需要安装第三方模块pillow（PIL）、matplotlib、jieba、wordcloud 和numpy  

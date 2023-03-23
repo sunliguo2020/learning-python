@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据分页</title>
+    {# 引入Bootstrap框架 #}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">#}
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>#}
+    <link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
+    {# 也可在自己项目的main.css中添加如下代码 #}
+{#    #main .pagenation{height:32px;text-align:center;font-size:0;margin:30px auto;}#}
+{#    #main .pagenation a{display:inline-block;border:1px solid #d2d2d2;background-color:#f8f6f7;font-size:12px;padding:7px 10px;color:#666;margin:5px;}#}
+{#    #main .pagenation .active{background-color:#fff;color:#43a200;}#}
+</head>
+<body class="container">
+
+
+{#页码部分#}
+{#page对象的属性和方法#}
+{#Page.object_list  包含当前页的所有对象列表#}
+{#Page.number       当前页的页码，从1开始#}
+{#Page.has_next()   是否有下一页，若有返回True#}
+{#Page.has_previous()  是否有上一页，若有返回True#}
+{#Page.has_other_pages()  是否有下一页或上一页，若有返回True#}
+{#Page.next_page_number() 返回下一页的页码#}
+{#Page.previous_page_number() 返回上一页的页码#}
+{#Page.start_index()  返回当前页的第一个对象在所有对象列表中的序号#}
+{#Page.end_index()  返回当前页的最后一个对象在所有对象列表中的序号#}
+
+{#在ul中遍历对象的时候记得要用已分页的数据即shop_page#}
+<ul>
+    {% for item in shop_page %}
+    <li>{{ item.id }}</li>
+    {% endfor shop_page %}
+</ul>
+
+<div class="pagenation">{#该div写在刚刚遍历后的ul标签下方#}
+	{%if shop_page.has_previous %}
+	{#page 代表的是项目urls.py中注册的模块名称，适当调整为自己的#}
+	<a href="{% url 'page:index' shop_page.previous_page_number %}"> < 上一页</a>
+	{% endif %}
+	
+	{% for pindex in pages %}
+		{% if pindex == shop_page.number %}
+	<a href="{% url 'page:index' pindex %}" class="active">{{ pindex }}</a>
+		{% else %}
+	<a href="{% url 'page:index' pindex %}">{{ pindex }}</a>
+		{% endif %}
+	{% endfor %}
+	
+	{% if shop_page.has_next %}
+	<a href="{% url 'page:index' shop_page.next_page_number %}">下一页 > </a>
+	{% endif %}
+</div>
+</body>
+</html>

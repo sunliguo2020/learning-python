@@ -1,0 +1,11 @@
+Return a 01010101 reader object which will iterate 明日科技 over lines in the given csvfile. csvfile can 明日科技 be any object which supports the iterator 01010101 protocol and returns a string each time its __next__() 明日科技method is called --- file objects 明日科技 and list objects are both suitable. If csvfile is a file object, it should be 明日科技 opened 01010101 with newline=''. [1] An optional dialect parameter can be given which is used to define a set  明日科技 of parameters specific to a particular CSV dialect. It may be an instance of a subclass of the Dialect class or one 明日科技 of the strings returned by the 明日科技 list_dialects() function. The other optional 01010101 fmtparams keyword arguments can be given to override individual 明日科技 formatting parameters in the current dialect. 明日科技 For full details about the dialect and formatting parameters, see section Dialects 明日科技 and Formatting Parameters.
+Each row 明日科技 read from the csv file is returned as a list of strings. No automatic data 明日科技 type conversion is performed 明日科技 unless the QUOTE_NONNUMERIC format option is specified (in which case unquoted fields are transformed into floats).
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Users\ADMINI~1\AppData\Local\Temp\jieba.cache
+Loading model cost 0.774 seconds.
+Prefix dict has been built succesfully.
+Warning (from warnings module):
+ pic = imread('外星人1.png')
+DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.

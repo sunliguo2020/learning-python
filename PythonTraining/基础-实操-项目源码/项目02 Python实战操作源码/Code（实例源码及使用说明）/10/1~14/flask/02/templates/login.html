@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .login {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            width: 600px;
+            height: 500px;
+            margin-left: -300px;
+            margin-top: -239px;
+        }
+        .title {
+            text-align: center
+        }
+    </style>
+</head>
+<body class="container">
+<div class="jumbotron login">
+<form action="" method="post" class="text-align：center">
+   <h1 class="title">用户登录</h1>
+  <div class="form-group">
+    <label for="exampleInputEmail1">邮箱</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+		   placeholder="请输入邮箱">
+    <small id="emailHelp" class="form-text text-muted">网站不会向任何人透漏用户信息</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">密码</label>
+    <input type="password"  name="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">验证码</label>
+    <div class="input-group mb-3">
+      <input type="text" name="code" class="form-control" placeholder="请输入验证码" >
+      <div class="input-group-append">
+        	<img class="img_checkcode" src="{{url_for('get_code')}}" width="116"
+		 height="38" onclick="this.src='{{url_for('get_code')}}'+'?'+ Math.random()">
+      </div>
+    </div>
+    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+	<div style="color:red;text-align:center;font-size:16px">
+	{{ msg }}
+	</div>
+   {% endfor %}
+  </div>
+  <button type="submit" class="btn btn-primary">登录</button>
+</form>
+</div>
+</body>
+</html>

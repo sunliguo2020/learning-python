@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="container">
+<div class="jumbotron login" style="text-align:center">
+    <h1>欢迎<span style="color:#17a2b8">{{session['username']}}</span>使用Flask框架</h1>
+    <p>
+        Flask是一个使用Python编写的轻量级Web应用框架。
+    </p>
+    <a href="/logout">
+        <button class="btn btn-primary">退出登录</button>
+    </a>
+</div>
+</body>
+</html>

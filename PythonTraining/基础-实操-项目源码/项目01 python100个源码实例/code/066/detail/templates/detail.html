@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row" style="margin:20px auto;">
+        <div class="col-sm-6">
+            <img src="{{course.big_img_url}}" class="card-img-top"
+                 alt="..." width="450px" height="260px">
+        </div>
+        <div class="col-sm-6">
+            <h4>{{course.product_name}}</h4>
+            <div class="course-info">课程讲师：{{course.lector_name}}</div>
+            <div class="course-info">所属机构：{{course.provider}}</div>
+            <div class="course-info">学习人数：{{course.learner_count}}人</div>
+            <div class="course-info">课程评分：{{course.score}}</div>
+            <div class="course-info">学习人数：{{course.learner_count}}</div>
+            <div class="course-price">
+                {% if course.original_price%}
+                    {% if course.discount_price %}
+                    ￥{{course.discount_price}}
+                    <span style="text-decoration: line-through;color: #666666;font-size: 14px;margin-left: 15px;">￥{{course.original_price}}</span>
+                    {% else %}
+                    ￥{{course.original_price}}
+                    {% endif %}
+                {% else %}
+                    免费
+                {% endif %}
+            </div>
+            <div>
+                <a href="https://study.163.com/course/introduction/{{course.course_id}}.htm" target="view_window">
+                    <button type="button" class="btn btn-danger" >直达网易云</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="课程介绍" aria-selected="true">课程介绍</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="week-tab" data-toggle="tab" href="#week" role="tab" aria-controls="本周销量" aria-selected="false">最近一周销量</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="本月销量" aria-selected="true">最近一个月销量</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="year-tab" data-toggle="tab" href="#year" role="tab" aria-controls="年度销量" aria-selected="false">每月销量</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent" style="min-height:260px;padding:20px;background:#fbfbfb;">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          {% for content in course.description.splitlines() %}
+                {{ content }}<br>
+          {% endfor %}
+      </div>
+      <div class="tab-pane fade" id="week" role="tabpanel" aria-labelledby="week-tab">
+          <div id="sale-week" style="width: 1000px;height:400px;"></div>
+      </div>
+      <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">
+          <div id="sale-month" style="width: 1000px;height:400px;"></div>
+      </div>
+      <div class="tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">
+          <div id="sale-year" style="width: 1000px;height:400px;"></div>
+      </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

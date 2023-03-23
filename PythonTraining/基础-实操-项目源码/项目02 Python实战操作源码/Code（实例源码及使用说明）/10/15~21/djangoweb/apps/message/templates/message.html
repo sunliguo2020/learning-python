@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消息提示</title>
+    <script src={% static 'js/jquery.min.js' %}></script>
+</head>
+<body>
+{% if messages %}
+<ul class="messages">
+	{% for message in messages %}
+	{# message.tags：信息类型，可以自己设置CSS样式 #}
+	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+
+{#      message.level拿到当前消息的级别数值，判断是否为error级别，是否需要显示到页面#}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </li>
+	{% endfor %}
+</ul>
+{% else %}
+	<script>alert('暂无信息');</script>
+{% endif %}
+
+<button onclick="send()">传递消息</button>
+   <script language="javascript" type="text/javascript">
+        function send(){
+            $.get('http://127.0.0.1:8000/message/receive/');
+        }
+   </script>
+
+</body>
+</html>

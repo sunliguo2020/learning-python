@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="container" style="min-height:500px">
+  <div class="card text-center" style="margin-top:20px">
+    <div class="card-header" style="background-color: #28a345;">
+      <span style="color:white">审核列表</span>
+    </div>
+    <div class="card-body">
+        <table class="table col-sm-12">
+          <tbody>
+            <thead>
+              <tr>
+                <th scope="col">姓名</th>
+                <th scope="col">部门</th>
+                <th scope="col">岗位名称</th>
+                <th scope="col">入职时间</th>
+                <th scope="col">工龄</th>
+                <th scope="col">工龄工资</th>
+                <th scope="col">状态</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            {% for user in data %}
+              <tr>
+                <td>{{user.username}}</td>
+                <td>{{user.department}}</td>
+                <td>{{user.position}}</td>
+                <td>{{user.hiredate_str}}</td>
+                <td>{{user.working_age}}年</td>
+                <td>{{user.working_age * 10}}元</td>
+                {% if user.status %}
+                  <td>已审核</td>
+                {% else %}
+                  <td>待审核</td>
+                {% endif %}
+                <td>
+                  {% if user.status %}
+                  <a href="/update_status/{{user.id}}/type/uncheck">
+                    <button class="btn btn-info">重新审核</button>
+                  </a>
+                  {% else %}
+                    <a href="/update_status/{{user.id}}/type/checked">
+                      <button class="btn btn-success">审核通过</button>
+                    </a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示酒店信息</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+</head>
+<body class="container">
+    <!-- 酒店详细 -->
+    <div class="tab-pane jumbotron" id="detail">
+        <h3 style="text-align:center">{{ hotel_name }}</h3>
+        <div style="padding:20px 0px;">
+            <div class="hotel-detail">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th width="120px">酒店等级：</th>
+                            <td style="padding-left:30px">
+                                {% if hotel_level == 5 %}
+                                    五星级
+                                {% elif hotel_level == 4 %}
+                                    四星级
+                                {% else %}
+                                    三星级
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                          <th >房间设施：</th>
+                            <td>
+                                {% for item in  hotel_facilities.split(',') %}
+                                  <span class="col-md-2 service">
+                                  <img src="/static/images/service-ok.png" class="service-icon" >
+                                  {{ item }}
+                                  </span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

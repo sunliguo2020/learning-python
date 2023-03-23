@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择酒店</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+</head>
+
+<body class="container">
+    <table class="table" >
+      <tbody>
+        <tr>
+          <th scope="row">档次:</th>
+            <td><a href="javascript:;" onclick="matchUrl('level',3)">3星级</a></td>
+            <td><a href="javascript:;" onclick="matchUrl('level',4)">4星级</a></td>
+            <td><a href="javascript:;" onclick="matchUrl('level',5)">5星级</a></td>
+        </tr>
+        <tr>
+          <th scope="row">品牌:</th>
+            {% for item in brand_list %}
+            <td>
+                <a href="javascript:;" onclick="matchUrl('brand','{{item.brand}}')">
+                {{ item.brand }}
+                </a>
+            </td>
+            {% endfor %}
+        </tr>
+        <tr>
+          <th scope="row">特色:</th>
+            {% for item in features_list %}
+            <td>
+                <a href="javascript:;" onclick="matchUrl('features','{{item.features}}')">
+                {{ item.features }}
+                </a>
+            </td>
+            {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+    <div class="rank-style">
+        <span class="rank">
+            <a href="javascript:;" onclick="matchUrl('tag','score')">
+            口碑<span class="glyphicon glyphicon-arrow-down"></span>
+            </a>
+        </span>
+        <span class="rank">
+            <a href="javascript:;" onclick="matchUrl('tag','price')">价格
+            <span class="glyphicon glyphicon-arrow-down"></span> </a>
+        </span>
+        <span class="rank">
+            <a href="javascript:;" onclick="matchUrl('tag','decorate_time')">
+            最近装修<span class="glyphicon glyphicon-arrow-down"></span>
+            </a>
+        </span>
+        <span class="rank"><a href="/hotel" class="reset">重置</a></span>
+    </div>
+    <div class="content">
+        {% for item in hotel %}
+        <div class="hotel">
+            <h4 class="hotel-name">{{item.name}} <span class="hotel-price">￥{{item.price}}元起</span></h4>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

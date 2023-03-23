@@ -1,0 +1,1 @@
+本实例在IDLE和Pycharm下测试通过。

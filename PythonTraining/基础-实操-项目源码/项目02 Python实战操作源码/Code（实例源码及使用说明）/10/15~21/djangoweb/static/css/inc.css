@@ -1,0 +1,80 @@
+/*公共样式*/
+body{ background:#f7f2f2}
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,t{margin:0;padding:0}
+body{font-size:12px;}
+img{border:none;}
+li{list-style:none}
+input,select,textarea{outline:none}
+textarea{resize:none}
+a{text-decoration:none}
+/*清浮动*/
+.clr{clear:both;}
+.clearfix{zoom:1}
+/*公共样式*/
+/*头部开始*/
+#top{width:100%; height:148px; border-bottom:2px solid #0ba2f7; margin:0 auto; position:relative}
+#sj_top{width:100%; height:60px;margin:0 auto; background:#ece9e9;}
+#sj_top .sj_index_top{width:1200px; height:60px; margin:0 auto; position:relative}
+#sj_top .sj_index_top img{width:114px; height:auto; margin-top:14x; position:absolute; top:14px;}
+#sj_top .sj_index_top select{ position:absolute; right:0; top:14px; font-size:18px; border:#0da2f8 solid 1px; background:none; color:#333;width:110px; height:35px; border-radius:12px;padding-left:15px;}
+#top .top1{width:100%; height:60px;float:left; background:#ece9e9; }
+#top .top1 .top1_con{width:1200px; margin:0 auto; height:60px; line-height:60px; text-indent:20px;}
+#top .top1 .top1_con .top1_con_f{width:200px; background:#FFF;float:left;font-size:22px;color:#666}
+#top .top1 .top1_con .top_lore{letter-spacing:4px;display:inline}
+#top .top1 .top1_con .top_lore a{font-size:14px;color:#666; }
+#top .top1 .top1_con .top_lore a:first-child{color:#0da2f8}
+#top .top1 .top1_con .dw_address{float:right;color:#f00; font-size:14px;}
+#top .top1 .top1_con .dw_address input{ margin-left:10px; background:none; border:1px solid #bbb;padding:5px}
+#top .top2{width:100%; height:88px;float:left;font-size:14px;}
+#top .top2 .top2_con{width:1200px; margin:0 auto; height:88px; line-height:88px;}
+#top .top2 .top2_con .top2_con_f{width:200px; background:#FFF;float:left; height:88px; position:relative;}
+#top .top2 .top2_con .top2_con_f img{ position:absolute; left:18px; top:18px;}
+#top .top2 input{width:500px; height:50px; border:#0da2f8 solid 1px; background:none;padding-left:10px;
+border-top-left-radius:12px;border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:12px}
+#top .top2 .sea_form{ display:inline-block; margin-left:50px; position:relative;}
+#top .top2 .sea_form button{width:100px; height:54px; background:#0da2f8; border:none;border-top-left-radius:0;
+border-top-right-radius:12px;border-bottom-right-radius:12px;border-bottom-left-radius:0; position:absolute; top:18px;color:#fff; font-size:20px;}
+#top .top2 nav{float:right;font-size:30px;}
+#top .top2 nav a{width:135px; height:52px;border-radius:12px; border:1px solid #0da2f8;float:left; line-height:52px; color:#0da2f8; text-align:center; margin-left:20px; margin-top:18px;}
+#top .top2 nav a:hover{color:#F00;border:1px solid #f00;transition-duration:0.6s;}
+/*城市*/
+._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position:absolute; right:0; background:#FFF;}
+._citys span { color: #56b4f8; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 10px; top: 10px; border: 1px solid #56b4f8; cursor: pointer; }
+._citys0 { width: 100%; height: 34px; display: inline-block; border-bottom: 2px solid #56b4f8; padding: 0; margin: 0; }
+._citys0 li { display: inline-block; line-height: 34px; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
+.citySel { background-color: #56b4f8; color: #fff !important; }
+._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 13px; overflow: hidden; }
+._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+.AreaS { background-color: #56b4f8 !important; color: #fff !important; }
+/*城市*/
+
+/*头部结束*/
+
+/*footer*/
+footer{width:100%; height:150px;background: -webkit-linear-gradient(#0bf781, #0ba3f7); /* Safari 5.1 - 6.0 */background: -o-linear-gradient(#0bf781, #0ba3f7); /* Opera 11.1 - 12.0 */background: -moz-linear-gradient(#0bf781, #0ba3f7); /* Firefox 3.6 - 15 */background: linear-gradient(#0bf781, #0ba3f7); /* 标准的语法 */}
+footer .foot_nav{width:1200px; margin:0 auto; font-size:16px; color:#fff;padding-top:20px;}
+footer .foot_nav a{ margin:0 40px 0 40px ;color:#fff;}
+footer .copy_ri{width:1200px; margin:0 auto; font-size:14px; color:#fff; margin-top:40px;letter-spacing:2px; position:relative;}
+footer .copy_ri img{width:90px; height:90px; position:absolute;right:0; top:-50px;}
+
+
+
+/*footer*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

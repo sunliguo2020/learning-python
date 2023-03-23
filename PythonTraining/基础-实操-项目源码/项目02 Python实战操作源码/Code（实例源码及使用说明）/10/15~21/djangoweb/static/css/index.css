@@ -1,0 +1,102 @@
+/*导航和轮播图*/
+#banner{width:1200px;height:345px;margin:0 auto;}
+#banner nav{width:200px;height:345px;float:left; background:#0da2f8; text-align:center;}
+#banner nav ul li{width:100%; height:55px; line-height:55px;margin-top:24px;}
+#banner nav ul li a{width:174px; height:55px; background:#0c75b1;float:left; margin-left:13px; border-radius:12px; font-size:20px;color:#fff; position:relative; text-indent:50px;}
+#banner nav ul li a:hover{ background:#02598a; transition-duration:0.6s;}
+#banner nav ul li a img{position:absolute;left:40px;top:12px;}
+#banner nav ul li a:hover img{position:absolute;left:30px;top:12px; transition-duration:0.6s;}
+#banner .banner{width:1000px;height:345px;float:right; background:url(../image/banner.jpg)}
+/*导航和轮播图*/
+/*中餐和西餐*/
+#dinner{width:100%; height:400px; margin:50px auto 0 auto;}
+#dinner .dinner_title{width:1200px; height:65px; margin:0 auto; background:url(../image/c_title_bg.jpg) no-repeat center center; text-align:center; position:relative; line-height:65px;}
+#dinner .dinner_title h2{font-size:65px;color:#333; font-weight:lighter;}
+#dinner .dinner_title a{ font-size:20px; color:#666; position:absolute; right:0; top:2px;}
+#dinner .dinner_con_bg{width:100%; height:325px; background:#FFF; margin:30px auto 0 auto}
+#dinner .dinner_con_bg .dinner_con{width:1200px; height:100%; margin:0 auto;}
+#dinner .dinner_con_bg .dinner_con ul li{width:233px; height:293px;float:left; border-radius:8px; border:solid 1px #ddd; margin-left:4px; margin-top:10px ;display:inline; overflow:hidden}
+#dinner .dinner_con_bg .dinner_con ul li img{width:233px; height:184px; border-radius:8px;}
+#dinner .dinner_con_bg .dinner_con ul li:hover{border:solid 1px #0da2f8;transition-duration:1s;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf{width:100%;padding-top:10px;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf h3{width:100%; font-size:20px; margin-left:6px;color:#333;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .cg_eva{width:100%; height:18px; line-height:18px;color:#666; display:inline-block; margin-top:10px; margin-left:6px;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .cg_eva span{font-size:15px; color:#666;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .cg_eva ul li{border:none; width:18px; height:18px;margin:0;padding:0; margin-right:2px;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .cg_eva ul li:last-child{margin-right:10px;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .cg_eva ul li img{width:18px; height:18px;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .food_sc{width:100%; color:#999; padding-top:10px; display:inline-block}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .food_sc span{ margin-left:10px;}
+#dinner .dinner_con_bg .dinner_con ul li .cg_inf .food_sc span:first-child{ margin-left:6px;}
+#dinner .dinner_con_bg .dinner_con ul li:first-child{margin-left:3px;}
+/*中餐和西餐*/
+/*水果*/
+#fruit{width:1200px; height:510px; margin:50px auto 0 auto }
+#fruit .fruit_title{width:1200px; height:131px;background:url(../image/fruit_bg.jpg); line-height:131px; text-align:center;font-size:50px;color:#333; position:relative;}
+#fruit .fruit_title h2{position:absolute;left:44%;top:-25px; font-weight:lighter;}
+#fruit .fruit_con{width:1200px; height:377px; background:url(../image/fruit_k_bg.jpg) no-repeat left; position:relative}
+#fruit .fruit_con .a_href{ color:#fc8e00;float:right;padding-right:30px; font-size:16px;}
+#fruit .fruit_con .fruit_con_ul{width:1175px; height:325px; position:absolute; top:26px;right:0; background:#FFF;}
+#fruit .fruit_con .fruit_con_ul ul li{width:289px;height:311px;float:left;margin-left:4px;margin-top:6px;position:relative; overflow:hidden}
+#fruit .fruit_con .fruit_con_ul ul li img{width:100%;height:100%; position:absolute; left:0; top:0; z-index:0;}
+#fruit .fruit_con .fruit_con_ul .sgd_inf{width:289px; height:101px; background:#000; opacity:0.6; position:absolute; bottom:0;}
+#fruit .fruit_con .fruit_con_ul ul li a:hover .sgd_inf{background:#011826;opacity:0.95;transition-duration:0.6s;}
+#fruit .fruit_con .fruit_con_ul .sgd_inf h3{width:100%; font-size:20px; margin-left:6px;color:#fff; margin-top:13px;}
+#fruit .fruit_con .fruit_con_ul .sgd_inf .cg_eva{width:100%; height:18px; line-height:18px;color:#fff; display:inline-block; margin-top:10px; margin-left:6px; font-size:15px;}
+#fruit .fruit_con .fruit_con_ul .sgd_inf .cg_eva ul li{border:none; width:18px; height:18px;margin:0;padding:0; margin-right:2px;}
+#fruit .fruit_con .fruit_con_ul .sgd_inf .cg_eva ul li img{width:18px; height:18px;}
+#fruit .fruit_con .fruit_con_ul .sgd_inf .food_sc{width:100%; color:#fff; padding-top:10px; display:inline-block}
+#fruit .fruit_con .fruit_con_ul .sgd_inf .food_sc span{ margin-left:10px;}
+#fruit .fruit_con .fruit_con_ul .sgd_inf .food_sc span:first-child{ margin-left:6px;}
+/*水果*/
+/*饮品*/
+#drink{width:1200px; height:510px; margin:50px auto 0 auto }
+#drink .drink_title{width:1200px; height:131px;background:url(../image/drink_bg.jpg); line-height:131px; text-align:center;font-size:50px;color:#333; position:relative;}
+#drink .drink_title h2{position:absolute;left:44%;top:-25px; font-weight:lighter;}
+#drink .drink_con{width:1200px; height:377px; background:url(../image/fruit_k_bg.jpg) no-repeat right; position:relative}
+#drink .drink_con .a_href{ color:#fc8e00;float:left;padding-left:30px; font-size:16px;}
+#drink .drink_con .drink_con_ul{width:1175px; height:325px; position:absolute; top:26px;left:0; background:#FFF;}
+#drink .drink_con .drink_con_ul ul li{width:289px;height:311px;float:left;margin-left:4px;margin-top:6px;position:relative; overflow:hidden}
+#drink .drink_con .drink_con_ul ul li img{width:100%;height:100%; position:absolute; left:0; top:0; z-index:0;}
+#drink .drink_con .drink_con_ul .ypd_inf{width:289px; height:101px; background:#000; opacity:0.6; position:absolute; bottom:0;}
+#drink .drink_con .drink_con_ul ul li a:hover .ypd_inf{background:#064c01;opacity:0.95;transition-duration:0.6s;}
+#drink .drink_con .drink_con_ul .ypd_inf h3{width:100%; font-size:20px; margin-left:6px;color:#fff; margin-top:13px;}
+#drink .drink_con .drink_con_ul .ypd_inf .cg_eva{width:100%; height:18px; line-height:18px;color:#fff; display:inline-block; margin-top:10px; margin-left:6px; font-size:15px;}
+#drink .drink_con .drink_con_ul .ypd_inf .cg_eva ul li{border:none; width:18px; height:18px;margin:0;padding:0; margin-right:2px;}
+#drink .drink_con .drink_con_ul .ypd_inf .cg_eva ul li img{width:18px; height:18px;}
+#drink .drink_con .drink_con_ul .ypd_inf .food_sc{width:100%; color:#fff; padding-top:10px; display:inline-block}
+#drink .drink_con .drink_con_ul .ypd_inf .food_sc span{ margin-left:10px;}
+#drink .drink_con .drink_con_ul .ypd_inf .food_sc span:first-child{ margin-left:6px;}
+/*饮品*/
+/*服务介绍*/
+#service_int{width:1200px;margin:50px auto 50px auto;}
+#service_int .ser_title{width:1200px;height:225px; background:url(../image/ser_title_bg.jpg) no-repeat center; text-align:center; position:relative;}
+#service_int .ser_title h2{ font-size:72px; color:#0da2f8; position:absolute; bottom:0; left:50%; margin-left:-143px;}
+#service_int .ser_con{width:1200px; margin-top:30px; height:472px;}
+#service_int .ser_con ul li{width:300px; height:472px; float:left;}
+#service_int .ser_con ul li a{ position:relative;}
+#service_int .ser_con ul li a img{ position:absolute; z-index:0;}
+#service_int .ser_con ul li a span{ position:absolute; z-index:5;color:#fff; font-size:55px;}
+#service_int .ser_con ul li:nth-child(1) a span{position:absolute;top:20px;left:40px;}
+#service_int .ser_con ul li:nth-child(3) a span{position:absolute;top:20px;left:40px;}
+#service_int .ser_con ul li:nth-child(2) a span{position:absolute;top:310px;left:200px;}
+#service_int .ser_con ul li:nth-child(4) a span{position:absolute;top:310px;left:200px;}
+/*服务介绍*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

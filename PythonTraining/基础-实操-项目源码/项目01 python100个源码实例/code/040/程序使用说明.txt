@@ -1,0 +1,1 @@
+    运行本程序需要安装第三方模块matplotlib、jieba、wordcloud 和scipy ，scipy要求1.0.0版本，否则程序将出现导入错误：ImportError: cannot import name 'imread' from 'scipy.misc' 

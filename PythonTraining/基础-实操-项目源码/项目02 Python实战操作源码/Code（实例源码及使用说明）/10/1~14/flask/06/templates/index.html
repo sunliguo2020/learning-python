@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="container">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="form-group">
+            <label>填写文章内容</label>
+            <textarea  class="form-control ckeditor"  name="content">
+            </textarea>
+        </div>
+    </form>
+    <script src="{{ url_for('static',filename='ckeditor/ckeditor.js') }}"></script>
+    <script>
+    // 使用CKeditor编辑器
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: '/ckupload/',  // 设置文件上传路径
+        height: '545px',
+        width: '1318px'
+    });
+    </script>
+</body>
+</html>

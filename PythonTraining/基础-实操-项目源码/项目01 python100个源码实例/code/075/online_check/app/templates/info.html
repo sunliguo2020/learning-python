@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content%}
+{% include "layout.html" %}
+<div class="container">
+  <div class="card text-center" style="margin-top:20px">
+    <div class="card-header" style="background-color: #28a345;">
+      <span style="color:white">线上审核系统</span>
+    </div>
+    <div class="card-body">
+        <table class="table col-sm-6 offset-sm-3">
+          <tbody>
+            <tr>
+              <td style="text-align:right">姓名:</td>
+              <td>{{user.username}}</td>
+            </tr>
+            <tr>
+              <td style="text-align:right">部门:</td>
+              <td>{{user.department}}</td>
+            </tr>
+            <tr>
+              <td style="text-align:right">岗位名称:</td>
+              <td>{{user.position}}</td>
+            </tr>
+            <tr>
+              <td style="text-align:right">入职时间:</td>
+              <td>{{user.hiredate}}</td>
+            </tr>
+            <tr>
+              <td style="text-align:right">工龄:</td>
+              <td>{{working_age}}年</td>
+            </tr>
+            <tr>
+              <td style="text-align:right">工龄工资:</td>
+              <td>{{working_age * 10}}元</td>
+            </tr>
+          </tbody>
+        </table>
+        {% if user.status == 0 %}
+          <a href="{{url_for('update_status',id=user.id,type='checked')}}" class="btn btn-success" style="margin-right:20px">确  认</a>
+          <a href="/edit" class="btn btn-danger" >修  改</a>
+        {% endif %}
+    </div>
+    <div class="card-footer text-muted">
+      <span style="color:#dc3545">
+        {% if user.status == 1 %}
+          当前状态：已审核
+        {% else %}
+          当前状态：待审核
+        {% endif %}
+      </span>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

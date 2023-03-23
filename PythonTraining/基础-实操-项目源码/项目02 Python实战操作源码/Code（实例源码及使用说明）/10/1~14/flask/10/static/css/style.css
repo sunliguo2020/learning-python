@@ -1,0 +1,24 @@
+a:link {text-decoration:none;}
+.container { padding-top: 20px}
+.rank {
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    border-right: 1px solid #eee;
+    padding: 0 20px;
+    min-width: 70px;
+}
+.hotel {
+    min-height: 50px;
+    padding:20px;
+    background-color: #fff;
+    margin-top: 15px;
+    border: 1px solid #e6e6e6;
+    color: #666;
+}
+.hotel-name{ color: #2DBB55; }
+.hotel-price {float:right;color: #f60;}
+.rank-style{
+    border: 1px solid #e6e6e6;padding:10px 50px;height: 45px;
+}
+.reset { color: #ff6600 }

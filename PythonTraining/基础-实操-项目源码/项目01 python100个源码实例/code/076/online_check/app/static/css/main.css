@@ -1,0 +1,150 @@
+a {
+text-decoration: none;
+color: black;
+}
+
+
+.footer {
+    margin-top: 30px;
+    background: #2e2e2e;
+    padding: 30px 0;
+    border-bottom: 1px solid #111;
+    color: white;
+    height: 240px;
+}
+.footer-left{
+    padding-left: 200px;
+    float: left;
+}
+.footer-right{
+    padding-left: 200px;
+    float: left;
+}
+
+/* 课程详情页 */
+.course-info {
+    padding:5px 0 ; color: #666666;font-size: 14px;
+}
+.course-price {
+    font-size: 20px;
+    color: #eb3b28;
+}
+.course-link{
+    font-size: 16px;
+    padding: 8px 25px;
+    color:white
+}
+
+/* 全部课程页 */
+.m-filter {
+	margin-bottom: 10px;
+	font-size: 12px;
+	padding: 10px 0 ;
+}
+
+.m-filter .mc {
+	padding: 0 3px;
+	border: 1px solid #ddd
+}
+
+.m-filter .mc .item {
+	padding: 10px 0;
+	height: 32px;
+	line-height: 32px;
+	border-top: 1px dotted #ddd
+}
+
+.m-filter .mc .item dd,.m-filter .mc .item dt {
+	float: left;
+	display: inline
+}
+
+.m-filter .mc .item dt {
+	width: 100px;
+	text-indent: 27px;
+	color: #666
+}
+
+.m-filter .mc .item a {
+	float: left;
+	display: inline;
+	margin-right: 10px;
+	padding: 0 10px;
+	color: #005ea7;
+	text-decoration: none;
+}
+
+.m-filter .mc .item a.curr,.m-filter .mc .item a:hover {
+	color: #e4393c;
+	background: #fff2f2
+}
+
+.m-filter .mc .item a.disabled {
+	color: #999;
+	background: #fff;
+	cursor: default
+}
+
+.m-filter .mc .item.fore1 {
+	border-top: 0
+}
+
+.course-filter {
+    font-size:12px;
+    padding: 20px 0;
+}
+.course-filter dl {
+    padding: 10px 0;
+    height: 32px;
+    line-height: 32px;
+    float: left;
+}
+.course-filter dt {
+    width: 84px;
+    text-indent: 27px;
+    color: #666;
+    float:left
+}
+
+.course-filter dd {
+    float:left
+}
+
+.course-filter dd a {
+    text-decoration: none;
+    color: #005ea7;
+    padding-left: 30px;
+}
+.filter-item {
+    clear: both;
+}
+.link-top {
+    width: 100%;
+    height: 1px;
+    border-top: solid #28a745 2px;
+    margin-top: 10px;
+}
+
+/* 404页面 */
+.not-found-container {
+    width: 500px;
+    min-height: 400px;
+    margin: 30px auto;
+}
+.not-found-container-sidebar {
+    float: right;
+    margin-top: 50px
+}
+.not-found-container-body {
+    margin-right: 4.5rem;
+}
+
+/* 分页样式 */
+.page-item.active .page-link {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.page-link {
+    color: #28a745;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加酒店信息</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+</head>
+<body class="container">
+<div class="jumbotron">
+    <form method="post" action="">
+          <div class="form-group">
+            <label for="hotel_name">酒店名称</label>
+            <input type="text" class="form-control" id="hotel_name" name="hotel_name" placeholder="请填写酒店名称" required>
+          </div>
+          <div class="form-group">
+            <label for="hotel_level">酒店级别</label>
+            <select class="form-control" id="hotel_level" name="hotel_level">
+              <option value="5">五星级</option>
+              <option value="4">四星级</option>
+              <option value="3">三星级</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hotel_facilities">房间设施（如有多个，请用","分割。例如：空调，热水）</label>
+            <textarea class="form-control" id="hotel_facilities" name="hotel_facilities" rows="3" required>
+            </textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+</div>
+</body>
+</html>

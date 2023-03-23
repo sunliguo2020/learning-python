@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content%}
+<style>
+    .login-container {
+        width: 500px;
+        margin: 100px auto;
+        padding: 20px 10px;
+        background-color: #eef1f4;
+        border-radius: .5rem;
+        padding: 20px;
+    }
+    .login-title {
+        text-align: center;
+    }
+    .login-form {
+        padding: 20px;
+    }
+</style>
+
+{% include "layout.html" %}
+
+<div class="login-container">
+    <h2 class="login-title">修改密码</h2>
+    <form class="login-form" method="post" action="/account">
+        <div class="form-group">
+            {{ form.password.label() }}
+            {% if form.password.errors %}
+                {{ form.password(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.password(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.new_password.label() }}
+            {% if form.new_password.errors %}
+                {{ form.new_password(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.new_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.new_password(class="form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.confirm_password.label() }}
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.confirm_password(class="form-control") }}
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block">提交</button>
+        {{ form.hidden_tag() }}
+    </form>
+</div>
+{% endblock %}

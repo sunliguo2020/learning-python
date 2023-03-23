@@ -1,0 +1,5 @@
+本实例需要使用WMI模块，所以需要安装WMI模块。在安装WMI模块之前，先要安装pywin32模块，WMI模块需要win32api的支持。使用pip安装pywin32模块和WMI模块的代码如下：
+pip install win32com
+pip install wmi
+
+本实例在IDLE和Pycharm下测试通过。

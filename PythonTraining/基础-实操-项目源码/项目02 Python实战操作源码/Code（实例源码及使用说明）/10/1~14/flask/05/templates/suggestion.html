@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>意见建议</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body class="container">
+<div class="jumbotron">
+    <div id="content">
+        明日学院，是吉林省明日科技有限公司倾力打造的在线实用技能学习平台，该平台于2016年正式上线，主要为学习者提供海量、
+        优质的课程，课程结构严谨，用户可以根据自身的学习程度，自主安排学习进度。我们的宗旨是，为编程学习者提供一站式服务，
+        培养用户的编程思维。
+    </div>
+    <form action=""  method="post" >
+        <div class="form-group" style="padding-top:20px">
+            <label >请输入您的{{ form.content.label }}：</label>
+            {{ form.content() }}
+            {% for err in form.content.errors %}
+            <div class="text-danger">{{ err }}</div>
+            {% endfor %}
+        </div>
+        {{form.submit}}
+    </form>
+</div>
+    <script src="{{ url_for('static',filename='ckeditor/ckeditor.js') }}"></script>
+    <script>
+    // 使用CKeditor编辑器
+    CKEDITOR.replace('ckeditor_content', {
+        filebrowserUploadUrl: '/ckupload/',  // 设置文件上传路径
+        height: '245px',
+        width: '900px'
+    });
+    </script>
+</body>
+</html>

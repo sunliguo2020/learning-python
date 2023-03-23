@@ -1,0 +1,15 @@
+﻿a copy of				一份，一本
+account		[ə'kaʊnt]		n. 账户；账单
+age		[eɪdʒ]		n. 年龄
+Anaconda	[ˌænəˈkɒndə]	n. 水蟒；蟒蛇
+args				n. [计算机]参数
+arguments	['ɑːgjʊm(ə)nts]	n. 参数
+array		[əˈreɪ]		n. 数组，阵列；排列，列阵
+attributes	['ætrə,bjʊt]	n. 属性（attribute的复数）
+audience		['ɔːdɪəns]		n. 观众；听众
+available		[əˈveɪləbl]	adj. 可获得的；可购得的
+axis		[ˈæksɪs]		n. 轴；轴线；轴心国
+centers				n. 中心，中央
+coef				abbr. 系数；折算率
+columns		[ˈkɒləms]		列
+ctrl		[kən'trəʊl]	n. 计算机的Ctrl按键（控制键）

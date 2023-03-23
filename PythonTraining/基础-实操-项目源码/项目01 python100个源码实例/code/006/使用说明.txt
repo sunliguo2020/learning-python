@@ -1,0 +1,4 @@
+本实例需要安装pywin32模块，使用pip安装pywin32模块代码如下：
+pip install win32com
+
+本实例在IDLE和Pycharm下测试通过。

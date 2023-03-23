@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>明日科技图书</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+</head>
+<body class="container">
+    <div style="margin:20px 0" >
+        <ul class="nav nav-tabs navbar-light" style="background-color: #e3f2fd;" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="introduction-tab" data-toggle="tab" href="#introduction" role="tab" aria-controls="introduction" aria-selected="true">
+                商品介绍
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="service-tab" data-toggle="tab" href="#service" role="tab" aria-controls="service" aria-selected="false">
+                售后保障
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">
+                商品评价
+            </a>
+          </li>
+        </ul>
+    </div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="introduction" role="tabpanel" aria-labelledby="introduction-tab">
+          {% include 'introduct.html' %}
+      </div>
+      <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
+          {% include 'service.html' %}
+      </div>
+      <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="contact-tab">
+          <div id="comment-content"></div>
+      </div>
+    </div>
+<script>
+
+// 单击酒店评论
+$('#comment-tab').click(function(){
+    var goods_id = 1;                           // 获取商品ID
+    $.ajax({                                    // 使用Ajax异步提交
+        url: "{{ url_for('comment') }}",        // 提交到的URL
+        type: "GET",                            // 提交方式为GET
+        data:{goods_id: goods_id},            // 传递参数
+        success: function (res) {               // 操作成功后执行逻辑
+            console.log('res:'+res)
+            $("#comment-content").empty();      // 清除评论区内容
+            $("#comment-content").append(res) ; // 添加评论到评论区
+        }
+    })
+})
+</script>
+</body>
+</html>

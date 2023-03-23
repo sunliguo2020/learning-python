@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+    <title>明日学院</title>
+    <style>
+        .nav-item {
+            padding-left:20px;
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏开始  -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+<!--            <img src="{{url_for('static',filename='images/logo.png')}}" width="40" height="30"-->
+<!--                 class="d-inline-block align-top" alt="">-->
+            <span style="padding-left:5px">明日学院</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav" style="margin:0 30px">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/courses/">全部课程</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about/">关于我们</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 导航栏结束  -->
+{% block content %}
+
+{% endblock %}
+<!-- 底部信息开始  -->
+<div class="footer">
+    <div class="footer-left" >
+        <p>明日学院 是明日科技旗下专注职业技能提升的在线学习平台。</p>
+        <ul>
+            <li>关于我们</li>
+            <li>联系我们</li>
+            <li>帮助中心</li>
+        </ul>
+    </div>
+    <div class="footer-right">
+        <img height="120px" width="120px" src="{{ url_for('static', filename='images/qrcode.jpg') }}">
+        <p>关注微信公众平台</p>
+    </div>
+    <div>
+        <p style="text-align:center;clear:both">©1997-2019 明日学院 版权所有</p>
+    </div>
+</div>
+<!-- 底部信息结束  -->
+
+</body>
+</html>

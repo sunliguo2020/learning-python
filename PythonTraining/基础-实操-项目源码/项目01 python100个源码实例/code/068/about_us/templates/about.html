@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body {
+      background-color: #eee;
+    }
+    .list-group-item.active {
+        z-index: 2;
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    .tab-pane {
+        background-color: white;
+        padding: 10px;
+        border-radius: 5px;
+        padding: 10px 20px;
+    }
+</style>
+<div class="container">
+<div class="row" style="padding:10px">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">关于我们</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">联系我们</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">帮助中心</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+          {% include 'about_content.html' %}
+      </div>
+      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+          {% include 'contact_content.html' %}
+      </div>
+      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+          {% include 'help_content.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

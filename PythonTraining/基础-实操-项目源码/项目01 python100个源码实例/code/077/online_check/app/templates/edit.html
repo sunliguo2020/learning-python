@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content%}
+<script src="{{ url_for('static',filename='js/laydate/laydate.js') }}"></script>
+
+<div class="container">
+  <div class="card text-center" style="margin-top:20px">
+    <div class="card-header" style="background-color: #28a345;">
+      <span style="color:white">更改信息</span>
+    </div>
+    <div class="card-body">
+        {% from "_formhelpers.html" import render_field %}
+        <form class="offset-md-4" method="post" action="{{ url_for('update') }}" autocomplete="off">
+            {{ form.csrf_token }}
+            {{ render_field(form.username,user.username) }}
+            {{ render_field(form.department,user.department) }}
+            {{ render_field(form.position,user.position) }}
+
+            <div class="form-group row">
+                {{ form.hiredate.label(class="col-sm-2 col-form-label") }}
+                <div class="col-sm-4">
+                    {{ form.hiredate(value=user.hiredate.strftime("%Y-%m-%d")) }}
+                </div>
+            </div>
+          <div class="col-sm-6">
+            <button class="btn btn-success">提交</button>
+            <a href="{{url_for('edit')}}" class="btn btn-default">返回</a>
+          </div>
+        </form>
+    </div>
+    <div class="card-footer text-muted">
+      <span style="color:#dc3545">截止日期：2019-11-11</span>
+    </div>
+  </div>
+</div>
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#hiredate' //指定元素
+});
+</script>
+{% endblock %}

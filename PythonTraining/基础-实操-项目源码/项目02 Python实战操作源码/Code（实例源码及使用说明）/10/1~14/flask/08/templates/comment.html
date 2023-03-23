@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<div class="jumbotron">
+    {% for data in comments %}
+    <div class="contact">
+        <h5>{{data['username']}}:</h5>
+        <div style="margin:20px">{{data['comment']}}</div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

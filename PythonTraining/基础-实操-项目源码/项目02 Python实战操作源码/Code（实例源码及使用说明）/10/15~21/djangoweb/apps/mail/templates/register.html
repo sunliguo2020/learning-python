@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+{% load staticfiles %}
+<head>
+<meta charset="utf-8">
+<title>celery异步发送验证邮件</title>
+<link href="{% static 'css/inc.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+</head>
+<body>
+
+<div id="register_main">
+   <form method="post" action="/mail/verify/" id="register" name="register">
+       {% csrf_token %}
+      <ul>
+         <li><span>账号</span><input type="text" name="user_name" id="user_name"></li>
+         <li><span>创建密码</span><input type="password" name="pwd" id="pwd"></li>
+         <li><span>联系电话</span><input type="text" name="phone" id="phone"></li>
+         <li><span>邮箱</span><input type="text" name="email" id="email"></li>
+      </ul>
+   </form>
+   <button class="agree_btn">同意以下协议并注册</button>
+   <script language="javascript" type="text/javascript">
+        $(".agree_btn").click(function(){
+            $("#register").submit();
+        });
+   </script>
+</div>
+
+<footer>
+   <div class="foot_nav">
+   </div>
+   <div class="copy_ri">
+         <p>吉林省明日科技有限公司Copyright ©2007-2018, All Rights Reserved 吉ICP备10002740号-2 </p>
+         <img src=""></div>
+   </div>
+</footer>
+</body>
+</html>
