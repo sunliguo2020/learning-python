@@ -1,5 +1,6 @@
-import scrapy
 import re
+
+import scrapy
 
 
 class LianjiaSpider(scrapy.Spider):
@@ -15,19 +16,20 @@ class LianjiaSpider(scrapy.Spider):
         for item in full_url:
             yield scrapy.Request(url=item, callback=self.parse_info)
 
-    def parse_info(self,response):
+    def parse_info(self, response):
         title = response.xpath('//div[@class="content clear w1150"]/p/text()').get()
-        total_price= response.xpath('//div[@class="content__aside--title"]/span/text()|//div[@class="content__aside--title"]/text()').getall()
-        price= ''.join(total_price).strip('')
-        price = re.sub('\s','',price)
-        mode= response.xpath('//ul[@class="content__aside__list"]/li[1]/text()').get()
-        type=response.xpath('//ul[@class="content__aside__list"]/li[2]/text()').get()
-        direction=response.xpath('//ul[@class="content__aside__list"]/li[3]/text()').get()
-        print([title,price,mode,type,direction])
+        total_price = response.xpath(
+            '//div[@class="content__aside--title"]/span/text()|//div[@class="content__aside--title"]/text()').getall()
+        price = ''.join(total_price).strip('')
+        price = re.sub('\s', '', price)
+        mode = response.xpath('//ul[@class="content__aside__list"]/li[1]/text()').get()
+        type = response.xpath('//ul[@class="content__aside__list"]/li[2]/text()').get()
+        direction = response.xpath('//ul[@class="content__aside__list"]/li[3]/text()').get()
+        print([title, price, mode, type, direction])
         yield {
-            'title':title,
-            "price":price,
-            "mode":mode,
-            "type":type,
-            "direction":direction
+            'title': title,
+            "price": price,
+            "mode": mode,
+            "type": type,
+            "direction": direction
         }
