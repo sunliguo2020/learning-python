@@ -19,12 +19,15 @@ def multiply(*numbers):
 
 print(multiply(10, 100))
 
-print("*"*100)
-def function(a,b,*args,keyword=True,**kwargs):
-    print(a,b)
+print("*" * 100)
+
+
+def function(a, b, *args, keyword=True, **kwargs):
+    print(a, b)
     print(args)
     print(keyword)
     print(kwargs)
 
-d = {"param_a":43,"param_b":44}
-function(1,2,*[5,3,4],param=42,*d)
+
+d = {"param_a": 43, "param_b": 44}
+function(1, 2, *[5, 3, 4], param=42, *d)

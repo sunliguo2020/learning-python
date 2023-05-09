@@ -1,6 +1,5 @@
-dict={'a':"ddd"
-      "sfsfd"
+dict = {'a': "ddd"
+             "sfsfd"
 
-
-      }
+        }
 print(dict.items())

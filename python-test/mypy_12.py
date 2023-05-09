@@ -1,11 +1,11 @@
-#测试LEGB
+# 测试LEGB
 
-#str="global str"
+# str="global str"
 
 def outer():
-    #str="outer str"
+    # str="outer str"
     def inner():
-        #str="inner str"
+        # str="inner str"
         print(str)
 
     inner()

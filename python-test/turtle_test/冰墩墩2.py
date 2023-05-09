@@ -1,5 +1,5 @@
 # coding:utf-8
-import turtle3
+import turtle
 
 turtle.title('PythonBingDwenDwen')
 
