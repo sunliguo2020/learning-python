@@ -9,7 +9,6 @@
 # 当检测到人体活动时，会持续高电平2～4秒
 
 import time
-
 import RPi.GPIO as GPIO
 
 HC_SR501 = 17
