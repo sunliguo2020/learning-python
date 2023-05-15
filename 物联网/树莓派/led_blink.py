@@ -16,10 +16,21 @@ led = 18  # 这里使用的是18引脚，请根据自己使用的引脚编号修
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(led, GPIO.OUT)
-n = 0  # 用于控制闪烁次数
-while n < 30:
-    GPIO.output(led, GPIO.HIGH)
-    time.sleep(0.05)
-    GPIO.output(led, GPIO.LOW)
-    time.sleep(0.05)
-    n += 1
+
+
+def blink(n=0):
+    """
+
+    Args:
+        n: # 用于控制闪烁次数
+
+    Returns:
+
+    """
+
+    while n < 30:
+        GPIO.output(led, GPIO.HIGH)
+        time.sleep(0.05)
+        GPIO.output(led, GPIO.LOW)
+        time.sleep(0.05)
+        n += 1

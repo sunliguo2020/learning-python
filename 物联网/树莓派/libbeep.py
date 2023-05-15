@@ -23,10 +23,16 @@ def beep(seconds):
 
 # 哔N次，时长、间隔时长、重复次数作为参数传递
 def beepAction(secs, sleepsecs, times):
+    """
+
+    @param secs:
+    @param sleepsecs:
+    @param times:
+    @return:
+    """
     for i in range(times):
         beep(secs)
         time.sleep(sleepsecs)
-    GPIO.cleanup()
 
 
 if __name__ == '__main__':

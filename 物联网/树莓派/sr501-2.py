@@ -10,6 +10,7 @@
 
 import time
 import RPi.GPIO as GPIO
+from libbeep import beepAction
 
 HC_SR501 = 17
 
@@ -20,6 +21,7 @@ try:
     while True:
         if GPIO.input(HC_SR501):
             print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " 警告!附近一米内有人 ")
+            beepAction(0.2, 0.02, 2)
         else:
             print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " 无情况，周围没人! ")
         time.sleep(1)
