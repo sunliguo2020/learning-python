@@ -47,5 +47,7 @@ def main():
             led.value(1)
         elif recv_data_str == 'light off':
             led.value(0)
+        elif recv_data_str == 'light':
+            led.value(not led.value())
 if __name__ == "__main__":
     main()
