@@ -1,0 +1,4 @@
+2023-05-24 13:18:43,866 - log3.py[line:31]-INFO:这是 logger info message
+2023-05-24 13:18:43,868 - log3.py[line:32]-WARNING:这是 logger warning message
+2023-05-24 13:18:43,869 - log3.py[line:33]-ERROR:这是 logger error message
+2023-05-24 13:18:43,870 - log3.py[line:34]-CRITICAL:这是 logger critical message
