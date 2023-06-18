@@ -7,22 +7,25 @@
 
 
 class FooBar():
-    def __init__(self,var=42):
+    def __init__(self, var=42):
         self.somevar = var
 
 
 f = FooBar('dsfasf')
 print(f.somevar)
 
+
 class A():
     def hello(self):
         print("hello,I'm in A")
+
 
 class B(A):
     def hello(self):
         print("hello, I'm in B")
 
-a=A()
-b=B()
+
+a = A()
+b = B()
 a.hello()
 b.hello()

@@ -13,7 +13,7 @@ class Fibs():
 
     def __next__(self):
         self.a, self.b = self.b, self.a + self.b
-        if self.a >100000000:
+        if self.a > 100000000:
             raise StopIteration
         return self.a
 
@@ -22,12 +22,12 @@ class Fibs():
 
 
 fibs = Fibs()
-#print(type(fibs))
-#print(dir(fibs))
+# print(type(fibs))
+# print(dir(fibs))
 
 print(list(fibs))
-for f in fibs:
-    if f > 100:
-        print(f)
-        print(list(fibs))
-        break
+# for f in fibs:
+#     if f > 100:
+#         print(f)
+#         print(list(fibs))
+#         break
