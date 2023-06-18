@@ -3,6 +3,18 @@
 @author: sunliguo
 @contact: QQ376440229
 @Created on: 2023-05-20 8:03
+logging自带的handler有很多类型，StreamHandler、FileHandler、RotatingFileHandler、TimedRotatingFileHandler、NullHandler、WatchedFileHandler、SocketHandler、DatagramHandler、SysLogHandler、NtEventHandler、SMTPHandler、MemoryHandler、HTTPHandler
+
+我想在GUI界面上显示日志内容，以上Handler都不支持。想到了两个思路，最后实现都成功了，而且很简单。
+
+思路一：以tk.Text为父类创建一个新的类，增加相关的功能以适配 StreamHandler。在创建StreamHandler时作为参数传入。
+
+实现：参考sys.stdou，因为StreamHandler(stream) 常规用法是把sys.stdout作为参数传进去的，查看StreamHandler源码见到其实就是在里面调用了sys.stdout的write()方法，即相当于print()。给新的类添加write()方法就可以了
+
+思路二：构造一个新的Handler类，可以支持直接把tk.Text控件作为参数传入。
+
+查了一下，发现各种handler最核心就是里面的 def emit(self, record) 这个函数，它确定了在哪里输出。重写emit函数即可。
+
 """
 
 import datetime
