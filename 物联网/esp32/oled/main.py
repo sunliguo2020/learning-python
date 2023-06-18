@@ -29,7 +29,7 @@ from oled.ssd1306 import SSD1306_I2C  #I2C的oled选该方法
 #创建软件I2C对象
 i2c = SoftI2C(sda=Pin(23), scl=Pin(18))
 #创建OLED对象，OLED分辨率、I2C接口
-oled = SSD1306_I2C(128, 32, i2c) 
+oled = SSD1306_I2C(128, 64, i2c) 
 
 #程序入口
 if __name__=="__main__":
