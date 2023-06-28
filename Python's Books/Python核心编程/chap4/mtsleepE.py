@@ -41,7 +41,7 @@ def main():
     for i in nloops:
         # print("i:",i)
         # print("loop[i]:",loops[i])
-        t = MyThread(loop,(i,loops[i]),loop.__name__)
+        t = MyThread(loop, (i, loops[i]), loop.__name__)
         threads.append(t)
 
     for i in nloops:

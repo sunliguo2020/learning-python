@@ -5,8 +5,7 @@
 @Created on: 2022/2/17 18:52
 """
 import _thread
-from time import sleep,ctime
-
+from time import sleep, ctime
 
 
 def loop0():
@@ -23,9 +22,9 @@ def loop1():
 
 def main():
     print("start at:", ctime())
-    #star_ne_thread(function,args,kwargs=None) 派生一个新的线程，使用给定的args和可选的kwargs来执行function
-    _thread.start_new_thread(loop0,())
-    _thread.start_new_thread(loop1,())
+    # star_ne_thread(function,args,kwargs=None) 派生一个新的线程，使用给定的args和可选的kwargs来执行function
+    _thread.start_new_thread(loop0, ())
+    _thread.start_new_thread(loop1, ())
     sleep(6)
     print("all done at :", ctime())
 

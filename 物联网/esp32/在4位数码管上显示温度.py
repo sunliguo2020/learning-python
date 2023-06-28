@@ -23,8 +23,8 @@ import tm1637
 from machine import Pin
 
 dht11_pin = 17
-clk_pin = 16
-dio_pin = 18
+clk_pin = 32
+dio_pin = 33
 
 
 # 获取当前温度和湿度的函数
@@ -35,6 +35,7 @@ def get_temp_humi():
     dht11.measure()  # 调用DHT类库中测量数据的函数
     temp = dht11.temperature()
     humi = dht11.humidity()
+    #print(temp,humi)
 
     if temp is not None and humi is not None:
         return temp, humi
@@ -47,7 +48,12 @@ def show_temp_humi():
     smg = tm1637.TM1637(clk=Pin(clk_pin), dio=Pin(dio_pin))
     temp, humi = get_temp_humi()
 
-    smg.scroll(str(temp) + "-" + str(humi), 500)
+    #smg.scroll(str(temp) + "-" + str(humi), 500)
+    print(type(temp))
+    temp_humi = int(str(temp)+str(humi))
+    #smg.temperature(temp_humi)
+    print(temp)
+    smg.number(temp_humi)
 
 
 if __name__ == '__main__':

@@ -6,13 +6,13 @@ from scrapy import Request
 class DaglSpider(scrapy.Spider):
     name = 'dagl'
     allowed_domains = ['192.168.1.21']
-    start_urls = ['http://192.168.1.21/personid/list/?page=13672']  #daglperosn detail
-    # start_urls = ['http://192.168.1.21/person/list/?page=16435']
+    # start_urls = ['http://192.168.1.21/personid/list/?page=17554']  #daglperosn detail
+    start_urls = ['http://192.168.1.21/person/list/?page=1']
 
     def parse(self, response):
-
-        list_items = response.xpath('//tr/td[2]/a') # daglperson_detail
-        # list_items = response.xpath('//tr/td[7]/a[4]')
+        # list_items = response.xpath('//tr/td[2]/a') # daglperson_detail
+        list_items = response.xpath('//tr/td[7]/a[4]') # getpersonid
+        list_items = response.xpath('//tr/td[7]/a[5]') # getbodyfeature
         for list_item in list_items:
             url = list_item.xpath('@href')
             url = response.urljoin(url.extract_first())
