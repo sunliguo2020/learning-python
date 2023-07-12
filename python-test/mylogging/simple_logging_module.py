@@ -21,6 +21,7 @@ ch.setFormatter(formatter)
 
 # add ch to logger
 logger.addHandler(ch)
+logger.setLevel(logging.DEBUG)
 
 # 'apolication' code
 logger.debug('debug message')
