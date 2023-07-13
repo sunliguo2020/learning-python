@@ -49,10 +49,11 @@ def show_temp_humi():
     temp, humi = get_temp_humi()
 
     #smg.scroll(str(temp) + "-" + str(humi), 500)
-    print(type(temp))
+    # print(type(temp))
     temp_humi = int(str(temp)+str(humi))
     #smg.temperature(temp_humi)
     print(temp)
+    print(humi)
     smg.number(temp_humi)
 
 
