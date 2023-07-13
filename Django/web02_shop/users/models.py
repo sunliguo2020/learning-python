@@ -23,7 +23,7 @@ class User(AbstractUser, BaseModel):
 class Addr(models.Model):
     """收货地址表"""
     user = models.ForeignKey('User', verbose_name='所属用户', on_delete=models.CASCADE)
-    phone = models.CharField(verbose_name='手机号码', max_length=11)
+    phone = models.CharField(verbose_name='手机号码', max_length=11,default='')
     name = models.CharField(verbose_name='联系人', max_length=20)
     province = models.CharField(verbose_name='省份', max_length=20)
     city = models.CharField(verbose_name='城市', max_length=20),

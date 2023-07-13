@@ -141,7 +141,7 @@ CORS_ALLOW_CREDENTIALS = True
 # 指定自定义用户类
 AUTH_USER_MODEL = 'users.User'
 
-# DRF的配置
+# DRF的配置鉴权方式
 REST_FRAMEWORK = {
     # 配置登录鉴权方式
     'DEFAULT_AUTHENTICATION_CLASSES': (
