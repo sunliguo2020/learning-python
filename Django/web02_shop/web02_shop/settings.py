@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'django_filters',
     'rest_framework',
     'users',
     'cart',
@@ -148,5 +149,45 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-    )
+    ),
+    # 配置DRF过滤器
+    'DEFAULT_FILTER_BACKENDS':['django_filters.rest_framework.DjangoFilterBackend']
 }
+
+# token的相关配置
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    # 访问令牌的有效时间
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    # 刷新令牌的有效时间
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    # 若为True，则刷新后新的refresh_token有更新的有效时间
+    "ROTATE_REFRESH_TOKENS": False,
+    # 若为True，刷新后的token将添加到黑名单
+    "BLACKLIST_AFTER_ROTATION": True,
+    # 对称算法：HS256 HS384 HS512 非对称:RSA
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    # if signing_key,verifying_key will be ignored.
+    "VERIFYING_KEY": None,
+    "AUDIENCE": None,
+    "ISSUER": None,
+
+    # Authorization: Bearer <token>
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    # if HTTP_X_ACCESS_TOKEN, X_ACCESS_TOKEN: Bearer <token>
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    # 使用唯一不变的数据库字段，将包含在生成的令牌中以标识用户
+    "USER_ID_CLAIM": "user_id",
+}
+
+# 使用自定义的认证类进行身份认证（登录时验证用户信息）
+AUTHENTICATION_BACKENDS = [
+    'common.authentication.Authentication'
+]
+
+# 文件上传的保存路径
+MEDIA_ROOT = BASE_DIR / 'file/image'
+# 指定文件获取的url路径
+MEDIA_URL = 'file/image/'
