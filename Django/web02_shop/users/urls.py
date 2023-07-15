@@ -20,6 +20,9 @@ urlpatterns = [
     # 上传用户头像接口
     path('<int:pk>/avatar/upload/', UserView.as_view({'post': 'upload_avatar'})),
 
+    # 修改昵称
+    path('<int:pk>/name/', UserView.as_view({'put': 'update_name'})),
+
     # 添加地址和获取地址列表
     path('address/', views.AddrView.as_view({
         "post": "create",
@@ -30,5 +33,10 @@ urlpatterns = [
     path('address/<int:pk>/', views.AddrView.as_view({
         "delete": "destroy",
         "put": 'update'
+    })),
+
+    # 设置默认收货地址
+    path('address/<int:pk>/default/', views.AddrView.as_view({
+        "put": 'set_default_addr'
     })),
 ]

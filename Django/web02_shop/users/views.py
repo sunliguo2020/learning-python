@@ -118,6 +118,20 @@ class UserView(GenericViewSet,
 
         return Response({"url": ser.data.get('avatar')})
 
+    def update_name(self, request, *args, **kwargs):
+        """修改用户昵称"""
+        # 1、获取参数
+        last_name = request.data.get('last_name')
+        # 2、校验参数
+        if not last_name:
+            return Response({"error": "用户昵称必传字段,参数last_name甭能为空"},
+                            status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        # 3、修改昵称
+        user = self.get_object()
+        user.last_name = last_name
+        user.save()
+        return Response({"message": '修改用户昵称成功!'})
+
 
 class FileView(APIView):
     """
@@ -151,12 +165,24 @@ class AddrView(GenericViewSet,
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        # 通过请求过来的用户进行过滤
+        # 通过请求过来的认证用户进行过滤
         queryset = queryset.filter(user=request.user)
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+    def set_default_addr(self, request, *args, **kwargs):
+        """设置默认的收货地址"""
+        # 1、获取到要设置的对象
+        obj = self.get_object()
+        obj.is_default = True
+        obj.save()
+        # 2、将该地址设置默认收货地址，将用户其他的收货地址设置为非默认
+        # 获取用户收货地址
+        queryset = self.get_queryset().filter(user=request.user)
+        for item in queryset:
+            if item != obj:
+                item.is_default = False
+                item.save()
+
+        return Response({'message': "设置成功"}, status=status.HTTP_200_OK)
