@@ -159,7 +159,7 @@ from datetime import timedelta
 
 SIMPLE_JWT = {
     # 访问令牌的有效时间
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=300),
     # 刷新令牌的有效时间
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     # 若为True，则刷新后新的refresh_token有更新的有效时间
