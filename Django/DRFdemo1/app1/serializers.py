@@ -11,29 +11,27 @@ from rest_framework import serializers
 from app1.models import UserInfo
 
 
-# class UserInfoSerializer(serializers.Serializer):
-#     name = serializers.CharField(max_length=18)
-#     pwd = serializers.CharField(max_length=20)
-#     email = serializers.EmailField(max_length=40)
-#     age = serializers.IntegerField(min_value=0, max_value=150)
-#
-#     def create(self, validated_data):
-#         """
-#         自定义一个序列化器保存数据的方法
-#         :param validated_data:
-#         :return:
-#         """
-#         UserInfo.objects.create(validated_data)
-#         return validated_data
-#
-#     def update(self, instance, validated_data):
-#         instance.name = validated_data['name']
-#         instance.pwd = validated_data['pwd']
-#         instance.email = validated_data['email']
-#         instance.age = validated_data['age']
-#
-#         instance.save()
-#         return instance
+class UserInfoSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=18)
+    pwd = serializers.CharField(max_length=20)
+    email = serializers.EmailField(max_length=40)
+    age = serializers.IntegerField(min_value=0, max_value=150)
 
-class UserInfoSerializer(serializers.ModelSerializer):
-    pass
+    def create(self, validated_data):
+        """
+        自定义一个序列化器保存数据的方法
+        :param validated_data:
+        :return:
+        """
+        UserInfo.objects.create(validated_data)
+        return validated_data
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data['name']
+        instance.pwd = validated_data['pwd']
+        instance.email = validated_data['email']
+        instance.age = validated_data['age']
+
+        instance.save()
+        return instance
+

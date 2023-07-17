@@ -5,5 +5,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('users/', views.user_list)
+    path('getdata/', views.get_data),
+    path('demo/', views.DemoView.as_view()),
 ]
