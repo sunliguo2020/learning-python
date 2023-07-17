@@ -18,6 +18,7 @@ class User(AbstractUser, BaseModel):
     class Meta:
         db_table = 'users'
         verbose_name = '用户表'
+        verbose_name_plural = verbose_name
 
 
 class Addr(models.Model):
@@ -34,6 +35,7 @@ class Addr(models.Model):
     class Meta:
         db_table = 'addr'
         verbose_name = '收货地址表'
+        verbose_name_plural = verbose_name
 
 
 class Area(models.Model):
