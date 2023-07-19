@@ -1,4 +1,5 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.views import View
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 
@@ -12,7 +13,7 @@ class UserListView(APIView):
     def get(self, request, format=None):
         pass
 
-    def post(self,request,format = None):
+    def post(self, request, format=None):
         pass
 
 
@@ -49,3 +50,21 @@ def user_list(request):
 
     else:
         return JsonResponse({'code': 405, 'messae': f"不支持该请求{request.method}"})
+
+
+class BookView(View):
+    def get(self, request):
+        return HttpResponse('BookView get run')
+
+    def post(self, request):
+        return HttpResponse('BookView post run')
+
+    def delete(self, request):
+        return HttpResponse('BookView delete run')
+
+
+class BookView2(APIView):
+    def post(self, request):
+        print(type(request.data))
+        print(request.data)
+        return HttpResponse(f"request.data{request.data}")
