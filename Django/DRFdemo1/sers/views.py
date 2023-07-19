@@ -43,6 +43,9 @@ class BookModelSerializers(serializers.ModelSerializer):
 
 class BookView(APIView):
     def get(self, request):
+        print(request.GET)
+        # print(request.POST)
+        print(request.body)  # You cannot access body after reading from request's data stream
         # 获取所有的书籍
         queryset = Book.objects.all()
         # 构建序列化对象
@@ -81,18 +84,29 @@ class BookDetailView(APIView):
             return Response(ser.data)
 
     def delete(self, request, id):
-        pass
+
+        result = Book.objects.filter(id=id).delete()
+        print(result)
+
+        return Response()
 
     def put(self, request, id):
-        book = Book.objects.get(id=id)
-        ser = BookSerializers(data=request.data, instance=book)
-        if ser.is_valid():
-            Book.objects.filter(id=id).update(**ser.validated_data)
+        """
+        修改一本书籍
+        """
+        try:
+            # 查询是否存在该资源
+            book = Book.objects.get(id=id)
 
-            updated_book = Book.objects.get(pk=id)
-            ser.instance = updated_book
-
-            # ser.save()
-            return Response(ser.validated_data)
+        except Exception as e:
+            return Response(data={"error": str(e)})
         else:
-            return Response(ser.errors)
+            ser = BookSerializers(data=request.data, instance=book)
+            if ser.is_valid():
+                Book.objects.filter(id=id).update(**ser.validated_data)
+                updated_book = Book.objects.get(pk=id)
+                ser.instance = updated_book
+                # ser.save()
+                return Response(ser.validated_data)
+            else:
+                return Response(ser.errors)
