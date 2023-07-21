@@ -36,6 +36,11 @@ class UserInfoSerializer(serializers.Serializer):
         instance.save()
         return instance
 
+    def validate_pwd(self, value):
+        """自定义的字段校验器"""
+        if 10 < len(value) < 18:
+            raise serializers.ValidationError('pwd长度需要在10-18之间')
+
 
 class AddrSerializer(serializers.Serializer):
     id = serializers.IntegerField()
