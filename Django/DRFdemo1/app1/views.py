@@ -1,7 +1,8 @@
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponse
 from django.views import View
 from rest_framework import status
-from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import UserInfo
@@ -18,6 +19,7 @@ class UserListView(APIView):
         pass
 
 
+@api_view(['GET', 'POST'])
 def user_list(request):
     """
     get方法请求：获取用户列表
@@ -35,59 +37,51 @@ def user_list(request):
             'code': 200,
             "message": "OK"
         }
-        return JsonResponse(result)
+        return Response(result, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        a = {"id": 1, "name": "sunliguo", "pwd": "123435", "email": "1234@qq.com", "age": 10
-             }
-        params = JSONParser().parse(request)
+
         # 创建序列化器
-        ser = UserInfoSerializer(data=params)
+        ser = UserInfoSerializer(data=request.data)
         # 校验请求数据
         if ser.is_valid():
             # 校验通过，则添加数据到数据
             ser.save()
-            return JsonResponse({'code': 201, 'data': ser.data, "message": 'OK'})
+            return Response({'code': 201, 'data': ser.data, "message": 'OK'})
         else:
-            return JsonResponse({'code': 400, 'message': ser.errors})
-
-    else:
-        return JsonResponse({'code': 405, 'message': f"不支持该请求{request.method}"})
+            return Response({'code': 400, 'message': ser.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET', 'PUT', 'DELETE'])
 def user_detail(request, id):
     """
     GET:获取单个用户信息
     PUT：修改单个用户信息
     DELETE:删除用户信息
     :param request:
-    :param id:
+    :param id: 操作资源的id
     :return:
     """
     try:
         obj = UserInfo.objects.get(id=id)
     except Exception as e:
-        return HttpResponse('404 访问资源不存在', status=status.HTTP_404_NOT_FOUND)
+        return Response({"code": 404, "message": "404,访问的资源不存在!"}, status=status.HTTP_404_NOT_FOUND)
+
     if request.method == 'GET':
         ser = UserInfoSerializer(obj)
-        return JsonResponse({'code': 200, "data": ser.data, 'message': "OK"})
+        return Response({'code': 200, "data": ser.data, 'message': "OK"}, status=status.HTTP_200_OK)
     elif request.method == "PUT":
         # 修改单个用户资源
-
         # ser = UserInfoSerializer(instance=obj, data=json.loads(request.body.decode('utf-8')))
 
-        params = JSONParser().parse(request)
-        ser = UserInfoSerializer(instance=obj, data=params)
+        ser = UserInfoSerializer(instance=obj, data=request.data)
         if ser.is_valid():
             ser.save()
-            return JsonResponse({'code': 200, "data": ser.validated_data, "message": "OK"})
+            return Response({'code': 200, "data": ser.validated_data, "message": "OK"}, status=status.HTTP_200_OK)
         else:
-            return JsonResponse({'code': 400, 'message': ser.errors})
+            return Response({'code': 400, 'message': ser.errors}, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         obj.delete()
-        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
-    else:
-        return JsonResponse({'code': 405, 'message': f"不支持该请求{request.method}"},
-                            status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 
 class BookView(View):
