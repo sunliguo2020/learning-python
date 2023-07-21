@@ -17,11 +17,10 @@ class UserInfo(models.Model):
 
 
 class Addr(models.Model):
-    user = models.ForeignKey("UserInfo",verbose_name='所属用户',on_delete=models.CASCADE)
-    mobile = models.CharField(verbose_name='手机号',max_length=19)
-    city = models.CharField(verbose_name='城市',max_length=20)
-    info = models.CharField(verbose_name="详细地址",max_length=200)
+    user = models.ForeignKey("UserInfo", verbose_name='所属用户', on_delete=models.CASCADE)
+    mobile = models.CharField(verbose_name='手机号', max_length=19)
+    city = models.CharField(verbose_name='城市', max_length=20)
+    info = models.CharField(verbose_name="详细地址", max_length=200)
 
     def __str__(self):
         return self.info
-
