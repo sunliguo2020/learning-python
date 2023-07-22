@@ -22,8 +22,9 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
     def validate_pwd(self, value):
         """自定义的字段校验器"""
-        if 10 < len(value) < 18:
+        if not 6 < len(value) < 18:
             raise serializers.ValidationError('pwd长度需要在10-18之间')
+        return value
 
 
 class AddrModelSerializer(serializers.ModelSerializer):
