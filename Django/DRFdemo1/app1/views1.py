@@ -9,15 +9,6 @@ from .serializers import UserInfoSerializer
 
 
 # Create your views here.
-
-class UserListView(APIView):
-    def get(self, request, format=None):
-        pass
-
-    def post(self, request, format=None):
-        pass
-
-
 def user_list(request):
     """
     get方法请求：获取用户列表
@@ -37,8 +28,7 @@ def user_list(request):
         }
         return JsonResponse(result)
     elif request.method == 'POST':
-        a = {"id": 1, "name": "sunliguo", "pwd": "123435", "email": "1234@qq.com", "age": 10
-             }
+
         params = JSONParser().parse(request)
         # 创建序列化器
         ser = UserInfoSerializer(data=params)
@@ -88,20 +78,3 @@ def user_detail(request, id):
         return JsonResponse({'code': 405, 'message': f"不支持该请求{request.method}"},
                             status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-
-class BookView(View):
-    def get(self, request):
-        return HttpResponse('BookView get run')
-
-    def post(self, request):
-        return HttpResponse('BookView post run')
-
-    def delete(self, request):
-        return HttpResponse('BookView delete run')
-
-
-class BookView2(APIView):
-    def post(self, request):
-        print(type(request.data))
-        print(request.data)
-        return HttpResponse(f"request.data{request.data}")
