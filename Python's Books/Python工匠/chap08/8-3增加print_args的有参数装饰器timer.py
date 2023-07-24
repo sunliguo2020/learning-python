@@ -31,10 +31,12 @@ def timer(print_args=False):
     return decorator
 
 
-@timer(print_args=True)  # _decorator = timer(print_args=True) ramdom_sleep= _decorator(ramdom_sleep)
+@timer()  # 必须加上()
+# @timer(print_args=True)  # _decorator = timer(print_args=True) ramdom_sleep= _decorator(ramdom_sleep)
 def random_sleep():
     time.sleep(random.random())
+    return random.random()
 
 
 if __name__ == '__main__':
-    random_sleep()
+    print(random_sleep())
