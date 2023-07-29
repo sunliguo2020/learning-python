@@ -10,7 +10,7 @@ from common.db import BaseModel
 class GoodsGroup(BaseModel):
     """商品分类"""
     name = models.CharField(max_length=20, verbose_name="名称")
-    image = models.ImageField(verbose_name="分类图标")
+    image = models.ImageField(blank=True, verbose_name="分类图标")
     status = models.BooleanField(default=False, verbose_name="是否启用")
 
     def __str__(self):
@@ -81,7 +81,7 @@ class GoodsBanner(BaseModel):
 class Collect(BaseModel):
     """收藏商品"""
     user = models.ForeignKey('users.User', help_text='用户ID', verbose_name='用户ID', on_delete=models.CASCADE,
-                             blank=True)
+                             )
     goods = models.ForeignKey('Goods', help_text="商品ID", verbose_name='商品ID', on_delete=models.CASCADE)
 
     class Meta:
