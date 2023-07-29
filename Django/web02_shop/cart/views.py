@@ -14,7 +14,7 @@ class CartView(mixins.ListModelMixin,
     """
 
     """
-    # 添加商品到购物车
+
     queryset = models.Cart.objects.all()
     serializer_class = serializers.CartSerializer
 
@@ -51,3 +51,4 @@ class CartView(mixins.ListModelMixin,
 
             # 方式2：
             return super().create(request, *args, **kwargs)
+        # 添加商品到购物车
