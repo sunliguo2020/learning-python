@@ -15,11 +15,12 @@ urlpatterns = [
     # # token 校验
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
+    # 获取用户列表
+    path('users/', UserView.as_view({'get': 'list'})),
     # 获取单个用户信息的路由
     path('users/<int:pk>/', UserView.as_view({'get': 'retrieve'})),
     # 上传用户头像接口
     path('<int:pk>/avatar/upload/', UserView.as_view({'post': 'upload_avatar'})),
-
     # 修改昵称
     path('<int:pk>/name/', UserView.as_view({'put': 'update_name'})),
 

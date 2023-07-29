@@ -90,7 +90,8 @@ class RegisterView2(APIView):
 
 
 class UserView(GenericViewSet,
-               mixins.RetrieveModelMixin):
+               mixins.RetrieveModelMixin,
+               mixins.ListModelMixin):
     """用户相关操作的视图集"""
     queryset = User.objects.all()
     serializer_class = UserSerializer

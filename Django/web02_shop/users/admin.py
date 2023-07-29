@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User,Addr,Area,VerifCode
+from .models import User, Addr, Area, VerifCode
 
 
 # Register your models here.
@@ -20,3 +20,15 @@ class AddrAdmin(admin.ModelAdmin):
                     'city',
                     'county',
                     'address']
+
+
+@admin.register(Area)
+class AreaAdmin(admin.ModelAdmin):
+    list_display = ['pid',
+                    'name',
+                    'level',
+                    ]
+@admin.register(VerifCode)
+class VerifCodeAdmin(admin.ModelAdmin):
+    list_display = ['mobile',
+                    'code']

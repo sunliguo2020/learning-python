@@ -5,7 +5,6 @@
 @Created on: 2023-07-14 13:16
 """
 from rest_framework import serializers
-
 from users.models import User, Addr
 
 
