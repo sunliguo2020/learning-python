@@ -45,7 +45,6 @@ class GoodsView(ReadOnlyModelViewSet):
     filterset_fields = ("recommend", "group")
 
     # 通过价格和销量排序
-
     ordering_fields = ('sales', 'price')
 
 
