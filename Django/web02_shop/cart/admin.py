@@ -7,4 +7,4 @@ from . import models
 
 @admin.register(models.Cart)
 class CartAdminModela(admin.ModelAdmin):
-    list_display = ['user', 'goods', 'number', 'is_checked']
+    list_display = ['id', 'user', 'goods', 'number', 'is_checked']
