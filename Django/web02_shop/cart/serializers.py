@@ -11,14 +11,15 @@ from . import models
 
 
 class CartSerializer(serializers.ModelSerializer):
-    """购物车序列化器"""
+    """写入：购物车序列化器"""
+    number = serializers.IntegerField(min_value=1,required=False)
 
     class Meta:
         model = models.Cart
         fields = "__all__"
 
 
-class CartInfoSerializer(serializers.ModelSerializer):
+class ReadCartSerializer(serializers.ModelSerializer):
     # 返回商品名称
     goods = GoodsSerializer()
 
