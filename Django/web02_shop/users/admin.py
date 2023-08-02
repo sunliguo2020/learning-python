@@ -1,11 +1,12 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as OldUserAdmin
 
 from .models import User, Addr, Area, VerifCode
 
 
 # Register your models here.
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(OldUserAdmin):
     list_display = ['username',
                     'mobile',
                     'avatar']
@@ -28,6 +29,8 @@ class AreaAdmin(admin.ModelAdmin):
                     'name',
                     'level',
                     ]
+
+
 @admin.register(VerifCode)
 class VerifCodeAdmin(admin.ModelAdmin):
     list_display = ['mobile',
