@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点我一下</button>
+    <script>
+        /*
+        要使用DOM来操作网页，我们需要浏览器至少得先给我一个对象才能去完成各种操作
+
+        浏览器已经为我们提供了一个document对象
+
+        */
+        //    console.log(document);
+        //获取btn对象
+        const btn = document.getElementById('btn')
+        console.log(btn);
+        //修改btn中的文字
+        btn.innerText = 'Click Me'
+    </script>
+
+
+</body>
+
+</html>
