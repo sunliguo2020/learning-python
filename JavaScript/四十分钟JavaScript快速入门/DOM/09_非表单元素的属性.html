@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="http://www.baidu.com" title="跳转到百度页面" id="link">跳转</a>
+    <img src="images/a.jpg" alt="美女" class="pic" id="pic">
+    <script>
+        //获取元素
+        var link = document.getElementById('link');
+        var pic = document.getElementById("pic");
+        //调用元素对象的属性，从而操作HTML标签的属性
+        console.log(link.href)
+        console.log(link.title)
+        console.log(link.id)
+        console.log(pic.src)
+        console.log(pic.alt)
+        console.log(pic.className)
+        pic.src='images/b.jpg';
+    </script>
+</body>
+</html>

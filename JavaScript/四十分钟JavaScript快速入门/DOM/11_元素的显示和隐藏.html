@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+        .hide {
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="点击隐藏" id="btn">
+    <div id="box" class="show"></div>
+    <script>
+        //获取元素
+        var btn = document.getElementById('btn');
+        var box = document.getElementById('box')
+        //点击按钮，让div 显示或隐藏
+        btn.onclick = function (){
+            if (box.className === 'show'){
+                box.className = "hide"
+                btn.value = '点击显示'
+            }
+            else {
+                box.className = 'show'
+                btn.value='点击隐藏'
+            }
+        };
+        // 在事件函数内部有一个this，指向事件源。
+        //区分一下不同函数内部 this的指向
+        //普通函数  ->window对象
+        //构造函数 ->生成的实例对象
+        //对象的方法 ->对象本身
+        //事件函数 ->事件源
+    </script>
+</body>
+
+</html>

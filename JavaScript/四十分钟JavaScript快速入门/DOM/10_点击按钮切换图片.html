@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击" id = 'btn'><br>
+    <img src="images/a.jpg" id="pic">
+    <script>
+        //获取元素
+        var btn = document.getElementById('btn')
+        var pic = document.getElementById('pic');
+        var num = 1
+        //给按钮加点击事件
+        btn.onclick = function(){
+           //给图片换src的属性值
+           if(num === 1){
+            pic.src = 'images/b.jpg';
+            num = 2;
+            console.log(pic.src)
+           }
+           else{
+                pic.src='images/a.jpg';
+                num =1;
+           } 
+        };
+    </script>
+</body>
+</html>
