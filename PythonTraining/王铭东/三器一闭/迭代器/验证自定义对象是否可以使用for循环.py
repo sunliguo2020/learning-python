@@ -4,8 +4,11 @@
 @contact: QQ376440229
 @Created on: 2023-05-25 22:34
 """
+
+
 class Student(object):
     """学生管理系统"""
+
     def __init__(self):
         self.stus = []
 
