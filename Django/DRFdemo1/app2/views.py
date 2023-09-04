@@ -11,6 +11,23 @@ def get_data(request):
     return Response({}, status=status.HTTP_200_OK)
 
 
+@api_view(['POST', 'PUT', 'PATCH'])
+def add_data(request):
+    pass
+
+
 class DemoView(APIView):
     def get(self, request):
         return Response({'code': 'get-ok'})
+
+    def post(self, request):
+        return Response({'code': 'post-ok'})
+
+    def put(self, request):
+        return Response({'code': 'put-ok'})
+
+    def putch(self, request):
+        return Response({'code': 'putch-ok'})
+
+    def delete(self, request):
+        return Response({'code': 'delete-ok'})

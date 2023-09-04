@@ -1,10 +1,11 @@
 from rest_framework import serializers, status
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework import  viewsets
 from .models import Book
-
-
+from rest_framework.generics import views
 # Create your views here.
 class BookSerializers(serializers.Serializer):
     title = serializers.CharField()
@@ -43,9 +44,6 @@ class BookModelSerializers(serializers.ModelSerializer):
 
 class BookView(APIView):
     def get(self, request):
-        print(request.GET)
-        # print(request.POST)
-        print(request.body)  # You cannot access body after reading from request's data stream
         # 获取所有的书籍
         queryset = Book.objects.all()
         # 构建序列化对象
@@ -110,3 +108,26 @@ class BookDetailView(APIView):
                 return Response(ser.validated_data)
             else:
                 return Response(ser.errors)
+
+
+class BookGenericApiView(GenericAPIView, ListModelMixin):
+    """
+
+    """
+    # 查询集
+    queryset = Book.objects.all()
+    serializer_class = BookModelSerializers
+
+    def get(self, request):
+        ser = self.get_serializer(instance=self.get_queryset(), many=True)
+        return Response(ser.data)
+
+    def post(self, request):
+        # 构建序列化器
+        ser = self.get_serializer(data=request.data)
+
+        if ser.is_valid():
+            ser.save()
+            return Response(ser.validated_data)
+        else:
+            return Response(ser.errors)
