@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'rest_framework',
+    'ckeditor',
     'users',
     'cart',
     'goods',
@@ -151,7 +152,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
     # 配置DRF过滤器
-    'DEFAULT_FILTER_BACKENDS':['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',
+                                "rest_framework.filters.OrderingFilter"
+                                ]
 }
 
 # token的相关配置

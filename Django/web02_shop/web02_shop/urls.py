@@ -20,6 +20,15 @@ from users.views import FileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 用户模块接口
     path('api/users/', include('users.urls')),
+    # 商品模块接口
+    path('api/goods/', include('goods.urls')),
     re_path(r'file/image/(.+?)/', FileView.as_view()),
+
+    # 购物车模块
+    path('api/cart/', include('cart.urls')),
+
+    # 订单模块
+    path('api/order/',include('order.urls'))
 ]
