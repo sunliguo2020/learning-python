@@ -25,12 +25,11 @@ def timer(func):
     return decorated
 
 
-# @timer
+@timer
 def random_sleep():
     """随机睡眠一小会"""
     time.sleep(random.random())
 
-
-random_sleep = timer(random_sleep)
+# random_sleep = timer(random_sleep)
 if __name__ == '__main__':
     random_sleep()
