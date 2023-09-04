@@ -4,7 +4,8 @@
 @contact: QQ376440229
 @Created on: 2022/12/10 11:26
 """
-from django.views.generic import TemplateView, ListView,DetailView
+from django.views.generic import TemplateView, ListView, DetailView
+
 from . import models
 
 
@@ -21,9 +22,9 @@ class TestTemplateViews(TemplateView):
 
 
 class TestListView(ListView):
-    '''
+    """
     列表视图类
-    '''
+    """
     model = models.UserBaseInfo
     template_name = '2/test_listview.html'
 
@@ -64,6 +65,5 @@ class TestDetailView(DetailView):
     template_name = '2/test_detaiview.html'
     context_object_name = 'users'
 
-    #对应路由中的参数userid
+    # 对应路由中的参数userid
     pk_url_kwarg = 'userid'
-
