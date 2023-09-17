@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <h1>{{message}}</h1>
+        <!-- 以普通文本方式输出 -->
+        <h1>{{msgHtml}}</h1>
+        <!-- 以HTML方式输出 -->
+        <h1 v-html="msgHtml"></h1>
+
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue",
+            msgHtml: "<span style='color:red'>这里的内容以红色显示</span>"
+        }
+    })
+</script>
+
+</html>
