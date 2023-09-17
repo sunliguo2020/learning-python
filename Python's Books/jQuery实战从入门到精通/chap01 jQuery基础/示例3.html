@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            var $li = $('li'); //返回jQuery对象
+            var li = $li[0];    //返回DOM对象
+            alert(li.innerHTML);
+        })
+    </script>
+</head>
+<body>
+    <ul>
+        <li>故人西辞黄鹤楼，</li>
+        <li>烟花三月下扬州。</li>
+        <li>孤帆远影碧空尽，</li>
+        <li>唯见长江天际流。</li>
+
+    </ul>
+</body>
+</html>
