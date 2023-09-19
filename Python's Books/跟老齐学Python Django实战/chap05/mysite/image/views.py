@@ -12,7 +12,7 @@ from .models import Image
 @csrf_exempt
 @require_POST
 def upload_image(request):
-    print(request.POST)
+    # print(request.POST)
     form = ImageForm(data=request.POST)
     # logging.debug(form)
     # print(f"form:{form}")
@@ -34,3 +34,18 @@ def upload_image(request):
 def list_images(request):
     images = Image.objects.all()
     return render(request, 'image/list_images.html', {'images': images})
+
+
+@require_POST
+@csrf_exempt
+def del_image(request):
+    image_id = request.POST.get('image_id', '')
+    print(f"image_id:{image_id}")
+    try:
+        image = Image.objects.get(id=image_id)
+        print(f"image_object:{image}")
+        image.delete()
+        return JsonResponse({"status": "1"})
+    except Exception as e:
+        print(f"e:{e}")
+        return JsonResponse({"status": "2"})
