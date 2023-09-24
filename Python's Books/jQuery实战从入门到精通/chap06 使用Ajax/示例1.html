@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            $('input').click(function () {
+                //请求当前url
+                $.get('', {
+                    name: 'css8',
+                    password: '12345',
+                    age: 1
+                }, function (data) {
+                    alert(data);
+                });
+            });
+
+        });
+
+    </script>
+</head>
+
+<body>
+<input type="button" value="jQuery 实现异步请求">
+</body>
+
+</html>

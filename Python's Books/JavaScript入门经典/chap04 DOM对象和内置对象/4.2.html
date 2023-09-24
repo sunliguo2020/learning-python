@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Current Date and Time</title>
+    <style>
+        p {
+            font: 14px normal arial, Verdana, Helvetica;
+
+        }
+    </style>
+    <script>
+        function telltime() {
+            var out = "";
+            var now = new Date();
+            out += "<br/>Date: " + now.getDate();
+            out += "<br/>Month: " + now.getMonth();
+            out += "<br/>Year: " + now.getFullYear();
+            out += "<br/>Hours: " + now.getHours();
+            out += "<br/>Minutes: " + now.getMinutes();
+            out += "<br/>Seconds: " + now.getSeconds();
+
+            document.getElementById("div1").innerHTML = out;
+
+
+        }
+    </script>
+</head>
+<body>
+The current date and time are:<br/>
+<div id="div1">
+    <script>
+        telltime();
+    </script>
+    <input type="button" onclick="location.reload()" value='Refresh'>
+</div>
+
+</body>
+</html>

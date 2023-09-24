@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function buttonReport(buttonId, buttonName, buttonValue) {
+            // information about the id of the button
+            var userMessage1 = "Button id: " + buttonId + "\n"
+            // then about the button name
+            var userMessage2 = "Button name: " + buttonName + "\n"
+            var userMessage3 = "Button value: " + buttonValue
+
+            alert(userMessage1 + userMessage2 + userMessage3)
+        }
+    </script>
+</head>
+<body>
+<input type="button" id="id1" name="Left Hand Button" value="left" onclick="buttonReport(this.id,this.name,this.value)">
+<input type="button" id="id2" name="Center Button" value="left" onclick="buttonReport(this.id,this.name,this.value)">
+<input type="button" id="id3" name="Right Hand Button" value="left"
+       onclick="buttonReport(this.id,this.name,this.value)">
+</body>
+</html>

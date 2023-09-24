@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <title>Document</title>
+    <script>
+        $(function () {
+
+            $("ul").delegate("li", "click", function () {
+                alert(this.innerHTML);
+            });
+
+            var i = 4;
+            $("#btn").click(function () {
+                $("ul").append("<li>列表项目" + i++ + "</li>");
+            })
+
+        });
+    </script>
+</head>
+
+<body>
+    <button id="btn">添加列表项目</button>
+    <ul id="list">
+        <h1>我h1        </h1>
+        <li>列表项目1</li>
+        <li>列表项目2</li>
+        <li>列表项目3</li>
+    </ul>
+</body>
+
+</html>

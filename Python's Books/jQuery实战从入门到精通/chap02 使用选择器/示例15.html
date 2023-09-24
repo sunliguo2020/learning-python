@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery/jquery-3.7.1.min.js">
+
+    </script>
+    <script>
+        $(function(){
+            $("form input").css({"border":"solid 1px red","background":"blue"});
+            
+        })
+    </script>
+</head>
+
+<body>
+<form action="">
+    <fieldset>
+        <label>包含的子文本框
+            <input >
+        </label>
+        <fieldset>
+            <label>包含的孙文本框
+                <input type="text">
+            </label>
+        </fieldset>
+    </fieldset>
+</form>
+<label for="">
+    非包含的文本框
+    <input/>
+</label>
+</body>
+
+</html>

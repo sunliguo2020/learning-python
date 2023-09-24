@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <style>
+        div {
+            width: 300px;
+            height: 180px;
+            background: red;
+            padding: 20px;
+        }
+
+        span {
+            float: right;
+            width: 120px;
+            height: 80px;
+            background: blue;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            var div = document.getElementsByTagName("div")[0]
+            var p = document.getElementsByTagName("p")[0]
+            var span = document.getElementsByTagName("span")[0]
+
+            if (div.addEventListener) {
+                div.addEventListener("mouseover", over, false);
+                div.addEventListener("mouseout", out, false);
+            } else {
+                div.attachEvent("onmouseover", over);
+                div.attachEvent("onmouseout", out);
+            }
+            function over(event) {
+                var event = event || window.event;
+                p.innerHTML += event.type + "<br/>";
+            }
+            function out(event) {
+                var event = event || window.event;
+                p.innerHTML += event.type + "<br/>";
+            }
+        }
+    </script>
+    <div>
+        <span></span>
+    </div>
+    <p></p>
+</body>
+
+</html>
