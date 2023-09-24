@@ -65,6 +65,23 @@ jQuery的选择器有三种类型
 
 寻找到你想要的标签后(如果你用的是id选择器)，jQuery会提供一系列操作的方法，如$("#id").text("要更改的值") 代表修改标签文本，$("#id").val("要更改的值") 代表修改标签value值，如果括号内不带参数的话，便是获取该值。
 
+## 2.3结构选择器
+
+#### 2.3.1层级选择器
+
+层级选择器能够根据元素之间的结构关系进行匹配操作，主要包含选择器、子选择器、相邻选择器和兄弟选择器。
+
+| 选择器              | 说明 |
+| ------------------- | ---- |
+| ancestor descendant |      |
+| parent>child        |      |
+| prev+next           |      |
+| prev~siblings       |      |
+
+
+
+
+
 # chap03 使用过滤器
 
 # chap04 操作DOM
@@ -184,13 +201,13 @@ $("input:checked") //获取所有选中的复选框单选按钮等
 $("select option:selected") //获取选中的选项元素
 ```
 
-## 5、jQuery事件
+# chap05 事件处理
 
-#### 5.1 绑定事件
+## 5.1 jQuery事件基础
 
 jQuery提供了四种事件绑定方式：bind(),live(),delegate(),on()。
 
-1、bind()
+### 1、bind() 为匹配元素添加一个或多个事件处理器。
 
 ```javascript
 bind(event,data,function)
@@ -212,6 +229,105 @@ bind(event,data,function)
     </script>
 ```
 
+```html
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            /*添加单个事件处理*/
+            $(".btn-test").bind("click", function () {
+                console.log('bind')
+                $(".container").slideToggle(); //显示隐藏div
+            });
+            /*添加多个事件处理*/
+            $(".btn-test").bind("mouseout click",function(){ //空格相隔方式
+                $(".container").slideToggle(); // 显示隐藏div
+            });
+            $(".btn-test").bind({   //大括号替代方式
+                "mouseout":function(){
+                    alert("这是mouseout事件！")
+                },
+                "click":function(){
+                    $(".countainer").slideToggle();
+                }
+            });
+            /*删除事件处理*/
+            $(".btn-test").unbind("click");
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <input type="button" value="按钮" class="btn-test">
+    <div class="container">
+        <img src="images/1.jpg" height="200" alt="">
+    </div>
+</body>
+
+</html> 
+```
+
+2.live()为当前或未来的匹配元素添加一个或多个事件处理程序。
+
+```
+live(event,data,function)
+```
+
+3、delegate()为指定的元素，以及被选元素的子元素，添加一个或多个事件处理程序，并规定当这些事件发生时运行的函数。
+
+```
+delegate(childSelector,event,data,function)
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <title>Document</title>
+    <script>
+        $(function () {
+
+            $("ul").delegate("li", "click", function () {
+                alert(this.innerHTML);
+            });
+
+            var i = 4;
+            $("#btn").click(function () {
+                $("ul").append("<li>列表项目" + i++ + "</li>");
+            })
+
+        });
+    </script>
+</head>
+
+<body>
+    <button id="btn">添加列表项目</button>
+    <ul id="list">
+        
+        <li>列表项目1</li>
+        <li>列表项目2</li>
+        <li>列表项目3</li>
+    </ul>
+</body>
+
+</html>
+```
+
 
 
 常见 DOM 事件：
@@ -224,7 +340,7 @@ bind(event,data,function)
 | [mouseleave](https://www.runoob.com/jquery/event-mouseleave.html) |                                                              | [blur](https://www.runoob.com/jquery/event-blur.html)     | [unload](https://www.runoob.com/jquery/event-unload.html) |
 | [hover](https://www.runoob.com/jquery/event-hover.html)      |                                                              |                                                           |                                                           |
 
-JQuery事件方法语法
+jQuery事件方法语法
 
 页面中的一个点击事件
 
@@ -239,6 +355,96 @@ $("p").click(function(){
 //动作触发后执行的代码!!
 });
 ```
+
+### 5.1.6 触发事件
+
+```
+tigger(type,[data])
+```
+
+[示例10]
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $("li").click(function(){
+                alert($(this).text());
+            });
+            $("li").mouseover(function(){
+                $(this).trigger("click"); //调用tigger方法直接触发click操作
+            });
+        })
+    </script>
+</head>
+<body>
+    <ul id="list">
+        <li>空山新雨后，天气晚来秋。</li>
+        <li>明月松间照，清泉石上流。</li>
+        <li>竹暄归浣女，莲动下鱼舟。</li>
+        <li>随意春芳歇，王孙自可留。</li>
+    </ul>
+</body>
+</html>
+
+```
+
+## 5.2 实战案例
+
+#### 5.2.1 切换事件
+
+【示例12】
+
+```html
+<script>
+        $(function(){
+            $("button").click(mySlow               
+            );
+        })
+        function mySlow(){
+            $("ul#list").toggle("slow")
+        }
+    </script>
+    <button>控制</button>
+    <ul id="list">
+        <li>空山新雨后，天气晚来秋。</li>
+        <li>明月松间照，清泉石上流。</li>
+        <li>竹暄归浣女，莲动下鱼舟。</li>
+        <li>随意春芳歇，王孙自可留。</li>
+    </ul>
+```
+
+#### 5.2.2 使用悬停事件
+
+【示例13】
+
+```javascript
+<script>
+        $(function(){
+            $("input").hover(
+                function(){
+                    this.value = "鼠标经过";
+                },
+                function(){
+                    this.value = "鼠标已经移出";
+                }
+            );
+        })
+    </script>
+    <input type="button" value="鼠标切换实践">
+```
+
+
+
+【示例14】
+
+
 
 jQuery获取内容和属性
 
