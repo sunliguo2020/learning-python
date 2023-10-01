@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../node_modules/vue/dist/vue.js">
+  </script>
+</head>
+<body>
+<ul id="app">
+  <li v-for="item in goodsList">
+    <p>{{ item.title }}</p>
+    <span v-if="item.hot">火爆</span>
+
+  </li>
+
+</ul>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      goodsList: [
+        {
+          title: "哈密大枣",
+          hot: true,
+          id: 1
+        },
+        {
+          title: '和田大枣',
+          hot: true,
+          id: 2
+        },
+        {
+          title: '若羌枣',
+          host: true,
+          id: 3
+        }
+      ]
+    }
+  });
+</script>
+</body>
+</html>
