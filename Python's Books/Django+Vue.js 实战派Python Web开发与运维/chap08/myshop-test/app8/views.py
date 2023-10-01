@@ -1,10 +1,15 @@
-from django.shortcuts import render
-
 import json
+
+from django.http import HttpResponse
+from django.views import View
+
+from .models import Goods
+
+
 # Create your views here.
 
 
-class GoodsListView(view):
+class GoodsListView(View):
     def get(self, request):
         json_list = []
         goods = Goods.objects.all()[:20]
@@ -14,4 +19,4 @@ class GoodsListView(view):
 
             json_list.append(json_dict)
 
-        return HtttpResponse(json.dumps(json_list, ensure_ascii=False, indent=4), content_type="application/json")
+        return HttpResponse(json.dumps(json_list, ensure_ascii=False, indent=4), content_type="application/json")
