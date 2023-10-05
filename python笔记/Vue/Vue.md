@@ -178,7 +178,7 @@ export default {
 
 ```
 
-
+v-bind指令只是将元素的id attribute与组件的dynamicld属性保持一致。如果绑定的值是null或者undefined，那么该attribute将会从渲染的元素上移除。
 
 > 温习提示：
 >
@@ -249,15 +249,15 @@ export default {
 </script>
 ```
 
-## 10 通过key管理状态
+# 10 通过key管理状态
 
 ### 维护状态
 
-当Vue正在更新使用v-for渲染的元素列表时，它默认使用“就地更新”的策略。如果数据项的顺序改变，Vue就不会移动DOM元素来匹配数据项的顺序，而是就地更新每个元素，并确保他们在每个所有位置正确渲染。
+当Vue正在更新使用v-for渲染的元素列表时，它默认使用“就地更新”的策略。如果数据项的**顺序**改变，Vue就不会移动DOM元素来匹配数据项的顺序，而是就地更新每个元素，并确保他们在原本指定的索引位置上渲染。
 
 为了给Vue一个提示，以便它能耿总每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一的key attribute：
 
-```
+```vue
 <template>
   <h3>key属性添加到v-for中</h3>
   <p v-for="(name, index) of names" v-bind:key="index">{{ name }}</p>
@@ -271,7 +271,7 @@ export default {
 </script>
 ```
 
-## 11 事件处理
+# 11 事件处理
 
 Vue.js的事件绑定格式是"v-on:"或者”@“。事件处理方法需要在methods中定义。
 
@@ -349,9 +349,7 @@ export default {
 </script>
 ```
 
-
-
-### 12 事件传参
+# 12 事件传参
 
 内联处理器中的参数
 
@@ -393,13 +391,162 @@ export default {
 </script>
 ```
 
+# 13事件修饰符
+
+Vue为v-on提供了事件修饰符，常用的有一下几个：
+
+- .stop
+
+- .prevent
+
+- .once
+
+- .enter
+
+  
+
+#### 阻止默认事件
+
+```vue
+<template>
+<h3>事件修饰符</h3>
+<a @click.prevent="clcikHandle" href="https://itbaizhan.com">百战程序员</a>
+</template>
+<script>
+
+export default{
+    data(){
+
+        return {
+
+        }
+    },
+    methods:{
+        clcikHandle(e){
+            //阻止默认事件
+            // e.preventDefault();
+            console.log('点击了');
+        }
+    }
+}
+</script>
+```
+
+#### 阻止冒泡事件
+
+```vue
+<template>
+<h3>事件修饰符</h3>
+
+<div @click="clickDiv">
+    <p @click.stop="clickP">测试冒泡</p>
+</div>
+</template>
+<script>
+
+export default{
+    data(){
+
+        return {
+
+        }
+    },
+    methods:{
+   
+        clickDiv(){
+            console.log('点击了div')
+        },
+        clickP(e){
+            //阻止冒泡
+            // e.stopPropagation();
+            console.log('点击了p')
+        }
+    }
+}
+</script>
+```
+
+# 14 数组变化侦测
+
+#### 变更方法
+
+变更方法，顾名思义，就是会对调用他们的原数组进行变更。
+
+Vue能够侦听响应式数组的变更方法，并在它们被调用时触发相关的更新。这些变更方法包括：
+
+- push()
+- pop()
+- shift()
+- unshift()
+- splice()
+- sort()
+- reverse()  
+
+```vue
+<template>
+<h3>数组侦听</h3>
+<button @click="addListHandle">添加数据</button>
+<ul>
+    <li v-for="(name,index) in names" :key="index">{{ name }}</li>
+</ul>
+</template>
+<script>
+export default{
+    data(){
+        return {
+            names:['iwen','ime','frank']
+        }
+    },
+    methods:{
+        //引起UI自动更新
+        addListHandle(){
+            this.names.push("sakura")
+        }
+    }
+
+}
+</script>
+```
 
 
-### 13事件修饰符
 
-### 14 数组变化侦测
+#### 替换一个数组
 
-### 15 计算属性
+filter(),concat()和slice()，不会更改原数组，而总是返回一个新数组。当遇到的是非变更方法时，我门需要将就的数组替换为新的。
+
+```vue
+<template>
+<h3>数组侦听</h3>
+<button @click="addListHandle">添加数据</button>
+<ul>
+    <li v-for="(name,index) in names" :key="index">{{ name }}</li>
+</ul>
+</template>
+<script>
+export default{
+    data(){
+        return {
+            names:['iwen','ime','frank']
+        }
+    },
+    methods:{
+        
+        addListHandle(){
+            //引起UI自动更新
+            // this.names.push("sakura")
+            //不会引起UI自动更新
+            this.names.concat(['sakura'])
+
+            console.log(this.names)
+            this.names = this.names.concat(['sakura'])
+        }
+    }
+
+}
+</script>
+```
+
+# 15 计算属性
 
 ```vue
 <template>
@@ -427,7 +574,13 @@ export default {
 </script>
 ```
 
-### 16 Class 绑定
+# 16 Class 绑定
+
+数据绑定的一个常见需求场景是操纵元素的CSS class列表。
+
+Vue专门为class的v-bind用法提供了特殊的功能增强。处理字符串外，表达式的值也可以是对象或数组。
+
+
 
 ```vue
 <template>
@@ -464,9 +617,36 @@ export default {
 </style>
 ```
 
+# 17 style绑定
 
+```vue
+<template>
+    <p :style="{class:'red'}">style绑定1</p>
+    <p :style="{class:activeColor}">style绑定2</p>
+    <p :style="styleObject">style绑定3</p>
 
-### 18 侦听器
+    
+</template>
+<script>
+export default {
+    data(){
+        return {
+            activeColor:'green',
+            fontSize:30,
+            styleObject:{
+                color:'red',
+                fontSize:'30px'
+            }
+
+        }
+    }
+}
+</script>
+```
+
+# 18 侦听器
+
+我们使用wach选项在每次响应式属性发生变化时触发一个函数。
 
 ```vue
 <template>
@@ -499,7 +679,7 @@ export default {
 </script>
 ```
 
-## 19表单输入绑定
+# 19表单输入绑定v-model
 
 
 
@@ -526,7 +706,11 @@ export default {
 
 ```
 
-### 20 模板引用
+# 20 模板引用
+
+虽然Vue的声明性渲染模型为你抽象了大部分对DOM的直接操作，但在某些情况下，我们仍然需要直接访问的底层DOM元素。要实现这一点，我们可以使用特殊的ref attribute。
+
+挂载结束后引用都会被暴露在<font color=red>this.$refs</font>之上。
 
 ```vue
 <template>
@@ -559,11 +743,74 @@ export default {
 </script>
 ```
 
-## 21组件组成
+# 21组件组成
+
+组件最大的优势就是可复用性。
+
+当使用构建步骤时，我们一般会将Vue组件定义在一个.vue文件中，这被叫做单文件组件（简称SFC）
+
+#### 组件组成结构
+
+```vue
+<template>
+	<div>承载标签</div>
+</template>
+<script>
+export default {
+
+}
+</script>
+<style scoped>
+</style>
+```
+
+#### mycomponent
+
+```vue
+<template>
+  <div class="container">组件基础组成</div>
+</template>
+<script >
+export default {
+  data() {
+    return "";
+  },
+};
+</script>
+
+<!--scoped 让当前样式只在当前组件生效-->
+<style scoped>
+.container {
+  font-size: 20px;
+}
+</style>
+
+```
+
+App.vue
+
+```vue
+<template>
+    <!-- 第三步：显示组件 -->
+    <MyComponent/>
+</template>
+<script>
+//第一步：引入组件
+import MyComponent from "./components/mycomponent.vue"
+
+export default{
+    //第二步：注入组件
+    components:{
+        MyComponent,
+    }
+}
+</script>
+
+```
 
 
 
-### 22 组件嵌套关系
+# 22 组件嵌套关系
 
 通常一个应用会以一棵嵌套的组件树的形式来组织。
 
