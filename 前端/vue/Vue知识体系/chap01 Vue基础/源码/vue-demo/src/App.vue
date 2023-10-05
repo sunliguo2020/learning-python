@@ -9,17 +9,21 @@ import modelDemoVue from "./components/modelDemo.vue";
 import watchDemoVue from "./components/watchDemo.vue";
 import refDemoVue from "./components/refDemo.vue"
 
+import myComponent from "./components/myComponent.vue"
+
+
 </script>
 
 <template>
-  <!-- <HelloWorld />
-  <ifDemoVue />
+  <HelloWorld />
+  <!-- <ifDemoVue />
   <ListDemo />
-  <keyDemoVue/> -->
+  <keyDemoVue/>  -->
   <!-- <computedDemoVue/>
   <classDemoVue/> -->
   <!-- <watchDemoVue/> -->
   <!-- <modelDemoVue/> -->
-  <refDemoVue/>
+  <!-- <refDemoVue/> -->
+  <!-- <myComponent /> -->
 </template>
 
