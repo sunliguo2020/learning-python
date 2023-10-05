@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="myForm">
+        用户名：<input type="text" id="username">
+        密码：<input type="password" id="password">
+        <button id="resetBtn">重置</button>
+    </form>
+    <script>
+        var username = document.getElementById("username")
+        var password = document.getElementById('password')
+        var resetBtn = document.getElementById("resetBtn")
+        var myForm = document.getElementById('myForm')
+        resetBtn.onclick = function(){
+            myForm.reset();
+        }
+    </script>
+</body>
+</html>

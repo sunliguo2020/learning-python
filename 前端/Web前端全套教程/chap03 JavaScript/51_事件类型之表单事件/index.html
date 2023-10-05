@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    用户名：<input type="text" id="username">
+    密码：<input type="text" id="password">
+    <script>
+        var username = document.getElementById("username")
+        var password = document.getElementById("password")
+        username.oninput = function (e) {
+            console.log(e.target.value)
+        }
+        password.onchange = function (e) {
+            console.log(e.target.value)
+        }
+
+    </script>
+</body>
+
+</html>
