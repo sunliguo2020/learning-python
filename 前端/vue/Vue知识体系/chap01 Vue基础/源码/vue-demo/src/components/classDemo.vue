@@ -1,7 +1,7 @@
 <template>
-  <p :class="myClass">Class样式</p>
+  <p :class="myClass">Class样式绑定</p>
   <p v-bind:class="myClass">Class样式</p>
-  <p :class="{ active: isActive, 'text-danger': hasError }">Class样式</p>
+  <p :class="{ 'active': isActive, 'text-danger': hasError }">Class样式</p>
   <p :class="classObject">Class样式绑定2</p>
   <p :class="[arrActive, arrHasError]">Class样式绑定3</p>
 </template>

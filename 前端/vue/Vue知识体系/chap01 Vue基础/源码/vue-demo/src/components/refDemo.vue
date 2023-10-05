@@ -16,10 +16,10 @@
 </template>
 <script>
 /**
- *内容改变：{{模板语法}}
-属性改变：v-bind: 指令
-事件： v-on:click
-如果没有特别的需求，不要操作DOM
+    *内容改变：{{模板语法}}
+    *属性改变：v-bind: 指令
+    *事件： v-on:click
+    *如果没有特别的需求，不要操作DOM
  */
 export default {
   data() {
