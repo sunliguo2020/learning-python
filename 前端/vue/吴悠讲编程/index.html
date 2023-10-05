@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="cdn.staticfile.org_vue_2.2.2_vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{title}}</p>
+        <p v-text="title"></p>
+        <p>{{content}}</p>
+        <p>{{ htmlContent}}</p>
+        <p v-text="htmlContent"></p>
+        <p v-html="htmlContent"></p>
+        <!-- <p>{{output()}}</p>
+        <p>{{output()}}</p>
+        <p>{{output()}}</p>
+        <p>{{outputContent}}</p>
+        <p>{{outputContent}}</p>
+        <p>{{outputContent}}</p> -->
+    </div>
+    <script>
+        // let value = '这是内容'
+        // document.getElementById('box').innerText=value
+        // value = '新内容'
+        // document.getElementById('box').textContent=value
+
+        const vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: '这是标题内容',
+                    content: "这是内容文本",
+                    htmlContent:'这是一个<span>span</span>标签'
+                }
+            },
+            //methods属性
+            methods:{
+                output(){
+                    console.log('methods')
+                    return '标题:'+this.title+'内容'
+                },
+            },
+            //计算属性：具有缓存性
+            computed:{
+                outputContent(){
+                    console.log('computed')
+                    return '标题:'+this.title+'内容'
+                },
+            },
+            //3、侦听器
+            watch:{
+                title(newValue,oldValue){
+                    console.log(newValue,oldValue)
+                }
+            }
+        }
+        )
+    </script>
+</body>
+
+</html>
