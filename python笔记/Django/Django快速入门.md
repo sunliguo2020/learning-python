@@ -1,26 +1,74 @@
 ### 一、Django快速入门
 
+#### Django来源
+
+#### MVT介绍
+
+- Model 模型和数据进行交互
+- V:View 视图接收请求
+- T：Template 
+
 #### 1、项目创建
 
-#### 2、模型类
+```
+django-admin startproject 
+```
+
+# 二、模型
 
 #### 3、后台管理
 
-#### 4、视图
+admin.py
 
-​	1、定义视图
+```
+admin.site.register()
+```
+
+# 三、视图
+
+## 1、视图的基本使用
 
 视图函数的例子
 
 视图函数定义的基本要求：
 
-1、视图函数必须定义一个参数（通过命名request）
+​	1、视图函数必须定义一个参数（通过命名request）
 
 ​	request参数：用来接收客户端的请求信息
 
-2、视图函数的返回值必须是一个HttpResponse对象（或者是子类）
+​	2、视图函数的返回值必须是一个HttpResponse对象（或者是子类）
 
-基本步骤：
+视图使用的流程：
+
+​	1.在应用的views.py定义视图函数
+
+​	2、配置路由
+
+​		1）在项目的urls.py中关联应用下的urls.py
+
+​			from django.contrib import admin
+
+​			from django.urls import path,include,re_path
+
+​			urlpatterns = [
+
+​			#将应用中的urls文件包含进来
+
+​			re_path(r'^news/',include('news.urls'))
+
+​			]
+
+​	2)	在应用的目录下定义一个urls.py文件
+
+​	3） 配置具体的访问规则
+
+​			from django.urls import path
+
+​			from .views import index
+
+​			urlpatterns = [    path('index/', index),]
+
+##### 视图函数定义基本步骤：
 
 ​	1、获取查询参数
 
@@ -74,7 +122,7 @@ class NewSView(View):
 
 2、在url.py中配置路由
 
-
+ 
 
 ​	2、配置URL
 
@@ -422,4 +470,250 @@ Django提供了一些类实现管理数据分页
   方法
 
   page(num):下标从1开始，如果提供的页面不存在，抛出InvalidPage异常。
+  
+## 2、路由
+
+  
+
+## 3、错误视图
+
+  Django内置处理HTTP错误的视图，主要错误及视图包含：
+
+  - 404：url匹配失败，找不到页面
+  - 500：server error视图
+
+### 1、404错误视图配置
+
+  将请求的地址进行url匹配后，没有找到匹配的正则表达式，则调用404视图。 
+
+## 4、HttpRequest 对象
+
+1、reuqest对象属性
+
+- path				请求路径
+- method          请求方法
+- encoding        请求体参数编码
+- GET
+- POST
+- FILES
+- COOKIES
+
+
+
+2、案例演示
+
+3、QueryDict对象
+
+HttpRequest对象的属性GET、POST都是QueryDIct类型的对象，与python字典不通，QueryDict类型的对象用来处理同一个键带有多个值的情况。
+
+#### 	1、方法get()
+
+- 根据键取值，如果一个键同时拥有多个值将获取最后一个值
+- 如果不存在则返回None值，可以设置默认值进行后续处理
+
+```
+dict.get('键',默认值)
+```
+
+#### 2、方法getlist()
+
+- 根据键取值，值以列表返回，可以获取指定键的所有值
+- 如果键不存在则返回空列表[]，可以设置默认值进行后续处理。
+
+
+
+4、GET属性
+
+GET属性是一个QueryDict类型的对象，键和值都是字符串类型
+
+
+
+5、POST属性
+
+## 5、HttpResponse对象
+
+视图在接收请求处理后，必须返回HttpResonse对象或子对象
+
+## 1、初始化参数
+
+- content：返回的 内容字符串
+- charset：表示response采用的编码字符集，默认为utf-8
+- status_code:返回的http响应状态码
+- content-type：指定返回数据的MIME类型，默认为'text/html'
+
+### 2、常用方法
+
+- set_cookie:
+
+>设置Cookie信息
+>
+>```
+>set_cookie(key,value='',max_age=None,expires=None)
+>```
+>
+>- max_age 整数，表示在指定秒后过期
+>
+>- expires是要给datetime或timedelta对象，会话将在这个指定的日期/时间过期
+>
+>- max_age与expires二选一
+>
+>- 如果不指定过期时间，在关闭浏览器时cookie会过期。
+>
+>- write：向响应体中写数据。
+>
+>  
+
+- delete_cookie:
+
+  >删除值当key的cookie
+  >
+  >```
+  >delete_cookie(key)
+  >```
+
+### 3、JsonResponse
+
+JsonResponse是HttpResponse的子类，用来返回json数据。JsonResponse对象返回的content-type为'application/json'
+
+## 6、登录案例
+
+## 7、cookie和session
+
+# 四、模板
+
+# 六、应用小案例
+
+## 1、基本需求
+
+### 1、功能图
+
+2、数据库表结构
+
+- 用户表（user）
+
+| 字段名   | 类型 | 说明   |
+| -------- | ---- | ------ |
+| id       | int  | 主键   |
+| username | str  | 用户名 |
+| password | str  | 密码   |
+
+- 书籍表（Books)
+
+| 字段名 | 类型 | 说明             |
+| ------ | ---- | ---------------- |
+| id     | str  | 书籍编号（唯一） |
+| name   | str  | 书籍名           |
+| status | bool | 是否出借         |
+
+- 借还记录表（Record）
+
+| 字段名 | 类型     | 说明                                   |
+| ------ | -------- | -------------------------------------- |
+| id     | int      | 主键                                   |
+| book   | int      | 书籍（id）                             |
+| sdate  | datetime | 借书时间                               |
+| name   | str      | 借书人                                 |
+| e_date | datetime | 归还时间（默认为借书时间，归还后才有） |
+
+2、创建项目
+
+3、模型类实现
+
+### 4、接口实现
+
+#### 1、登录接口
+
+表单请求方式：
+
+```
+POST /user/login/ HTTP/1.1
+User-Agent: PostmanRuntime/7.33.0
+Accept: */*
+Cache-Control: no-cache
+Postman-Token: 1c655798-2ac7-4b1f-a32e-b5016f3650d2
+Host: 127.0.0.1:8000
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+
+username=username&password=password
+```
+
+
+
+GET 请求
+
+```
+GET /user/login/?username=username&password=password HTTP/1.1
+User-Agent: PostmanRuntime/7.33.0
+Accept: */*
+Cache-Control: no-cache
+Postman-Token: 6cdbc8df-9c77-4813-819d-3124b1efd3b9
+Host: 127.0.0.1:8000
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+
+username=username&password=password
+```
+
+
+
+json
+
+```
+POST /user/login/ HTTP/1.1
+Content-Type: application/json
+User-Agent: PostmanRuntime/7.33.0
+Accept: */*
+Cache-Control: no-cache
+Postman-Token: ae17b29b-ed89-4a84-92db-4850f477180a
+Host: 127.0.0.1:8000
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 59
+
+{
+    "username":"username",
+    "password":"password"
+}HTTP/1.1 200 OK
+Date: Fri, 06 Oct 2023 05:01:49 GMT
+Server: WSGIServer/0.2 CPython/3.10.5
+Content-Type: application/json
+X-Frame-Options: DENY
+Content-Length: 49
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+{"code": 200, "username": null, "password": null}
+```
+
+```python
+class LoginView(View):
+    def post(self, request):
+        """登录接口
+        获取参数（表单/json)
+        request.POST 获取表单参数
+        request.body 获取json数据
+        """
+
+        # 获取参数
+        params = request.POST if len(request.POST) else json.loads(request.body.decode('utf-8'))
+
+        username = params.get('username')
+        password = params.get('password')
+
+        # 校验账号密码是否正确
+        user = authenticate(username=username,password=password)
+        if user:
+            # 保存登录的信息到session
+            login(request, user)
+            return JsonResponse({'code': 1000, "message": "登录成功"})
+        else:
+            return JsonResponse({'code': 2001, "message":"登录失败，账号或密码不对！"},status='403')
+
+```
 
