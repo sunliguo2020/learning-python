@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div>{{a}}</div>
+        <div>{{obj.b}}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                a: "我是根级响应式数据a",
+                obj: {}
+            }
+        })
+        Vue.set(vm.obj, 'b', '我是Vue.set添加的响应式属性obj.b')
+    </script>
+
+</body>
+
+</html>

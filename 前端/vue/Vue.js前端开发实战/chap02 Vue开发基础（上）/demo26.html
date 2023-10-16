@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部注册组件</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+    <script>
+        var com1 = {
+            template: '<p>我是vm实例中的局部组件</p>'
+        }
+        var vm = new Vue({
+            el: '#app',
+            //注册局部组件
+            components: {
+                myComponent: com1,
+            }
+        })
+    </script>
+</body>
+
+</html>

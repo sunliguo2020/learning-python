@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-3.3.4.js"></script>
+    <style>
+        #optioncard .titlebar a{
+            display: block; 
+            text-align: center;
+            text-decoration: none; /*去掉下划线*/
+            /* vertical-align: middle; */
+            line-height: 32px;
+            height: 32px;
+            width: 100px;
+            background-color: #afafaf;
+            color:#000;
+            float:left;
+            margin-right:4px ;
+        }
+        #optioncard .titlebar::after{
+            clear:both;
+            display: block;
+            content: "";
+        }
+        #optioncard .contentbox .content{
+            width: 500px;
+            height: 350px;
+            background-color: yellow;
+            display: none;
+        }
+        #optioncard .contentbox .active{
+            display:  block;
+        }
+        #optioncard .titlebar .current {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <div id="optioncard">
+        <div @click.prevent='optionclick' class="titlebar">
+            <a  href="" :class="{current:current_title=='体育新闻'}">体育新闻</a>
+            <a href="" :class="{current:current_title=='财经资讯'}">财经资讯</a>
+            <a href="" :class="{current:current_title=='娱乐八卦'}">娱乐八卦</a>
+        </div>
+        <div class="contentbox">
+            <div :class="{content:true,active:current_title=='体育新闻'}">体育新闻</div>
+            <div :class="{content:true,active:current_title=='财经资讯'}">财经资讯</div>
+            <div :class="{content:true,active:current_title=='娱乐八卦'}">娱乐八卦</div>
+        </div>
+    </div>
+    
+    <script>
+        var vm = Vue.createApp({
+            data(){
+                return {
+                    current_title:'财经资讯'
+                }
+            },
+            methods:{
+                optionclick(e){
+                    console.log(e.target.innerText)
+                    this.current_title = e.target.innerText
+                }
+
+            }
+        }).mount("#optioncard")
+    </script>
+</body>
+</html>

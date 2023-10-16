@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist</title>
+    <style>
+        .list_con {
+            width: 600px;
+            margin: 50px auto 0;
+        }
+
+        .inputxt {
+            width: 550px;
+            height: 30px;
+            border: 1px solid #ccc;
+            padding: 0px;
+            text-align: 10px;
+        }
+
+        .inputbtn {
+            width: 40px;
+            height: 32px;
+            padding: 0px;
+            border: 1px solid #ccc;
+
+        }
+
+        .list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-top: 20px;
+            ;
+        }
+
+        .list li {
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .list li span {
+            float: left;
+        }
+
+        .list li a {
+            float: right;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+    <script src="js/vue-3.3.4.js"></script>
+</head>
+
+<body>
+    <div class="list_con" id="app">
+        <h2>TO do list</h2>
+        <input type="text" v-model="task" id="text1" class="inputxt">
+        <input @click='task_add' type="button" value="增加" id="btn1" class="inputbtn">
+        <ul id="list" class="list">
+            <li v-for="item,index of task_list" :key="index">
+                <span>{{item}}</span>
+                <a href="" class="up" @click.prevent="move_up(index)">↑</a>
+                <a href="" class="down" @click.prevent="move_down(index)">↓</a>
+                <a href="" class="del" @click.prevent="del_task(index)">删除</a>
+            </li>
+
+
+        </ul>
+    </div>
+    <div id="app">
+
+    </div>
+    <script>
+        var vm = Vue.createApp({
+            data() {
+                return {
+                    task: '',
+                    task_list: [
+                        '学习html',
+                        "学习css",
+                        "学习javascript"
+                    ]
+                }
+
+            },
+            methods: {
+                /*
+                    添加计划任务
+                */
+                task_add() {
+                    // task = document.getElementById('text1').value
+                    // console.log(task)
+
+                    if (this.task.length != 0) {
+                        this.task_list.push(this.task)
+                        this.task = ""
+                    }
+
+                },
+                del_task(key) {
+                    //删除计划任务
+                    // delete this.task_list[key]
+                    this.task_list.splice(key, 1)
+                },
+                move_down(key) {
+                    var del_task = this.task_list.splice(key, 1)[0]
+                    //console.log(del_task)
+                    this.task_list.splice(key + 1, 0, del_task)
+                },
+                move_up(key) {
+                    //向上移动数据
+                    if (key === 0) {
+                        return;
+                    }
+                    var del_task = this.task_list.splice(key, 1)[0]
+                    this.task_list.splice(key - 1, 0, del_task)
+                },
+
+            }
+        }).mount("#app")
+    </script>
+
+</body>
+
+</html>

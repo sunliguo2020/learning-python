@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-3.3.4.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <input type="text" v-model="message">
+    </div>
+    <script>
+        var vm = Vue.createApp({
+            data(){
+                return {
+                    message:'hello',
+                }
+            
+            },
+            beforeCreate(){
+                console.log('beforeCreate已经执行了！');
+                console.log(this.message);
+                console.log(this.$el);
+                console.log(this.$data);
+            },
+            created(){
+                console.log('created');
+                console.log(this.message); //Proxy(Object) 
+                console.log(this.$el); //null
+                console.log(this.$data);//Proxy(Object) 
+            },
+            beforeMount(){
+                //data数据渲染到模板之前
+                console.log('beforeMount')
+                console.log(this.$el);
+            },
+            mounted(){
+                //data数据渲染到模板之后
+                console.log('mounted');
+                console.log(this.$el);
+
+                console.log(this.$el.parentElement);
+            },
+            beforeUpdate(){
+                //data数据更新到模板之前的钩子
+                console.log('beforeUpdate已经执行了')
+                console.log(this.message);
+                console.log(this.$el.parentElement.innerHTML);
+            },
+            updated(){
+                //data数据更新后
+                console.log('updated已经执行了')
+                console.log(this.message);
+                console.log(this.$el.parentElement.innerHTML);
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

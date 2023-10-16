@@ -8,13 +8,120 @@ Vue的组件可以按两种不同的风格书写：***选项式API***和**组合
 
 # Vue开发前端的准备
 
-
-
 > 前提条件：
 >
 > 命令行
 >
 > nodejs 15.0或更高版本
+
+vuejs的使用官方提供了2中方式：
+
+1、基于脚本导入使用，下载vue.js文件，通过script标签引入到html网页。
+
+2、基于项目构建工具来使用，需要安装项目构建工具，自动构建程一个独立的项目。
+
+目前官方推荐的项目构建项目：vue-CLI,vite
+
+# el唯一根标签
+
+```vue
+ <!-- 定义唯一根元素div -->
+    <div id="app">{{name}}</div>
+    <script>
+        var vm = new Vue({
+            el: "#app", //通过el与div元素绑定
+            data: {
+                name: "Vue 实例创建成功!"
+            }
+        })
+    </script>
+```
+
+
+
+```vue
+    <!-- 定义唯一根元素div -->
+    <div id="app">{{name}}</div>
+    <script>
+        var vm = new Vue({
+            // el: "#app", //通过el与div元素绑定
+            data: {
+                name: "Vue 实例创建成功!"
+            }
+        })
+        vm.$mount("#app")
+    </script>
+```
+
+
+
+## data与el的2种写法
+
+1、el有2种写法：
+
+- new Vue时候配置el属性
+- 先创建Vue实例，随后再通过vm.$mount('#app')指定el的值。
+
+2、data有2种写法
+
+- 对象式
+- 函数式
+
+以后学习组件时，data必须使用函数式
+
+3、一个重要的原则：
+
+由Vue管理的函数，一定不要写箭头函数，一旦写了箭头函数，this就不再式Vue实例了。
+
+Vue中数据代理：通过vm对象来代理data对象中属性的操作（读/写）
+
+Vue中数据代理的好处：更加方便的操作data中的数据
+
+基本原理：通过Object.defineProperty()把data对象中所有属性添加到vm上。
+
+为每一个添加到vm上的属性，都指定一个getter/setter。
+
+在getter/setter内部去操作（读/写）data中对应的属性。
+
+### 事件的基本使用：
+
+- 使用v-on:xxx 或@xxx绑定事件，其中xxx是事件名
+- 事件的回调需要配置在methods对象中，最终会在vm上
+- methods中配置的函数，不要用箭头函数！否则this就不是vm了。
+- methods中配置的函数，都是被Vue所管理的函数，this的指向是vm或组件实例对象；
+- @click="demo" 和 @click=“demo($event)"效果一致，单后者可以传参数。
+
+### Vue中的事件修饰符：
+
+- prevent：阻止默认事件
+- stop：阻止事件冒泡
+- once：事件只触发一次
+- capture：使用是哪的捕获模式
+- self：只有event.target是当前操作的元素时才触发事件
+- passive：事件的默认行为立即执行，无需等待事件回调执行完毕
+
+## Vue中常用的按键别名：
+
+- 回车=>enter
+- 删除-》delete
+- 退出-》esc
+- 空格-》space
+- 换行-》tab（特殊，必须配合keydown去使用）
+- 上-》up
+- 下-》down
+- 左-》left
+- 右-》right
+
+Vue未提供别名的按键，可以使用按键原始的key值去绑定，但注意要转为kebab-case（短横线命名）
+
+3、系统修饰键：ctrl、alt、shift、meta
+
+- 配合keyup使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发。
+- 配合keydown使用：正常触发事件。
+
+4、也可以使用keyCode去指定具体的按键（不推荐）
+
+5、Vue.config.keyCodes.自定义键名 = 键码 可以去定制按键别名。
 
 ### 创建项目
 
@@ -71,7 +178,19 @@ Done. Now run:
 
 vscode + volar
 
-# 5 Vue项目目录结构
+### Vue.js的M-V-VM思想
+
+MVVM是Model-View-ViewModel的缩写，它是一种基于前端开发的架构模式，是一种代码分工思想来的 。
+
+Model指代的是vue对象的data属性里面的数据。这里的数据要显示到页面中。
+
+View指代的是vue中数据要显示的HTML页面，在vue中，也称之为“视图模板”。
+
+ViewModel指代的是我们编写代码的vm对象了，他是vue.js的核心，负责连接View和Model，保证视图和数据的一致性，所以前面代码中，data里面的数据被显示中p标签中就是vm对象自动完成的。vm对象会时刻的监控View和Model的变化，并保持双方数据一致性！！！
+
+
+
+## 5 Vue项目目录结构
 
 ```
 .vscode			--vscode工具的配置文件
@@ -85,7 +204,7 @@ README.md		---	注释文件
 vite.config.js	---	Vue配置文件
 ```
 
-# 6 模板语法
+## 6 模板语法
 
 “插值”是指，使用{{变量}}的方法讲数据插入到HTML文档中。
 
@@ -93,6 +212,10 @@ vite.config.js	---	Vue配置文件
 
 - 文本插值 {{变量}} v-text
 - HTML插值 v-html
+
+双花括号仅拥用输出文本内容，如果要输出html代码，则要使用v-html来输出。
+
+v-html必须在html标签里面作为属性写出来，而且只能写在普通双标签中，单标签元素或者表单都不行。
 
 ```vue
 <script >
@@ -150,9 +273,11 @@ export default {
 
 
 
+# 2、常用指令
 
 
-# 7 属性绑定 v-bind
+
+## 7 属性绑定 v-bind
 
  双大括号不能在 HTML attributes 中使用。想要响应式地绑定一个 attribute，应该使用 [`v-bind` 指令](https://cn.vuejs.org/api/built-in-directives.html#v-bind)： 
 
@@ -201,7 +326,6 @@ export default{
     }
 }
 </script>
-
 ```
 
 v-show 
@@ -249,7 +373,7 @@ export default {
 </script>
 ```
 
-# 10 通过key管理状态
+## 10 通过key管理状态
 
 ### 维护状态
 
@@ -271,7 +395,7 @@ export default {
 </script>
 ```
 
-# 11 事件处理
+## 11 事件处理
 
 Vue.js的事件绑定格式是"v-on:"或者”@“。事件处理方法需要在methods中定义。
 
@@ -349,7 +473,7 @@ export default {
 </script>
 ```
 
-# 12 事件传参
+## 12 事件传参
 
 内联处理器中的参数
 
@@ -360,7 +484,6 @@ export default {
   <ul>
     <li @click="clickHandle2(item)" v-for="(item,idnex) in names" :key="index">{{item}}</li>
   </ul>
-  
 </template>
 <script>
 /**
@@ -391,21 +514,25 @@ export default {
 </script>
 ```
 
-# 13事件修饰符
+## 13事件修饰符
 
-Vue为v-on提供了事件修饰符，常用的有一下几个：
+Vue为v-on提供了事件修饰符，常用的有以下几个：
 
 - .stop
 
 - .prevent
 
-- .once
+- .once       # 限制事件绑定次数为1次
 
 - .enter
 
+- .number    #限制表单输入为数字
+
+- .trim
+
   
 
-#### 阻止默认事件
+#### 阻止默认事件 .prevent
 
 ```vue
 <template>
@@ -416,9 +543,7 @@ Vue为v-on提供了事件修饰符，常用的有一下几个：
 
 export default{
     data(){
-
         return {
-
         }
     },
     methods:{
@@ -446,13 +571,10 @@ export default{
 
 export default{
     data(){
-
         return {
-
         }
     },
     methods:{
-   
         clickDiv(){
             console.log('点击了div')
         },
@@ -644,7 +766,18 @@ export default {
 </script>
 ```
 
-# 18 侦听器
+# 18 侦听器 watch
+
+监视属性watch:
+
+1、当被监视的属性变化时，回调函数自动调用，进行相关操作
+
+2、监视的属性必须存在，才能进行监视
+
+3、监视的两种写法：
+
+- new Vue时传入watch配置
+- 通过vm.$watch监视
 
 我们使用wach选项在每次响应式属性发生变化时触发一个函数。
 
@@ -679,7 +812,25 @@ export default {
 </script>
 ```
 
+### computed和watch之间的区别
+
+1、computed能完成的功能，watch都可以完成。
+
+2、watch能完成的功能，computed不一定能完成。例如：watch可以进行异步操作。
+
+两个重要的小原则：
+
+1、所被Vue管理的函数，最好写成普通函数，这样this的指向才是vm或组件实例对象。
+
+2、所有不被Vue所管理的函数（定时器的回调函数、ajax的回调函数等），最好写成箭头函数，这样this的指向才是vm或组件实例对象。
+
+
+
 # 19表单输入绑定v-model
+
+```vue
+<input type="text" v-model="message">
+```
 
 
 
@@ -709,6 +860,28 @@ export default {
 # 20 模板引用
 
 虽然Vue的声明性渲染模型为你抽象了大部分对DOM的直接操作，但在某些情况下，我们仍然需要直接访问的底层DOM元素。要实现这一点，我们可以使用特殊的ref attribute。
+
+ 模板引用也就是指向模板中一个 DOM 元素的 ref。 我们需要通过这个特殊的 ref attribute来实现模板引用：
+
+```vue
+<p ref="pElementRef" >
+    hello
+</p>
+```
+
+此元素将作为this.$refs.pElementRef暴露在 this.$refs上。然而，你只能在组件挂载之后访问它。
+
+要在挂载之后执行代码，我们可以使用mouted选项：
+
+```vue
+export default{
+	mounted(){
+	//此时组件已经挂载
+	}
+}
+```
+
+
 
 挂载结束后引用都会被暴露在<font color=red>this.$refs</font>之上。
 
@@ -808,23 +981,82 @@ export default{
 
 ```
 
+## 组件声明
+
+```vue
+    <script>
+        //组件声明
+        Vue.component("组件名",{
+            data(){ //组件内部的数据
+
+            },
+            methods:{  //组件内部的操作方法
+
+            },
+            temlate:"", //组件的HTML代码
+        });
+    </script>
+```
+
 
 
 # 22 组件嵌套关系
 
 通常一个应用会以一棵嵌套的组件树的形式来组织。
 
+真正的Vue应用往往是有嵌套组件创建的。
 
+父组件可以在模板中渲染另一个组件作为子组件。要使用子组件间，我们需要先导入它：
 
-### 23 组件传递数据_Props
+```vue
+import ChildComp from './ChildComp.vue'
+
+export default {
+  components: {
+    ChildComp
+  }
+}
+```
+
+我们还需要使用components选项注册组件。这里我们使用对象属性的简写形式在ChildComp键下中注册ChildComp组件。
+
+然后我们就可以在模板中使用组件
+
+```
+<ChildComp/>
+```
+
+# 23 组件传递数据_Props
 
 组件与组件之间不是完全独立的。
 
-传递数据的解决方案是Props。
+传递数据的解决方案是Props。 一个组件需要显式声明它所接受的 props，这样 Vue 才能知道外部传入的哪些是 props 。
+
+子组件可以通过props从父组件接收动态数据。
+
+首先，子组件种需要声明它所接收的props：
+
+```vue
+//在子组件中
+export default{
+props:{
+		msg:String,
+}
+}
+```
+
+一旦声明，msg prop 就会暴露在this上，并可以在子组件的模板中使用。
+
+父组件可以像声明HTML attributes一样传递props。若要传递动态值，也可以使用v-bind 语法：
+
+```vue
+<ChildComp :msg="greeting"/>
+```
+
+父组件：
 
 ```vue
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
   <p>
     {{ title }}
   </p>
@@ -841,9 +1073,7 @@ export default {
       title: '我是一个标题',
       age:20,
     }
-
   },
-
   components: {
     myComponent,
   }
@@ -851,7 +1081,7 @@ export default {
 </script>
 ```
 
-
+子组件：
 
 ```vue
 <template>
@@ -878,10 +1108,89 @@ export default {
 <style scoped></style>
 ```
 
+例二：
+
+父组件
+
+```vue
+<template>
+    <h1>Home页面</h1>
+    <!--父组件要发送数据给子组件，通过组件的属性传递。属性名就是将来的变量名，
+    传递数据如果时一个变量，则需要在左边加上冒号
+    -->
+    <Menu :htotal="total" title="来自父组件的数据"> </Menu>
+    <button @click="total++">{{total}}</button>
+</template>
+<script>
+import Menu from '../components/Menu.vue'
+
+export default {
+    name: "home",
+    data(){
+        return {
+            total:0
+        }
+    },
+    components: {
+        Menu,
+    }
+}
+</script>
+<style scoped>
+list-style-type:none;
+</style>
+```
+
+子组件：
+
+```vue
+<template>
+    <div>
+        <p>来自父组件的数据：total= {{ htotal }}</p>
+        <p>来自父组件的数据：title= {{ title }}</p>
+        <ul>
+            <li><a href="">首页</a></li>
+            <li><a href="">商品</a></li>
+            <li><a href="">论坛</a></li>
+            <li><a href="">注册</a></li>
+        </ul>
+    </div>
+</template>
+<script>
+export default {
+    name: "Menu",
+    //来自父组件的数据，全部通过props来接收，2种写法：json写法，数组写法
+    // props:['htotal','title']
+    props: {
+        htotal: Number,   //来自父组件的数据
+        title: String,
+    }
+}
+
+</script>
+<style scoped>
+div {
+    border: 1px solid red;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: inline;
+    margin-right: 10px;
+}
+
+li a {
+    text-decoration: none;
+}
+</style>
+
+```
 
 
->
->
+
 >## 注意事项 ##
 >
 >`props`传递数据，只能从父级传递到子级，不能反其道而行。
@@ -892,10 +1201,27 @@ export default {
 >
 >数据类型为数组或对象的时候，默认值需要返回工厂模式
 
-## 自定义事件组件交互
+# 自定义事件组件交互 $emit
+
+子组件还可以向父组件触发事件：
 
 ```vue
-template>
+export default{
+// 声明触发的事件
+emits:['response'],
+created(){
+//带参数触发
+this.$emit("resonse","hello from child")
+}
+}
+```
+
+this.$emit()的第一个参数是事件的名称。其他所有参数都将传递给事件监听器。
+
+父组件：
+
+```vue
+<template>
   <img alt="Vue logo" src="./assets/logo.png">
 
   <myComponent :title="title" :age="age" />
@@ -932,6 +1258,8 @@ export default {
 </script>
 ```
 
+子组件：
+
 ```vue
 <template>
     <h3>自定义事件传递数据</h3>
@@ -959,6 +1287,115 @@ export default {
 </script>
 ```
 
+# 局部注册组件
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+<body>
+    <div id="app">
+        父组件
+{{name}}
+        <Demo></Demo>
+    </div>
+    <script>
+        //创建子组件
+        const Demo = {
+            template: `
+            <div>
+                <h1>{{msg}}</h1>
+                <input type="text" v-model="msg"/>
+                <input type="button" @click="showMsg" value="点我呀">
+            </div>
+                `,
+            methods: {
+                showMsg() {
+                    alert(this.msg)
+                }
+            },
+            data: function () {
+                return {
+                    msg: "哈哈哈哈"
+                }
+            }
+        }
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name:'武沛齐'
+            },
+            components: {
+                Demo,
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
+
+# 全局注册组件
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        父组件{{name}}
+        <Demo></Demo>
+    </div>
+    <script>
+        //创建子组件
+        Vue.component('Demo',
+            {
+                template: `
+<div>
+    <h1>{{msg}}</h1>
+    <input type="text" v-model="msg"/>
+    <input type="button" @click="showMsg" value="点我呀">
+</div>
+    `,
+                methods: {
+                    showMsg() {
+                        alert(this.msg)
+                    }
+                },
+                data: function () {
+                    return {
+                        msg: "哈哈哈哈"
+                    }
+                }
+            })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name: '武沛齐'
+            },
+            components:{
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
+
 
 
 ## 组件生命周期
@@ -973,7 +1410,7 @@ export default {
 
 
 
-## Axios网络请求
+# Axios网络请求
 
 ### 安装
 
@@ -994,3 +1431,4 @@ post请求
 >安装依赖：npm install --save querystring
 >
 >转换格式：qs.stringify({})
+

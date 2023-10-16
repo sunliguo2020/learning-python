@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue-2.7.14.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        姓：<input type="text" v-model="firstName"><br/>
+        名：<input type="text" v-model="lastName"><br/>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                firstName:"张",
+                lastName:"三"
+            },
+
+        })
+    </script>
+</body>
+</html>

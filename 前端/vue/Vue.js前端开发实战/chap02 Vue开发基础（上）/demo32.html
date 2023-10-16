@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实例创建</title>
+    <script src="js/vue-2.7.14.js"></script>
+
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'张三'
+            },
+            beforeCreate(){
+                console.log('实例创建之前');
+                console.log(this.$data.msg);
+            },
+            created(){
+                console.log('实例创建之后');
+                console.log(this.$data.msg);
+            }
+        })
+    </script>
+</body>
+</html>

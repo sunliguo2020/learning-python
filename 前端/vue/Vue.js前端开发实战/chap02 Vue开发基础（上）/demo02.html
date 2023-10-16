@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <!-- 定义唯一根元素div -->
+    <div id="app">
+        <p>{{name}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app", //通过el与div元素绑定
+            //data第一种写法：对象式
+            // data: {
+            //     name: "定义初始数据"
+            // }
+            //data 第2种写法：函数式
+            data: function () {   //或者 data()
+                console.log("@@",this); //此处this是vue的实例对象
+                return {
+                    name: "定义初始对象",
+                }
+            }
+        });
+        console.log(vm.$data.name)
+        console.log(vm.name)
+    </script>
+</body>
+
+</html>

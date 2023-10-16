@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生列表案例</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <!-- 定义唯一根元素div -->
+    <div id="app">
+        <button @click="add">添加学生</button>
+        <button @click="del">删除学生</button>
+        <table>
+            <tr>
+                <th>班级</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+            </tr>
+            <tr align="center" v-for="item in students">
+                <td>{{item.grade}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.age}}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app", //通过el与div元素绑定
+            data: {
+                students: []
+            },
+            methods: {
+                //追加学生信息
+                add() {
+                    var student = {
+                        grade: '1',
+                        name: "张三",
+                        gender: '男',
+                        age: 25
+                    }
+                    this.students.push(student);
+                },
+                //删除学生信息
+                del() {
+                    this.students.pop();
+                }
+
+            },
+            computed: {
+
+            },
+            watch: {
+                //使用watch监听cityName的变化
+                cityName(newvalue, oldvalue) {
+                    // alert(newvalue);
+                    console.log(oldvalue);
+                    console.log(newvalue)
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

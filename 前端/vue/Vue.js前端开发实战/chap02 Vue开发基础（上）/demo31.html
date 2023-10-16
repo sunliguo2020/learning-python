@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件切换</title>
+    <script src="js/vue-2.7.14.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>使用is属性匹配组件名称</p>
+        <a href="#" @click="comName='login'">登录</a>
+        <a href="#" @click="comName='register'">注册</a>
+        <compont v-bind:is="comName"></compont>
+    </div>
+    <script>
+        Vue.component('login', {
+            template: '<div>登录页面</div>',
+        });
+        Vue.component('register', {
+            template: '<div>注册页面</div>',
+
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                comName: '',
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue数据绑定</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+   
+    <!-- 定义唯一根元素div -->
+    <div id="app">
+        <div v-bind:style="{backgroundColor:pink,width:width,height:height}">
+            <div v-bind:style="myDiv"></div>
+        </div>
+        
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app", //通过el与div元素绑定
+            data: {
+                pink: "pink",
+                width: "100%",
+                height: "200px",
+                myDiv: {
+                    backgroundColor: 'red',
+                    width: '100px',
+                    height: '100px',
+                }
+
+            },
+            methods: {
+                //定义事件处理方法showInfo
+                showInfo() {
+                    this.msg = '触发单击事件';
+                }
+
+            },
+            computed: {
+
+            },
+            watch: {
+                //使用watch监听cityName的变化
+                cityName(newvalue, oldvalue) {
+                    // alert(newvalue);
+                    console.log(oldvalue);
+                    console.log(newvalue)
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

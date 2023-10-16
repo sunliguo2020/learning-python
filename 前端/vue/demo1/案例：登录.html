@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        label {
+            width: 60px;
+            display: inline-block;
+            text-align: right;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="密码登录" @click="isSms=false">
+        <input type="button" value="短信登录" @click="isSms=true">
+
+        <div v-show="isSms">
+            <p>
+                <label>手机号</label>
+                <input type="text" placeholder="手机号" v-model="sms.mobile">
+
+            </p>
+            <p>
+                <label for="">验证码</label>
+                <input type="text" placeholder="验证码" v-model="sms.code">
+            </p>
+        </div>
+        <div v-show="!isSms">
+
+            <p>
+                <label for="">用户名</label>
+                <input type="text" placeholder="用户名" v-model="info.username">
+            </p>
+            <p>
+                <label for="">密码</label>
+                <input type="text" placeholder="密码" v-model="info.password">
+            </p>
+        </div>
+        <input type="button" value="登录" @click="loginForm">
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                isSms: true,
+                info: {
+                    username: '',
+                    password: ''
+                },
+                sms: {
+                    moblie: '',
+                    code: ''
+                }
+            },
+            methods: {
+                loginForm() {
+                    //1、获取用户输入的值
+                    let dataDict = this.isSms ? this.sms : this.info;
+                    console.log(dataDict)
+                    let url;
+                    if (this.isSms) {
+                        url = "https://api.luffycity.com/api/auth/password/login/?loginWay=password"
+                    } else {
+                        url = "https://api.luffycity.com/api/auth/mobile/login/?loginWay=mobile"
+                    }
+                    //2、向某个地址发送网络请求 axios
+                    //https://api.luffycity.com/api/auth/password/login/?loginWay=password
+                    //https://api.luffycity.com/api/auth/mobile/login/?loginWay=mobile
+                    axios({
+                        method: 'post',
+                        url: url,
+                        params: {
+                            v1: 123,
+                            v2: 456,
+                        },
+                        data: dataDict,
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        timeout:1000
+                    }).then(function (res) {
+                        console.log(res.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                    })
+
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

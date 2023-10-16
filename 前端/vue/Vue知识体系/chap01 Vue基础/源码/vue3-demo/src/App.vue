@@ -1,16 +1,17 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
 
-  <!-- <myComponent :title="title" :age="age" />
+  <myComponents :title="title" :age="age"></myComponents>
   <p>{{ message }}</p>
-  <myComponent2 @onEvent="getDataHandle" /> -->
+
+  <!--<myComponent2 @onEvent="getDataHandle" /> -->
   <axiosDemo/>
 </template>
 
 <script>
-import myComponent from "./components/myComponents.vue"
-import myComponent2 from "./components/myComponents2.vue"
 import axiosDemo from "./components/axiosDemo.vue"
+import myComponents from "./components/myComponents.vue";
+
 
 export default {
   name: 'App',
@@ -18,19 +19,19 @@ export default {
     return {
       title: '我是一个标题',
       age: 20,
-      message:""
+      message: ""
     }
   },
 
   methods:
-  {
-    getDataHandle(data) {
-      console.log(data);
-      this.message = data;
-    }
-  },
+      {
+        getDataHandle(data) {
+          console.log(data);
+          this.message = data;
+        }
+      },
   components: {
-    // myComponent,
+    myComponents,
     // myComponent2,
     axiosDemo,
   }

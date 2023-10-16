@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue-2.7.14.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="showInfo1">点我提示信息1(不传参）</button>
+        <button @click="showInfo2($event,66)">点我提示信息2（传参）</button>
+    </div>
+    <script>
+Vue.config.productionTip=false;
+const vm = new Vue({
+    el:"#app",
+    data:{
+        name:"尚硅谷",
+    },
+    methods:{
+        showInfo1(event){
+            console.log(event)
+        },
+        showInfo2(event,number){
+            console.log(event)
+            console.log(event.target.innerText)
+        }
+    }
+})
+    </script>
+</body>
+</html>

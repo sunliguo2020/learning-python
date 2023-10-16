@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-3.3.4.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{num}}</p>
+        <form action="">
+            <input type="text" v-model.number="num"><br>
+            <input type="text" v-model="message" >
+            <input type="password" value="密码"><br>
+            <input type="text" :value="message">
+        </form>
+       
+
+    </div>
+
+    <div id="wo">
+        <p>{{counter}}</p>
+    </div>
+
+    <script>
+        var vm2 = Vue.createApp({
+            data() {
+                return {
+                    counter: 1,
+                }
+            },
+            mounted() {
+                setInterval(() => {
+                    this.counter = this.counter + 1;
+                    console.log(this.counter)
+                }, 1000)
+            },
+
+        }).mount("#wo");
+        var vm = Vue.createApp({
+            data() {
+                return {
+                    num: 0,
+                    message: "我是vue"
+                }
+            },
+            mounted() {
+                //会在vue加载html完成以后，自动执行这里的代码
+                //setInterval 原生js提供的定时函数，参数1是一个匿名函数或者函数名，参数2是间隔事件（单位：ms）
+                setInterval(() => {
+                    this.num = this.num + 1;
+                }, 1000)
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>

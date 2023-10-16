@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <!-- 定义唯一根元素div -->
+    <div id="app">{{name}}</div>
+    <script>
+        var vm = new Vue({
+            // el: "#app", //通过el与div元素绑定，第一种写法
+            data: {
+                name: "Vue 实例创建成功!"
+            }
+        })
+        vm.$mount("#app")  //第2种写法
+    </script>
+</body>
+
+</html>

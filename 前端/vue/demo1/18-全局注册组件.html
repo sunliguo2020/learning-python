@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        父组件{{name}}
+        <Demo></Demo>
+    </div>
+    <script>
+        //创建子组件
+        Vue.component('Demo',
+            {
+                template: `
+<div>
+    <h1>{{msg}}</h1>
+    <input type="text" v-model="msg"/>
+    <input type="button" @click="showMsg" value="点我呀">
+</div>
+    `,
+                methods: {
+                    showMsg() {
+                        alert(this.msg)
+                    }
+                },
+                data: function () {
+                    return {
+                        msg: "哈哈哈哈"
+                    }
+                }
+            })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name: '武沛齐'
+            },
+            components:{
+
+            }
+        })
+    </script>
+</body>
+
+</html>

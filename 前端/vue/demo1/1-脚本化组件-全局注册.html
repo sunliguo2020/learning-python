@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局注册组件</title>
+    <script src="js/vue-3.3.4.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header-nav></header-nav>
+        <header-nav></header-nav>
+        <header-nav></header-nav>
+        <header-nav></header-nav>
+    </div>
+    <script>
+
+        var app = Vue.createApp({
+            data() {
+                return {}
+            },
+        });
+        //组件声明
+        app.component("header-nav", { //使用时，将组件名作为标签名进行使用
+            data() { //组件内部的数据
+                return {
+                    nav_list: ['首页', '注册']
+                }
+            },
+            methods: {  //组件内部的操作方法
+
+            },
+            //组件的HTML代码
+            template: `
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">列表</a></li>
+                <li><a href="">注册</a></li>
+            </ul>
+            `,
+        });
+        app.mount("#app");
+    </script>
+
+</body>
+
+</html>

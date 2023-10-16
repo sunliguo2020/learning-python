@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    isHot: true,
+                }
+            },
+            computed: {
+                info: function () {
+                    return this.isHot ? "炎热" : "凉爽"
+                }
+            },
+            methods: {
+                changeWeather() {
+                    this.isHot = !this.isHot
+                }
+            },
+            watch: {
+                isHot: {
+                    //当isHot值发生改变时被调用
+                    handler(newValue,oldValue) {
+                        console.log('handler被调用',newValue,oldValue)
+                    }
+                }
+            },
+
+        })
+    </script>
+
+</body>
+
+</html>

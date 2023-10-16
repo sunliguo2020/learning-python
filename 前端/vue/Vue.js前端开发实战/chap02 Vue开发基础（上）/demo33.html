@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面挂载</title>
+    <script src="js/vue-2.7.14.js">
+
+    </script>
+</head>
+
+<body>
+<div id="app">
+{{msg}}
+</div>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            msg:'张三'
+        },
+        beforeMount(){
+            console.log('挂载之前');
+            console.log(this.$el.innerHTML);
+        },
+        mounted(){
+            console.log('挂载之后');
+            console.log(this.$el.innerHTML)
+        }
+    })
+</script>
+</body>
+
+</html>

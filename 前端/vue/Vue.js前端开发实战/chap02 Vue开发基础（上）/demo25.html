@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局注册组件</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+    </div>
+
+    <script>
+        Vue.component('my-component', {
+            data() {
+                return {
+                    count: 0,
+                }
+            },
+            template: '<button v-on:click="count++">被单击{{count}}次</button>'
+        })
+        var vm = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>

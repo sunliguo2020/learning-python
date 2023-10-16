@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <!-- 定义唯一根元素div -->
+    <div id="app">
+        <p>总价格{{totalPrice}}</p>
+        <p>单价：{{price}}</p>
+        <p>数量：{{num}}</p>
+        <div>
+            <button @click="num == 0?0:num--">减少数量</button>
+            <button @click="num ++">增加数量</button>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app", //通过el与div元素绑定
+            data: {
+                price: 12,
+                num: 0,
+            },
+            methods: {
+                //定义事件处理方法showInfo
+                showInfo() {
+                    this.msg = '触发单击事件';
+                }
+
+            },
+            computed: {
+                totalPrice() {
+                    return this.price * this.num;
+                }
+            }
+        });
+        console.log(vm.$data.name)
+        console.log(vm.name)
+    </script>
+</body>
+
+</html>

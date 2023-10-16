@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-3.3.4.js">
+
+    </script>
+</head>
+<body>
+    <div id="app">
+        <p @click="show2">一段话
+            <a href="" @click.prevent.stop="show1">
+                链接
+            </a>
+        </p>
+    </div>
+    <script>
+        var vm = Vue.createApp({
+            data(){
+                return {
+
+                }
+            },
+            methods:{
+                show1(){
+                    console.log("a标签被点击了")
+                },
+                show2(){
+                    console.log("p标签被点击了")
+
+                }
+            }
+
+        }).mount("#app");
+    </script>
+</body>
+</html>

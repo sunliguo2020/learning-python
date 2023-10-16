@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人员列表（排序）</title>
+    <script src="../js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>人员列表（排序）</h2>
+        <input type="text" v-model="keyWord">
+        <button @click="sortType=2">升序</button>
+        <button @click="sortType=1">降序</button>
+        <button @click="sortType=0">原序</button>
+        <ul>
+            <li v-for="(p,index) of filPersons" :key="index">
+                {{p.name}}-{{p.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                persons: [
+                    { id: '001', name: '马冬梅', age: 18 },
+                    { id: '002', name: '周冬雨', age: 19 },
+                    { id: '003', name: '周杰伦', age: 30 },
+                    { id: '004', name: '温兆伦', age: 20 },
+                ],
+                keyWord: '',
+                sortType:0,
+            },
+     
+            computed:{
+                filPersons(){
+                    const arr  =this.persons.filter((p) => {
+                            return p.name.indexOf(this.keyWord) !== -1;
+                        })
+                    //判断一下是否需要排序
+                    if(this.sortType){
+                        arr.sort((p1,p2)=>{
+                            return this.sortType === 1?p2.age-p1.age :p1.age-p2.age
+                        })
+                    }
+                    return arr;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

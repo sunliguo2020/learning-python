@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-parent :name="title"></my-parent>
+        <my-parent></my-parent>
+    </div>
+    <script>
+        Vue.component('myParent', {
+            props: ['name'],
+            template: '<div>我是父组件{{name}}</div>',
+            created() {
+                console.log('我是子组件' + this.name)
+            }
+        })
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name: '我是父组件data中定义的 ',
+                title:'我是父组件向子组件传递的数值'
+            },
+            created() {
+                // console.log(this.name)
+            },
+
+        })
+    </script>
+</body>
+
+</html>

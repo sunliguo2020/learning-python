@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件切换</title>
+    <script src="js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>通过v-if来控制组件的切换</p>
+        <a href="#" @click.prevent="flag=true">登录</a>
+        <a href="#" @click.prevent="flag=false">注册</a>
+        <login v-if="flag"></login>
+        <register v-else></register>
+    </div>
+    <script>
+        Vue.component('login', {
+            template: '<div>登录页面</div>',
+        });
+        Vue.component('register', {
+            template: '<div>注册页面</div>',
+
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: { flag: true }
+        })
+
+    </script>
+
+</body>
+
+</html>
