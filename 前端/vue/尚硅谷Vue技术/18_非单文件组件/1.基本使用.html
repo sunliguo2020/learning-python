@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 第三步：编写组件标签 -->
+        <school></school>
+        <br>
+        <!-- 第三步：编写组件标签 -->
+        <student></student>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+        //第一步：创建school组件
+        const school = Vue.extend({
+            template: `
+            <div>
+            <h2>学校名称：{{schoolName}}</h2>
+            <h2>学校地址：{{address}}</h2>
+            <button @click="showName">点我提示学校名</button>
+            </div>
+            `,
+            data() {
+                return {
+                    schoolName: '尚硅谷',
+                    address: "北京昌平"
+                }
+            },
+            methods: {
+                showName(){
+                    alert(this.showName)
+                }
+            },
+        })
+
+        //第一步：创建student组件
+        const student = Vue.extend({
+            template:`
+            <div>
+                <h2>学生姓名：{{studentName}}</h2>
+                <h2>学生年龄：{{age}}</h2>
+            </div>`,
+            data(){
+                return {
+                    studentName:'张三',
+                    age:18
+                }
+            }
+        })
+        //创建vm
+        var vm = new Vue({
+            el: "#app",
+            //第二步，注册组件 局部注册
+            components: {
+                school: school,
+                student
+            }
+        })
+
+    </script>
+</body>
+
+</html>

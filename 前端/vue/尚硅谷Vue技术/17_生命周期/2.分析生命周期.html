@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='../js/vue-2.7.14.js'></script>
+</head>
+<body>
+    <div id="app">
+        <h2>当前的n值是:{{n}}</h2>
+        <button @click="add">点我n+1</button>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                n:0
+            },
+            methods: {
+                add(){
+                    this.n += 1;
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate')
+                
+            },
+        })
+    </script>
+    
+</body>
+</html>

@@ -39,7 +39,7 @@ if __name__ == '__main__':
     phone = get_phone(r"d:\phone.txt")
     # print(phone)
     for count, item in enumerate(phone):
-        if count < 12557:
+        if count < 0:
             continue
         print(f"{count}:{item}")
         # print(len(item))

@@ -93,3 +93,7 @@ def get_block():
 def get_next_block(block):
     b = BLOCKS[block.name]
     return b[block.next]
+
+
+if __name__ == '__main__':
+    print(get_block())

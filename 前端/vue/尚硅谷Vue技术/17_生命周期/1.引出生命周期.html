@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2 :style="{opacity:opacity}">欢迎学习Vue</h2>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                opacity: 1
+            },
+            methods: {},
+            mounted() {
+                console.log('mounted', this)
+                setInterval(() => {
+                    vm.opacity -= 0.01
+                    if (vm.opacity <= 0) vm.opacity = 1
+                }, 16)
+            },
+        });
+        //通过外部的定时器实现（不推荐）
+        /*
+        setInterval(()=>{
+            vm.opacity -= 0.01
+            if(vm.opacity <= 0) vm.opacity =1
+        },16)
+        */
+    </script>
+</body>
+
+</html>
