@@ -198,7 +198,7 @@ class UerInfo(models.Model):
 
 ##### 2、序列化操作
 
-- 序列化：将python对象--->转化为json格式的数据
+- **序列化：将python对象--->转化为json格式的数据**
 
   定义好Serializer类后，如果要通过序列化器类进行序列化，需要先创建Serializer对象。
 
@@ -316,19 +316,18 @@ class AddrSerializer(serializers.Serializer):
   - 返回关联字段模型类__str__方法返回的内容
 
   - ```python
-    
     user = serializers.StringRelatedField()
     ```
-
-  3、使用关联对象的序列化器
-
-  - 返回关联对象序列化器返回的所有字段
-
-  - ```python
+  
+3、使用关联对象的序列化器
+  
+- 返回关联对象序列化器返回的所有字段
+  
+- ```python
     # 关联模型的序列化器
     user = UserInfoSeralizer()
     ```
-
+  
 - 4、SlugRelatedField
 
 - 指定返回关联对象某个具体字段
@@ -337,7 +336,6 @@ class AddrSerializer(serializers.Serializer):
   user = seralizers.SlugRelatedField(read_only=True,slug_field = 'name')
   ```
 
-- 
 
 ## 4、反序列化操作
 
@@ -370,7 +368,7 @@ JSONRenderer().render(u.data)
 
 ##### 3、序列化器保存数据
 
-验证通过后，如需保存数据，直接调用序列化器对象的save方式即可，save方法会自动触发序列化器中对应的方法来保存数据
+验证通过后，如需保存数据，直接调用序列化器对象的save方法即可，save方法会自动触发序列化器中对应的方法来保存数据
 
 ```python
 #反序列化
@@ -394,7 +392,7 @@ ModelSerializer与常规的Serializer相同，但提供了：
 
 - 基于模型类自动生成一些列字段
 - 基于模型类自动为Serializer生成validators ，比如unique_together
-- 包含默认的create()和update()的实现
+- **包含默认的create()和update()的实现**
 
 ##### 1、模型序列化器的使用
 
