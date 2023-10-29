@@ -9,8 +9,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_extensions.cache.decorators import cache_response
-from app8.models import Goods
-from app8.serializers import GoodsSerializer
+
+
+from .models import Goods
+from .serializers import GoodsSerializer
 
 
 class GoodsView(APIView):

@@ -22,10 +22,12 @@ class GoodsSerializer(serializers.Serializer):
     market_price = serializers.DecimalField(max_digits=8, decimal_places=2)
     price = serializers.DecimalField(max_digits=8, decimal_places=2)
 
+    # 对应POST请求，相当于新增数据。
     def create(self, validated_data):
         print(type(validated_data), validated_data)
         return Goods.objects.create(**validated_data)
 
+    # 对应PUT请求，相当于修改数据。
     def update(self, instance, validated_data):
         print(type(validated_data), validated_data)
         instance.name = validated_data.get("name")
@@ -35,8 +37,14 @@ class GoodsSerializer(serializers.Serializer):
         return instance
 
 
+class GoodsCategoryModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GoodsCategory
+        fields = "__all__"
+
+
 class GoodsModelSerializer(serializers.ModelSerializer):
-    category = GoodsCategorySerializer()
+    category = GoodsCategoryModelSerializer()
 
     class Meta:
         model = models.Goods  # 关联模型类

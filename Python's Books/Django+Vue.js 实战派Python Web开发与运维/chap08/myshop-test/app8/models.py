@@ -6,6 +6,8 @@ from app6.models import MyUser
 
 
 # Create your models here.
+
+
 class GoodsCategory(models.Model):
     id = models.AutoField(primary_key=True)
     name=models.CharField(max_length=50,verbose_name='分类名称',default='')

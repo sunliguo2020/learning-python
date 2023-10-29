@@ -9,16 +9,16 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from app8.models import Goods
-from app8.serializers import GoodsSerializer
+from .models import Goods
+from .serializers import GoodsSerializer
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def GoodsList(request, *args, **kwargs):
     if request.method == "GET":
         # 获取queryset
-        if kwargs.get("id"):
-            id = kwargs.get("id")
+        if kwargs.get("pk"):
+            pk = kwargs.get("pk")
             goods = Goods.objects.filter(id=id)
         else:
             goods = Goods.objects.all()[:10]
@@ -44,7 +44,7 @@ def GoodsList(request, *args, **kwargs):
             goods = Goods.objects.get(id=kwargs.get("id"))
         except Goods.DoesNotExist:
             raise Http404
-        ser_data = GoodsSerializer(goods, data=request.data, context={'request': request})
+        ser_data = GoodsSerializer(instance=goods, data=request.data, context={'request': request})
         if ser_data.is_valid():  # 判断数据的合法性
             goods = ser_data.save()  # 保存数据，实际上调用create方法
             return Response(ser_data.data)
