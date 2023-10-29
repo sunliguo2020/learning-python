@@ -16,23 +16,23 @@ class GoodsListView(View):
     def get(self, request):
         json_list = []
         goods = Goods.objects.all()[:20]
-        for good in Goods:
-            json_dict = {}
-            json_dict['name'] = good.name
+        for good in goods:
+            json_dict = {'name': good.name,
+                         # Object of type Decimal is not JSON serializable
+                         'market_price':good.market_price.to_eng_string()}
 
             json_list.append(json_dict)
 
-        return HttpResponse(json.dumps(json_list, ensure_ascii=False, indent=4), content_type="application/json")
+        return HttpResponse(json.dumps(json_list, ensure_ascii=False, indent=4),
+                            content_type="application/json")
 
 
-class GoodsListView_JsonResponse(View):
+class GoodsListViewJsonResponse(View):
     def get(self, request):
         json_list = []
         goods = Goods.objects.all()[:20]
-        for good in Goods:
-            json_dict = {}
-            json_dict['name'] = good.name
-
+        for good in goods:
+            json_dict = {'name': good.name}
             json_list.append(json_dict)
 
         return JsonResponse(json_list,
@@ -47,7 +47,7 @@ class GoodsView(APIView):
         goods = Goods.objects.all()[:10]
         # 开始序列化多条数据，加上many=True
         goods_json = GoodsSerializer(goods, many=True)
-        goods_json = GoodsModelSerializer(goods,many=True)
+        goods_json = GoodsModelSerializer(goods, many=True)
         # 返回序列化对象。goods_json.data 是序列化后的值
         print(goods_json.data)
 

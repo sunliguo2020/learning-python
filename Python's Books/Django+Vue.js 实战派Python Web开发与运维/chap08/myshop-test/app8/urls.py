@@ -9,7 +9,8 @@ from django.urls import path
 from . import views_api_view, views_apiview, views, views_mixin, views_generics
 
 urlpatterns = [
-    path('goods/', views.GoodsView.as_view()),
+    path('goods/', views.GoodsListView.as_view()),
+
     path('goods1/', views_api_view.GoodsList),
     path('goods1/<pk>/', views_api_view.GoodsList),
     path('goods2/', views_apiview.GoodsView.as_view()),
