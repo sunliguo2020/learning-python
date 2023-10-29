@@ -6,7 +6,7 @@
 """
 from django.urls import path
 
-from . import views_api_view, views_apiview, views, views_mixin,views_generics
+from . import views_api_view, views_apiview, views, views_mixin, views_generics
 
 urlpatterns = [
     path('goods/', views.GoodsView.as_view()),
@@ -18,7 +18,7 @@ urlpatterns = [
     path('goods3/', views_mixin.GoodsView.as_view()),
     path('goods3/<pk>/', views_mixin.GoodsDetailView.as_view()),
 
-    path('goods4/',views_generics.GoodsView.as_view()),
-    path('goods4/<pk>/',views_generics.GoodsDetailView.as_view()),
+    path('goods4/', views_generics.GoodsView.as_view()),
+    path('goods4/<pk>/', views_generics.GoodsDetailView.as_view()),
 
 ]
