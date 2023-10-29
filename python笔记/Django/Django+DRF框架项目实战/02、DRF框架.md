@@ -416,7 +416,7 @@ ModelSerializer与常规的Serializer相同，但提供了：
 
 1、fields
 
-- fields =“__all__" 代表模型类中所有字段都进行序列化
+- fields =“____all____" 代表模型类中所有字段都进行序列化
 
 2、exclude 使用exclude可以明确排除哪些字段不参与序列化
 
@@ -775,18 +775,24 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 
 ## 7、类视图APIView
 
+APIView是REST framework提供的所有视图的基类，继承自Django的View父类。支持认证、限流、授权等功能。
+
+> rest_framework.views.APIView
+
+
+
 1、APIView与View的区别：
 
-- 传入到视图方法中的是REST framework的Request对象
-- 视图方法可以返回REST framework的Response对象
+- 传入到视图方法中的是REST framework的Request对象,而不是Django的HttpRequest对象。
+- 视图方法可以返回REST framework的Response对象，视图会为响应数据设置（render）符合前端要求的格式；
 - 任何APIException异常都会被捕获到，并且处理成合适的响应信息。
 - 扩展了身份认证、权限检查、流量控制这个三个功能
 
 2、扩展的功能
 
-- authentication_classes:身份认证
-- permission classes ：权限检查
-- throttle_classes:限流
+- authentication_classes: 列表或元组 身份认证 
+- permission classes ：列表或元组 权限检查
+- throttle_classes: 列表或元组  限流
 
 3、基于APIView实现增删查改
 
@@ -794,24 +800,63 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 
 # 四、视图集和路由
 
-## 1、GenericAPIView
+## 4.1、GenericAPIView通用视图
+
+### 4.1.1 什么是GenericAPIView
+
+它在APIView类的基础上增加了操作序列化器和数据库查询的方法，作用是为Mixin扩展类提供方法支持。
+
+继承自APIView，拥有APIView所有的特性（认证、限流、授权），还支持搜索、分页、排序等功能。
+
+主要增加了操作序列化器和数据库查询的方法，作用是为下面Minxin扩展类的执行提供方法支持。通常在使用时，可搭配一个或多个Mixin扩展类。
 
 rest_framework.generics.GenericAPIView继承自APIView，增加了对于列表视图的详情视图可能用到的通用支持方法。
+
+### 4.1.3 GenericAPIView类的原理
+
+1、GerericAPIView类的属性和方法
+
+| 属性和方法             | 说明                                        |
+| ---------------------- | ------------------------------------------- |
+| queryset               | 指明使用的数据查询集                        |
+| serializer_class       | 指明视图使用的序列化器                      |
+| loopup_field           | 指明模型主键                                |
+| get_queryset           | 提供方法，以获取request请求封装完毕的结果集 |
+| get_object             | 获取单条数据                                |
+| get_serializer         | 获取序列化后的数据                          |
+| get_serializer_class   | 获取需要序列化的model类                     |
+| get_serializer_context | 获取序列化的数据，定义了某种格式的字典      |
+| Paginator              | 分页器                                      |
+
+
+
+```python
+# You'll need to either set these attributes,
+# or override `get_queryset()`/`get_serializer_class()`.
+# If you are overriding a view method, it is important that you call
+# `get_queryset()` instead of accessing the `queryset` property directly,
+# as `queryset` will get evaluated only once, and those results are cached# for all subsequent requests.
+
+您需要设置这些属性，或覆盖“get_queryset（）”get_serializer_class（）”。如果要重写视图方法，请务必调用“get_queryset（）”而不是直接访问“queryset”属性，因为“queryset”将仅被计算一次，并且这些结果将缓存用于所有后续请求。
+```
+
+需要设置queryset 和serializer_class 属性，或者重写get_queryset()和get_serializer_class()
 
 1、扩展的类属性
 
 - queryset :指定当前视图使用的查询集
-- serializer_class:类视图使用的序列化器
+- serializer_class:指明类视图使用的序列化器
 
 2、扩展的方法：
 
 - self.queryset():获取查询集
 - self.serializer():获取序列化器
+- self.get_serializer_class(self) :返回序列化器类，默认返回serializer_class
 - self.get_object():获取指定的单一对象
 
 3、扩展功能
 
-- pagination_clas:数据分页
+- pagination_class:指明分页控制类
 - filter_backends:数据过滤&排序
 - 指定单一数据获取的参数字段：
   - lookup_field 查询单一数据库对象时使用的条件字段，默认为‘pk’
@@ -819,14 +864,101 @@ rest_framework.generics.GenericAPIView继承自APIView，增加了对于列表�
 
 ## 2、扩展视图类
 
+扩展类提供了几种后端视图（对数据资源进行增删查改）处理流程的实现，如果需要编写的视图属于这五种，则视图可以通过继承相应的扩展类来复用代码，减少自己编写的代码量。
+
+这五个扩展类需要搭配GenericAPIView父类，因为5个扩展类的实现需要调用GenericAPIView提供的**序列化器与数据库查询**的方法。
+
 ### 1、基本扩展类：
 
+DRF框架包含5类Mixin
+
+| 类                 | 说明                                                  | 请求方法  |
+| ------------------ | ----------------------------------------------------- | --------- |
+| ListModelMixin     | 以列表方式返回一个QuerySet列表，提供list()方法        | GET       |
+| CreateModelMixin   | 创建一个实例，提供create()方法、perform_create()方法  | POST      |
+| RetrieveModelMixin | 返回一个具体的实例，提供retrieve()方法                | GET       |
+| UpdateModelMixin   | 对某个实例进行更新，提供pdate()、perform_update()方法 | PUT PATCH |
+| DestoryModelMixin  | 删除某个实例，提供delete()、perform_destory()方法     | DELETE    |
+
+
+
 - ListModelMinxin:
-  - 列表视图扩展类，提供'list'方法快速实现列表视图
+  - 列表视图扩展类，提供list(request,*args,**kwargs)方法快速实现列表视图
+  
   - 状态码：200
+  
+  - 该Mixin的list方法会对数据进行过滤和分页。
+  
+  - 源码
+  
+    - ```python
+      class ListModelMixin(object):
+          """
+          List a queryset.
+          """
+          def list(self, request, *args, **kwargs):
+              # 过滤
+              queryset = self.filter_queryset(self.get_queryset())
+              # 分页
+              page = self.paginate_queryset(queryset)
+              if page is not None:
+                  serializer = self.get_serializer(page, many=True)
+                  return self.get_paginated_response(serializer.data)
+              # 序列化
+              serializer = self.get_serializer(queryset, many=True)
+              return Response(serializer.data)
+      
+      ```
+  
+  - 举例：
+  
+    - ```python
+      from rest_framework.mixins import ListModelMixin
+      
+      class BookListView(ListModelMixin, GenericAPIView):
+          queryset = BookInfo.objects.all()
+          serializer_class = BookInfoSerializer
+      
+          def get(self, request):
+              return self.list(request)
+      
+      ```
+  
+    - 
 - CreateModelMixin：
-  - 创建视图扩展类，提供create方法快速实现创建资源的视图
+  - 创建视图扩展类，提供create(request,*args,**kwargs)方法快速实现创建资源的视图
+  
   - 成功返回201状态码，如果序列化器对前端发送的数据验证失败，返回400错误。
+  
+  - 源码
+  
+    - ```python
+      class CreateModelMixin(object):
+          """
+          Create a model instance.
+          """
+          def create(self, request, *args, **kwargs):
+              # 获取序列化器
+              serializer = self.get_serializer(data=request.data)
+              # 验证
+              serializer.is_valid(raise_exception=True)
+              # 保存
+              self.perform_create(serializer)
+              headers = self.get_success_headers(serializer.data)
+              return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+      
+          def perform_create(self, serializer):
+              serializer.save()
+      
+          def get_success_headers(self, data):
+              try:
+                  return {'Location': str(data[api_settings.URL_FIELD_NAME])}
+              except (TypeError, KeyError):
+                  return {}
+      
+      ```
+  
+    - 
 - RetrieveModelMixin：获取单一数据
   - 详情视图扩展类，提供retrieve方法，可以快速实现返回一个存在的数据对象。
   - 如果成功，返回200，否则返回404
@@ -837,7 +969,7 @@ rest_framework.generics.GenericAPIView继承自APIView，增加了对于列表�
   - 删除视图扩展类，提供destroy方法，可以快速实现删除一个存在的数据对象。
   - 成功返回204，不存在返回404。
 
-### 2、视图扩展类
+### 2、视图扩展类   子类视图
 
 1、CreateAPIView
 
@@ -864,7 +996,28 @@ rest_framework.generics.GenericAPIView继承自APIView，增加了对于列表�
 - 继承自：GenericAPIView、UpdateModelMixin
 - 提供put和patch方法
 
+6、RetrieveUpdateAPIView
+
+- 提供 get、put、patch方法
+- 继承自： GenericAPIView、RetrieveModelMixin、UpdateModelMixin
+
+7、RetrieveUpdateDestoryAPIView
+
+- **提供 get、put、patch、delete方法**
+- 继承自：GenericAPIView、RetrieveModelMixin、UpdateModelMixin、DestoryModelMixin
+  
+
 ## 3、视图集
+
+常见视图集父类
+
+ViewSet
+
+继承自APIView与ViewSetMixin，作用也与APIView基本类似，提供了身份认证、权限校验、流量管理等。
+
+ViewSet主要通过继承ViewSetMixin来实现在调用as_view()时传入字典（如：{'get'：'list'}的映射处理工作。
+
+在ViewSet中，没有提供任何动作action方法，需要我们自己实现action方法。
 
 1、视图集的使用
 
@@ -971,6 +1124,33 @@ class StudentView(ListAPIView):
 
 
 # 六、ajax跨域
+
+​	1、安装第三方库django-cors-headers
+
+```python
+pip install django-cors-headers
+```
+
+2. 在settings.py 中 INSTALLED_APPS 下 添加 一个 corsheaders 
+```
+INSTALLED_APPS = [
+    ....
+    'corsheaders',
+]
+
+```
+3. 在settings.py 中 Midddleware 中，添加对应的中间件
+```
+MIDDLEWARE = [ 
+    ...
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    ...
+]
+```
+4. 在settings.py 中设置跨域的基本参数
+- CORS_ORIGIN_ALLOW_ALL ：默认是False, 如果为 True， 则允许所有网站跨域
+
 
 # 七、DRF JWT
 
