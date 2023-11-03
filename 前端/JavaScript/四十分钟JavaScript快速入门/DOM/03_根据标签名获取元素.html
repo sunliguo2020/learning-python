@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var divs = document.getElementsByTagName('div');
+        console.log(divs)
+    </script>
+</head>
+<body>
+    <p>text1</p>
+    <p>text2</p>
+    <p>text3</p>
+    <p>text4</p>
+    <div>div1</div>
+    <div>div2</div>
+    <div>div3</div>
+    <div>div4</div>
+    <script>
+        console.log(divs)
+        var ps = document.getElementsByTagName('p');
+        console.log(ps)
+        //HTMLCollection html 元素组成的集合 伪数组
+        //操作时需要按照操作数组的方法进行
+        //遍历数组
+        for(var i =0;i<=ps.length;i++){
+            //输出每一项
+            console.log(ps[i])
+        }
+        ps[0].style.backgroundColor='pink'
+    </script>
+</body>
+</html>

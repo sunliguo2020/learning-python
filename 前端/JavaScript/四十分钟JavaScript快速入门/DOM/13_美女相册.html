@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>美女画廊</h2>
+    <div id="imagegallery">
+        <a href="images/1.jpg" title="美女A">
+            <img src="images/1-small.jpg" width="100px" alt="美女1" >
+        </a>
+        <a href="images/2.jpg" title="美女B">
+            <img src="images/2-small.jpg" width="100px" alt="美女2" >
+        </a>
+        <a href="images/3.jpg" title="美女C">
+            <img src="images/3-small.jpg" width="100px" alt="美女3" >
+        </a>
+        <a href="images/1.jpg" title="美女D">
+            <img src="images/4-small.jpg" width="100px" alt="美女4" >
+        </a>
+    </div>
+    <div style="clear:both"></div>
+    <img id="image" src="images/placeholder.png" alt="" width="450px">
+    <p id="des">选择一个图片</p>
+    
+    <script>
+    //获取元素
+    var imagegallery = document.getElementById('imagegallery');
+    console.log(imagegallery)
+    var links = imagegallery.getElementsByTagName('a');
+    var image = document.getElementById('image');
+    var des = document.getElementById('desc');
+    //2、遍历数组，添加点击事件
+    for (var i=0;i<=links.length-1;i++){
+        links[i].onclick = function(){
+            // alert("aaaa");
+            //3、更改image内部的src属性值
+            // this 关键字指代的是触发事件的真正的事件源
+            //image.src = links[i].href
+            image.scr = this.href;
+            //4、更改des内部的文字内容
+            des.innerText = this.title;
+        //取消a标签的默认跳转效果
+        return false;
+        }
+
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">
+        <li>列表1</li>
+        <li>列表2</li>
+        <li>列表3</li>
+        <li>列表4</li>
+    </ul>
+    <script>
+        var list = document.getElementById("list")
+        // list.onclick = function(){
+        //     console.log('点击了');
+        // }
+        list.addEventListener("click",function(e){
+            // console.log(e.target.tagName)
+            if (e.target.tagName === "LI"){
+                console.log("点击了li标签")
+            }
+        })
+    </script>
+</body>
+</html>
