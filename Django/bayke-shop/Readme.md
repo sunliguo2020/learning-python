@@ -50,9 +50,50 @@ python manage.py runserver
 
 1、创建app
 
+在apps 目录中新建article目录
+
+django-admin startapp app名  app路径
+
+```
+
+(venv) D:\github\learning-python\Django\bayke-shop>django-admin startapp article baykeshop\apps\article
+CommandError: Destination directory 'D:\github\learning-python\Django\bayke-shop\baykeshop\apps\article' does not exist, please create it first.
+
+(venv) D:\github\learning-python\Django\bayke-shop>django-admin startapp article bakeshop\apps\article  
+```
+
+
+
 2、settings中注册app
 
+修改app类名
+
+```
+class ArticleConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'bakeshop.apps.article'
+
+```
+
+注册
+
+```
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'bakeshop.apps.article'
+]
+```
+
+
+
 3、编写视图views
+
+函数视图 类试图
 
 4、urls.py中注册视图路由
 
