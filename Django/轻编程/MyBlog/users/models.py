@@ -15,6 +15,8 @@ class UserProfile(models.Model):
     gender = models.CharField('性别', max_length=6, choices=USER_GENDER_TYPE, default='male')
     address = models.CharField('地址', max_length=100, blank=True, default='')
     image = models.ImageField(upload_to='images/%Y/%m', default='images/default.png', max_length=100, verbose_name = '用户头像')
+    desc = models.TextField('个人简介', max_length=200, blank=True, default='')
+    gexing = models.CharField('个性签名', max_length=100, blank=True, default='')
 
     class Meta:
         verbose_name = '用户数据'

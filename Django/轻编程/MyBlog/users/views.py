@@ -2,12 +2,15 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
 from .forms import LoginForm, RegisterForm
 from .models import EmailVerifyRecord
+from .models import UserProfile  # 引入用户模型字段
+
 # Create your views here.
 
 class MyBackend(ModelBackend):
@@ -79,3 +82,9 @@ def active_user(request, active_code):
     else:
         return HttpResponse('链接有误！')
     return redirect('users:login')
+
+
+@login_required(login_url='users:login')   # 设置登录后才能访问，如果没有登陆，就跳转到登录界面
+def user_profile(request):
+    user = User.objects.get(username=request.user)
+    return render(request, 'users/user_profile.html', {'user': user})
