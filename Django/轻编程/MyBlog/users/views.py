@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -88,3 +88,8 @@ def active_user(request, active_code):
 def user_profile(request):
     user = User.objects.get(username=request.user)
     return render(request, 'users/user_profile.html', {'user': user})
+
+def logout_view(request):
+    logout(request=request)
+    return redirect('users:login')
+
