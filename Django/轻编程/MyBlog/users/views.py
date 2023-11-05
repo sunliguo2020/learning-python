@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 
-from .froms import LoginForm
+from .forms import LoginForm, RegisterForm
 # Create your views here.
 
 def login_view(request):
@@ -26,3 +26,23 @@ def login_view(request):
             # 返回登录失败信息
             return HttpResponse('账号或者密码错误')
     return render(request,'users/login.html',{'form':form})
+
+def register(request):
+    if request.method == 'GET':
+        form = RegisterForm()
+      
+    elif request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
+
+            return redirect('users:login')
+        
+    context = {
+            'form':form
+        }
+    print(form)
+    return render(request, 'users/register.html', context)
+    
