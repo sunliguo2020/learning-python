@@ -7,6 +7,7 @@ from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
 from .forms import LoginForm, RegisterForm
+from .models import EmailVerifyRecord
 # Create your views here.
 
 class MyBackend(ModelBackend):
@@ -62,3 +63,19 @@ def register(request):
     print(form)
     return render(request, 'users/register.html', context)
     
+def active_user(request, active_code):
+    """查询验证码"""
+    print(active_code)
+    all_records = EmailVerifyRecord.objects.filter(code=active_code)
+    print(all_records)
+    if all_records:
+        for record in all_records:
+            email = record.email
+            print(email)
+            user = User.objects.get(email=email)
+            print(user)
+            user.is_staff = True
+            user.save()
+    else:
+        return HttpResponse('链接有误！')
+    return redirect('users:login')
