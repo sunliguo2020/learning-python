@@ -1,20 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'users/bulma.css' %}">
+    <title>登录</title>
 </head>
 <body>
     
-    <form action="" method="post">
-        <label for="id_username">用户名：</label>
-        <input type="text" name="username" id="id_username">
-        <label for="id_password">密码：</label>
-        <input type="password" name="password" id="id_password">
-        <input type="submit" value="提交">
-        {% csrf_token %}
-    </form>
+    <div class="container">
+        <div class="box">
+            <h1 class="is-uppercase has-text-centered has-text-weight-bold">轻编程
+                <br><span class="tag">登录</span>
+            </h1>
+            <hr class=" dropdown-divider">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" style="margin-top: 1em;" class="button is-link is-fullwidth" value="提交">
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>

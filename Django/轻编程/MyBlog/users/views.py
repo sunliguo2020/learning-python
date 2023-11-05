@@ -1,11 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+
+from .froms import LoginForm
 # Create your views here.
 
 def login_view(request):
+    if request.method != 'POST':
+        form = LoginForm()
     if request.method == 'POST':   # 判断采用的是何种请求
 
+        form = LoginForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         
@@ -19,5 +24,5 @@ def login_view(request):
             return HttpResponse('登陆成功')
         else:
             # 返回登录失败信息
-            return HttpResponse('登陆失败')
-    return render(request,'users/login.html')
+            return HttpResponse('账号或者密码错误')
+    return render(request,'users/login.html',{'form':form})
