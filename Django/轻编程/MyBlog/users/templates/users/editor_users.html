@@ -1,0 +1,61 @@
+{% extends 'users/user_profile.html' %}
+{% load i18n %}
+{% block title %}
+<li class="is-active"><a>修改用户信息</a></li> 
+{% endblock title %}
+    
+{% block content %}
+<div class="content">
+    <fieldset disabled style="margin-bottom: 1em">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">用户名</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control is-expanded has-icons-left">
+                <input class="input" type="text" placeholder="Name" value="{{ user.username }}">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </p>
+            </div>
+          </div>  
+        </div>
+    </fieldset>
+  
+    
+    <form action="{% url 'users:editor_users' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label for="{{ form.email.id_for_label }}" class="label">{{ form.email.label }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                  {{ form.email }}
+              </div>
+            </div>
+          </div>
+      </div> 
+        {% for field in user_profile_form %}
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label for="{{ field.id_for_label }}" class="label">{{ field.label }}</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                   {{ field }}
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+        <input class=" button is-primary is-pulled-right" type="submit" value="{% trans '提交修改' %}">
+        <div class=" is-clearfix"></div>
+        
+    </form>
+</div>
+{% endblock content %}

@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UserForm, UserProfileForm
 from .models import EmailVerifyRecord
 from .models import UserProfile  # 引入用户模型字段
 
@@ -39,7 +39,8 @@ def login_view(request):
             # login方法登录
             login(request, user)
             # 返回登录成功信息
-            return HttpResponse('登陆成功')
+            # return HttpResponse('登陆成功')
+            return redirect('users:user_profile')
         else:
             # 返回登录失败信息
             return HttpResponse('账号或者密码错误')
@@ -93,3 +94,36 @@ def logout_view(request):
     logout(request=request)
     return redirect('users:login')
 
+@login_required(login_url='users:login')
+def editor_users(request):
+    """ 编辑用户信息 """
+    user = User.objects.get(id=request.user.id)
+    if request.method == "POST":
+        try:
+            userprofile = user.userprofile
+            form = UserForm(request.POST, instance=user)
+            user_profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)  # 向表单填充默认数据
+            if form.is_valid() and user_profile_form.is_valid():
+                form.save()
+                user_profile_form.save()
+                return redirect('users:user_profile')
+        except UserProfile.DoesNotExist:   # 这里发生错误说明userprofile无数据
+            form = UserForm(request.POST, instance=user)       # 填充默认数据 当前用户
+            user_profile_form = UserProfileForm(request.POST, request.FILES)  # 空表单，直接获取空表单的数据保存
+            if form.is_valid() and user_profile_form.is_valid():
+                form.save()
+                # commit=False 先不保存，先把数据放在内存中，然后再重新给指定的字段赋值天剑进去，提交保存新的数据
+                new_user_profile = user_profile_form.save(commit=False)
+                new_user_profile.owner = request.user
+                new_user_profile.save()
+
+                return redirect('users:user_profile')
+    else:
+        try:
+            userprofile = user.userprofile
+            form = UserForm(instance=user)
+            user_profile_form = UserProfileForm(instance=userprofile) 
+        except UserProfile.DoesNotExist:
+            form = UserForm(instance=user)
+            user_profile_form = UserProfileForm()  # 显示空表单
+    return render(request, 'users/editor_users.html', locals())

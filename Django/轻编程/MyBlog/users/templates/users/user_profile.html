@@ -53,10 +53,10 @@
                             <div class="dropdown-menu" id="dropdown-menu2" role="menu" >
                                 <div class="dropdown-content is-shadowless">
                                     <div class="dropdown-item">
-                                    <a class=" has-text-grey-dark" href="">
+                                    <a class=" has-text-grey-dark" href="{%url 'users:editor_users' %}">
                                         <span class="icon is-small">
                                             <i class="fas fa-user-cog" aria-hidden="true"></i>
-                                        </span>&nbsp;&nbsp;
+                                        </span>
                                         账号设置
                                     </a>
                                     </div>
@@ -78,5 +78,22 @@
 
         </div>
     </nav>
+
+    <div class="column is-10">
+        <div class="box is-radiusless is-shadowless"></div>
+        <div class="tabs">
+            <ul>
+                {% block title%}
+                <li class="is-active"><a>账号信息</a></li>
+                {% endblock title %}
+            </ul>
+        </div>
+        {% block content %}
+        <div class="columns is-mobile">        
+        </div>
+        <div class="columns"></div>
+        <div class="columns"></div>
+        {% endblock content %}
+    </div>
 </body>
 </html>

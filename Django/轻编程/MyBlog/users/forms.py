@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, UserProfile
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='用户名', max_length=20)
@@ -38,3 +38,19 @@ class RegisterForm(forms.ModelForm):
         if self.cleaned_data['password'] != self.cleaned_data['password1']:
             raise forms.ValidationError('两次密码输入不一致！')
         return self.cleaned_data['password1']
+    
+
+class UserForm(forms.ModelForm):
+    """ User模型的表单，只允许修改email一个数据，用户名不允许修改 """
+    class Meta:
+        model = User
+        fields = ('email',)
+
+
+class UserProfileForm(forms.ModelForm):
+    """ UserProfile的表单 """
+    class Meta:
+        """Meta definition for UserInfoform."""
+        model = UserProfile
+        fields = ('nike_name','desc', 'gexing', 'birthday',  'gender', 'address', 'image')
+
