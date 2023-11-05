@@ -1,9 +1,23 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+
+from django.contrib.auth.backends import ModelBackend
+from django.db.models import Q
 
 from .forms import LoginForm, RegisterForm
 # Create your views here.
+
+class MyBackend(ModelBackend):
+    def authenticate(self, request, username=None, password=None):
+        try:
+            user = User.objects.get(Q(username=username)|Q(email=username))
+            if user.check_password(password):   # 加密明文密码
+                return user
+        except Exception as e:
+            return None
+
 
 def login_view(request):
     if request.method != 'POST':
@@ -35,6 +49,8 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             new_user = form.save(commit=False)
+             # 让username等于邮箱即可
+            new_user.username = form.cleaned_data.get('email')  
             new_user.set_password(form.cleaned_data['password'])
             new_user.save()
 

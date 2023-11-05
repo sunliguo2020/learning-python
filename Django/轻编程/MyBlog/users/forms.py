@@ -2,7 +2,7 @@ from django import forms
 from .models import User
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='用户名', max_length=15)
+    username = forms.CharField(label='用户名', max_length=20)
     password = forms.CharField(label='密码', min_length=6, widget=forms.PasswordInput())
 
     def clean_password(self):
@@ -13,28 +13,28 @@ class LoginForm(forms.Form):
         return password
     
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(label='密码', 
-                               min_length=6, 
-                               widget=forms.PasswordInput(attrs={
-                                'class': 'input', 
-                                'placeholder': '密码'}))
-    password1 = forms.CharField(label='再次密码', min_length=6, widget=forms.PasswordInput(attrs={
-        'class': 'input', 'placeholder': '再次密码'}))
+    """注册表单"""
+    email = forms.EmailField(label='邮箱', min_length=3, widget=forms.EmailInput(attrs={
+        'class': 'input', 'placeholder': '邮箱'}))
+    password = forms.CharField(label='密码', min_length=6, widget=forms.PasswordInput(attrs={
+        'class': 'input', 'placeholder': '密码'}))
+    password1 = forms.CharField(label='再次输入密码', min_length=6, widget=forms.PasswordInput(attrs={
+        'class': 'input', 'placeholder': '再次输入密码'}))
+
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('email', 'password')
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        exists = User.objects.filter(username=username).exists()
+    def clean_email(self):
+        """ 验证用户是否存在 """
+        email = self.cleaned_data.get('email')
+        exists = User.objects.filter(email=email).exists()
         if exists:
-            raise forms.ValidationError("用户名已经存在！")
-        return username
+            raise forms.ValidationError('邮箱已经存在!')
+        return email
 
     def clean_password1(self):
-        data = self.cleaned_data
-        password = data['password']
-        password1 = data['password1']
-        if password != password1:
-            raise forms.ValidationError('两次输入的密码不一致，请修改!')
-        return password
+        """验证密码是否相等"""
+        if self.cleaned_data['password'] != self.cleaned_data['password1']:
+            raise forms.ValidationError('两次密码输入不一致！')
+        return self.cleaned_data['password1']

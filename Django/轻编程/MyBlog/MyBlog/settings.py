@@ -134,3 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 配置用户上传文件路径及url
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+AUTHENTICATION_BACKENDS = (
+    'users.views.MyBackend',
+)
