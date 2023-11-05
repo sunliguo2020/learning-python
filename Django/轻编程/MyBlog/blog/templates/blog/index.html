@@ -1,0 +1,10 @@
+<h1>查询博客分类：</h1>
+{% for category in category_list %}
+	{{ category.name }}
+{% endfor %}
+
+
+<h1>查询博客文章：</h1>
+{% for post in post_list %}
+	{{ post.title }}
+{% endfor %}
