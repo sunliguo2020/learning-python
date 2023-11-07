@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% block section%}
+<div class="box">
+    <h1 class="is-size-5 has-text-weight-bold">
+        <a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a>
+    </h1>
+    <div class="is-size-7 has-text-grey-light pt-1 pb-1">
+        <span class="mr-3">作者：{{ post.owner}}</span>
+        <span>发布日期：{{ post.add_date}}</span>
+    </div>
+    <div class="content">
+        {{post.content|safe}}
+    </div>
+</div>
+{% endblock %}

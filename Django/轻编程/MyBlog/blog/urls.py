@@ -5,4 +5,6 @@ app_name = 'blog'   # 定义一个命名空间，用来区分不同应用之间�
 
 urlpatterns = [ 
     path('', views.index, name='index'),
+    path('category/<int:category_id>/', views.category_list, name='category_list'),
+    path('post/<int:post_id>/', views.post_detail, name='post_detail'),
 ]

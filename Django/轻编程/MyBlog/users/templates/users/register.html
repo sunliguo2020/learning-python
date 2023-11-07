@@ -9,11 +9,17 @@
 
 </head>
 <body>
-    <form method="post">
-        {{ form.error}}
-        {%csrf_token%}
-        {{form.as_p}}
-        <button>注册</button>
-    </form>
+    <div class="columns">
+        <div class="container  column is-half">
+            <form method="post">
+                {{ form.error}}
+                {%csrf_token%}
+                {{form.as_p}}
+                <button>注册</button>
+            </form>
+        </div>
+    </div>
+    
+  
 </body>
 </html>
