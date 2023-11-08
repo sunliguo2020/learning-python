@@ -52,5 +52,5 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         """Meta definition for UserInfoform."""
         model = UserProfile
-        fields = ('nike_name','desc', 'gexing', 'birthday',  'gender', 'address', 'image')
+        fields = ('nick_name','desc', 'gexing', 'birthday',  'gender', 'address', 'image')
 

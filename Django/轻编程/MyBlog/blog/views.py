@@ -26,8 +26,15 @@ def category_list(request,category_id):
 def post_detail(request,post_id):
     # 文章详情页
     post = get_object_or_404(Post,id=post_id)
+
+    # 上一篇
+    prev_post = Post.objects.filter(id__lt =post_id).last()
+    # 下一篇
+    next_post = Post.objects.filter(id__gt=post_id).first()
     context = {
-        'post':post
+        'post':post,
+        'prev_post':prev_post,
+        'next_post':next_post
     }
 
     return render(request,'blog/detail.html',context)
