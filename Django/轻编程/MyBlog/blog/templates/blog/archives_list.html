@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block title%}
+{{year}} {{month}} 的归档页
+{%endblock %}
+{% block section %}{{block.super}}
+每月归档：{{year}} 年{{month}}月
+<div class="tas has-addons is-pulled-right">
+    <span class="tag">共</span>
+    <span class="tag is-primary">{{post_list.count}}篇</span>
+</div>
+
+{% endblock %}
