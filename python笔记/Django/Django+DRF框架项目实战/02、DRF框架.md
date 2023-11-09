@@ -319,8 +319,9 @@ class AddrSerializer(serializers.Serializer):
     user = serializers.StringRelatedField()
     ```
   
+
 3、使用关联对象的序列化器
-  
+
 - 返回关联对象序列化器返回的所有字段
   
 - ```python
@@ -391,7 +392,7 @@ ser.save()
 ModelSerializer与常规的Serializer相同，但提供了：
 
 - 基于模型类自动生成一些列字段
-- 基于模型类自动为Serializer生成validators ，比如unique_together
+- 基于模型类自动为Serializer生成验证器validators ，比如unique_together
 - **包含默认的create()和update()的实现**
 
 ##### 1、模型序列化器的使用
@@ -794,6 +795,64 @@ APIView是REST framework提供的所有视图的基类，继承自Django的View�
 
 3、基于APIView实现增删查改
 
+```python
+class UserListView(APIView):
+    def get(self, request, format=None):
+        # 获取用户信息列表
+        users = UserInfo.objects.all()
+        # 创建序列化对象
+        ser = UserInfoSerializer(users, many=True)
+        result = {
+            'data': ser.data,
+            'code': 200,
+            "message": "OK"
+        }
+        return Response(result, status=status.HTTP_200_OK)
+
+    def post(self, request, format=None):
+        # 创建序列化器
+        print(request.data)
+        ser = UserInfoSerializer(data=request.data)
+        # 校验请求数据
+        if ser.is_valid():
+            # 校验通过，则添加数据到数据
+            ser.save()
+            return Response({'code': 201, 'data': ser.data, "message": 'OK'})
+        else:
+            return Response({'code': 400, 'message': ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserDetailView(APIView):
+    def get_object(self, id):
+        try:
+            return UserInfo.objects.get(id=id)
+        except Exception as e:
+            raise Http404()
+
+    def get(self, request, id, format=None):
+        obj = self.get_object(id)
+        ser = UserInfoSerializer(obj)
+        return Response({'code': 200, "data": ser.data, 'message': "OK"}, status=status.HTTP_200_OK)
+
+    def put(self, request, id, format=None):
+        obj = self.get_object(id)
+        # 修改单个用户资源
+        ser = UserInfoSerializer(instance=obj, data=request.data)
+        if ser.is_valid():
+            ser.save()
+            return Response({'code': 200, "data": ser.validated_data, "message": "OK"}, status=status.HTTP_200_OK)
+        else:
+            return Response({'code': 400, 'message': ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        obj = self.get_object(id)
+        obj.delete()
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+```
+
+
+
 
 
 # 四、视图集和路由
@@ -838,6 +897,19 @@ rest_framework.generics.GenericAPIView继承自APIView，增加了对于列表�
 您需要设置这些属性，或覆盖“get_queryset（）”get_serializer_class（）”。如果要重写视图方法，请务必调用“get_queryset（）”而不是直接访问“queryset”属性，因为“queryset”将仅被计算一次，并且这些结果将缓存用于所有后续请求。
 ```
 
+如果你想使用GenericAPIview，你需要从如下二种选择其一：
+
+1. 在视图类中设置如下属性 (常用)
+
+   `queryset`、`serializer_class`
+
+2. 重写GenericAPIview类的`get_queryset()`/`get_serializer_class()`方法
+
+如果你重写了一个视图方法，那么重要的是 你应该调用get_queryset() 而不是直接的访问`queryset`属性。
+因为`queryset`将只被设置一次，并且为了后续到来的所有请求，这个结果会被缓存。
+
+**总而言之，不要直接访问`queryset`、`serializer_class`属性，而是使用GenericAPIview提供的各种方法获取。**
+
 需要设置queryset 和serializer_class 属性，或者重写get_queryset()和get_serializer_class()
 
 1、扩展的类属性
@@ -860,7 +932,7 @@ rest_framework.generics.GenericAPIView继承自APIView，增加了对于列表�
   - lookup_field 查询单一数据库对象时使用的条件字段，默认为‘pk’
   - lookup_url_kwarg 查询单一数据时URL中的参数关键字名称，默认与lookup_field相同
 
-## 2、扩展视图类
+## 4.2、扩展视图类
 
 扩展类提供了几种后端视图（对数据资源进行增删查改）处理流程的实现，如果需要编写的视图属于这五种，则视图可以通过继承相应的扩展类来复用代码，减少自己编写的代码量。
 
@@ -1005,7 +1077,7 @@ DRF框架包含5类Mixin
 - 继承自：GenericAPIView、RetrieveModelMixin、UpdateModelMixin、DestoryModelMixin
   
 
-## 3、视图集
+## 4.3、视图集
 
 常见视图集父类
 
@@ -1050,13 +1122,77 @@ path(r'^books/<int:id>/$',xxxInfoViewSet.as_view({'get':'retrieve'}))
 
 在ViewSet中，没有提供任何动作action方法，需要我们自己实现action方法
 
+源码：
+
+```python
+class ViewSet(ViewSetMixin, views.APIView):
+    """
+    The base ViewSet class does not provide any actions by default.
+    """
+    pass
+
+```
+
+ViewSetMixin
+
+```python
+class ViewSetMixin:
+    """
+    This is the magic.
+
+    Overrides `.as_view()` so that it takes an `actions` keyword that performs
+    the binding of HTTP methods to actions on the Resource.
+
+    For example, to create a concrete view binding the 'GET' and 'POST' methods
+    to the 'list' and 'create' actions...
+
+    view = MyViewSet.as_view({'get': 'list', 'post': 'create'})
+    """
+```
+
+
+
+
+
 2）GenericViewSet
 
 继承自GenericAPIView，作用也与GenericAPIView类似，提供了get_object、get_queryset等方法便于列表视图与详情信息视图的开发。
 
+源码
+
+```python
+class GenericViewSet(ViewSetMixin, generics.GenericAPIView):
+    """
+    The GenericViewSet class does not provide any actions by default,
+    but does include the base set of generic view behavior, such as
+    the `get_object` and `get_queryset` methods.
+    """
+    pass
+```
+
+
+
 3）ModelViewSet
 
 继承自GenericAPIView，同时包括了ListModelMixin、RetrieveModelMixin、CreateModelMixin、UpdateModelMinxin、DestoryModelMinxin。
+
+源码：
+
+```python
+class ModelViewSet(mixins.CreateModelMixin,
+                   mixins.RetrieveModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.DestroyModelMixin,
+                   mixins.ListModelMixin,
+                   GenericViewSet):
+    """
+    A viewset that provides default `create()`, `retrieve()`, `update()`,
+    `partial_update()`, `destroy()` and `list()` actions.
+    """
+    pass
+```
+
+
 
 4）ReadOnlyModelViewSet
 
@@ -1065,6 +1201,88 @@ path(r'^books/<int:id>/$',xxxInfoViewSet.as_view({'get':'retrieve'}))
 4、路由
 
 对于视图集ViewSet，我们除了可以自己手动指明请求方式与动作action之间的对应关系外，还可以使用
+
+## 4.4 总结
+
+```
+# 两个视图基类 
+1.APIView       
+2.GenericAPIView
+APIView：       renderer_classes响应格式类 parser_classes请求解析类    跟数据库解耦合
+GenericAPIView：queryset数据集 serializer_class序列化类                跟数据库耦合
+
+# 5个视图扩展类 (提供方法)
+ListModelMixin      -->  list      -->  查询所有
+RetrieveModelMixin  -->  retrieve  -->  查询一个
+CreateModelMixin    -->  create    -->  新增一个
+UpdateModelMixin    -->  update    -->  修改一个
+DestroyModelMixin   -->  destroy   -->  删除一个
+
+# 9个视图子类 
+继承关系公式： 视图子类 = n * 视图扩展类 + GenericAPIView 
+
+# 示例：
+ListAPIView     =  ListModelMixin     + GenericAPIView 
+RetrieveAPIView =  RetrieveModelMixin + GenericAPIView 
+CreateAPIView   =  CreateModelMixin   + GenericAPIView 
+DestroyAPIView	= DestroyModelMixin	  + GenericAPIView
+UpdateAPIView
+ListCreateAPIView
+RetrieveUpdateAPIView
+RetrieveDestroyAPIView = RetrieveModelMixin + DestroyModelMixin + GenericAPIView 
+RetrieveUpdateDestroyAPIView = RetrieveModelMixin + UpdateModelMixin + DestroyModelMixin + GenericAPIView
+
+'''
+总结：9个视图子类都继承GenericAPIView
+'''
+```
+
+```
+
+# from rest_framework.viewsets下有这几个类：
+
+ViewSetMixin：魔法类，重写了as_view，只要继承他，以后路由写法变成了映射方法
+ModelViewSet: 5个视图扩展类 + ViewSetMixin(魔法类) + GenericAPIView
+ReadOnlyModelViewSet: 2个视图扩展类 + ViewSetMixin(魔法类) + GenericAPIView   只读的两个
+ViewSet：ViewSetMixin(魔法类)  + APIView
+GenericViewSet：ViewSetMixin(魔法类) + GenericAPIView
+
+# 重点
+	以后，你想继承APIView，但是想变路由写法【视图类中方法名任意命名】，要继承ViewSet
+    以后，你想继承GenericAPIView，但是想变路由写法【视图类中方法名任意命名】，要继承GenericViewSet
+    
+# 总结
+只要想变路由，就要继承ViewSetMixin，但是ViewSetMixin不是CBV视图类，他没有list，create等方法，所以要配合APIView, GenericAPIView一起使用，所以会出现ViewSet,GenerucViewSet，帮助我们继承好了。
+ViewSet：       ViewSetMixin(魔法类)  + APIView
+GenericViewSet：ViewSetMixin(魔法类)  + GenericAPIView
+
+```
+
+###  视图层大总结
+
+```
+# 1. 两个视图基类
+	-APIView，GenericAPIView
+# 2. 5个视图扩展类，不是视图类，必须配合GenericAPIView
+
+# 3. 9个视图子类，是视图类，只需要继承其中某一个即可
+
+# 4. 视图集 
+	-ModelViewSet：路由写法变了，只需要写两行，5个接口都有了
+    -ReadOnlyModelViewSet：路由写法变了，只需要写两行，2个只读接口都有了
+    -ViewSetMixin：不是视图类，魔法，重写了as_view,路由写法变了，变成映射了
+    	views.BookView.as_view({'get': 'list', 'post': 'create'})
+    -ViewSet：ViewSetMixin+ APIView
+	-GenericViewSet：ViewSetMixin+ GenericAPIView
+
+# 举例子：发送短信接口，视图类叫SendView，方法叫send_sms，路由配置变了
+	get--->send_sms
+	class SendView(ViewSet):
+        def send_sms(self,request):
+            
+```
+
+
 
 # 五、其他功能
 
