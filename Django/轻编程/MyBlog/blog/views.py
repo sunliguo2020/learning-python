@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
@@ -9,7 +10,11 @@ def index(request):
     # 首页
     category_list = Category.objects.all()  # 查询到所有的分类
     post_list = Post.objects.all()  # 查询到所有的文章
-    context = {"category_list": category_list, "post_list": post_list}  # 上下文数据
+    paginator = Paginator(post_list, 2)  # 第二个参数显示每页显示几个
+    page_number = request.GET.get('page')
+    print(page_number)
+    page_obj = paginator.get_page(page_number)
+    context = {"category_list": category_list, "post_list": page_obj}  # 上下文数据
 
     return render(request, "blog/index.html", context)
 
