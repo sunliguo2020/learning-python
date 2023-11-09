@@ -2,6 +2,7 @@ import pygame
 
 pygame.init()
 screen = pygame.display.set_mode((750,750))
+
 # 棋盘落子信息
 map = [0]*15
 for i in range(15):
@@ -9,14 +10,24 @@ for i in range(15):
 
 # 哪一方在落子
 player = 1
+# 获胜者
 winner = 0
 
 running = True
 
 def check(row,col):
+    """判断是否五子连线
+        判断交叉点左右上下斜线是否有5子连线
+    Args:
+        row (_type_): 行
+        col (_type_): 列
+
+    Returns:
+        _type_: _description_
+    """
     # 判断左右方向是否五子联线
     score = 1
-    # 水平往左判断
+    # 水平往右判断
     for i in range(4):
         if  map[row][col+i] == map[row][col+i+1]:
             score = score + 1
