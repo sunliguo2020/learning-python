@@ -92,6 +92,9 @@ def user_reg(request):
 
 
 def user_login(request):
+    """
+    用户登录视图
+    """
     return render(request, 'shop/user_login.html')
 
 
@@ -99,7 +102,6 @@ def ajax_login_data(request):
     uname = request.POST.get('username', '')
     pwd = request.POST.get('password', '')
     json_dict = {
-
     }
     if uname and pwd:  # 用户名和密码不为空，则查询数据库
         if MyUser.objects.filter(username=uname):  # 判断用户是否存在
