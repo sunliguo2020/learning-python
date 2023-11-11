@@ -6,8 +6,8 @@
 """
 import re
 
-from django.core.exceptions import ValidationError
 from django import forms
+from django.core.exceptions import ValidationError
 
 
 # 手机验证函数
@@ -21,7 +21,6 @@ class UserRegForm(forms.Form):
     username = forms.CharField(label='用户名', min_length=6,
                                widget=forms.widgets.TextInput(
                                    attrs={'class': 'form-control', 'placeholder': '请输入用户名'}
-
                                ),
                                error_messages={
                                    'required': '用户名不能为空',
@@ -30,8 +29,10 @@ class UserRegForm(forms.Form):
     password = forms.CharField(label='密码', min_length=6, max_length=10,
                                widget=forms.widgets.PasswordInput(
                                    attrs={
-                                       "class": 'password',
-                                   }, render_value=True
+                                       # 指定样式类名
+                                       "class": 'form-control',
+                                   },
+                                   render_value=True  # 在页面校验不通过后，页面上的值还存在
                                ),
                                error_messages={
                                    'max_length': '密码最长为10位',
@@ -43,7 +44,6 @@ class UserRegForm(forms.Form):
                                   widget=forms.widgets.PasswordInput(
                                       attrs={
                                           'class': 'form-control',
-
                                       },
                                       render_value=True
                                   ),
@@ -53,6 +53,30 @@ class UserRegForm(forms.Form):
                                       'min_length': '密码最少为6位'
                                   }
                                   )
+
+    nickname = forms.CharField(label="昵称", max_length=20, required=False,
+                               widget=forms.widgets.TextInput(
+                                   # 其中class样式为form-control，这是bootstrap的样式
+                                   attrs={'class': 'form-control', 'placeholder': "请输入用户昵称"}),
+                               error_messages={
+                                   'required': '用户昵称不能为空',
+                                   'max_length': '昵称长度不能超过20位',
+                               })
+    email = forms.EmailField(label="邮箱",
+                             widget=forms.widgets.EmailInput(
+                                 attrs={'class': 'form-control', }),
+                             error_messages={
+                                 'required': '邮箱不能为空',
+                                 'invalid': '邮箱格式不对',
+                             })
+    mobile = forms.CharField(label="手机号码", validators=[mobile_validate],
+                             widget=forms.widgets.TextInput(
+                                 attrs={'class': 'form-control', }),
+                             error_messages={
+                                 'required': '手机号码不能为空',
+                             })
+    user_img = forms.ImageField(label="用户头像", required=False, widget=forms.widgets.FileInput(
+        attrs={'class': 'form-control'}))
 
     # 全局钩子函数
     def clean(self):

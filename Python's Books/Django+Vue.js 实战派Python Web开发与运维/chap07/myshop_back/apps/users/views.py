@@ -59,11 +59,15 @@ def delete(request, id):
 
 
 def user_reg(request):
+    """
+    用户注册视图
+    """
     if request.method == 'GET':
         form_obj = forms.UserRegForm()
         return render(request, 'shop/user_reg.html', {'form_obj': form_obj})
     if request.method == "POST":
-        form_obj = forms.UserRegForm(request.POST, request.FILES)
+        # form_obj = forms.UserRegForm(request.POST, request.FILES)
+        form_obj = forms.UserRegForm(data=request.POST, files=request.FILES)
         if form_obj.is_valid():
             uname = request.POST.get("username", '')
             users = MyUser.objects.filter(username=uname)
@@ -72,6 +76,7 @@ def user_reg(request):
                     user_img = user.user_img
                 info = '用户已经存在'
             else:
+                # 去掉二次输入的密码
                 form_obj.cleaned_data.pop("re_password")
                 form_obj.cleaned_data["is_staff"] = 1
                 form_obj.cleaned_data["is_superuser"] = 0  # 非管理员
@@ -82,7 +87,7 @@ def user_reg(request):
             return render(request, 'shop/user_reg.html', {"form_obj": form_obj, "info": info, "user_img": user_img})
         else:
             errors = form_obj.errors
-            print(errors)
+            # print(errors)
             return render(request, "shop/user_reg.html", {'form_obj': form_obj, 'errors': errors})
 
 
