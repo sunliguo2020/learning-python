@@ -8,6 +8,14 @@ from apps.users.models import MyUser
 
 
 # Create your views here.
+def add(request):
+    return render(request,'shop/users/add.html')
+
+def edit(request,id):
+    print(id)
+    return render(request,'shop/users/edit.html')
+
+
 
 def index(request):
     if request.method == "GET":

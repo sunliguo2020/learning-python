@@ -1,12 +1,11 @@
-from django.shortcuts import render
-
 # Create your views here.
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.base import View
-from django.http import HttpResponse, JsonResponse
-from apps.goods.models import *
+
 from apps.goods.forms import GoodsCategoryForm
-import json
+from apps.goods.models import *
 
 
 class GoodsCategoryView(View):
