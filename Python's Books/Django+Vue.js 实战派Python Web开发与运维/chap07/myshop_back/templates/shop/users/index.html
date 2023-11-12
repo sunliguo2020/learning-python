@@ -105,14 +105,14 @@
                             <tr>
                                 <td>{{ per.username }}</td>
                                 <td>{{ per.truename }}</td>
-                                <td>{{ per.sex }}</td>
+                                <td>{{ per.get_sex_display}}</td>
                                 <td>{{ per.birthday }}</td>
                                 <td>{{ per.email }}</td>
                                 <td>{{ per.mobile }}</td>
                                 <td>{{ per.add_time }}</td>
                                 <td width="5%"><img src="/media/{{ per.user_img }}" width="100px" height="100px"/></td>
                                 <td width="20%">
-                                    <a class="btn btn-primary single" href="{% url 'users:users_edit' per.id%}">
+                                    <a class="btn btn-primary single" href="{% url 'users:users_edit' per.id %}">
                                         <i class="fa fa-edit"></i> 修改
                                     </a>
                                     <a class="btn btn-danger" href="javascript:void(0)" onclick="showDeleteModal(this)">删除</a>

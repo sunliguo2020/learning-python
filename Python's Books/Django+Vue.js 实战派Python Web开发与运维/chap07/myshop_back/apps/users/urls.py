@@ -8,12 +8,13 @@
 from django.urls import path
 
 from apps.users import views
-app_name= 'users'
+
+app_name = 'users'
 urlpatterns = [
     path('user_reg/', views.user_reg),
     path('user_login/', views.user_login),
     path('ajax_login_data/', views.ajax_login_data),
-    path('index/', views.index),
+    path('index/', views.index, name='users_index'),
     path('del/<int:id>/', views.delete),
     path('edit/<id>/', views.edit, name='users_edit'),
 ]

@@ -9,6 +9,8 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 
+from .models import MyUser
+
 
 # 手机验证函数
 def mobile_validate(value):
@@ -85,3 +87,11 @@ class UserRegForm(forms.Form):
         print(password)
         if password != re_password:
             self.add_error('re_password', ValidationError('两次密码输入不一样'))
+
+
+class UsersForm(forms.ModelForm):
+    birthday = forms.DateField(label='出生日期', widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = MyUser
+        fields = ['truename', 'mobile', 'birthday', 'sex']

@@ -1,20 +1,40 @@
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from apps.users import forms
 from apps.users.models import MyUser
+from .forms import UsersForm
 
 
 # Create your views here.
 def add(request):
-    return render(request,'shop/users/add.html')
+    return render(request, 'shop/users/add.html')
 
-def edit(request,id):
-    print(id)
-    return render(request,'shop/users/edit.html')
 
+def edit(request, id):
+    # print(id)
+    # user = MyUser.objects.filter(id=id).first()
+    user = MyUser.objects.get(id=id)
+    # print(user)
+    if request.method == 'GET':
+        user_form = UsersForm(instance=user)
+        context = {
+            'user_form': user_form
+        }
+        return render(request, 'shop/users/edit.html', context)
+    elif request.method == "POST":
+        user_form = UsersForm(data=request.POST, instance=user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect(reverse('users:users_index'))
+        else:
+            context = {
+                'user_form': user_form
+            }
+            return render(request, 'shop/users/edit.html',context)
 
 
 def index(request):
