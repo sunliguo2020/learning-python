@@ -39,9 +39,9 @@ def edit(request, id):
 
 def index(request):
     if request.method == "GET":
-        level = request.GET.get('level')
+        level = request.GET.get('level','')
         truename = request.GET.get('truename', '')
-        status = request.GET.get('status')
+        status = request.GET.get('status','')
         search_dict = dict()
         if level:
             search_dict['level'] = level
@@ -50,7 +50,9 @@ def index(request):
         if status:
             search_dict['status'] = status
 
+        # 多条件查询
         datas = MyUser.objects.filter(**search_dict).order_by('-id')
+
         page_size = 2  # 每页显示的行数
         try:
             if not request.GET.get("page"):

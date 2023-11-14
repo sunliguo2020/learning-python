@@ -9,13 +9,9 @@
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
-                <div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h1 class="m-0">
-                                用户模块 <small>列表</small>
-                            </h1>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="m-0"> 用户模块 <small>列表</small></h1>
                     </div>
                 </div>
             </div>
@@ -105,7 +101,7 @@
                             <tr>
                                 <td>{{ per.username }}</td>
                                 <td>{{ per.truename }}</td>
-                                <td>{{ per.get_sex_display}}</td>
+                                <td>{{ per.get_sex_display }}</td>
                                 <td>{{ per.birthday }}</td>
                                 <td>{{ per.email }}</td>
                                 <td>{{ per.mobile }}</td>
@@ -153,7 +149,6 @@
                         </li>
                     {% endif %}
                 {% endfor %}
-
 
                 {% if users.has_next %}
                     <li class="page-item">
