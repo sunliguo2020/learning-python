@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import myhead from "./../app/head";
+import myhead from './../app/head';
 import myfooter from "./../app/footer";
 import slide from "./slide";
 import recommend from "./recommend";

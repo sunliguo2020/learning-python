@@ -29,7 +29,7 @@
     <div class="hd_main cle">
       <div class="logo">
         <a href="./" class="lizi_logo">
-          <img src="../../static/images/logo.jpg" alt="" />
+          <img src="../../static/images/logo.jpg" alt=""/>
         </a>
       </div>
       <div class="search_box">
@@ -48,17 +48,17 @@
             value=""
             autocomplete="off"
           />
-          <input type="hidden" value="k1" name="dataBi" />
+          <input type="hidden" value="k1" name="dataBi"/>
           <button type="submit" class="sea_submit">搜索</button>
         </form>
       </div>
     </div>
     <div class="hd_nav">
       <div class="hd_nav_bd cle">
-        <div          class="main_nav main_nav_hover"
-          id="main_nav"
-          @mouseover="overAllmenu"
-          @mouseout="outAllmenu"
+        <div class="main_nav main_nav_hover"
+             id="main_nav"
+             @mouseover="overAllmenu"
+             @mouseout="outAllmenu"
         >
           <div class="main_nav_link">
             <a class="#">全部商品分类</a> <i class="iconfont"></i>
@@ -79,8 +79,9 @@
                   "
                 >
                   <router-link :to="'/list/' + item.id">{{
-                    item.name
-                  }}</router-link>
+                      item.name
+                    }}
+                  </router-link>
                 </h3>
                 <div
                   class="J_subCata"
@@ -93,8 +94,9 @@
                       <dl>
                         <dt>
                           <router-link :to="'/list/' + iteminfo.id">{{
-                            iteminfo.name
-                          }}</router-link>
+                              iteminfo.name
+                            }}
+                          </router-link>
                         </dt>
                       </dl>
                       <div class="clear"></div>
@@ -111,9 +113,7 @@
           </li>
           <template v-for="item in allMenu">
             <li v-if="item.is_nav">
-              <router-link :to="'/list/' + item.id">{{
-                item.name
-              }}</router-link>
+              <router-link :to="'/list/' + item.id">{{ item.name }}</router-link>
             </li>
           </template>
         </ul>
@@ -126,27 +126,23 @@
         >
           <router-link class="tit" :to="'/checkout'">
             <b class="iconfont">Ɲ</b>去购物车结算<span
-              ><i class="iconfont"></i></span
-            >
-            <em class="num" id="hd_cartnum" style="visibility: visible">{{
-              totalNum
-            }}</em>
+          ><i class="iconfont"></i></span
+          >
+            <em class="num" id="hd_cartnum" style="visibility: visible">{{ totalNum }}</em>
           </router-link>
           <div class="list" v-show="showCart">
             <div class="data">
               <dl v-for="item in cart_lists">
                 <dt>
-                  <a target="_blank" href="#"
-                    ><img :src="item.goods.main_img"
-                  /></a>
+                  <a target="_blank" href="#"><img :src="item.goods.main_img"/></a>
                 </dt>
                 <dd>
                   <h4>
                     <router-link
                       target="_blank"
                       :to="'detail' + item.goods.id"
-                      >{{ item.goods.name }}</router-link
-                    >
+                    >{{ item.goods.name }}
+                    </router-link>
                   </h4>
                   <p>
                     <span class="red">{{ item.goods.price }}</span
@@ -156,20 +152,21 @@
                     class="iconfont del"
                     title="删除"
                     href="javascript:deleteCartGoods(278);"
-                    >Ť</a
+                  >Ť</a
                   >
                 </dd>
               </dl>
 
               <div class="count">
                 共<span class="red" id="hd_cart_count">{{ totalNum }}</span
-                >件商品哦~
+              >件商品哦~
                 <p>
                   总价:<span class="red"
-                    ><em id="hd_cart_total">{{ totalPrice }}</em></span
-                  >
+                ><em id="hd_cart_total">{{ totalPrice }}</em></span
+                >
                   <router-link class="btn" :to="'/checkout'"
-                    >去结算</router-link
+                  >去结算
+                  </router-link
                   >
                 </p>
               </div>
@@ -182,8 +179,9 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { getGoodsCategory } from "@/api/goods";
+import {mapGetters} from "vuex";
+import {getGoodsCategory} from "@/api/goods";
+
 export default {
   data() {
     return {
