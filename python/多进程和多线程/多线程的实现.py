@@ -3,6 +3,7 @@
 @author: sunliguo
 @contact: QQ376440229
 @Created on: 2023-06-23 7:07
+python 多线程实现方法
 1、创建Thread的实例，传给它一个函数。
 2、创建Thread的实例，传给它一个可调用的实例
 3、派生Thread的子类，并创建子类的实例。
