@@ -1,14 +1,7 @@
+{% extends 'shop/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>商品-新增</title>
-  <link rel="stylesheet" href="{% static  '/dist/css/adminlte.min.css'%}">
-    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-</head>
-<body>
-<div class="wrapper">
+{% block content %}
+  <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -24,67 +17,79 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-        <form novalidate enctype="multipart/form-data" action="" method="post"  class="form-horizontal"  >
-    {% csrf_token  %}
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">商品添加</h3>
-            </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="id_name">商品名称</label>
-                <input type="text" name="name" class="form-control" placeholder="请输入商品名称" minlength="2" required id="id_name">
+          <form novalidate enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+            {% csrf_token %}
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">商品添加</h3>
               </div>
-              <div class="form-group">
-                <label for="id_parent}}">商品分类</label>
-                <select id="parent_id" class="form-control custom-select">
-                  <option selected disabled>请选择...</option>
-                  {% for key,value in cates.items %}
-                      <option value={{key}}>{{ value|safe}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="id_name">市场价</label>
-                <input type="text" name="market_price" class="form-control" placeholder="请输入市场价" required οnkeyup="value=value.replace(/[^\d.]/g,'')">
-              </div>
-              <div class="form-group">
-                <label for="id_name">销售价</label>
-                <input type="text" name="price" class="form-control" placeholder="请输入销售价" required οnkeyup="value=value.replace(/[^\d.]/g,'')">
-              </div>
-              
-              <div class="form-group">
-                    <label for="id_pic_main}}">商品主图片</label>
-                    <div class="custom-file">
-                     {{form_obj.logo}}
-                      <label class="custom-file-label" for="customFile">选择商品主图片
-                      </label>
-                    </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="id_name">{{form_obj.name.label}}</label>
+                  {{form_obj.name}}
                 </div>
-              <div class="form-group">
-                    <label for="id_good_desc}}">商品详情</label>
-                        <textarea name="content">输入商品详情</textarea>
+                <div class="form-group">
+                  <label for="id_category">{{form_obj.category.label}}</label>
+                  <select name="category" id="id_category" class="form-control custom-select">
+                    <option selected disabled>请选择...</option>
+                    {% for key,value in cates.items %}
+                    <option value={{key}}>{{ value|safe}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                    <label for={{ form_obj.category.id_for_label }}>
+                        {{ form_obj.category.label }}
                     </label>
-              </div>
+{#                    {{ form_obj.category }}#}
+
+                </div>
+                <div class="form-group">
+                  <label for="id_name">市场价</label>
+                  <input type="text" name="market_price" class="form-control" placeholder="请输入市场价" required
+                    οnkeyup="value=value.replace(/[^\d.]/g,'')">
+                </div>
+                <div class="form-group">
+                  <label for="id_name">销售价</label>
+                  <input type="text" name="price" class="form-control" placeholder="请输入销售价" required
+                    οnkeyup="value=value.replace(/[^\d.]/g,'')">
+                </div>
+                <div class="form-group">
+                  <label for="id_pic_main">商品主图片</label>
+                  <div class="custom-file">
+                    {{form_obj.logo}}
+                    <label class="custom-file-label" for="customFile">选择商品主图片</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="id_good_desc">商品详情</label>
+                  <textarea name="content">输入商品详情</textarea>
+                </div>
+                <div>
+                  {{errors}}
+                </div>
                 <div class="card-footer">
-                <a href="#" class="btn btn-secondary">取消</a>
+                  <a href="#" class="btn btn-secondary">取消</a>
                   <button type="submit" class="btn btn-primary">Submit</button>
                   {{ info }}
                 </div>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
         </div>
       </div>
     </section>
-</div>
-<script src="{% static 'plugins/bootstrapValidator/bootstrapValidator.min.js'%}"></script>
-<script src="{% static 'plugins/ckeditor/ckeditor-init.js'%}"></script>
-<script src="{% static 'plugins/ckeditor/ckeditor/ckeditor.js'%}"></script>
-<script>
-CKEDITOR.replace('content',{width:'100%',height:'400px',
-            filebrowserBrowserUrl:'/ckeditor/browser/',
-            filebrowserUploadUrl:'/ckeditor/upload/'});
-</script>
-</body>
-</html>
+  </div>
+{% endblock %}
+{% block ext_js %}
+  <script src="{% static 'plugins/bootstrapValidator/bootstrapValidator.min.js'%}"></script>
+  <script src="{% static 'plugins/ckeditor/ckeditor-init.js'%}"></script>
+  <script src="{% static 'plugins/ckeditor/ckeditor/ckeditor.js'%}"></script>
+  <script>
+    CKEDITOR.replace('content', {
+      width: '100%', height: '400px',
+      filebrowserBrowserUrl: '/ckeditor/browser/',
+      filebrowserUploadUrl: '/ckeditor/upload/'
+    });
+  </script>
+{% endblock %}

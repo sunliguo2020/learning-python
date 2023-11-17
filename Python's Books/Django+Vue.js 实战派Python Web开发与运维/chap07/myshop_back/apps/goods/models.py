@@ -24,7 +24,7 @@ class GoodsCategory(BaseModel):
         db_table = 'd_goods_category'
 
 
-class Goods(models.Model):
+class Goods(BaseModel):
     STATUS = (
         (0, '正常'),
         (1, '下架'),
@@ -39,12 +39,12 @@ class Goods(models.Model):
     amount = models.IntegerField(default=0, verbose_name="销售量")
     stock_num = models.IntegerField(default=0, verbose_name="库存数")
     fav_num = models.IntegerField(default=0, verbose_name="收藏数")
-    goods_desc = RichTextUploadingField(default='', verbose_name='商品详情')
-    status = models.IntegerField(default=0, choices=STATUS)
+    goods_desc = RichTextUploadingField(default='', verbose_name='商品详情',blank=True)
+    status = models.IntegerField(default=0, choices=STATUS,blank=True)
     main_img = models.ImageField(verbose_name='商品主图', blank=True, null=True, upload_to='goods/images/')
     is_recommend = models.BooleanField(default=False, verbose_name="是否推荐")
     user = models.ForeignKey(MyUser, blank=True, null=True, verbose_name="用户", on_delete=models.DO_NOTHING)
-    createDate = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
+    
 
     def __str__(self):
         return self.name
