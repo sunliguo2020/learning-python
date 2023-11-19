@@ -11,7 +11,18 @@ from .forms import UsersForm
 
 # Create your views here.
 def add(request):
-    return render(request, 'shop/users/add.html')
+    if request.method == "GET":
+        form_obj = UsersForm()
+        context = {
+            'form_obj': form_obj
+        }
+        return render(request, 'shop/users/add.html', context)
+    if request.method == "POST":
+        form_obj = UsersForm(data=request.POST)
+        if form_obj.is_valid():
+            form_obj.save()
+            return redirect(reverse('users:users_index'))
+        return render(request, 'shop/users/add.html', {'form_obj': form_obj})
 
 
 def edit(request, id):
@@ -22,26 +33,26 @@ def edit(request, id):
     if request.method == 'GET':
         user_form = UsersForm(instance=user)
         context = {
-            'user_form': user_form
+            'form_obj': user_form
         }
         return render(request, 'shop/users/edit.html', context)
     elif request.method == "POST":
-        user_form = UsersForm(data=request.POST, instance=user)
+        user_form = UsersForm(data=request.POST, instance=user,files=request.FILES)
         if user_form.is_valid():
             user_form.save()
             return redirect(reverse('users:users_index'))
         else:
             context = {
-                'user_form': user_form
+                'form_obj': user_form
             }
-            return render(request, 'shop/users/edit.html',context)
+            return render(request, 'shop/users/edit.html', context)
 
 
 def index(request):
     if request.method == "GET":
-        level = request.GET.get('level','')
+        level = request.GET.get('level', '')
         truename = request.GET.get('truename', '')
-        status = request.GET.get('status','')
+        status = request.GET.get('status', '')
         search_dict = dict()
         if level:
             search_dict['level'] = level

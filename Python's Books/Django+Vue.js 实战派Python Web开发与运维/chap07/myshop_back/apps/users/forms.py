@@ -92,6 +92,25 @@ class UserRegForm(forms.Form):
 class UsersForm(forms.ModelForm):
     birthday = forms.DateField(label='出生日期', widget=forms.DateInput(attrs={'type': 'date'}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 循环找到所有的插件，添加 class=“form-control"
+        for name, field in self.fields.items():
+            # if name == 'password':
+            #   continue
+            field.widget.attrs = {"class": "form-control", "placeholder": field.label}
+
     class Meta:
         model = MyUser
-        fields = ['truename', 'mobile', 'birthday', 'sex']
+        fields = ['username', 'truename', 'mobile', 'birthday', 'sex', 'user_img']
+        # widgets = {"username": forms.TextInput(attrs={"class": "form-control",
+        #                                                  'placeholder': '请输入用户名'})}
+        # 如果model中定义了名称，则在这里不用再定义。
+        labels = {
+            'username': '用户名',
+        }
+        error_messages = {
+            "username": {
+                'required': '用户名不能为空'
+            }
+        }

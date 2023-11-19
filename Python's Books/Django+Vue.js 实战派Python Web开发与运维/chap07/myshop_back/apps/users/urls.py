@@ -17,4 +17,5 @@ urlpatterns = [
     path('index/', views.index, name='users_index'),
     path('del/<int:id>/', views.delete),
     path('edit/<id>/', views.edit, name='users_edit'),
+    path('user/add/', views.add, name='users_add'),
 ]

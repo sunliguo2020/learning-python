@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, logout
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
-from django.contrib.auth import login
-from django.shortcuts import render, redirect,HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse
 
 from app6.models import MyUser
@@ -106,6 +106,7 @@ def myuser_logout(request):
     logout(request)
     return redirect(reverse('app6_myuser_login'))
 
+
 @permission_required('app6.view_myuser')
 @login_required
 def user_index(request):
@@ -116,9 +117,7 @@ def user_index(request):
 @permission_required('app6.change_myuser')
 @login_required()
 def user_edit(request):
-    return render(request,'6/user_edit.html')
-
-
+    return render(request, '6/user_edit.html')
 
 
 def test(request):
