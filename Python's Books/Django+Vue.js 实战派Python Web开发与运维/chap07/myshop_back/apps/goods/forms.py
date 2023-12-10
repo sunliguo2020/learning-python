@@ -1,8 +1,9 @@
-from apps.goods.models import *
+import re
+
 from django import forms
 from django.core.exceptions import ValidationError
-import re
-from apps.goods.views import *
+
+from apps.goods.models import Goods, GoodsCategory
 
 
 def sort_validate(value):
@@ -12,21 +13,18 @@ def sort_validate(value):
 
 
 class GoodsCategoryForm(forms.Form):
-    name = forms.CharField(
-        label="分类名称",
-        min_length=2,
-        widget=forms.widgets.TextInput(
-            attrs={"class": "form-control", "placeholder": "请输入分类名称"}
-        ),
-        error_messages={
-            "required": "分类名称不能为空",
-            "min_length": "长度最少2位",
-        },
-    )
+    name = forms.CharField(label="分类名称", min_length=2,
+                           widget=forms.widgets.TextInput(
+                               attrs={"class": "form-control", "placeholder": "请输入分类名称"}),
+                           error_messages={
+                               "required": "分类名称不能为空",
+                               "min_length": "长度最少2位",
+                           },
+                           )
     parent_id = forms.CharField(
         label="选择父类",
         max_length=20,
-        required=False,
+        required=True,
         widget=forms.widgets.Select(
             attrs={"class": "form-control custom-select", "placeholder": "请选择父类"}
         ),
@@ -51,16 +49,27 @@ class GoodsCategoryForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
+
         super(GoodsCategoryForm, self).__init__(*args, **kwargs)
         cates_all = GoodsCategory.objects.all()
-        self.alist = [("", "请选择...")]
-        self.fields["parent_id"].widget.choices = self.binddata(cates_all, 0, 1)
+        self.alist = [('', '请选择...')]
+        # 商品分类的选择数组
+        self.fields['parent_id'].widget.choices = self.binddata(cates_all, 0, 1)
 
     def binddata(self, datas, id, n):
+        """
+        data 表示商品的分类数据
+        id  指当前分类id
+        n   缩进的数量
+        返回值：列表嵌套元组
+            [(1,'枣'),(2,'大枣'),]
+        """
         if id == 0:
+            # 父分类为空
             datas = datas.filter(parent__isnull=True)
         else:
             datas = datas.filter(parent_id=id)
+
         for data in datas:
             # 列表中添加元组
             self.alist.append((data.id, self.spacelength(n) + data.name))
@@ -81,4 +90,4 @@ class GoodsModelForm(forms.ModelForm):
         # fields = "__all__"
         exclude = ["stock_num", "amount", "click_num", "fav_num"]
         widgets = {"name": forms.TextInput(attrs={"class": "form-control",
-                                                  'placeholder':'请输入商品名称'})}  # 设置样式
+                                                  'placeholder': '请输入商品名称'})}  # 设置样式

@@ -2,6 +2,15 @@ import pygame
 
 pygame.init()
 screen = pygame.display.set_mode((750,750))
+pygame.display.set_caption('我的五子棋')
+
+border_left = 25
+border_right = 725
+border_top =25
+border_bottom = 725
+width =50
+height = 50
+
 
 # 棋盘落子信息
 map = [0]*15
@@ -14,6 +23,24 @@ player = 1
 winner = 0
 
 running = True
+class Button:
+    def __init__(self,x,y,width,height,text,color,click_color,text_color) -> None:
+        self.text =text
+        self.color = color
+        self.click_color = click_color
+        self.text_color = text_color
+        self.rect = pygame.Rect(x,y,width,height)
+        self.clicked = False
+    def draw(self,screen):
+        if self.clicked:
+            pygame.draw.rect(screen,self.click_color,self.rect)
+        else:
+            pygame.draw.rect(screen,self.color,self.rect)
+        
+        text_surface = font.render(self.text,True,self.text_color)
+        text_rect = text_surface.get_rect(center=self.rect.center)
+        screen.blit(text_serface,text_position)
+
 
 def check(row,col):
     """判断是否五子连线
@@ -39,9 +66,10 @@ def check(row,col):
             score = score + 1
         else:
             break
-    if score == 5:
+    if score >=5:
         return True
     
+    score = 1
     # 竖直往下判断
     for i in range(4):
         if  map[row+i][col] == map[row+i+1][col]:
@@ -54,10 +82,11 @@ def check(row,col):
             score = score + 1
         else:
             break
-    if score == 5:
+    if score >=5:
         return True
 
 
+    score = 1
     # 判断右斜上
     for i in range(4):
         if  map[row-i][col+i] == map[row-i-1][col+i+1]:
@@ -70,10 +99,11 @@ def check(row,col):
             score = score + 1
         else:
             break
-    if score == 5:
+    if score >=5:
         return True
     
-     # 判断左斜上
+    score = 1
+    # 判断左斜上
     for i in range(4):
         if  map[row-i][col-i] == map[row-i-1][col-i-1]:
             score = score + 1
@@ -85,7 +115,7 @@ def check(row,col):
             score = score + 1
         else:
             break
-    if score == 5:
+    if score >= 5:
         return True
 
 
@@ -118,14 +148,17 @@ while running:
 
     screen.fill('#ee9a49')
 
-    # 横线
-    for x in range(15):
-        pygame.draw.line(screen,'#000000',[25+50*x,25],[25+50*x,725],2)
     # 竖线
+    for x in range(15):
+        pygame.draw.line(screen,'#000000',[border_left+height*x,border_top],
+                         [border_left+height*x,border_bottom],2)
+    # 横线
     for y in range(15):
-        pygame.draw.line(screen,'#000000',[25,25+50*y],[725,25+50*y],2)
+        pygame.draw.line(screen,'#000000',[border_left,border_left+width*y],
+                         [border_right,border_left+width*y],2)
     
-    pygame.draw.circle(screen,'#000000',[25+50*7,25+50*7],8)
+    # 画中心小圆
+    pygame.draw.circle(screen,'#000000',[border_left+width*7,border_top+height*7],8)
 
     x,y = pygame.mouse.get_pos()
 

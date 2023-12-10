@@ -14,7 +14,7 @@
                     <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-left">
                             <li class="breadcrumb-item"><a href="#">商品分类</a></li>
-                            <li class="breadcrumb-item active">商品分类增加</li>
+                            <li class="breadcrumb-item active">用户信息修改</li>
                         </ol>
                     </div>
                 </div>
@@ -25,8 +25,27 @@
                 <div class="col-md-12">
                     <form novalidate enctype="multipart/form-data" action="" method="post" class="form-horizontal">
                         {% csrf_token %}
-                    {{ user_form.as_p }}
-                       <input type="submit" value="提交">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">用户添加</h3>
+                            </div>
+                            <div class="card-body">
+                                {% for form in form_obj %}
+                                    <div class="form-group">
+                                        <label for="{{ form.id_for_label }}">{{ form.label }}:</label>
+                                        {{ form }}
+                                    </div>
+                                    {% if form.errors %}
+                                        <span style="color:red">{{ form.errors.0 }}</span>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="card-footer">
+                                    <a href="#" class="btn btn-secondary">取消</a>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
 
                 </div>

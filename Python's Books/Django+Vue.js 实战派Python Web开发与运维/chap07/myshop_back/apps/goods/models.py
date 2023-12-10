@@ -11,7 +11,7 @@ class GoodsCategory(BaseModel):
     name = models.CharField(max_length=50, verbose_name='分类名称', default='')
     parent = models.ForeignKey("self", null=True, blank=True, verbose_name="父类", on_delete=models.DO_NOTHING,
                                related_name="sub_cat")
-    logo = models.ImageField(verbose_name="分类logo图片", upload_to="uploads/goods_img/")
+    logo = models.ImageField(verbose_name="分类logo图片", upload_to="uploads/goods_img/",blank=True)
     is_nav = models.BooleanField(default=False, verbose_name='是否显示在导航栏')
     sort = models.IntegerField(verbose_name='排序')
 
@@ -56,9 +56,9 @@ class Goods(BaseModel):
 
 
 class Slide(models.Model):
-    '''
+    """
     首页轮播图
-    '''
+    """
     goods = models.ForeignKey(Goods, verbose_name='商品', on_delete=models.DO_NOTHING)
     images = models.ImageField(upload_to='slide', verbose_name='轮播图片')
     sort = models.IntegerField(default=0, verbose_name='排列顺序')

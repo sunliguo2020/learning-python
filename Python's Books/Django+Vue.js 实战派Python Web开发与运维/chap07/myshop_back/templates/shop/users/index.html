@@ -69,9 +69,8 @@
 
                     <div class="col-sm-12 select-table table-striped">
                         <div class="btn-group-sm" id="toolbar" role="group">
-                            <a class="btn btn-success" href="/member/add/">
-                                <i class="fa fa-plus"></i> 新增
-                            </a>
+                            <a class="btn btn-success" href="{% url 'users:users_add' %}">
+                                <i class="fa fa-plus"></i> 新增 </a>
                         </div>
                     </div>
                 </div>
@@ -105,7 +104,7 @@
                                 <td>{{ per.birthday }}</td>
                                 <td>{{ per.email }}</td>
                                 <td>{{ per.mobile }}</td>
-                                <td>{{ per.add_time }}</td>
+                                <td>{{ per.create_time }}</td>
                                 <td width="5%"><img src="/media/{{ per.user_img }}" width="100px" height="100px"/></td>
                                 <td width="20%">
                                     <a class="btn btn-primary single" href="{% url 'users:users_edit' per.id %}">
@@ -185,6 +184,9 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+{% block ext_js %}
     <script>
         // 打开模态框并设置需要删除的ID
         function showDeleteModal(obj) {

@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic.base import View
 
-from apps.goods.forms import GoodsCategoryForm,GoodsModelForm
+from apps.goods.forms import GoodsCategoryForm, GoodsModelForm
 from apps.goods.models import *
 
 
@@ -23,7 +23,7 @@ class GoodsCategoryAddView(View):
 
     def binddata(self, datas, id, n):
         if id == 0:
-            datas = datas.filter(parent__isnull=True)
+            datas = datas.filter(parent_id__isnull=True)
         else:
             datas = datas.filter(parent__isnull=True)
         for data in datas:
@@ -39,10 +39,17 @@ class GoodsCategoryAddView(View):
 
     def get(self, request):
         form_obj = GoodsCategoryForm()
-        return render(request, "shop/goods/cate_add.html", {"form_obj": form_obj,'title':'商品分类新增'})
+        cates = GoodsCategory.objects.all()
+        print(cates)
+        context = {
+            'cates': cates,
+            "form_obj": form_obj,
+            'title': '商品分类新增'
+        }
+        return render(request, "shop/goods/cate_add.html", context)
 
     def post(self, request):
-        form_obj = GoodsCategoryForm(request.POST, request.FILES)
+        form_obj = GoodsCategoryForm(data=request.POST, files=request.FILES)
         if form_obj.is_valid():
             name = request.POST.get("name", '')
             cates = GoodsCategory.objects.filter(name=name)
@@ -113,7 +120,7 @@ class GoodsAddView(View):
         cates_all = GoodsCategory.objects.all()
         cates = self.binddata(cates_all, 0, 1)
         goods_obj = GoodsModelForm()
-        return render(request, "shop/goods/add.html", {"cates": cates,'form_obj':goods_obj})
+        return render(request, "shop/goods/add.html", {"cates": cates, 'form_obj': goods_obj})
 
     def post(self, request):
         goods_form = GoodsModelForm(data=request.POST)
@@ -122,8 +129,9 @@ class GoodsAddView(View):
             return redirect(reverse('goods_index'))
         else:
             errors = goods_form.errors
-            return render(request,'shop/goods/add.html',{'form_obj':goods_form,'errors':errors})
-        return render(request,'shop/goods/add.html',{'form_obj':goods_form})
+            return render(request, 'shop/goods/add.html', {'form_obj': goods_form, 'errors': errors})
+        return render(request, 'shop/goods/add.html', {'form_obj': goods_form})
+
 
 def ajax_goods(request):
     cate_id = request.GET.get("cate_id", '')
