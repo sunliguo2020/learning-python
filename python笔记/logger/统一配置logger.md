@@ -39,7 +39,7 @@ logger = setup_logger('CameraLog', 'Camera.log', level=logging.DEBUG)
 举例来说：
 
 ```
-pythonCopy code# main.py 或 app.py
+# main.py 或 app.py
 
 import logging
 
@@ -68,7 +68,7 @@ logger = setup_logger('CameraLog', 'Camera.log', level=logging.DEBUG)
 然后，在其他模块中导入 `logger`：
 
 ```
-pythonCopy code# other_module.py
+# other_module.py
 
 import logging
 
