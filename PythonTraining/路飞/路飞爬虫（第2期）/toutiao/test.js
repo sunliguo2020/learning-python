@@ -1,0 +1,1 @@
+console.log("undefined" != typeof exports ? exports : void 0)
