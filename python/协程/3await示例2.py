@@ -9,7 +9,7 @@ import asyncio
 
 async def others():
     print('start')
-    await  asyncio.sleep(2)
+    await asyncio.sleep(2)
     print('end')
     return '返回值'
 
