@@ -2,6 +2,7 @@ import logging
 
 # 引用主程序中的日志记录器
 logger = logging.getLogger(__name__)
+print(f"我是module1的{logger}，我的日志级别是：{logger.level}")
 
 def do_something():
         logger.info('This is a message from module1')
