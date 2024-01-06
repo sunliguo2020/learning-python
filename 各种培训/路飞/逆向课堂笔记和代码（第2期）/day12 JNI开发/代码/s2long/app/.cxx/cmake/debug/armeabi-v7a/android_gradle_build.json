@@ -1,0 +1,63 @@
+{
+  "stringTable": {
+    "0": "/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Ddynamic_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC",
+    "2": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dencrypt_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/wupeiqi/AndroidStudioProjects/s2long/app/src/main/cpp/CMakeLists.txt",
+    "/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "encrypt-Debug-armeabi-v7a": {
+      "buildCommand": "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/armeabi-v7a\" encrypt",
+      "buildType": "debug",
+      "toolchain": "4285893201",
+      "abi": "armeabi-v7a",
+      "artifactName": "encrypt",
+      "files": [
+        {
+          "src": "/Users/wupeiqi/AndroidStudioProjects/s2long/app/src/main/cpp/encrypt.c",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libencrypt.so",
+      "runtimeFiles": [
+        "/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libdynamic.so"
+      ]
+    },
+    "dynamic-Debug-armeabi-v7a": {
+      "buildCommand": "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/debug/armeabi-v7a\" dynamic",
+      "buildType": "debug",
+      "toolchain": "4285893201",
+      "abi": "armeabi-v7a",
+      "artifactName": "dynamic",
+      "files": [
+        {
+          "src": "/Users/wupeiqi/AndroidStudioProjects/s2long/app/src/main/cpp/dynamic.c",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libdynamic.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "4285893201": {
+      "cCompilerExecutable": "/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}
