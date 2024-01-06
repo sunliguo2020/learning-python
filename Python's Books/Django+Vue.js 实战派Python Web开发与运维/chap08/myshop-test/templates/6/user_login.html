@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+</head>
+<body>
+<div class='register-box'>
+    <div class='register-logo'>用户登录</div>
+    <div class="card">
+        <div class="card-body register-card-body">
+            <form action="" method='post'>
+                {% csrf_token %}
+                <div class='input-group mb-3'>
+                    <input type="text" class="form-control" name="username" placeholder="用户名">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class='input-group mb-3'>
+                    <input type="password" class="form-control" name="password" placeholder="密码">
+
+                </div>
+
+                <div class='row'>
+                    <div class='col-8'>
+                        <label for="agreeTerms">
+                            {{ info }}
+                        </label>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">登录</button>
+
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

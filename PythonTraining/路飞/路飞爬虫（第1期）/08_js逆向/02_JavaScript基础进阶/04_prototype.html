@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+            //动作
+            this.chi = function(fan){
+                console.log(this.name+'在吃'+fan)
+            }
+        }
+        Person.prototype.xxoo = function(withwho){
+            console.log(this.name+'和'+withwho+'在ooxx')
+        }
+
+        p1 = new Person('张无忌',10)
+        p1.chi('盖饭')
+        p1.xxoo('alex')
+    </script>
+</head>
+<body>
+
+</body>
+</html>

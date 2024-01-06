@@ -4,6 +4,8 @@
 @contact: QQ376440229
 @Created on: 2022-12-24 22:32
 """
+from collections.abc import Iterable
+from collections.abc import Iterator
 
 
 class Range7:
@@ -14,6 +16,7 @@ class Range7:
     def __init__(self, start, end):
         self.start = start
         self.end = end
+        # 使用current保存当前所处的位置
         self.current = start
 
     def __iter__(self):
@@ -30,7 +33,8 @@ class Range7:
                 return ret
             self.current += 1
 
-    def num_is_valid(self, num):
+    @staticmethod
+    def num_is_valid(num):
         """判断数字是否满足要求"""
         if num == 0:
             return False
@@ -46,9 +50,16 @@ class Myinter:
 
 
 if __name__ == '__main__':
-    # r = Range7(0, 200)
-    # for num in r:
-    #     print(num)
+    r = Range7(0, 20)
+    print(r.current)
+    for num in r:
+        print(num)
+    print(r.current)
 
-    a = Myinter()
-    print(iter(a))
+    print(dir(r.__dict__))
+
+    print(f"r 是否是可迭代对象{isinstance(r, Iterable)}")
+    print(f"r 是否是迭代器{isinstance(r, Iterator)}")
+
+    # a = Myinter()
+    # print(iter(a))

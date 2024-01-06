@@ -11,7 +11,7 @@ class GoodsCategory(BaseModel):
     name = models.CharField(max_length=50, verbose_name='分类名称', default='')
     parent = models.ForeignKey("self", null=True, blank=True, verbose_name="父类", on_delete=models.DO_NOTHING,
                                related_name="sub_cat")
-    logo = models.ImageField(verbose_name="分类logo图片", upload_to="uploads/goods_img/")
+    logo = models.ImageField(verbose_name="分类logo图片", upload_to="uploads/goods_img/",blank=True)
     is_nav = models.BooleanField(default=False, verbose_name='是否显示在导航栏')
     sort = models.IntegerField(verbose_name='排序')
 
@@ -24,7 +24,7 @@ class GoodsCategory(BaseModel):
         db_table = 'd_goods_category'
 
 
-class Goods(models.Model):
+class Goods(BaseModel):
     STATUS = (
         (0, '正常'),
         (1, '下架'),
@@ -39,12 +39,12 @@ class Goods(models.Model):
     amount = models.IntegerField(default=0, verbose_name="销售量")
     stock_num = models.IntegerField(default=0, verbose_name="库存数")
     fav_num = models.IntegerField(default=0, verbose_name="收藏数")
-    goods_desc = RichTextUploadingField(default='', verbose_name='商品详情')
-    status = models.IntegerField(default=0, choices=STATUS)
+    goods_desc = RichTextUploadingField(default='', verbose_name='商品详情',blank=True)
+    status = models.IntegerField(default=0, choices=STATUS,blank=True)
     main_img = models.ImageField(verbose_name='商品主图', blank=True, null=True, upload_to='goods/images/')
     is_recommend = models.BooleanField(default=False, verbose_name="是否推荐")
     user = models.ForeignKey(MyUser, blank=True, null=True, verbose_name="用户", on_delete=models.DO_NOTHING)
-    createDate = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
+    
 
     def __str__(self):
         return self.name
@@ -56,9 +56,9 @@ class Goods(models.Model):
 
 
 class Slide(models.Model):
-    '''
+    """
     首页轮播图
-    '''
+    """
     goods = models.ForeignKey(Goods, verbose_name='商品', on_delete=models.DO_NOTHING)
     images = models.ImageField(upload_to='slide', verbose_name='轮播图片')
     sort = models.IntegerField(default=0, verbose_name='排列顺序')

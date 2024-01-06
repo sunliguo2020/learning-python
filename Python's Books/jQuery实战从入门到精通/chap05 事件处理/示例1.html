@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            /*添加单个事件处理*/
+            $(".btn-test").bind("click", function () {
+                console.log('bind')
+                $(".container").slideToggle(); //显示隐藏div
+            });
+            /*添加多个事件处理*/
+            $(".btn-test").bind("mouseout click",function(){ //空格相隔方式
+                $(".container").slideToggle(); // 显示隐藏div
+            });
+            $(".btn-test").bind({   //大括号替代方式
+                "mouseout":function(){
+                    alert("这是mouseout事件！")
+                },
+                "click":function(){
+                    $(".countainer").slideToggle();
+                }
+            });
+            /*删除事件处理*/
+            $(".btn-test").unbind("click");
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <input type="button" value="按钮" class="btn-test">
+    <div class="container">
+        <img src="images/1.jpg" height="200" alt="">
+    </div>
+</body>
+
+</html>

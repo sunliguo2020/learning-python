@@ -9,7 +9,9 @@ from collections.abc import Iterable
 
 class A:
     def __iter__(self):
-        return self
+        # return self
+        return iter(list)()
 
 
 print(isinstance(iter(A()), Iterable))
+print(isinstance(A, Iterable))

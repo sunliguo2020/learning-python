@@ -1,0 +1,11 @@
+<form action="{% url 'blog:search' %}" method="get">
+    {% csrf_token %}
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <input type="search" class="input" name="keyword" placeholder="{{keyword}}" value="{{ keyword }}">
+        </div>
+        <div class="control">
+            <input class="button is-primary" type="submit" value="搜索">
+        </div>
+    </div>
+</form>

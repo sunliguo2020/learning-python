@@ -11,7 +11,6 @@ from concurrent.futures import ThreadPoolExecutor
 
 def fun1(arg1, arg2):
     """
-
     @param arg1:
     @param arg2:
     @return:
@@ -21,6 +20,6 @@ def fun1(arg1, arg2):
 
 if __name__ == '__main__':
     with ThreadPoolExecutor() as t:
-        for arg1,arg2 in [[0]*2]*4:
-            print(arg1,arg2)
-            t.submit(fun1, arg1,arg2)
+        for arg1, arg2 in [[0] * 2] * 4:
+            print(arg1, arg2)
+            t.submit(fun1, arg1, arg2)

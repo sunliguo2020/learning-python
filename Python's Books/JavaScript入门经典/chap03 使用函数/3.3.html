@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var a = 10;
+    var b = 10;
+
+    function showVars() {
+        var a = 20; //declare a new local  variable 'a'
+        b = 20;     // change the value of global variable 'b'
+        return "Local variable 'a' = " + a + "\nGlobal variable 'b' = " + b;
+    }
+
+    var message = showVars()
+    alert(message + "\nGlobal variable 'a'=" + a)
+</script>
+</body>
+</html>

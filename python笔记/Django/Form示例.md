@@ -194,3 +194,17 @@ In [21]:
 
 ```
 
+Django中froms表单使用日期选择器
+
+```python
+from django import forms
+
+class LoginForm(forms.Form):
+    user_name = forms.CharField(label='昵称', max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
+    pwd = forms.ChoiceField(label="密码", widget=forms.PasswordInput(attrs={'class':'form-control'}))
+
+    date = forms.DateField(label='日期', widget=forms.DateInput(attrs={'type':'date'}))
+    #实现可选的日期输入格式
+
+```
+

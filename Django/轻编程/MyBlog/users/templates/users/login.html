@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users/bulma.css' %}">
+    <title>登录</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="box">
+            <h1 class="is-uppercase has-text-centered has-text-weight-bold">轻编程
+                <br><span class="tag">登录</span>
+            </h1>
+            <hr class=" dropdown-divider">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" style="margin-top: 1em;" class="button is-link is-fullwidth" value="提交">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

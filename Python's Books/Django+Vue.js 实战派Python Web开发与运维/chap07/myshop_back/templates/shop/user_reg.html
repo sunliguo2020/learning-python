@@ -2,76 +2,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>用户注册</title>
-  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <meta charset="utf-8">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="col-md-6 col-md-offset-2">
-        <div class="page-header">
-          <h2>用户注册</h2>
+        <div class="col-md-6 col-md-offset-2">
+            <div class="page-header">
+                <h2>用户注册</h2>
+            </div>
+            <form novalidate action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form_obj.username.id_for_label }}"
+                           class="col-sm-2">{{ form_obj.username.label }}</label>
+                    <div class="col-sm-8">{{ form_obj.username }}
+                        <span class="help-block">{{ form_obj.errors.username.0 }}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form_obj.password.id_for_label }}"
+                           class="col-sm-2">{{ form_obj.password.label }}</label>
+                    <div class="col-sm-8">{{ form_obj.password }}
+                        <span class="help-block">{{ form_obj.errors.password.0 }}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form_obj.re_password.id_for_label }}"
+                           class="col-sm-2">{{ form_obj.re_password.label }}</label>
+                    <div class="col-sm-8">{{ form_obj.re_password }}
+                        <span class="help-block">{{ form_obj.errors.re_password.0 }}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form_obj.nickname.id_for_label }}"
+                           class="col-sm-2">{{ form_obj.nickname.label }}</label>
+                    <div class="col-sm-8">{{ form_obj.nickname }}
+                        <span class="danger">{{ form_obj.errors.nickname.0 }}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form_obj.nickname.id_for_label }}"
+                           class="col-sm-2">{{ form_obj.email.label }}</label>
+                    <div class="col-sm-8">{{ form_obj.email }}
+                        <span class="danger">{{ form_obj.errors.email.0 }}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form_obj.nickname.id_for_label }}"
+                           class="col-sm-2">{{ form_obj.mobile.label }}</label>
+                    <div class="col-sm-8">{{ form_obj.mobile }}
+                        <span class="help-block">{{ form_obj.errors.mobile.0 }}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form_obj.nickname.id_for_label }}"
+                           class="col-sm-2">{{ form_obj.user_img.label }}</label>
+                    <div class="col-sm-8">{{ form_obj.user_img }}
+                        <span class="help-block"></span>
+                    </div>
+                    {% if user_img %}
+                        <img src="/media/{{ user_img }}">
+                    {% endif %}
+                </div>
+                <div class="col-8">
+                    <label for="agreeTerms">
+                        {{ info }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input type="submit" class="btn btn-success" value="用户注册">
+                        <a href="/users/user_login/" class="btn btn-success">用户登录</a>
+                    </div>
+                </div>
+            </form>
         </div>
-        <form novalidate action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="{{form_obj.username.id_for_label}}" class="col-sm-2">{{form_obj.username.label}}</label>
-            <div class="col-sm-8">{{form_obj.username}}
-              <span class="help-block">{{ form_obj.errors.username.0 }}</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="{{form_obj.password.id_for_label}}" class="col-sm-2">{{form_obj.password.label}}</label>
-            <div class="col-sm-8">{{form_obj.password}}
-              <span class="help-block">{{ form_obj.errors.password.0 }}</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="{{form_obj.re_password.id_for_label}}" class="col-sm-2">{{form_obj.re_password.label}}</label>
-            <div class="col-sm-8">{{form_obj.re_password}}
-              <span class="help-block">{{ form_obj.errors.re_password.0 }}</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="{{form_obj.nickname.id_for_label}}" class="col-sm-2">{{form_obj.nickname.label}}</label>
-            <div class="col-sm-8">{{form_obj.nickname}}
-              <span class="help-block">{{ form_obj.errors.nickname.0 }}</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="{{form_obj.nickname.id_for_label}}" class="col-sm-2">{{form_obj.email.label}}</label>
-            <div class="col-sm-8">{{form_obj.email}}
-              <span class="help-block">{{ form_obj.errors.email.0 }}</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="{{form_obj.nickname.id_for_label}}" class="col-sm-2">{{form_obj.mobile.label}}</label>
-            <div class="col-sm-8">{{form_obj.mobile}}
-              <span class="help-block">{{ form_obj.errors.mobile.0 }}</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="{{form_obj.nickname.id_for_label}}" class="col-sm-2">{{form_obj.user_img.label}}</label>
-            <div class="col-sm-8">{{form_obj.user_img}}
-              <span class="help-block"></span>
-            </div>
-            <img src="/media/{{ user_img }}">
-          </div>
-          <div class="col-8">
-            <label for="agreeTerms">
-              {{ info }}
-            </label>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-10">
-              <input type="submit" class="btn btn-success" value="用户注册">
-              <a href="/users/user_login/"  class="btn btn-success">用户登录</a>
-            </div>
-          </div>
-        </form>
-      </div>
     </div>
-  </div>
+</div>
 </body>
 </html>

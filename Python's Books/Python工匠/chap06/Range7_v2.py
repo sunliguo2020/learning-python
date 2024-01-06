@@ -3,6 +3,9 @@
 @author: sunliguo
 @contact: QQ376440229
 @Created on: 2022-12-24 23:08
+让Range7每次迭代都能返回完整结果，
+把代码拆分为两部分：可迭代类型Range7和迭代器类型Range7Iterator。
+
 """
 
 

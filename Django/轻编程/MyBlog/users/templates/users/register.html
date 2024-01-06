@@ -1,0 +1,25 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="{% static 'users/bulma.css' %}">
+
+</head>
+<body>
+    <div class="columns">
+        <div class="container  column is-half">
+            <form method="post">
+                {{ form.error}}
+                {%csrf_token%}
+                {{form.as_p}}
+                <button>注册</button>
+            </form>
+        </div>
+    </div>
+    
+  
+</body>
+</html>

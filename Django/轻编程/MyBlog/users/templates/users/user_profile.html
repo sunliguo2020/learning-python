@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="stylesheet" href=" {% static 'users/bulma.css' %} ">
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <script src=" {% static 'users/js/all.min.js' %}"></script>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <nav class="navbarn has-shadow">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="" class=" navbar-item">
+                    <img src="{% static 'users/images/logo.png' %}" width="112" height="28" alt="logo">
+                </a>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end">  
+                    <div class="navbar-item">
+                        <div class=" dropdown is-hoverable">
+                            <div class="dropdown-trigger">
+                                <button class=" button is-white">
+                                    <figure class="image is-24x24">
+                                        
+                                        {% if user.userprofile.image %}
+                                            <img class=" is-rounded" src="{{ MEDIA_URL }}{{ user.userprofile.image }}" alt="" srcset="">
+                                        {% else %}
+                                            <img class=" is-rounded" src="{% static 'users/images/avatar.jpg' %}" alt="" srcset="">
+                                        {% endif %}
+                                    </figure>&nbsp;&nbsp;
+                                        
+                                        {% if user.userprofile.nick_name %}
+                                        <span class="has-text-grey-dark">{{ user.userprofile.nike_name }}</span>
+                                        {% else %}
+                                        <span class="has-text-grey-dark">{{ user.username }}</span>
+                                        {% endif %}
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
+                                </button>
+                            </div>
+
+                            <div class="dropdown-menu" id="dropdown-menu2" role="menu" >
+                                <div class="dropdown-content is-shadowless">
+                                    <div class="dropdown-item">
+                                    <a class=" has-text-grey-dark" href="{%url 'users:editor_users' %}">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-user-cog" aria-hidden="true"></i>
+                                        </span>
+                                        账号设置
+                                    </a>
+                                    </div>
+                                    <hr class="dropdown-divider">
+                                    <div class="dropdown-item">
+                                        <a class=" has-text-grey-dark" href="{% url 'users:logout' %}">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-power-off" aria-hidden="true"></i>
+                                            </span>
+                                            退出登录
+                                        </a>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="column is-10">
+        <div class="box is-radiusless is-shadowless"></div>
+        <div class="tabs">
+            <ul>
+                {% block title%}
+                <li class="is-active"><a>账号信息</a></li>
+                {% endblock title %}
+            </ul>
+        </div>
+        {% block content %}
+        <div class="columns is-mobile">        
+        </div>
+        <div class="columns"></div>
+        <div class="columns"></div>
+        {% endblock content %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+.quickBoxOuter{position:fixed;background:url(images/wrap.png) repeat 0 0;border-radius:5px 5px 5px 5px;color:#333;display:none;padding:5px;width:500px;z-index:99999;left:30%;top:5%;top:10%}
+.quickBoxInner{background:#fff}
+.quickBoxInner .title-bar{background:url(images/quick_nav.png) repeat-x left 2px;height:32px;line-height:30px;position:relative;text-align:left}
+.quickBoxInner .title-bar h2{color:#008cd6;font-size:14px;font-weight:700;padding-left:15px}
+.quickBoxInner .title-bar a.close_quick{background:url(images/quick_close.png) no-repeat left top;display:block;height:15px;position:absolute;right:12px;top:10px;width:15px}
+.quickBoxInner .tips{height:32px;line-height:30px;padding-left:15px;background:#fff}
+.quickBox{background:#fff;padding-left:15px;padding-top:15px}
+.quickBox form{display:block;text-align:left;font-weight:400;padding:0;margin:0;width:100%;background:#fff}
+.quickBox .titbar{height:50px;background:#15940f;color:#FFF;font-size:16px;font-weight:700;line-height:50px}
+.quickAddressBox{background:#fff}
+.quickBox ul{background:#fff}
+.quickBox ul li{color:#000;padding:5px;margin:0;clear:both}
+.quickBox ul li em{font-style:normal;float:left;width:80px;text-align:left;padding-right:20px;font-weight:700}
+.quickBox ul li .textInput{border:#CCC solid 1px;height:20px;line-height:20px;width:200px;padding:3px}
+.quickBox ul li .total_price{color:#008cd6;font-weight:700;font-size:14px}
+.paymentMethod li{float:left;margin-right:10px;padding:10px;width:200px}
+.comfirmSubmit{text-align:right;padding-top:10px;padding-bottom:10px}
+.comfirmSubmit li{padding:0;margin:0}
+.f4_b{color:red}
+.black_overlay{position:fixed;z-index:9999;width:100%;height:100%;top:0;left:0;filter:alpha(opacity=50);opacity:.5;overflow:hidden;background-color:#000;display:none}
+*html{background:url(*) fixed}
+*html body{margin:0;height:100%}
+*html .black_overlay{position:absolute;left:expression(documentElement.scrollLeft+documentElement.clientWidth - this.offsetWidth);top:expression(documentElement.scrollTop+documentElement.clientHeight - this.offsetHeight)}
+a.thunder{background:url(images/thunder.png) no-repeat left top;display:block;float:left;height:40px;line-height:40px;margin-right:5px;width:127px}
+.quickBoxInner .title-bar h2 font{font-weight:400;font-size:12px;color:#666;margin:auto 10px}
+.sku_box2{float:left;width:360px}
+label.sku_list2{display:block;zoom:1;float:left;height:18px;line-height:18px;padding:10px 15px;border:1px solid #e7e7e7;background-color:#fff;color:#999;position:relative;margin:0 15px 6px 0;border-radius:2px;white-space:nowrap; cursor:pointer;}
+label.selected{border-color:#008cd6;color:#333}
+label.sku_list2 span{visibility:hidden;background:#008cd6 url(images/gou-ico2.png) 1px 12px no-repeat;display:block;height:0;overflow:hidden;padding-top:40px;position:absolute;right:-11px;top:-1px;width:12px;border-radius:0 2px 2px 0}
+label.selected span{visibility:visible}
+#textNum{width:66px;height:14px;padding:8px 0;line-height:14px;text-align:center;font-size:14px}

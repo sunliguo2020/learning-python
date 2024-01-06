@@ -1,19 +1,58 @@
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from apps.users import forms
 from apps.users.models import MyUser
+from .forms import UsersForm
 
 
 # Create your views here.
+def add(request):
+    if request.method == "GET":
+        form_obj = UsersForm()
+        context = {
+            'form_obj': form_obj
+        }
+        return render(request, 'shop/users/add.html', context)
+    if request.method == "POST":
+        form_obj = UsersForm(data=request.POST)
+        if form_obj.is_valid():
+            form_obj.save()
+            return redirect(reverse('users:users_index'))
+        return render(request, 'shop/users/add.html', {'form_obj': form_obj})
+
+
+def edit(request, id):
+    # print(id)
+    # user = MyUser.objects.filter(id=id).first()
+    user = MyUser.objects.get(id=id)
+    # print(user)
+    if request.method == 'GET':
+        user_form = UsersForm(instance=user)
+        context = {
+            'form_obj': user_form
+        }
+        return render(request, 'shop/users/edit.html', context)
+    elif request.method == "POST":
+        user_form = UsersForm(data=request.POST, instance=user,files=request.FILES)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect(reverse('users:users_index'))
+        else:
+            context = {
+                'form_obj': user_form
+            }
+            return render(request, 'shop/users/edit.html', context)
+
 
 def index(request):
     if request.method == "GET":
-        level = request.GET.get('level')
+        level = request.GET.get('level', '')
         truename = request.GET.get('truename', '')
-        status = request.GET.get('status')
+        status = request.GET.get('status', '')
         search_dict = dict()
         if level:
             search_dict['level'] = level
@@ -22,7 +61,9 @@ def index(request):
         if status:
             search_dict['status'] = status
 
+        # 多条件查询
         datas = MyUser.objects.filter(**search_dict).order_by('-id')
+
         page_size = 2  # 每页显示的行数
         try:
             if not request.GET.get("page"):
@@ -59,11 +100,15 @@ def delete(request, id):
 
 
 def user_reg(request):
+    """
+    用户注册视图
+    """
     if request.method == 'GET':
         form_obj = forms.UserRegForm()
         return render(request, 'shop/user_reg.html', {'form_obj': form_obj})
     if request.method == "POST":
-        form_obj = forms.UserRegForm(request.POST, request.FILES)
+        # form_obj = forms.UserRegForm(request.POST, request.FILES)
+        form_obj = forms.UserRegForm(data=request.POST, files=request.FILES)
         if form_obj.is_valid():
             uname = request.POST.get("username", '')
             users = MyUser.objects.filter(username=uname)
@@ -72,6 +117,7 @@ def user_reg(request):
                     user_img = user.user_img
                 info = '用户已经存在'
             else:
+                # 去掉二次输入的密码
                 form_obj.cleaned_data.pop("re_password")
                 form_obj.cleaned_data["is_staff"] = 1
                 form_obj.cleaned_data["is_superuser"] = 0  # 非管理员
@@ -82,11 +128,14 @@ def user_reg(request):
             return render(request, 'shop/user_reg.html', {"form_obj": form_obj, "info": info, "user_img": user_img})
         else:
             errors = form_obj.errors
-            print(errors)
+            # print(errors)
             return render(request, "shop/user_reg.html", {'form_obj': form_obj, 'errors': errors})
 
 
 def user_login(request):
+    """
+    用户登录视图
+    """
     return render(request, 'shop/user_login.html')
 
 
@@ -94,7 +143,6 @@ def ajax_login_data(request):
     uname = request.POST.get('username', '')
     pwd = request.POST.get('password', '')
     json_dict = {
-
     }
     if uname and pwd:  # 用户名和密码不为空，则查询数据库
         if MyUser.objects.filter(username=uname):  # 判断用户是否存在

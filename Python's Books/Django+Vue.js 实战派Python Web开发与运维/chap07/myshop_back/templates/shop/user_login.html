@@ -2,38 +2,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>用户登录</title>
-  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
-  <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <meta charset="utf-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
-  <div class="register-logo">
-    <b>用户登录
-  </div>
-  <div class="card">
-    <div class="card-body register-card-body">
-      <form action="" method="post">
-        {% csrf_token  %}
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" id="password" name="password" placeholder="密码">
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <label for="agreeTerms" id="info">
-             </label>
-          </div>
-          <div class="col-4">
-            <input id="register" type="button" class="btn btn-success" value="登录">
-          </div>
-        </div>
-      </form>
+    <div class="register-logo">
+        <b>用户登录</b>
     </div>
-  </div>
+    <div class="card">
+        <div class="card-body register-card-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <label for="agreeTerms" id="info">
+                        </label>
+                    </div>
+                    <div class="col-4">
+                        <input id="register" type="button" class="btn btn-success" value="登录">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <script>
     $("#register").click(function () {
@@ -47,7 +47,8 @@
             },
             //请求成功后操作
             success: function (data) {
-              $("#info").html(data.msg)
+                $("#info").html(data.msg)
+                // 重定向页面
             },
             //请求失败后操作
             error: function (jqXHR, textStatus, err) {

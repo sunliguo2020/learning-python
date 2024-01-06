@@ -17,12 +17,14 @@
   <link rel="stylesheet" href="{% static 'dist/css/common.css'%}">
   <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
   <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
-
   <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.min.css' %}">
+
   <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+
  {% block ext_css %}
  {% endblock %}
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -32,7 +34,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">首页</a>
+        <a href="{% url 'basic:basic_index' %}" class="nav-link">首页</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -87,9 +89,7 @@
           <li class="nav-item">
             <a href="/users/index" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                用户信息
-              </p>
+              <p>用户信息</p>
             </a>
           </li>
           <li class="nav-item">
@@ -135,7 +135,7 @@
           </li>
           <li class="nav-header">系统管理</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{% url 'users:users_index' %}" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">用户管理</p>
             </a>
@@ -156,8 +156,10 @@
       </nav>
     </div>
   </aside>
+
   {%block content%}
   {%endblock%}
+
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
@@ -165,8 +167,10 @@
       <b>Version</b> 3.1.0-rc
     </div>
   </footer>
+
   <aside class="control-sidebar control-sidebar-dark">
   </aside>
+
 </div>
 
 <script>
@@ -174,7 +178,6 @@
 </script>
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
-
 <script src="{% static 'plugins/sparklines/sparkline.js' %}"></script>
 <script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %}"></script>
 <script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
@@ -186,10 +189,10 @@
 <script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
 <script src="{% static 'dist/js/adminlte.js' %}"></script>
 <script src="{% static 'dist/js/demo.js' %}"></script>
-
 <script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
 
 {% block ext_js %}
 {% endblock%}
+
 </body>
 </html>

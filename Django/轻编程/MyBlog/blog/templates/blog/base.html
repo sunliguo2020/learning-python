@@ -1,0 +1,150 @@
+{% load static category %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
+    <link rel="stylesheet" href="{% static 'users/bulma.css' %}">
+    <title>{% block title %}我的博客，基于Django{% endblock title %}</title>
+</head>
+
+<body>
+<div class="pt-6">
+    <nav class="navbar is-primary container" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+               data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                {% block navbar-start %}
+                <a class="navbar-item" href="{%url 'blog:index' %}">
+                    首页
+                </a>
+                {% get_category_list as category_list %}
+                {% for category in category_list %}
+                <a class="navbar-item" href="{% url 'blog:category_list' category.id%}">
+                    {{ category.name}}
+                </a>
+
+                {%endfor%}
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        More
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            About
+                        </a>
+                        <a class="navbar-item">
+                            Jobs
+                        </a>
+                        <a class="navbar-item">
+                            Contact
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Report an issue
+                        </a>
+                    </div>
+                </div>
+                {% endblock navbar-start %}
+            </div>
+
+            <div class="navbar-end">
+                {% block navbar-end %}
+                <div class="navbar-item">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'users:user_profile'%}" class="button is-info">{{request.user.username}}</a>
+                    <a href="{% url 'users:logout'%}" class="button is-primary">退出</a>
+                    {%else%}
+                    <div class="buttons">
+                        <a class="button is-primary" href="{%url 'users:register'%}" target="_blank">
+                            <strong>注册</strong>
+                        </a>
+                        <a class="button is-light" href="{%url 'users:login'%}" target="_blank">
+                            登录
+                        </a>
+                        {%endif%}
+                    </div>
+                </div>
+                {% endblock navbar-end %}
+
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8">
+                    {% block section %}
+                    {% if post_list%}
+                        {% for post in post_list %}
+                            <div class="box">
+                            <h1 class="is-size-5 has-text-weight-bold">
+                                <a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a>
+                            </h1>
+                            <div class="is-size-7 has-text-grey-light pt-1 pb-1">
+                                <span class="mr-3">作者：{{ post.owner}}</span>
+                                <span>发布日期：{{ post.add_date}}</span>
+                            </div>
+
+                            <p class="mt-3">
+                                {{post.desc|truncatechars:45}}
+                            </p>
+                        </div>
+                        {% endfor %}
+                    {%else%}
+                        <div class="box">
+                                       <p class="has-text-danger">文章不存在！</p>
+                        </div>
+                    {%endif%}
+
+                    {% endblock section %}
+
+                </div>
+                <div class="column is-4">
+                    {% block right %}
+                    {% get_sidebar_list as sidebar_list%}
+                    {% for sidebar in sidebar_list%}
+                    <div class="box">
+                        <h1 class="is-size-5 title">{{sidebar.title}}</h1>
+                        <p>{{sidebar.get_content|safe}}</p>
+
+                    </div>
+
+                    {%endfor%}
+                    {% endblock right %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+</div>
+
+{% block footer %}
+<footer class="footer container">
+    <div class=" has-text-centered">
+        这是博客footer
+    </div>
+</footer>
+{% endblock footer %}
+
+</body>
+
+</html>

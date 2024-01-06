@@ -157,6 +157,62 @@ uid=990
 停止： uwsgi --stop uwsgi.pid
 ```
 
+启停脚本：
+
+```shell
+#!/bin/bash
+
+# uWSGI启动命令
+start_uwsgi() {
+    echo "Starting uWSGI..."
+    uwsgi --ini /path/to/your/uwsgi.ini  # 指定你的uWSGI配置文件路径
+}
+
+# uWSGI停止命令
+stop_uwsgi() {
+    echo "Stopping uWSGI..."
+    killall -s INT uwsgi
+}
+
+# uWSGI状态命令
+status_uwsgi() {
+    echo "Checking uWSGI status..."
+    if pgrep -x "uwsgi" > /dev/null
+    then
+        echo "uWSGI is running."
+    else
+        echo "uWSGI is not running."
+    fi
+}
+
+# 根据输入参数执行相应操作
+case "$1" in
+    start)
+        start_uwsgi
+        ;;
+    stop)
+        stop_uwsgi
+        ;;
+    restart)
+        stop_uwsgi
+        start_uwsgi
+        ;;
+    status)
+        status_uwsgi
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+esac
+
+exit 0
+
+```
+
+
+
+
+
 #### 7、settings的设置
 
 ##### 1、允许授权主机的访问

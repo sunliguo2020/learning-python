@@ -6,7 +6,7 @@
 """
 from django.urls import path,include
 from apps.basic import views
-
+app_name = 'basic'
 urlpatterns = [
-    path('index/',views.index),
+    path('index/',views.index,name='basic_index'),
 ]

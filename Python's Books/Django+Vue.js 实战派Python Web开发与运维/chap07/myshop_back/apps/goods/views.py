@@ -1,12 +1,11 @@
-from django.shortcuts import render
-
 # Create your views here.
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.base import View
-from django.http import HttpResponse, JsonResponse
+
+from apps.goods.forms import GoodsCategoryForm, GoodsModelForm
 from apps.goods.models import *
-from apps.goods.forms import GoodsCategoryForm
-import json
 
 
 class GoodsCategoryView(View):
@@ -24,7 +23,7 @@ class GoodsCategoryAddView(View):
 
     def binddata(self, datas, id, n):
         if id == 0:
-            datas = datas.filter(parent__isnull=True)
+            datas = datas.filter(parent_id__isnull=True)
         else:
             datas = datas.filter(parent__isnull=True)
         for data in datas:
@@ -40,10 +39,17 @@ class GoodsCategoryAddView(View):
 
     def get(self, request):
         form_obj = GoodsCategoryForm()
-        return render(request, "shop/goods/cate_add.html", {"form_obj": form_obj})
+        cates = GoodsCategory.objects.all()
+        print(cates)
+        context = {
+            'cates': cates,
+            "form_obj": form_obj,
+            'title': '商品分类新增'
+        }
+        return render(request, "shop/goods/cate_add.html", context)
 
     def post(self, request):
-        form_obj = GoodsCategoryForm(request.POST, request.FILES)
+        form_obj = GoodsCategoryForm(data=request.POST, files=request.FILES)
         if form_obj.is_valid():
             name = request.POST.get("name", '')
             cates = GoodsCategory.objects.filter(name=name)
@@ -82,9 +88,9 @@ class GoodsView(View):
         return space + "|--"
 
     def get(self, request):
-        cates_all = GoodsCategory.objects.all()
-        cates = self.binddata(cates_all, 0, 1)
-        return render(request, "shop/goods/index.html", {"cates": cates})
+        # goods = Goods.objects.all()
+        # cates = self.binddata(cates_all, 0, 1)
+        return render(request, "shop/goods/index.html")
 
     def post(self, request):
         pass
@@ -113,22 +119,18 @@ class GoodsAddView(View):
     def get(self, request):
         cates_all = GoodsCategory.objects.all()
         cates = self.binddata(cates_all, 0, 1)
-        return render(request, "shop/goods/add.html", {"cates": cates})
+        goods_obj = GoodsModelForm()
+        return render(request, "shop/goods/add.html", {"cates": cates, 'form_obj': goods_obj})
 
     def post(self, request):
-        name = request.POST.get("name", '')
-        parent_id = request.POST.get("parent_id", '')
-        market_price = request.POST.get("market_price", '0')
-        price = request.POST.get("price", '0')
-        goods_desc = request.POST.get("goods_desc", '')
-        main_img = request.POST.get("main_img", '')
-        message = "字段需要填写"
-        if not name:
-            message = "请输入姓名"
-
-        # return render(request, 'login/login.html', {"message": message})
-        # print(name)
-        return redirect(reverse('index'))
+        goods_form = GoodsModelForm(data=request.POST)
+        if goods_form.is_valid():
+            goods_form.save()
+            return redirect(reverse('goods_index'))
+        else:
+            errors = goods_form.errors
+            return render(request, 'shop/goods/add.html', {'form_obj': goods_form, 'errors': errors})
+        return render(request, 'shop/goods/add.html', {'form_obj': goods_form})
 
 
 def ajax_goods(request):
