@@ -63,17 +63,9 @@ def your_function():
 
 
 
-
-
-![User](统一配置logger2.assets/unnamed.png)
-
 You
 
 在自己手写的项目中，怎么统一配置logger呢？
-
-
-
-ChatGPT
 
 ChatGPT
 
@@ -108,8 +100,6 @@ def your_function():
 ```
 
 在上面的例子中，`setup_logger` 函数用于配置 logger，并返回一个配置好的 logger 实例。在代码中，你可以调用这个函数并传递所需的名称和日志文件名。然后，在需要记录日志的地方，通过这个配置好的 logger 实例记录不同级别的日志信息。
-
-![User](统一配置logger2.assets/unnamed-1702557522698.png)
 
 You
 
@@ -177,4 +167,3 @@ def your_function():
 
 
 
- 
