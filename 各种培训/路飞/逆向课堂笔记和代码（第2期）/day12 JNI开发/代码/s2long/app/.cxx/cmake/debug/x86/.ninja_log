@@ -1,0 +1,16 @@
+# ninja log v5
+1	140	1645714605	CMakeFiles/dynamic.dir/dynamic.c.o	a026eeaa8f120548
+1	188	1645714606	CMakeFiles/encrypt.dir/encrypt.c.o	a6750e01e6b28efb
+140	205	1645714606	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86/libdynamic.so	7a8c6ab3bc87a048
+205	263	1645714606	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86/libencrypt.so	da20ea9000851c97
+0	7	0	clean	f4e01d1b7ebad130
+0	79	1645714657	CMakeFiles/dynamic.dir/dynamic.c.o	a026eeaa8f120548
+1	88	1645714657	CMakeFiles/encrypt.dir/encrypt.c.o	a6750e01e6b28efb
+79	155	1645714658	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86/libdynamic.so	7a8c6ab3bc87a048
+155	206	1645714658	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86/libencrypt.so	da20ea9000851c97
+0	9	0	clean	f4e01d1b7ebad130
+0	8	0	clean	f4e01d1b7ebad130
+0	68	1645714671	CMakeFiles/dynamic.dir/dynamic.c.o	a026eeaa8f120548
+0	85	1645714671	CMakeFiles/encrypt.dir/encrypt.c.o	a6750e01e6b28efb
+68	112	1645714671	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86/libdynamic.so	7a8c6ab3bc87a048
+112	160	1645714671	/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/debug/obj/x86/libencrypt.so	da20ea9000851c97

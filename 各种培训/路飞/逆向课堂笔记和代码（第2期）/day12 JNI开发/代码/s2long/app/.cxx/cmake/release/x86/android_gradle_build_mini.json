@@ -1,0 +1,29 @@
+{
+  "buildFiles": [
+    "/Users/wupeiqi/AndroidStudioProjects/s2long/app/src/main/cpp/CMakeLists.txt",
+    "/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/wupeiqi/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "encrypt-Release-x86": {
+      "artifactName": "encrypt",
+      "buildCommand": "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86\" encrypt",
+      "abi": "x86",
+      "output": "/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/release/obj/x86/libencrypt.so",
+      "runtimeFiles": [
+        "/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/release/obj/x86/libdynamic.so"
+      ]
+    },
+    "dynamic-Release-x86": {
+      "artifactName": "dynamic",
+      "buildCommand": "/Users/wupeiqi/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/wupeiqi/AndroidStudioProjects/s2long/app/.cxx/cmake/release/x86\" dynamic",
+      "abi": "x86",
+      "output": "/Users/wupeiqi/AndroidStudioProjects/s2long/app/build/intermediates/cmake/release/obj/x86/libdynamic.so",
+      "runtimeFiles": []
+    }
+  }
+}
