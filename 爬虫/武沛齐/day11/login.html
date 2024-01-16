@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>基础教育教师培训</title>
+    <link href="/Content/GuoPei/css/base.css" rel="stylesheet"/>
+
+    <link href="/Content/GuoPei/css/style.css" rel="stylesheet"/>
+
+    <link href="/Content/GuoPei/css/top.css" rel="stylesheet"/>
+
+    <link href="/Content/GuoPei/css/footer.css" rel="stylesheet"/>
+
+    <link href="/Content/GuoPei/css/iconfont.css?v=202068092610" rel="stylesheet"/>
+
+    
+    <script src="/Scripts/jquery-3.4.1/jquery-3.4.1.js"></script>
+
+    <script type="text/javascript" src="/Content/layer/layer-v2.4/layer.js"></script>
+    
+</head>
+<body>
+    <!--标题-->
+    
+<div class="header_wrapper">
+    <header>
+        <div class="container">
+            <a href="/" title="基础教育教师培训" class="logo">
+                <img src="/Content/GuoPei/img/Logo.png" />
+            </a>
+            <nav class="navbar"></nav>
+        </div>
+    </header>
+</div>
+    <!--内容-->
+        <link href="/Content/GuoPei/css/login_g4.css" rel="stylesheet" />
+    <link href="/Content/GuoPei/js/swiper/swiper.css" rel="stylesheet" />
+    <script src="/Content/GuoPei/js/swiper/swiper.js"></script>
+    <script src="/Scripts/BaseCode.js"></script>
+    <script src="/Scripts/qrcode.min.js"></script>
+    <script src="/Content/GuoPei/js/login/scanCodeLogin.js"></script>
+    <style type="text/css">
+        .swiper-container {
+            width: 485px;
+            height: 504px;
+        }
+    </style>
+    <div class="mian" id="main" style="">
+        <input id="hidReturnUrl" name="hidReturnUrl" type="hidden" value="/PersonalCenter" />
+        <div class="container mian-container" style="">
+            <div class="center-con clearfix" style="">
+                
+                <div class="swiper-re">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="/Content/GuoPei/img/g3/login-swiper-02.png" alt="" /></div>
+                            <div class="swiper-slide"><img src="/Content/GuoPei/img/g3/login-swiper-03.png" alt="" /></div>
+                            <div class="swiper-slide"><img src="/Content/GuoPei/img/g3/login-swiper-01.png" alt="" /></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    var mySwiper = new Swiper('.swiper-container', {
+                        autoplay: 5000,
+                        loop: true,
+                        pagination: '.swiper-pagination',
+                        paginationClickable: true,
+                        spaceBetween: 30,
+                    })
+                </script>
+                
+                <div class="login">
+                    <h2>密码登录</h2>
+                    <div class="MobileLogin">
+                        <a href="javascript:void(0);">
+                            <div class="login-tip">
+                                <div class="poptip">
+                                    <div class="poptip-arrow">
+                                        <em></em>
+                                        <span></span>
+                                    </div>
+                                    <div class="poptip-content">
+                                        扫码登录
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<img class="wxlogin-msg" src="img/g4/wxlogin-msg.png" alt="" />-->
+                            <img class="login-wx" src="/Content/GuoPei/img/g4/login-wx.png" alt="" />
+                            <img class="login-wx" src="/Content/GuoPei/img/g4/login-wx.png" alt="" />
+                        </a>
+                    </div>
+                    <form action="">
+                        <div class="form-group por">
+                            <input id="txtUserAccount" type="text" class="form-control" placeholder="请输入用户名\身份证号\手机号" />
+                            <i class="iconfont icon-username"></i>
+                        </div>
+                        <div class="form-group por mb12 clearfix">
+                            <input id="txtPassword" type="password" class="form-control" placeholder="请输入密码" autocomplete="off" />
+                            <i class="iconfont icon-password"></i>
+                        </div>
+                        <div class="form-group por mb12 clearfix">
+                            <input type="text" id="txtcode" class="form-control" placeholder="请输入验证码" style="width:120px; float:left;" />
+                            <i class="iconfont icon-policyFile"></i>
+                            <div class="validationImg">
+                                <img class="yzms" id="imgVerifity" src="/Login/GetValidateCode" onclick="setValidate()" style="vertical-align: middle; cursor: pointer;width:100%;">
+                            </div>
+                        </div>
+                        <div class="form-group sub-form mb12 clearfix">
+                            <a id="aLogin" class="btn btn-cyan db sub-f" href="javascript:void(0);">登录</a>
+                        </div>
+                        <div class="form-group w-pwd">
+                            <a class="" href="/Pwd" target="_self">忘记密码？</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="wx-login"  style="display: none;">
+                    <h2>扫码登录</h2>
+                    <div class="MobileLogin">
+                        <a href="javascript:void(0);">
+                            <div class="login-tip">
+                                <div class="poptip">
+                                    <div class="poptip-arrow">
+                                        <em></em>
+                                        <span></span>
+                                    </div>
+                                    <div class="poptip-content">
+                                        密码登录
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<img class="wxlogin-msg" src="img/g4/wxlogin-msg.png" alt="" />-->
+                            <img class="login-pc" src="/Content/GuoPei/img/g4/login-pc.png" alt="" />
+                        </a>
+                    </div>
+                    <div class="wx-code">
+                        <div id="qrCode" class="erCode_prompt"></div>
+                        <div id="scSucc" class="erCode_prompt" style="display: none;">
+                            <div class="loginStatePanel cordeSuccess">
+                                <p class="cordeSuccessMsg">
+                                    <i class="iconfont icon-yiguanzhu"></i>
+                                    <em>扫码成功！</em>
+                                </p>
+                                <span class="cordeSuccessMsg_txt">请在手机端确认</span>
+                            </div>
+                        </div>
+                        <div id="sclSucc" class="erCode_prompt" style="display: none;">
+                            <div class="loginStatePanel cordeSuccess">
+                                <p class="cordeSuccessMsg">
+                                    <i class="iconfont icon-yiguanzhu"></i>
+                                    <em>登录成功！</em>
+                                </p>
+                                <span class="cordeSuccessMsg_txt">跳转中...</span>
+                            </div>
+                        </div>
+                        <div id="sclFail" class="erCode_prompt" style="display: none;">
+                            <div class="loginStatePanel codeFailure">
+                                <p>登录失败</p>
+                                <a href="javascript:;" class="code_ref" onclick="refreshQrCode()">刷新</a>
+                            </div>
+                        </div>
+                        <div id="qrExpired" class="erCode_prompt" style="display: none;">
+                            <div class="loginStatePanel codeFailure">
+                                <p>二维码过期</p>
+                                <a href="javascript:;" class="code_ref" onclick="refreshQrCode()">刷新</a>
+                            </div>
+                        </div>
+                        <p>打开<span>微信-扫一扫</span>扫描二维码</p>
+                    </div>
+                    <div class="erCode_advantages">
+                        <section class="advantages_col">
+                            <img src="/Content/GuoPei/img/g4/advantages01.png" alt="" />
+                            <span>免输入</span>
+                        </section>
+                        <section class="advantages_col">
+                            <img src="/Content/GuoPei/img/g4/advantages02.png" alt="" />
+                            <span>更快</span>
+                        </section>
+                        <section class="advantages_col">
+                            <img src="/Content/GuoPei/img/g4/advantages03.png" alt="" />
+                            <span>更安全</span>
+                        </section>
+                    </div>
+                    <div class="wx-msg clearfix">
+                        <span>温馨提示：</span><p>需先在PC端成功选课后使用，作业仍需通过PC端完成</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/Scripts/GuoPeiWeb/login.js" type="text/javascript"></script>
+    <!--尾注-->
+    
+<div class="footer_wrapper" style="height: auto; padding: 16px 0;">
+    <p>版权所有 Copyright © 基础教育教师培训 </p>
+    <p style="margin-bottom: 7px;">
+        <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" style="color: #333;"><img class="beianPng" src="/Content/GuoPei/img/public/beian.png" alt="" />京公网安备11010202008750</a>
+    </p>
+    <p style="height: 27px;"><img src="/Content/GuoPei/img/360.png" style="width: 74px; height: 27px;" alt="" /></p>
+</div>
+
+
+    <!--脚本-->
+    
+</body>
+</html>
