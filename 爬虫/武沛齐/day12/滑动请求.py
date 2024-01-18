@@ -9,7 +9,7 @@
 import requests
 import execjs
 
-with open('模拟轨迹.js','r',encoding='utf-8') as fp:
+with open('模拟轨迹.js', 'r', encoding='utf-8') as fp:
     js = fp.read()
 
 JS = execjs.compile(js)
@@ -61,13 +61,42 @@ headers = {
 }
 
 data = {
-    "data":data,
-        "orca": 2,
+    "data": data,
+    "orca": 2,
     "appCode":
         "register_pc",
     "cs": "pc"}
 
-response = requests.post('https://vercode.qunar.com/inner/captcha/snapshot', cookies=cookies, headers=headers,
+response = requests.post('https://vercode.qunar.com/inner/captcha/snapshot',
+                         # cookies=cookies,
+                         headers=headers,
                          json=data)
 print(response.text)
+
 # # {"ret":true,"errCode":0,"errMsg":null,"data":{"code":0,"timestamp":1705505389965,"cst":"d932156ad23bb851d5e72bd49d34ba42","vcd":{"QN271AC":"register_pc","QN271RC":"d932156ad23bb851d5e72bd49d34ba42","QN271SL":"d932156ad23bb851d5e72bd49d34ba42"}}}
+slideToken = response.json().get('data').get('cst')
+print(slideToken)  #69c6a7642fc648ff0d51502ffdb99e88
+# 发送验证码
+sendLoginCode_url = 'https://user.qunar.com/weblogin/sendLoginCode'
+data = {
+    "usersource": "",
+    "source": "",
+    "ret": "https://www.qunar.com/",
+    "ref": "",
+    "business": "",
+    "pid": "",
+    "originChannel": "",
+    "activityCode": "",
+    "origin": "",
+    "mobile": 15653613200,
+    "prenum": 86,
+    "loginSource": 1,
+    "slideToken": slideToken,
+    "smsType": 0,
+    "appcode": "register_pc",
+    "bella": "",
+    "captchaType": ""
+}
+
+res = requests.post(sendLoginCode_url, data=data)
+print(res.text)

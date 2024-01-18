@@ -1,7 +1,9 @@
 //寻找sliderInfo
 sliderInfo = {
-    openTime: Date.now() - 100,
+    openTime: Date.now() - Math.random()*1999,
+    //鼠标开始点击
     startTime: Date.now() - 20,
+    //鼠标抬起
     endTime: Date.now(),
     // userAgent: window.navigator.userAgent,
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -25,6 +27,7 @@ clientY = 100
 i = Date.now() % 1e5
 o = clientX.toFixed(2)
 u = clientY.toFixed(2)
+//滑动的距离
 a = n.toFixed(2)
 f = "".concat(i, ";").concat(o, ";").concat(u, ";").concat(a);
 sliderInfo.track.push(f)

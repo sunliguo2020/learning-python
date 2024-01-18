@@ -1,5 +1,5 @@
 //concat()用法
-i= 'i';
+i = 'i';
 o = '0';
 u = 'u';
 a = 'a'
@@ -9,3 +9,18 @@ a = 'a'
 
 f = "".concat(i, ";").concat(o, ";").concat(u, ";").concat(a);
 console.log(f)
+
+//三元表达式
+
+"GET" == e.type ? (r = o(e.data),
+    t.open("GET", e.url + "?" + r, !0),
+    t.withCredentials = !0,
+    t.send(null)) : "POST" === e.type && (t.open("POST", e.url, !0),
+    t.withCredentials = !0,
+    t.send(JSON.stringify(r))),
+e.time && (n = setTimeout(function () {
+    t.abort(),
+    e.error && e.err({
+        message: "超时"
+    })
+}, e.time))
