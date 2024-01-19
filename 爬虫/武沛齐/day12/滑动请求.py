@@ -73,9 +73,9 @@ response = requests.post('https://vercode.qunar.com/inner/captcha/snapshot',
                          json=data)
 print(response.text)
 
-# # {"ret":true,"errCode":0,"errMsg":null,"data":{"code":0,"timestamp":1705505389965,"cst":"d932156ad23bb851d5e72bd49d34ba42","vcd":{"QN271AC":"register_pc","QN271RC":"d932156ad23bb851d5e72bd49d34ba42","QN271SL":"d932156ad23bb851d5e72bd49d34ba42"}}}
+# {"ret":true,"errCode":0,"errMsg":null,"data":{"code":0,"timestamp":1705505389965,"cst":"d932156ad23bb851d5e72bd49d34ba42","vcd":{"QN271AC":"register_pc","QN271RC":"d932156ad23bb851d5e72bd49d34ba42","QN271SL":"d932156ad23bb851d5e72bd49d34ba42"}}}
 slideToken = response.json().get('data').get('cst')
-print(slideToken)  #69c6a7642fc648ff0d51502ffdb99e88
+print(slideToken)  # 69c6a7642fc648ff0d51502ffdb99e88
 # 发送验证码
 sendLoginCode_url = 'https://user.qunar.com/weblogin/sendLoginCode'
 data = {
@@ -88,7 +88,7 @@ data = {
     "originChannel": "",
     "activityCode": "",
     "origin": "",
-    "mobile": 15653613200,
+    "mobile": 15689266171,
     "prenum": 86,
     "loginSource": 1,
     "slideToken": slideToken,
