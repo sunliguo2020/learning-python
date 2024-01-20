@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .body-wrap .tc-opera .tc-fg-item {
+            opacity: 0;
+            -webkit-transition: opacity .5s;
+            -o-transition: opacity .5s;
+            -moz-transition: opacity .5s;
+            transition: opacity .5s
+        }
+
+        .body-wrap .tc-opera .tc-fg-item, .unselectable {
+            user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -ms-user-select: none
+        }
+    </style>
+</head>
+<body>
+<div class="tc-bg-img unselectable" id="slideBg"
+     style="width: 340px; height: 242.857px; position: absolute; top: 0px; left: 0px; background-image: url(bg.png); background-size: 100%; background-repeat: no-repeat; overflow: hidden; z-index: 1; background-position: 0px 0px; opacity: 1;"></div>
+<div class="tc-fg-item" aria-label="拖动下方滑块完成拼图" alt="拖动下方滑块完成拼图"
+     style="position: absolute; background-image: url(slice.png); background-position: -70.8333px -247.917px; background-size: 345.06px 313.69px; width: 60.7143px; height: 60.7143px; left: 25.2976px; top: 32.8869px; z-index: 1; cursor: pointer; opacity: 1;"></div>
+
+</body>
+</html>

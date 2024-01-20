@@ -84,11 +84,19 @@ print("缺口图", slice_image_url)
 slice_bytes = requests.get(slice_image_url).content
 bg_bytes = requests.get(bg_image_url).content
 
-with open('slice.jpg', 'wb') as fp:
+with open('slice.png', 'wb') as fp:
     fp.write(slice_bytes)
-with open('bg.jpg', 'wb') as fp:
+with open('bg.png', 'wb') as fp:
     fp.write(bg_bytes)
 
+from PIL import Image
+
+img = Image.open('slice.png')
+print(img.size)
+cropped = img.crop((150, 490, 240, 588))  # (left, upper, right, lower)
+cropped.save("slice2.png")
+with open('slice2.png', 'rb') as fp:
+    slice_bytes = fp.read()
 # 使用ddddocr识别
 slide = ddddocr.DdddOcr(det=False, ocr=False, show_ad=False)
 res = slide.slide_match(slice_bytes, bg_bytes, simple_target=True)
@@ -101,9 +109,10 @@ print('滑动距离', x1)
 # driver.switch_to.default_content()
 btn_tag = driver.find_element(By.XPATH, '//*[@id="tcOperation"]/div[6]')
 print(btn_tag)
+
 ActionChains(driver).click_and_hold(btn_tag).perform()
 ActionChains(driver).move_by_offset(xoffset=x1, yoffset=0).perform()
 ActionChains(driver).release().perform()
 
-
+print('移动完成')
 time.sleep(500)
