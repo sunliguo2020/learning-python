@@ -6,10 +6,10 @@
 """
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://passport.china.com/logon'
 res = requests.post(url,
                     data={
-                        # "userName": "15131255089",
                         "userName": "15131255089",
                         "password": "qwe123456"
                     },
@@ -19,13 +19,17 @@ res = requests.post(url,
                         'Host': 'passport.china.com',
                         "X-Requested-With": "XMLHttpRequest"
                     })
+
 cookie_dict = res.cookies.get_dict()
 print(cookie_dict)
 print(res.text)
-new_main  = 'https://passport.china.com/main'
+
+new_main = 'https://passport.china.com/main'
 res = requests.get(new_main, cookies=cookie_dict)
+
+# 登录成功后，抓取信息
 soup = BeautifulSoup(res.text, features='html.parser')
-tag = soup.find('p',attrs={'id':'usernick'})
+tag = soup.find('p', attrs={'id': 'usernick'})
 print(tag.text)
 print(tag.attrs['title'])
 # print(res.text)
