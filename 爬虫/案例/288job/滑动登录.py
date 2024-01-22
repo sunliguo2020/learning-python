@@ -92,6 +92,7 @@ slice_bytes = requests.get(slice_image_url).content
 bg_bytes = requests.get(bg_image_url).content
 
 # 调整背景图片大小
+# 背景图原始尺寸：672：390
 image = Image.open(io.BytesIO(bg_bytes))
 # 调整图像大小为宽度为340 像素，高度为243像素
 resized_image = image.resize((340, 243))
