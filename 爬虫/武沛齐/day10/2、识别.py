@@ -8,6 +8,7 @@
 """
 import time
 
+import ddddocr
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -36,6 +37,10 @@ geetest_ques_tips_tag = driver.find_element(By.XPATH,
                                             '//*[@id="captcha"]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[2]')
 geetest_ques_tips_tag.screenshot('geetest_ques_tips.png')
 
+# 识别
+ocr = ddddocr.DdddOcr(show_ad=False)
+word = ocr.classification(geetest_ques_tips_tag.screenshot_as_png)
+print(f'要识别的文字：{word}')
 # 5、背景geetest_bg
 geetest_bg_tag = driver.find_element(By.CLASS_NAME, 'geetest_bg')
 geetest_bg_tag.screenshot('geetest_bg.png')
