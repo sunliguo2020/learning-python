@@ -1,0 +1,268 @@
+
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>登录-修改版</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <link rel="icon" href="//www.elongstatic.com/common/pic/favicon.ico?t=201411070740" type="image/x-icon"/>
+   <!--  <link rel="stylesheet" rev="stylesheet" href="/css/common-css/EL_common.css" type="text/css" media="all" /> -->
+<link rel="stylesheet" type="text/css"
+      href="/passport/css/common-css/EL_common.css">
+<link rel="stylesheet" type="text/css"
+      href="/passport/css/common-css/myelong_login_2016.css">
+<script defer src='https://jy.17u.cn/recaptcha/api.js?project_id=online.java.weblogin&timestamp=1706361089658' ></script>
+<script type="text/javascript">
+    window.projectId = "online.java.weblogin";
+</script>
+<style>
+    .grecaptcha-badge {
+        display:none;
+    }
+    .blur::input-placeholder{
+        color:#999;
+    }
+</style>
+    <!--<script type="text/javascript" src="//m.elongstatic.com/static/webapp/savior/build/savior.js"></script>-->
+</head>
+<body>
+
+
+
+<div data-bind="jyValid" data-callback="jySuccess" id="online.java.weblogin" class="g-recaptcha" data-badge="inline" data-size="invisible" data-appid="277c4fb0c3e111dfc3efc8589f79914b" data-qq_007="2055248442" >
+</div>
+<button id="jyValid" type="button" style="display: none"></button>
+<div class="head">
+    <div class="logo" id="RedirectHomeSite"></div>
+</div>
+
+<div class="loginbox">
+
+        <div class="switch_btn" id="switchCodeLogin">
+            <a class="a_one" style="top: 0px; left: 0px;" method="QrCodeLogin"></a>
+            <a class="a_two" style="top: 0px; left: 50px;" method="NormalLogin"></a>
+        </div>
+        <div class="pic">
+            <a href="http://www.elong.com/promotion/web/elong_subject/index.html" target="_blank">
+                <img src="/passport/img/banner.jpg" width="620" height="350" alt="常住30天"/>
+            </a>
+        </div>
+
+        <!-- 扫码登录 -->
+            <div id="CodeLogin" class="formbox phonebox" style="display: none; overflow: hidden;">
+
+                <!-- 扫二维码 -->
+                <div class="scanning_code" style="display: block;" id="SearchCodeStep">
+                    <h5>请使用艺龙APP扫码登录</h5>
+
+                    <div class="pic_code">
+                        <img id="qrImg" src="/passport/qrCode?sessionGuid=6d9342d2-3811-4dd6-a7b2-ac473164f97e" width="185" height="185">
+                    </div>
+                    <div class="pic_code2" style="left: 0px; display: none; position: absolute; top: 85px;">
+                        <div class="animate_wrap" style="width: 100px; height: 100px; top: 0px; display: block">
+                            <img alt="" src="/passport/img/show_anima.png">
+                        </div>
+                    </div>
+
+                    <div class="e_code_help" id="help">
+                        <a class="mt10" href="javascript:;" method="showHelp">使用帮助</a>
+                    </div>
+                </div>
+                <!-- 扫二维码 -->
+
+                <!--扫码成功-->
+                <div class="scanning_code" style="display: none;" id="ScanSuccess">
+                    <div class="pic_code3">
+                        <h5>
+                            <i></i>扫描成功
+                        </h5>
+                    </div>
+                    <div class="e_code_help">
+                        <p>点击手机上的确认按钮即可登录</p>
+                    </div>
+                </div>
+                <!-- 扫码成功 -->
+
+                <!--扫码超时-->
+                <div class="scanning_code" style="display: none;" id="ScanTimeout2">
+                    <div class="pic_code4">
+                        <h5>
+                            <i></i>操作超时
+                        </h5>
+                    </div>
+                    <div class="e_code_help e_code_help2" id="RefreshCode">
+                        <p>点击刷新二维码，请重新登录</p>
+                        <a href="javascript:;" method="RefreshQrCode">刷新二维码</a>
+                    </div>
+                </div>
+                <!--扫码超时-->
+
+            </div>
+    <!-- 扫码登录 -->
+
+    <div id="NoCodeLogin" class="formbox phonebox errorBox" style="display: block">
+       <!-- 
+                <div id="HKTip" class="el-poptip"
+                     style="width: 265px; position: absolute; left: 108px; top: -28px;">
+                    <div class="el-poptip-shadow">
+                        <div class="el-poptip-container">
+
+                            <div class="el-poptip-arrow el-poptip-arrow-7">
+                                <em>◆</em> <span>◆</span>
+                            </div>
+
+                            <a href="javascript:;" class="el-poptip-close"
+                               onclick="$('#HKTip').hide()">×</a>
+
+                            <p>港澳台手机用户请使用“手机动态密码登录”</p>
+                        </div>
+
+                    </div>
+                </div>
+            -->
+            <div class="nav_login_user" id="LoginTypeChoose">
+                <label>
+                    <input name="loginType" type="radio" method="normalLogin" checked="checked">
+普通登录                </label>
+                <label>
+						<span>
+						<input name="loginType" type="radio" method="dynamicLogin" >手机动态密码登录
+						</span>
+                </label>
+            </div>
+        <div id="ElongLogin" language="cn">
+            <div class="inputbox login_id">
+                        <span class="icon"></span>
+                        <input class="blur" type="text" id="UserName" method="ValidateUserName"
+                               value='用户名/卡号/手机号/邮箱' language="cn"/>
+
+                <div class="input_tip" name="accounterrortip" style="display: none;">您输入的用户名和密码不匹配，请重新输入！</div>
+            </div>
+
+            <div class="inputbox login_pw" id="password_tip">
+                <span class="icon"></span><input class="blur" id="password_input" type="text" value='密码'
+                                                 method="ValidatePassword">
+            </div>
+            <div class="inputbox login_pw" style="display:none" id="input_password">
+                <span class="icon"></span><input class="blur" type="password" method="PassWord" id="PassWord">
+            </div>
+            <!--
+            <div class="inputbox login_code err" id="ValidateCodeDiv" style="display: block;">
+                <input class="blur" id="ValidateCode" type="text" value="验证码" method="CheckValidateCode" >
+                <img src='/passport/getValidateCode' method="ChangeVidateCode" alt="" style="width: 65px;"/>
+                <a href="#?" id="ValidateHref" method="HrefVlidateCode">换一张</a>
+
+                <div class="input_tip input_tip_yzm" id="validate_result" style="display: none">您输入的验证码不正确                </div>
+            </div>
+            -->
+
+            <div class="forget">
+					<span>
+						  <span class="icon off" id="pageinputRememberMe" name="rememberMe"></span>
+						  <span id="remberMeText">两个月内免登录</span>
+					</span>
+
+                <a href="https://secure.elong.com/passport/newSecurePassWord">忘记密码</a>
+            </div>
+
+            <a class="loginbtn" href="#?" usable="true" method="LoginSubmit">登录</a>
+            <div style="margin: 20px 0;color: #999">登录即代表您已阅读并同意<a target="_blank" style="color: #999" href="https://m.elongstatic.com/privacy/policy/202302271528LcvIL/privacy-main.html">《服务协议及隐私政策》</a></div>
+         <!--   <div class="login_style">
+                <span>使用其它账号登录：</span>
+                &lt;!&ndash; <a class="icon s_weixin" href="#?" method="hrefWeixin">微信</a> &ndash;&gt;
+                <a class="icon s_qq" href="#?" method="hrefQQ">qq</a>
+                <a class="icon s_sina" href="#?" method="hrefSina">新浪微博</a>
+                <a class="icon s_zfb" href="#?" method="hrefAlipay">支付宝</a>
+                <a class="icon s_renren" href="#?" method="hrefRenRen">人人</a>
+            </div>-->
+
+        </div>
+            <div id="DynamicLogin" style="display: none"  >
+                <div class="inputbox login_id">
+                    <div class="phonenum" method="showPhoneTypes">
+                            <span id="PhoneType" value="1" method="showPhoneTypes">中国大陆+86</span>
+                        <ul id="PhoneTypeList" style="display: none;"></ul>
+                    </div>
+
+                    <input id="userPhone" class="blur phonenum_input" type="text"
+                           value='请输入手机号' method="ValidateUserPhone"/>
+
+                    <div id="UserPhoneErroTip" class="input_tip" style="display: none"></div>
+                </div>
+            <!--
+            <div class="inputbox login_code err" id="VCodeDiv" style="display: block;">
+                <input class="blur" id="ValidateCode_Dynamic" type="text" value="验证码"
+                       method="CheckValidateCode_Dynamic" language="cn">
+                <img src='/passport/getValidateCode' id="ValidateCodeImg" method="ChangeVidateCode_Dynamic"
+                     style="width: 65px;"/>
+                <a href="#?" method="HrefVlidateCode_Dynamic">换一张</a>
+
+                <div class="input_tip input_tip_yzm" id="validateResult" style="display: none">您输入的验证码不正确                </div>
+            </div>
+            -->
+                <div class="inputbox phone_pw">
+                    <input id="input_DynamicCode" class="blur" type="text"
+                           value='输入动态密码' method="ValidateDynamicCode"/>
+                    <a class="btn" id="GetDynamicCode" useful="true" method="GetDynamicCode">获取动态密码</a>
+
+                    <div id="DynamicCodeErroTip" class="input_tip" style="display: none"></div>
+                </div>
+
+
+
+                <div class="forget">
+						<span>
+							<span class="icon off" id="remember4Dynamic" name="rememberMe"></span>
+							<span id="remember4DynamicTxt">记住我</span>
+						</span>
+                </div>
+
+                <a class="loginbtn" href="#?" usable="true" method="DynamicLoginSubmit">登录</a>
+
+                 <!--bind phone-->
+			    <div class="bind-phone">
+			    		<p class="mt20">用户未绑定手机号？</p>
+			    		<div class="bind-phonetip" style="display:none;">
+			    			<p class="tip1"><i></i>未注册的用户，请先注册</p>
+			    			<p class="tip2"><i></i>已经注册但仍未绑定手机号的用户，请拨打<a>400-666-1166</a>联系客服绑定手机。</p>
+			    		</div>
+			    </div>
+			    <!--bind phone-->
+            </div>
+    </div>
+
+</div>
+
+    <div class="register_tip"><a href="register_cn.html" title="立即注册">立即注册<i></i></a></div>
+
+<!--底部-->
+<div class="footer">
+    <p class="mobile">
+        <a class="iphone" href="http://promotion.elong.com/index/cn/2016/elong_app_down/index.html" target="_blank"><span
+                class="icon"></span>iPhone / iPad</a>
+        <a href="http://promotion.elong.com/index/cn/2016/elong_app_down/index.html" target="_blank" class="android"><span
+                class="icon"></span>Android</a>
+    </p>
+
+    <p>
+        <a href="http://promotion.elong.com/hotel/cn/elongagent/elongagent.html">代理合作</a>|
+        <a href="http://promotion.elong.com/web/adservice/adservice.html">广告服务</a>|
+        <a href="http://promotion.elong.com/web/contact/contact.html">联系我们</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;© 2000 - 2021 北京艺龙信息技术有限公司, eLong, Inc or its affiliates. All Rights Reserved.
+    </p>
+    <input type="hidden" id="loginLevel" value="2"/>
+</div>
+<!--底部-->
+
+
+     <script type="text/javascript">var LoginController={nextUrl:"https:\/\/www.elong.com\/",targetUrl:null,language:"cn",existGuid:false,callBackName:"jsonpCallback",regBoxDes:{"RegBox_Registing":"\u6CE8\u518C\u4E2D","SmsCodeSendFail":"\u9A8C\u8BC1\u7801\u53D1\u9001\u5931\u8D25\uFF0C\u70B9\u51FB\u91CD\u65B0\u83B7\u53D6","RegBox_Mobile_Des":"\u624B\u673A\u53F7","RegBox_SmsCode_Error":"\u77ED\u4FE1\u9A8C\u8BC1\u7801\u9519\u8BEF\uFF0C\u8BF7\u91CD\u65B0\u8F93\u5165","RegBox_Email_Null":"\u90AE\u7BB1\u6709\u8BEF","RegBox_Mobile_Error":"\u8BF7\u8F93\u5165\u6B63\u786E\u7684\u624B\u673A\u53F7","SmsCode_ReachCountLimit":"\u60A8\u5DF2\u8FBE\u5230\u4ECA\u5929\u83B7\u53D6\u9A8C\u8BC1\u7801\u7684\u6700\u9AD8\u6B21\u6570","RegBox_MobileError":"\u624B\u673A\u53F7\u5DF2\u88AB\u4F7F\u7528\uFF0C\u8BF7\u66F4\u6362\u5176\u4ED6\u624B\u673A\u53F7","lang":"cn","RegBox_Password_LengthError":"\u5BC6\u7801\u57286-30\u4E2A\u5B57\u7B26\u6216\u6570\u5B57\u5185","RegBox_BothPassword_Error":"\u4E24\u6B21\u8F93\u5165\u5BC6\u7801\u4E0D\u4E00\u81F4","RegValidateMobile_HadReg_Error":"\u624B\u673A\u53F7\u5DF2\u88AB\u4F7F\u7528\uFF0C\u8BF7\u66F4\u6362\u5176\u4ED6\u53F7\u7801\u3002","SmsCode_GetSmsAfter":"\u79D2\u540E\u91CD\u65B0\u83B7\u53D6","RegBox_Password_Null":"\u5BC6\u7801\u4E0D\u80FD\u4E3A\u7A7A","RegBox_Validate_Error":"\u8BF7\u8F93\u5165\u6B63\u786E\u9A8C\u8BC1\u7801","RegBox_Mobile_Null":"\u8BF7\u8F93\u5165\u624B\u673A\u53F7","SmsCode_GetSmsCodeDes":"\u83B7\u53D6\u77ED\u4FE1\u9A8C\u8BC1\u7801","SmsCodeDisabled":"\u9A8C\u8BC1\u7801\u5DF2\u5931\u6548\uFF0C\u8BF7\u91CD\u65B0\u83B7\u53D6","RegBox_Mobile_HagReg":"\u8BE5\u624B\u673A\u53F7\u5DF2\u88AB\u6CE8\u518C","RegBox_SixOr30Char":"6-30\u4E2A\u5B57\u7B26\u6216\u6570\u5B57\u7EC4\u6210\uFF0C\u8BF7\u91CD\u65B0\u8F93\u5165","RegBox_SmsCode_Null":"\u8BF7\u8F93\u5165\u77ED\u4FE1\u9A8C\u8BC1\u7801","RegBox_Regist_Now":"\u7ACB\u5373\u6CE8\u518C","RegValidateMobile_Input_Error":"\u8BF7\u8F93\u5165\u6B63\u786E\u7684\u624B\u673A\u53F7\u3002","RegSystemDefault":"\u7CFB\u7EDF\u7E41\u5FD9\uFF0C\u8BF7\u7A0D\u540E\u518D\u8BD5\uFF01","RegBox_MobileAndEmail_Null":"\u90AE\u7BB1\/\u624B\u673A\u53F7","RegBox_Password_Similar":"\u5BC6\u7801\u4E0E\u5DF2\u5F55\u5165\u7684\u624B\u673A\u53F7\u6216\u90AE\u7BB1\u76F8\u4F3C","RegBox_Validate_Null":"\u8BF7\u8F93\u5165\u56FE\u5F62\u9A8C\u8BC1\u7801","SmsCodeOutOfDate":"\u9A8C\u8BC1\u7801\u5DF2\u5931\u6548\uFF0C\u8BF7\u91CD\u65B0\u83B7\u53D6","SmsCode_MultiPhone":"\u5BF9\u4E0D\u8D77\uFF0C\u60A8\u7684\u624B\u673A\u53F7\u7ED1\u5B9A\u591A\u4E2A\u827A\u9F99\u8D26\u53F7\uFF0C\u8BF7\u66F4\u6362\u624B\u673A\u53F7","RegBox_RePassword_Null":"\u8BF7\u91CD\u65B0\u8F93\u5165\u5BC6\u7801","SmsCode_OtherError":"\u51FA\u73B0\u5176\u4ED6\u9519\u8BEF\uFF0C\u8BF7\u91CD\u65B0\u83B7\u53D6","RegBox_Validate_Des":"\u9A8C\u8BC1\u7801","RegBox_EmailError":"\u90AE\u7BB1\u5DF2\u88AB\u4F7F\u7528\uFF0C\u8BF7\u66F4\u6362\u5176\u4ED6\u90AE\u7BB1","SmsCodeTimeLimit":"\u4E00\u5206\u949F\u5185\u83B7\u53D6\u9A8C\u8BC1\u7801\u592A\u9891\u7E41\uFF0C\u8BF7\u7A0D\u540E\u83B7\u53D6","SmsCodeInputError":"\u9A8C\u8BC1\u7801\u8F93\u5165\u9519\u8BEF"}};var pageController=LoginController;</script> 
+    <script type="text/javascript" src="/passport/js/common-js/jy/jquery1.8.3.min.js"></script>
+<!--<script src="https://sec.ly.com/fp/index.js?v=0131"></script>-->
+<!-- <script  type="text/javascript" src="//file.40017.cn/ysrc/duhurisk.min.js?v=2024012721"></script> -->
+<script type="text/javascript" defer src="/passport/js/common-js/require_jy.js" data-main="/passport/js/login/login.js?vs=202107095&timestamp=1706361089658"></script>
+
+    </body>
+</html>
