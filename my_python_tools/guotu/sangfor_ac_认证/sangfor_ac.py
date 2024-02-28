@@ -20,6 +20,7 @@ Cookie: Sessionid=3243203828-1; ac_login_info=passwork
 opr=pwdLogin&userName=%E6%9E%97%E8%90%8D&pwd=zrzy%402021&rememberPwd=1
 """
 import requests
+import json
 
 ac_url = 'http://1.1.1.3/ac_portal/login.php'
 post_data = {
@@ -28,5 +29,7 @@ post_data = {
     "pwd": "zrzy@2021",
     "rememberPwd": "1"
 }
-req = requests.post(ac_url,data=post_data)
+req = requests.post(ac_url, data=post_data)
 print(req.text.encode('utf-8'))
+print(json.loads(req.text))
+# print(req.json())
