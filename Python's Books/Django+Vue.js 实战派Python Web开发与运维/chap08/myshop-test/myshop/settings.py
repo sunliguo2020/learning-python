@@ -31,12 +31,11 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',  # 权限管理模块
-    'django.contrib.contenttypes', # 内容类型，用于关联模型
+    'django.contrib.contenttypes',  # 内容类型，用于关联模型
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'app6',
     'app8',
 ]
 
@@ -122,4 +121,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'app6.MyUser'
+# AUTH_USER_MODEL = 'app6.MyUser'

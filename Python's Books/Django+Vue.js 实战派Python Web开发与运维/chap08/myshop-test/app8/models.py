@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from app6.models import MyUser
 from django.db import models
 
 
@@ -42,7 +41,7 @@ class Goods(models.Model):
     status = models.IntegerField(default=0, choices=STATUS)
     main_img = models.ImageField(verbose_name='商品主图', blank=True, null=True, upload_to='goods/images/')
     is_recommend = models.BooleanField(default=False, verbose_name="是否推荐")
-    user = models.ForeignKey(MyUser, blank=True, null=True, verbose_name="用户", on_delete=models.DO_NOTHING)
+    # user = models.ForeignKey(MyUser, blank=True, null=True, verbose_name="用户", on_delete=models.DO_NOTHING)
     createDate = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
 
     def __str__(self):

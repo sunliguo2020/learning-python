@@ -18,16 +18,18 @@ class GoodsCategorySerializer(serializers.Serializer):
 class GoodsSerializer(serializers.Serializer):
     name = serializers.CharField(required=True, max_length=100)
     # category = serializers.CharField(required=True, max_length=100)
-    category = GoodsCategorySerializer(required=False, read_only=True)
+    # category = GoodsCategorySerializer(required=False, read_only=True)
     market_price = serializers.DecimalField(max_digits=8, decimal_places=2)
     price = serializers.DecimalField(max_digits=8, decimal_places=2)
 
     # 对应POST请求，相当于新增数据。
+    # 前端提交的数据全部放在validated_data中。
     def create(self, validated_data):
-        print(type(validated_data), validated_data)
+        print('GoodsSerializer中', type(validated_data), validated_data)
         return Goods.objects.create(**validated_data)
 
     # 对应PUT请求，相当于修改数据。
+    # instance 代表当前修改的实例对象，
     def update(self, instance, validated_data):
         print(type(validated_data), validated_data)
         instance.name = validated_data.get("name")

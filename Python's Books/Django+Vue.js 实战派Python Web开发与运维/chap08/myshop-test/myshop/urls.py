@@ -15,16 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app6 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('reg/', views.user_reg),  # 访问路由，指定视图函数
-    path('login/', views.user_login),
-    path('user_reg/', views.myuser_reg),
-    path('myuser_login/', views.myuser_login, name='app6_myuser_login'),
-    path('myuser_logout/', views.myuser_logout, name='app6_myuser_logout'),
-    path('index/',views.user_index),
-    path('app6/test/',views.test),
-    path('app8/',include('app8.urls')),
+    path('app8/', include('app8.urls')),
 ]

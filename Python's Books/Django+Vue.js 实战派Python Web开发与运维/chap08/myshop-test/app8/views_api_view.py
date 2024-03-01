@@ -13,6 +13,7 @@ from .models import Goods
 from .serializers import GoodsSerializer
 
 
+# 允许以GET POST PUT DELETE 方式请求视图函数
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def GoodsList(request, *args, **kwargs):
     if request.method == "GET":
