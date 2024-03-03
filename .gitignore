@@ -131,4 +131,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/爬虫/web逆向/day01/node_modules/
+
+**/node_modules/
+
