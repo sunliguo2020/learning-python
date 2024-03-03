@@ -1,0 +1,88 @@
+//  (_0x16dafc['data']['result'] = JSON['parse'](_0x1683d3['a']['decipher'](_0x16dafc['data']['result'])))
+
+
+const jsdom = require("jsdom");
+const {JSDOM} = jsdom;
+const dom = new JSDOM('<!DOCUMENT html><p>Test</p>')  //实例化
+window = dom.window
+document = window.document
+navigator = window.navigator
+
+function _0x300484(_0x17a9d3) {
+    let _0x1403b1, _0x491f1a, _0x58689c = '';
+    for (var _0x2a4fe4 = 0x0; _0x2a4fe4 < _0x17a9d3['length'];)
+        _0x1403b1 = _0x17a9d3[_0x2a4fe4],
+            _0x491f1a = 0x0,
+            _0x1403b1 >>> 0x7 === 0x0 ? (_0x58689c += String['fromCharCode'](_0x17a9d3[_0x2a4fe4]),
+                _0x2a4fe4 += 0x1) : 0xfc === (0xfc & _0x1403b1) ? (_0x491f1a = (0x3 & _0x17a9d3[_0x2a4fe4]) << 0x1e,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x1]) << 0x18,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x2]) << 0x12,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x3]) << 0xc,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x4]) << 0x6,
+                _0x491f1a |= 0x3f & _0x17a9d3[_0x2a4fe4 + 0x5],
+                _0x58689c += String['fromCharCode'](_0x491f1a),
+                _0x2a4fe4 += 0x6) : 0xf8 === (0xf8 & _0x1403b1) ? (_0x491f1a = (0x7 & _0x17a9d3[_0x2a4fe4]) << 0x18,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x1]) << 0x12,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x2]) << 0xc,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x3]) << 0x6,
+                _0x491f1a |= 0x3f & _0x17a9d3[_0x2a4fe4 + 0x4],
+                _0x58689c += String['fromCharCode'](_0x491f1a),
+                _0x2a4fe4 += 0x5) : 0xf0 === (0xf0 & _0x1403b1) ? (_0x491f1a = (0xf & _0x17a9d3[_0x2a4fe4]) << 0x12,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x1]) << 0xc,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x2]) << 0x6,
+                _0x491f1a |= 0x3f & _0x17a9d3[_0x2a4fe4 + 0x3],
+                _0x58689c += String['fromCharCode'](_0x491f1a),
+                _0x2a4fe4 += 0x4) : 0xe0 === (0xe0 & _0x1403b1) ? (_0x491f1a = (0x1f & _0x17a9d3[_0x2a4fe4]) << 0xc,
+                _0x491f1a |= (0x3f & _0x17a9d3[_0x2a4fe4 + 0x1]) << 0x6,
+                _0x491f1a |= 0x3f & _0x17a9d3[_0x2a4fe4 + 0x2],
+                _0x58689c += String['fromCharCode'](_0x491f1a),
+                _0x2a4fe4 += 0x3) : 0xc0 === (0xc0 & _0x1403b1) ? (_0x491f1a = (0x3f & _0x17a9d3[_0x2a4fe4]) << 0x6,
+                _0x491f1a |= 0x3f & _0x17a9d3[_0x2a4fe4 + 0x1],
+                _0x58689c += String['fromCharCode'](_0x491f1a),
+                _0x2a4fe4 += 0x2) : (_0x58689c += String['fromCharCode'](_0x17a9d3[_0x2a4fe4]),
+                _0x2a4fe4 += 0x1);
+    return _0x58689c;
+}
+
+
+function _0x476691(_0x4eff8a) {
+    let _0x5f0aa7 = [-0x6f, 0x34, 0x5b, 0x41, -0x41, 0x74, 0x77, 0x6a, -0x79, -0x52, -0x5, 0x50, 0x33, 0x61, 0x44, -0x53, -0x70, -0x33, 0x17, -0x2e, -0x22, -0x72, -0x37, -0xb, -0x7f, 0x5a, 0x21, 0x16, -0x1f, 0x32, -0x11, 0x14, -0x2c, 0xf, -0x5e, -0x7b, 0x76, -0x17, -0x3d, 0x72, 0x47, -0x68, -0x7e, -0x75, -0x51, -0x36, -0x12, -0x6e, -0x4, -0x5f, -0x5b, 0x5e, -0x50, -0xe, 0x78, 0x69, 0x55, 0x68, -0x56, -0x6c, 0x43, 0x19, 0x65, 0x6c, 0x10, -0x69, 0x6f, -0xa, 0x75, -0x49, 0x4d, 0x59, -0x1d, -0x62, -0x44, 0x70, 0x6b, -0x1, 0x56, 0x79, 0x58, -0x65, -0x7c, 0x45, -0x1e, -0x8, -0x71, -0x4a, -0x76, 0x39, -0x19, 0xc, -0x73, -0x6a, 0x5f, 0x7f, 0x54, 0x7c, -0x66, -0x1c, 0x49, 0x2b, -0x3c, 0x1c, 0x2e, 0x73, 0x1e, 0x7a, -0x4b, 0x7d, -0x43, -0x4d, 0x3, -0x7, -0x35, -0xd, 0x35, 0x4e, -0x48, 0x1, 0xb, -0x47, -0x27, -0x4f, -0x3, 0x13, 0x29, 0x7e, -0x2b, -0x7d, -0x1b, 0x22, 0x3f, 0x8, 0x48, -0x23, -0x29, -0x3f, 0x3c, -0x18, 0x66, 0x2f, -0x77, -0x67, -0x16, 0x2d, 0x3b, 0x40, -0x60, 0x31, 0x53, -0x6b, -0x78, -0x39, -0x46, 0x0, -0x26, -0x54, -0x28, 0x18, 0xe, 0x30, 0x1d, 0x2c, -0x24, -0x2f, 0x38, -0x5c, 0x26, 0x25, 0x4, -0x32, 0x67, 0xa, -0x59, 0x37, 0x71, -0x1a, 0x6e, 0x36, 0x24, -0x14, -0x4e, -0xc, -0x74, 0x46, -0x25, 0x5, -0x3e, -0x4c, -0x30, -0x40, 0x4f, 0x64, 0x28, 0x6, -0x3a, -0x5a, -0x13, -0x9, 0x27, 0x5d, -0x63, 0x15, 0x7, 0x1a, -0x2, 0x1b, -0x2d, 0x51, 0x3a, -0x7a, 0x4c, -0x42, 0x2, 0x5c, -0x2a, 0x62, -0x10, 0x9, 0x3d, 0x3e, -0xf, 0x63, -0x15, 0x1f, -0x38, 0x57, 0x11, -0x34, -0x45, -0x21, -0x3b, -0x55, 0x42, 0x4a, 0x12, -0x5d, -0x80, -0x57, -0x20, 0x2a, 0x20, -0x58, 0x6d, 0x60, 0xd, -0x6, 0x4b, -0x64, -0x31, 0x23, -0x61, 0x52, -0x6d, 0x7b]
+        , _0x48065b = 0x0
+        , _0x5274e8 = 0x0
+        , _0x86b937 = 0x0
+        , _0x114065 = new Array();
+    for (let _0x4aff5a = 0x0; _0x4aff5a < _0x4eff8a['length']; _0x4aff5a++) {
+        _0x48065b = _0x48065b + 0x1 & 0xff,
+            _0x5274e8 = (0xff & _0x5f0aa7[_0x48065b]) + _0x5274e8 & 0xff;
+        const _0x3c8821 = _0x5f0aa7[_0x48065b];
+        _0x5f0aa7[_0x48065b] = _0x5f0aa7[_0x5274e8],
+            _0x5f0aa7[_0x5274e8] = _0x3c8821,
+            _0x86b937 = (0xff & _0x5f0aa7[_0x48065b]) + (0xff & _0x5f0aa7[_0x5274e8]) & 0xff,
+            _0x114065['push'](_0x4eff8a[_0x4aff5a] ^ _0x5f0aa7[_0x86b937]);
+    }
+    return _0x114065;
+}
+
+
+function _0x4176cc(_0x529333) {
+    const _0x2bc465 = window['atob'](_0x529333)
+        , _0x5384be = new Int8Array(_0x2bc465['length']);
+    for (let _0x41c9e8 = 0x0; _0x41c9e8 < _0x2bc465['length']; _0x41c9e8++)
+        _0x5384be[_0x41c9e8] = _0x2bc465['charCodeAt'](_0x41c9e8);
+    return _0x5384be;
+}
+
+// _0x1683d3['a']['decipher'] 解密函数
+function _0x58b5da(_0x512f6f) {
+    return _0x300484(_0x476691(_0x4176cc(_0x512f6f)));
+}
+
+// data = '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'
+
+data = "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"
+console.log(_0x58b5da(data))
+
+function jiemi(data) {
+    return _0x58b5da(data)
+}
+
