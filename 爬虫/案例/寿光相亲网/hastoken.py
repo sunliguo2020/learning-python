@@ -47,5 +47,7 @@ encrypted_b64 = base64.b64encode(encrypted).decode('utf-8')
 
 def r_hashtoken():
     return encrypted_b64
+
+
 if __name__ == '__main__':
-    pass
+    print(r_hashtoken())

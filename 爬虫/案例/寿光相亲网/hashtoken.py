@@ -5,6 +5,7 @@
  @Email : sunliguo2006@qq.com
 """
 import base64
+import datetime
 
 import rsa
 
@@ -17,6 +18,7 @@ def RsaEncrypt(publickey, data):
     return info
 
 
+# 公钥
 PublicKey = '''-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlXTJX5BgW2/oJRf3kTo7XZ3q7
 aOnqN832+hkKe/xjKLKHnMTv+td/0Zsw1VkczWvodtLKsjJnrjiIx+dRIjLz2qYC
@@ -27,6 +29,15 @@ BprA0vZPz1SeTjmllQIDAQAB
 
 def r_hashtoken(data):
     return RsaEncrypt(PublicKey, data)
+
+
+def header_hashtoken():
+    """
+    返回当前时间戳RAS加密后的数据
+    @return:
+    """
+    timestamp = str(datetime.datetime.now().timestamp() * 1000)
+    return RsaEncrypt(PublicKey, timestamp)
 
 
 if __name__ == '__main__':
