@@ -131,6 +131,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-**/node_modules/
-
+/爬虫/web逆向/day01/node_modules/
+Python's Books/Django+Vue.js 实战派Python Web开发与运维/chap08/myshop-test/app8/migrations/0003_remove_goods_user_alter_goods_createdate.py
+Python's Books/Django+Vue.js 实战派Python Web开发与运维/chap08/myshop-test/app8/migrations/0004_alter_goods_createdate.py

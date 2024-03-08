@@ -29,7 +29,8 @@ class GoodsDetailView(mixins.RetrieveModelMixin,
                       mixins.DestroyModelMixin,
                       generics.GenericAPIView):
     queryset = Goods.objects.all()
-    serializer_class = GoodsSerializer
+    # serializer_class = GoodsSerializer
+    serializer_class = GoodsModelSerializer
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

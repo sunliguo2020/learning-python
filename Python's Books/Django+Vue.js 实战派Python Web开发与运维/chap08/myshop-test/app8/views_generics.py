@@ -5,6 +5,7 @@
 @Created on: 2023-10-29 11:05
 """
 from rest_framework import generics
+from rest_framework.viewsets import ModelViewSet
 
 from .models import Goods
 from .serializers import GoodsModelSerializer
@@ -18,3 +19,5 @@ class GoodsView(generics.ListCreateAPIView):
 class GoodsDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Goods.objects.all()
     serializer_class = GoodsModelSerializer
+
+ModelViewSet

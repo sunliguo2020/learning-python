@@ -16,6 +16,7 @@ class GoodsCategorySerializer(serializers.Serializer):
 
 
 class GoodsSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(required=True, max_length=100)
     # category = serializers.CharField(required=True, max_length=100)
     # category = GoodsCategorySerializer(required=False, read_only=True)
