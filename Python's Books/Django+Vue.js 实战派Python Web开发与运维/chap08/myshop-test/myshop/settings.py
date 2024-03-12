@@ -35,11 +35,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework.authentication',
+    # 'rest_framework.authtoken',
+    'corsheaders',
     'rest_framework',
     'app8',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     # 'app6.middle.mymiddle.AuthMiddleware1',
     # 'app6.middle.mymiddle.AuthMiddleware2',
     # 'app6.middle.permmiddleware.PermissionMiddleWare',
@@ -123,6 +128,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AUTH_USER_MODEL = 'app6.MyUser'
 
-FRST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'app8.customexception.custom_exception_handler',
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSESS': (
+        # 配置验证方式为JWT验证
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 实现Token认证
+        'rest_framework_simplejwt.authentication.TokenAuthentication',
+    ),
+    # 'AutoSchema' object has no attribute 'get_link'
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
+# JWT_AUTH = {
+#     # 过期时间
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
+#     # Token的头为
+#     'JWT_AUTH_HEADER_PREFIX': 'JWT',
+#     # 不允许刷新
+#     'JWT_ALLOW_REFRESH': False,
+# }
+
+
+# 跨域
+CORS_ALLOW_CREDENTIALS = True  # 允许跨域是携带Cookie，默认为False
+CORS_ORIGIN_ALLOW_ALL = True    # 指定所有域名都可以访问后端接口，默认为Flase
