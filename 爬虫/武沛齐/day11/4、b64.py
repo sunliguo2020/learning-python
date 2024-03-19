@@ -9,6 +9,7 @@
 import base64
 
 userAccount = 'wupeiqi'
+print(userAccount.encode('utf-8'))
 userAccount_b64 = base64.b64encode(userAccount.encode('utf-8'))
 print(userAccount_b64)
 
