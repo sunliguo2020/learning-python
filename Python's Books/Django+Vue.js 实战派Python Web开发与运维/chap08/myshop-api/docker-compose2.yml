@@ -1,0 +1,41 @@
+version: '3'
+services:
+    db:
+      image: 192.168.77.101/myshop/mysql:5.7.29
+      container_name: mysql
+      ports:
+        - "3306:3306"
+      expose:
+        - "3306"
+      environment:
+        - MYSQL_DATABASE=shop
+        - MYSQL_ROOT_PASSWORD=Aa_123456
+      command: [
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_general_ci',
+      ]
+    
+    myshop-api:
+      image: 192.168.77.101/myshop/myshop-api:1.0.0
+      container_name: myshop-api-1.0.0
+      command: /bin/bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn -c gunicorn.py myshop.wsgi:application"
+      ports:
+        - "8005:8005"
+      expose:
+        - "8005"
+      links:
+        - db:mydb
+      depends_on:
+        - db
+      restart: always
+    
+    nginx:
+      image: 192.168.77.101/myshop/nginx:1.21.1
+      container_name: nginx
+      ports:
+        - "85:85"
+      links:
+        - myshop-api:myweb
+      depends_on:
+        - myshop-api
+      restart: always

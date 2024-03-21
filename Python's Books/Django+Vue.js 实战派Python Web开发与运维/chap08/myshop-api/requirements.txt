@@ -1,0 +1,14 @@
+django_ckeditor==6.1.0
+Django==3.1.5
+djangorestframework_jwt==1.11.0
+djangorestframework==3.12.4
+pymysql==1.0.2
+django-filter==2.4.0
+django-cors-headers==3.6.0
+coreapi==2.3.3
+pillow==8.3.1
+gunicorn==20.1.0
+gevent==21.8.0
+drf-extensions==0.7.1
+django-rest-swagger==2.2.0
+django-prometheus==2.2.0

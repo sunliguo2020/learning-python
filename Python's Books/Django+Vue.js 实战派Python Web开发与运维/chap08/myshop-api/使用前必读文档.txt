@@ -1,0 +1,53 @@
+
+1、项目myshop-api包含第8.6章【实现商城系统的接口】的源代码。
+
+2、安装项目myshop-api所需的依赖包
+pip install -r requirements.txt
+
+3、运行项目myshop-api前，需要安装MYSQL数据库，具体参考第12章的12.2节。
+安装数据库后，需要修改myshop/settings.py文件，
+找到如下小节进行数据库信息的修改：
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'shop', #数据库名称，可以不用修改
+        'USER': 'root', #数据库用户
+        'PASSWORD': '123456',#数据库密码
+        'HOST': 'localhost',#这里修改成你的数据库主机host
+        'PORT': '3306',#端口
+
+4、项目myshop-api，默认使用数据库缓存。使用如下命令来创建数据表
+python manage.py createcachetable
+
+如果使用redis来缓存，需要安装redis，具体参考第10.4章节
+安装redis后，需要修改myshop/settings.py文件，
+找到如下小节进行修改,注释默认的数据库缓存。
+#CACHES={
+#    'default':{
+#        'BACKEND':'django.core.cache.backends.db.DatabaseCache',
+#        'LOCATION':'my_cache_table',
+#    }
+#}
+启用redis缓存(取消行前的注释)，并修改location节点中的ip信息。
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://localhost:6379",#修改ip
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD":"123456",#修改密码
+        }
+    }
+}
+
+4、执行迁移命令
+python manage.py makemigrations
+python manage.py migrate
+
+5、运行项目myshop-api
+python manage.py runserver
+
+6、项目myshop-api运行环境为python3.8.2 + Django3.1.5,切记。
+
+
+

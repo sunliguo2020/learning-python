@@ -1,0 +1,77 @@
+def projectName="myshop-api"
+pipeline {
+    agent any
+    stages {
+        stage('拉取代码'){
+            steps{
+                git credentialsId: '0d3fcd54-d261-499f-a815-86362dfac7c2', url: 'https://gitee.com/xjboy2018/myshop-api.git'
+            }
+        }
+
+        stage('代码质量分析'){
+            steps{
+                echo '代码分析'
+                withSonarQubeEnv(installationName:'Sonarqube_test',credentialsId: 'sonarqube_token') {
+                // some block
+                sh "/root/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/MyScanner/bin/sonar-scanner -Dsonar.projectKey=${projectName} -Dsonar.projectName=${projectName} -Dsonar.projectVersion=1.0 -Dsonar.sourceEncoding=UTF-8"
+                }
+            }
+        }
+        stage('代码质检'){
+            steps{
+                echo '代码质检'
+                //60分钟超时时间
+                //timeout(time: 1, unit: 'HOURS') {
+                    //等待5秒，防止插件卡住
+                //    sleep(8)
+                    //等待SonarQube返回质检结果
+                    //如果是OK则继续，否则报错并终止流水线
+                //    waitForQualityGate abortPipeline: true
+
+                //}
+            }
+        }
+        stage('构建') {
+            steps {
+                echo 'Building'
+                sh "cp -rf /root/.jenkins/workspace/myshop-api-build/ /home/yang/myshop-api"
+                sh "cd /home/yang/myshop-api"
+                sh "source activate && python manage.py makemigrations && python manage.py migrate &&  nohup python manage.py runserver 0.0.0.0:8002 >>manage.log 2>&1 &"
+            }
+        }
+        stage('单元测试') {
+            steps {
+                echo 'Testing'
+                sh "pytest -sq  /home/yang/myshop-api/pytest_test/calc_test.py --alluredir=${WORKSPACE}/allure-results"
+                sh "exit 0"
+            }
+        }
+        stage('部署') {
+            steps {
+                echo 'Deploying'
+                sshPublisher(publishers: 
+                [sshPublisherDesc(configName: '192.168.77.101', transfers: [
+                    sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /home/yang''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/myshop-api/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*/')
+                    ,sshTransfer(cleanRemote: false, excludes: '', execCommand: '''touch test''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/myshop-api/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*/')
+                ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false), 
+
+                sshPublisherDesc(configName: '192.168.77.102', transfers: [
+                    sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /home/yang''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/myshop-api/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*/')
+                    ,sshTransfer(cleanRemote: false, excludes: '', execCommand: '''touch test''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/myshop-api/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*/')
+                ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false),
+
+                sshPublisherDesc(configName: '192.168.77.103', transfers: [
+                    sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /home/yang''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/myshop-api/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*/')
+                    ,sshTransfer(cleanRemote: false, excludes: '', execCommand: '''touch test''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/myshop-api/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*/')
+                ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            }
+        }
+    }
+    post('results') {
+        always {
+            script{
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            }
+        }
+    }
+}

@@ -1,0 +1,4 @@
+django_ckeditor==6.1.0
+Django==3.1.5
+djangorestframework_jwt==1.11.0
+djangorestframework==3.12.4
