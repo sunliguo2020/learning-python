@@ -1371,7 +1371,7 @@ self = window
 
 entcrypt_v3 = window.loader(1514).ZP
 
-console.log(entcrypt_v3('1'))
+// console.log(entcrypt_v3('1'))
 
 // export  default  entcrypt_v3
 //导出函数
