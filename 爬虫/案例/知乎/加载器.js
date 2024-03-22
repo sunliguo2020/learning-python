@@ -10,6 +10,10 @@ const screen = window.screen
 const alert = window.alert
 
 self = window
+
+Math.random = function(){
+    return 0.5
+};
 !function (s) {
     "use strict";
     var e, a, c, d, f, b, t, r, o, n, i, l = {};

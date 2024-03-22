@@ -15,15 +15,15 @@ function get_tp(tt, tu) {
     }
 
     var tf = t4(tt);
-    console.log("tf", tf)
-    tp = [ta, tf, tu, false, null].filter(Boolean).join("+");
+    console.log("tf:", tf)
+    // tp = [ta, tf, tu, false, null].filter(Boolean).join("+");
+    tp = [ta, tf, tu].filter(Boolean).join("+");
 
     return tp
 }
 
 //md5
 const CryptoJS = require("crypto-js");
-
 
 const md5 = (aaa) => {
     return CryptoJS.MD5(aaa).toString();
@@ -35,9 +35,11 @@ const entcrypt_v3 = require('./加载器')
 
 // console.log(entcrypt_v3(md5(tp)))
 
-function x93(tt, tu) {
+function x96(tt, tu) {
     return '2.0_' + entcrypt_v3(md5(get_tp(tt, tu)))
 }
 
 tt = 'https://www.zhihu.com/api/v4/comment_v5/questions/616391683/root_comment?limit=10&offset=457158625_10644363034_0&order_by=score'
-console.log(x93(tt, 'ADDSD-j4lRePTsK721fRFrWpxQLGjfijbjo=|1697981461'))
+
+console.log('tp', get_tp(tt, 'ADDSD-j4lRePTsK721fRFrWpxQLGjfijbjo=|1697981461'))
+console.log('x96',x96(tt, 'ADDSD-j4lRePTsK721fRFrWpxQLGjfijbjo=|1697981461'))

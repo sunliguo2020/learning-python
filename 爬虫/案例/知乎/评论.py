@@ -4,6 +4,8 @@
 @contact: QQ376440229
 @Created on: 2024-03-19 13:16
 """
+import pprint
+
 import execjs
 import fake_useragent
 import requests
@@ -12,11 +14,14 @@ ua = fake_useragent.UserAgent()
 
 
 def get_x96(tt, tu):
+    print('tt', tt)
+    print('tu', tu)
     with open('demo5.js', encoding='utf-8') as fp:
         js_content = fp.read()
 
     jj = execjs.compile(js_content)
-    return jj.call('x93', tt, tu)
+
+    return jj.call('x96', tt, tu)
 
 
 session = requests.session()
@@ -72,9 +77,6 @@ response = session.get(
     headers=headers,
 )
 
-if response.cookies.get_dict():        #保持cookie有效
-    session.cookies.update(response.cookies)
-
 result = response.json()
 print(result)
 print(response.cookies)
@@ -86,13 +88,14 @@ print('下一页:', next_url)
 
 if next_url:
     # print(session.cookies)
-    for item in session.cookies:
-        print(item)
+    # for item in session.cookies:
+    #     print(item)
     # 更新header的 x-zse-96值
     print("cookies['d_co']", cookies.get('d_c0'))
     x96 = get_x96(next_url, cookies.get('d_c0'))
     headers['x-zse-96'] = x96
-    print("headers", headers.get('x-zse-96'))
+    print("headers,x-zse-96", headers.get('x-zse-96'))
+    pprint.pprint(headers)
     new_response = session.get(next_url, headers=headers)
     print(new_response.cookies)
     print(new_response.json())

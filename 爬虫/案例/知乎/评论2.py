@@ -5,18 +5,21 @@
  @Email : sunliguo2006@qq.com
 """
 import pprint
-import execjs
 
+import execjs
 import requests
 
 
 def get_x96(d_c0, url):
+    # print('get_x96',url)
     with open('zhihu_x-zse-96.js', encoding='utf-8') as fp:
         content = fp.read()
         jj = execjs.compile(content)
 
         return jj.call('get_xzse96', d_c0, url)
 
+
+session = requests.session()
 
 cookies = {
     '_zap': '3ac25dde-c84d-4d65-bf3b-c9a16dadabfd',
@@ -57,23 +60,26 @@ params = {
 
 url = 'https://www.zhihu.com/api/v4/comment_v5/questions/616391683/root_comment'
 
-response = requests.get(url
-                        ,
-                        params=params,
-                        cookies=cookies,
-                        headers=headers,
-                        )
+response = session.get(url,
+                       params=params,
+                       cookies=cookies,
+                       headers=headers,
+                       )
 
 result = response.json()
 
-# pprint.pprint(result)
+pprint.pprint(result)
 
 next_url = result.get('paging').get('next')
 
+for cookie in session.cookies:
+    print(f"{cookie.name} = {cookie.value}")
+
 if next_url:
     print(next_url)
-    # x96 = get_x96(cookies.get('d_c0'), next_url)
-    # print(x96)
+    print('cookie.get(d_c0)', cookies.get('d_c0'))
+    x96 = get_x96(cookies.get('d_c0'), next_url)
+    print(x96)
     headers['x-zse-96'] = '2.0_hM5CzP5jfO65xXAuZpa3QfF0kXe/=c5daGkzi99xS3sLx9S1iDr290KczYKSBCmW'
 
-    print(requests.get(next_url, headers=headers).json())
+    print(session.get(next_url, headers=headers).json())

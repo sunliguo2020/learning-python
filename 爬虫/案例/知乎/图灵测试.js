@@ -1,132 +1,160 @@
-const md5 = require('./md5')
-const jsdom = require("jsdom");
-const {JSDOM} = jsdom;
-const dom = new JSDOM(`<!DOCTYPE html><html lang="cn"><head></head><body></body></html>`, {url: 'https://www.zhihu.com/search'});
-const window = dom.window;
-const document = window.document;
-const navigator = window.navigator
-const location = window.location
-const history = window.history
-const screen = window.screen
-const alert = window.alert
-
-let ObjectToString = Object.prototype.toString
-Object.prototype.toString = function () {
-    if (this.constructor.name === 'Document') {
-        return '[object HTMLDocument]'
-    } else if (this.constructor.name === 'CanvasRenderingContext2D') {
-        return '[object CanvasRenderingContext2D]'
-    }
-    return ObjectToString.call(this, arguments)
-}
+const {JSDOM} = require('jsdom');
+const dom = new JSDOM('<!DOCTYPE html><p>Hello world</p>', {'url': 'https://www.zhihu.com'});
+window = dom.window
+document = window.document
+location = window.location
+history = window.history
+screen = window.screen
+navigator = window.navigator
 window._resourceLoader = undefined
 window._sessionHistory = undefined
 
-let FunctionToString = Function.prototype.toString
-Function.prototype.toString = function () {
-    if (this.name === 'Window') {
-        return 'function Window() { [native code] }'
-    }
-    return FunctionToString.call(this, arguments)
-}
-exports = {}
+alert = window.alert
 
-function o(e) {
-    return (o = "function" == typeof Symbol && "symbol" == typeof Symbol.A ? function (e) {
-                return typeof e
-            }
-            : function (e) {
-                return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
-            }
-    )(e)
+Math.random = function () {
+    return 0.50
 }
 
-function x(e) {
-    return C(e) || s(e) || t()
-}
-
-function C(e) {
-    if (Array.isArray(e)) {
-        for (var t = 0, n = new Array(e.length); t < e.length; t++)
-            n[t] = e[t];
-        return n
-    }
-}
-
-function s(e) {
-    if (Symbol.A in Object(e) || "[object Arguments]" === Object.prototype.toString.call(e))
-        return Array.from(e)
-}
-
-function t() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance")
-}
-
-Object.defineProperty(exports, "__esModule", {
-    value: !0
-});
-var A = "3.0", S = "undefined" != typeof window ? window : {}, h;
-
-function i(e, t, n) {
-    t[n] = 255 & e >>> 24,
-        t[n + 1] = 255 & e >>> 16,
-        t[n + 2] = 255 & e >>> 8,
-        t[n + 3] = 255 & e
-}
-
-function B(e, t) {
-    return (255 & e[t]) << 24 | (255 & e[t + 1]) << 16 | (255 & e[t + 2]) << 8 | 255 & e[t + 3]
-}
-
-function Q(e, t) {
-    return (4294967295 & e) << t | e >>> 32 - t
-}
-
-function G(e) {
-    var t = new Array(4)
-        , n = new Array(4);
-    i(e, t, 0),
-        n[0] = h.zb[255 & t[0]],
-        n[1] = h.zb[255 & t[1]],
-        n[2] = h.zb[255 & t[2]],
-        n[3] = h.zb[255 & t[3]];
-    var r = B(n, 0);
-    return r ^ Q(r, 2) ^ Q(r, 10) ^ Q(r, 18) ^ Q(r, 24)
-}
-
-var __g = {
-    x: function (e, t) {
-        for (var n = [], r = e.length, i = 0; 0 < r; r -= 16) {
-            for (var o = e.slice(16 * i, 16 * (i + 1)), a = new Array(16), c = 0; c < 16; c++)
-                a[c] = o[c] ^ t[c];
-            t = __g.r(a),
-                n = n.concat(t),
-                i++
-        }
-        return n
+window = new Proxy(window, {
+    set(target, property, value, receiver) {
+        console.log('设置属性set_window', property, typeof value);
+        return Reflect.set(...arguments);
     },
-    r: function (e) {
-        var t = new Array(16)
-            , n = new Array(36);
-        n[0] = B(e, 0),
-            n[1] = B(e, 4),
-            n[2] = B(e, 8),
-            n[3] = B(e, 12);
-        for (var r = 0; r < 32; r++) {
-            var o = G(n[r + 1] ^ n[r + 2] ^ n[r + 3] ^ h.zk[r]);
-            n[r + 4] = n[r] ^ o
-        }
-        return i(n[35], t, 0),
-            i(n[34], t, 4),
-            i(n[33], t, 8),
-            i(n[32], t, 12),
-            t
+    get(target, property, receiver) {
+        console.log('获取属性get_window', property, typeof target[property]);
+        return target[property]
     }
-};
+})
 
-function l() {
+document = new Proxy(document, {
+    set(target, property, value, receiver) {
+        console.log('设置属性set_document', property, typeof value);
+        return Reflect.set(...arguments);
+    },
+    get(target, property, receiver) {
+        console.log('获取属性get_document', property, typeof target[property]);
+        return target[property]
+    }
+})
+
+navigator = new Proxy(navigator, {
+    set(target, property, value, receiver) {
+        console.log('设置属性set_navigator', property, typeof value);
+        return Reflect.set(...arguments);
+    },
+    get(target, property, receiver) {
+        console.log('获取属性get_navigator', property, typeof target[property]);
+        return target[property]
+    }
+})
+
+location = new Proxy(location, {
+    set(target, property, value, receiver) {
+        console.log('设置属性set_location', property, typeof value);
+        return Reflect.set(...arguments);
+    },
+    get(target, property, receiver) {
+        console.log('获取属性get_location', property, typeof target[property]);
+        return target[property];
+    }
+})
+
+
+history = new Proxy(history, {
+    set(target, property, value, receiver) {
+        console.log('设置属性set_history', property, typeof value);
+        return Reflect.set(...arguments);
+    },
+    get(target, property, receiver) {
+        console.log('获取属性get_history', property, typeof target[property]);
+        return target[property];
+    }
+})
+
+screen = new Proxy(screen, {
+    set(target, property, value, receiver) {
+        console.log('设置属性set_screen', property, typeof value);
+        return Reflect.set(...arguments);
+    },
+    get(target, property, receiver) {
+        console.log('获取属性get_screen', property, typeof target[property]);
+        return target[property];
+    }
+})
+
+var Object_toString = Object.prototype.toString;
+
+
+Object.prototype.toString = function () {
+    let _temp = Object_toString.call(this, arguments);
+    console.log(this)
+    if (this.constructor.name === 'Document') {
+        return '[object Document]'
+    } else if (this.constructor.name === 'CanvasRenderingContext2D') {
+        return '[object CanvasRenderingContext2D]'
+    }
+}
+
+var Function_toString = Function.prototype.toString;
+Function.prototype.toString = function () {
+    let _temp = Function_toString.call(this, arguments);
+    console.log(this);
+    console.log("Function.prototype.toString" + _temp)
+    if (this.name === 'Window') {
+        return 'function Window(){ [native code] }'
+    } else if (this.name === 'Document') {
+        return 'function Document(){ [native code] }'
+    } else if (this.name === 'CanvasRenderingContext2D') {
+        return 'function CanvasRenderingContext2D(){ [native code] }'
+    }
+}
+
+
+"use strict";
+// var _type_of = __webpack_require__(74185),
+var x = function (tt) {
+    return C(tt) || s(tt) || t()
+}
+    , C = function (tt) {
+    if (Array.isArray(tt)) {
+        for (var te = 0, tr = Array(tt.length); te < tt.length; te++)
+            tr[te] = tt[te];
+        return tr
+    }
+}
+    , s = function (tt) {
+    if (Symbol.A in Object(tt) || "[object Arguments]" === Object.prototype.toString.call(tt))
+        return Array.from(tt)
+}
+    , t = function () {
+    throw TypeError("Invalid attempt to spread non-iterable instance")
+}
+    , i = function (tt, te, tr) {
+    te[tr] = 255 & tt >>> 24,
+        te[tr + 1] = 255 & tt >>> 16,
+        te[tr + 2] = 255 & tt >>> 8,
+        te[tr + 3] = 255 & tt
+}
+    , B = function (tt, te) {
+    return (255 & tt[te]) << 24 | (255 & tt[te + 1]) << 16 | (255 & tt[te + 2]) << 8 | 255 & tt[te + 3]
+}
+    , Q = function (tt, te) {
+    return (4294967295 & tt) << te | tt >>> 32 - te
+}
+    , G = function (tt) {
+    var te = [, , , ,]
+        , tr = [, , , ,];
+    i(tt, te, 0),
+        tr[0] = h.zb[255 & te[0]],
+        tr[1] = h.zb[255 & te[1]],
+        tr[2] = h.zb[255 & te[2]],
+        tr[3] = h.zb[255 & te[3]];
+    var ti = B(tr, 0);
+    return ti ^ Q(ti, 2) ^ Q(ti, 10) ^ Q(ti, 18) ^ Q(ti, 24)
+}
+    , l = function () {
     this.C = [0, 0, 0, 0],
-        this.s = +[],
+        this.s = 0,
         this.t = [],
         this.S = [],
         this.h = [],
@@ -138,13 +166,55 @@ function l() {
         this.w = 1024,
         this.g = null,
         this.a = Date.now(),
-        this.e = +[],
+        this.e = 0,
         this.T = 255,
         this.V = null,
         this.U = Date.now,
-        this.M = new Array(32)
+        this.M = Array(32)
+};
+
+function o(tt) {
+    return (o = "function" == typeof Symbol && "symbol" == _type_of._(Symbol.A) ? function (tt) {
+                return void 0 === tt ? "undefined" : _type_of._(tt)
+            }
+            : function (tt) {
+                return tt && "function" == typeof Symbol && tt.constructor === Symbol && tt !== Symbol.prototype ? "symbol" : void 0 === tt ? "undefined" : _type_of._(tt)
+            }
+    )(tt)
 }
 
+__webpack_unused_export__ = {
+    value: !0
+};
+var __webpack_unused_export__, h, A = "3.0", S = "undefined" != typeof window ? window : {}, __g = {
+    x: function (tt, te) {
+        for (var tr = [], ti = tt.length, ta = 0; 0 < ti; ti -= 16) {
+            for (var tu = tt.slice(16 * ta, 16 * (ta + 1)), tc = Array(16), tf = 0; tf < 16; tf++)
+                tc[tf] = tu[tf] ^ te[tf];
+            te = __g.r(tc),
+                tr = tr.concat(te),
+                ta++
+        }
+        return tr
+    },
+    r: function (tt) {
+        var te = Array(16)
+            , tr = Array(36);
+        tr[0] = B(tt, 0),
+            tr[1] = B(tt, 4),
+            tr[2] = B(tt, 8),
+            tr[3] = B(tt, 12);
+        for (var ti = 0; ti < 32; ti++) {
+            var ta = G(tr[ti + 1] ^ tr[ti + 2] ^ tr[ti + 3] ^ h.zk[ti]);
+            tr[ti + 4] = tr[ti] ^ ta
+        }
+        return i(tr[35], te, 0),
+            i(tr[34], te, 4),
+            i(tr[33], te, 8),
+            i(tr[32], te, 12),
+            te
+    }
+};
 l.prototype.O = function (A, C, s) {
     for (var t, S, h, i, B, Q, G, D, w, g, a, e, E, T, r, V, U, M, O, c, I; this.T < this.w;)
         try {
@@ -290,7 +360,7 @@ l.prototype.O = function (A, C, s) {
                         this.T += this.M[11];
                     break;
                 case 331:
-                    D = window.atob(A),
+                    D = atob(A),
                         w = D.charCodeAt(0) << 16 | D.charCodeAt(1) << 8 | D.charCodeAt(2);
                     for (var k = 3; k < w + 3; k += 3)
                         this.G.push(D.charCodeAt(k) << 16 | D.charCodeAt(k + 1) << 8 | D.charCodeAt(k + 2));
@@ -346,7 +416,7 @@ l.prototype.O = function (A, C, s) {
                     this.T -= 64;
                     break;
                 case 413:
-                    this.C[this.e >> 15 & 7] = (this.e >> 18 & 1) == +[] ? 32767 & this.e : this.S[32767 & this.e],
+                    this.C[this.e >> 15 & 7] = (this.e >> 18 & 1) == 0 ? 32767 & this.e : this.S[32767 & this.e],
                         this.T -= 61;
                     break;
                 case 418:
@@ -395,13 +465,13 @@ l.prototype.O = function (A, C, s) {
                             U = 24 ^ I.charCodeAt(b) ^ U;
                     M = M.join("").split("|"),
                         O = parseInt(M.shift()),
-                        this.i.push(O === +[] ? M.join("|") : O === +!+[] ? -1 !== M.join().indexOf(".") ? parseInt(M.join()) : parseFloat(M.join()) : O === !+[] + !+[] ? eval(M.join()) : 3 === O ? null : void 0),
+                        this.i.push(0 === O ? M.join("|") : 1 === O ? -1 !== M.join().indexOf(".") ? parseInt(M.join()) : parseFloat(M.join()) : 2 === O ? eval(M.join()) : 3 === O ? null : void 0),
                         this.T -= 88;
                     break;
                 case 443:
                     this.b = this.e >> 2 & 65535,
                         this.J = 3 & this.e,
-                        this.J === +[] ? this.s = this.b : this.J === +!+[] ? !!this.Q && (this.s = this.b) : 2 === this.J ? !this.Q && (this.s = this.b) : this.s = this.b,
+                        0 === this.J ? this.s = this.b : 1 === this.J ? this.Q && (this.s = this.b) : 2 === this.J && this.Q || (this.s = this.b),
                         this.g = null,
                         this.T -= 91;
                     break;
@@ -413,7 +483,7 @@ l.prototype.O = function (A, C, s) {
                     this.W = this.e >> 16 & 7,
                         this.k = this.e >> 2 & 4095,
                         this.J = 3 & this.e,
-                        Q = this.J === +!+[] && this.i.pop(),
+                        Q = 1 === this.J && this.i.pop(),
                         G = this.i.slice(this.i.length - this.k, this.i.length),
                         this.i = this.i.slice(0, this.i.length - this.k),
                         c = 2 < G.length ? 3 : G.length,
@@ -429,7 +499,7 @@ l.prototype.O = function (A, C, s) {
                     break;
                 case 453:
                     B = this.e >> 17 & 3,
-                        this.T = B === +[] ? 445 : B === +!+[] ? 380 : B === !+[] + !+[] ? 400 : 440;
+                        this.T = 0 === B ? 445 : 1 === B ? 380 : 2 === B ? 400 : 440;
                     break;
                 case 458:
                     this.J = this.e >> 17 & 3,
@@ -439,7 +509,7 @@ l.prototype.O = function (A, C, s) {
                         this.T -= 12 * this.J + 180;
                     break;
                 case 459:
-                    this.C[3] = this.C[this.W](G[+[]]),
+                    this.C[3] = this.C[this.W](G[0]),
                         this.T -= 100 + 7 * G.length;
                     break;
                 case 461:
@@ -458,7 +528,7 @@ l.prototype.O = function (A, C, s) {
                         this.T += 10 * O + 3;
                     break;
                 case 465:
-                    this.C[3] = this.C[this.W][Q](G[+[]]),
+                    this.C[3] = this.C[this.W][Q](G[0]),
                         this.T -= 13 * G.length + 100;
                     break;
                 case 466:
@@ -470,17 +540,17 @@ l.prototype.O = function (A, C, s) {
                         this.T -= 116;
                     break;
                 case 469:
-                    this.C[3] = this.C[this.W](G[+[]], G[1]),
+                    this.C[3] = this.C[this.W](G[0], G[1]),
                         this.T -= 119 - G.length;
                     break;
                 case 471:
-                    this.C[3] = new this.C[this.W](G[+[]]),
+                    this.C[3] = new this.C[this.W](G[0]),
                         this.T -= 118 + G.length;
                     break;
                 case 473:
                     throw this.C[this.e >> 16 & 7];
                 case 475:
-                    this.C[3] = this.C[this.W][Q](G[+[]], G[1]),
+                    this.C[3] = this.C[this.W][Q](G[0], G[1]),
                         this.T -= 123;
                     break;
                 case 476:
@@ -491,12 +561,12 @@ l.prototype.O = function (A, C, s) {
                     t = [0].concat(x(this.S)),
                         this.V = 65535 & this.e,
                         h = this,
-                        this.C[3] = function (e) {
-                            var n = new l;
-                            return n.S = t,
-                                n.S[0] = e,
-                                n.O(h.G, h.V, h.D),
-                                n.C[3]
+                        this.C[3] = function (tt) {
+                            var te = new l;
+                            return te.S = t,
+                                te.S[0] = tt,
+                                te.O(h.G, h.V, h.D),
+                                te.C[3]
                         }
                         ,
                         this.T -= 50 < this.M[3] ? 120 : 126;
@@ -507,7 +577,7 @@ l.prototype.O = function (A, C, s) {
                         this.T -= this.M[9] ? 127 : 128;
                     break;
                 case 481:
-                    this.C[3] = new this.C[this.W](G[+[]], G[1]),
+                    this.C[3] = new this.C[this.W](G[0], G[1]),
                         this.T -= 10 * G.length + 109;
                     break;
                 case 483:
@@ -548,35 +618,16 @@ l.prototype.O = function (A, C, s) {
 "undefined" != typeof window && (S.__ZH__ = S.__ZH__ || {},
     h = S.__ZH__.zse = S.__ZH__.zse || {},
     (new l).O("ABt7CAAUSAAACADfSAAACAD1SAAACAAHSAAACAD4SAAACAACSAAACADCSAAACADRSAAACABXSAAACAAGSAAACADjSAAACAD9SAAACADwSAAACACASAAACADeSAAACABbSAAACADtSAAACAAJSAAACAB9SAAACACdSAAACADmSAAACABdSAAACAD8SAAACADNSAAACABaSAAACABPSAAACACQSAAACADHSAAACACfSAAACADFSAAACAC6SAAACACnSAAACAAnSAAACAAlSAAACACcSAAACADGSAAACAAmSAAACAAqSAAACAArSAAACACoSAAACADZSAAACACZSAAACAAPSAAACABnSAAACABQSAAACAC9SAAACABHSAAACAC/SAAACABhSAAACABUSAAACAD3SAAACABfSAAACAAkSAAACABFSAAACAAOSAAACAAjSAAACAAMSAAACACrSAAACAAcSAAACABySAAACACySAAACACUSAAACABWSAAACAC2SAAACAAgSAAACABTSAAACACeSAAACABtSAAACAAWSAAACAD/SAAACABeSAAACADuSAAACACXSAAACABVSAAACABNSAAACAB8SAAACAD+SAAACAASSAAACAAESAAACAAaSAAACAB7SAAACACwSAAACADoSAAACADBSAAACACDSAAACACsSAAACACPSAAACACOSAAACACWSAAACAAeSAAACAAKSAAACACSSAAACACiSAAACAA+SAAACADgSAAACADaSAAACADESAAACADlSAAACAABSAAACADASAAACADVSAAACAAbSAAACABuSAAACAA4SAAACADnSAAACAC0SAAACACKSAAACABrSAAACADySAAACAC7SAAACAA2SAAACAB4SAAACAATSAAACAAsSAAACAB1SAAACADkSAAACADXSAAACADLSAAACAA1SAAACADvSAAACAD7SAAACAB/SAAACABRSAAACAALSAAACACFSAAACABgSAAACADMSAAACACESAAACAApSAAACABzSAAACABJSAAACAA3SAAACAD5SAAACACTSAAACABmSAAACAAwSAAACAB6SAAACACRSAAACABqSAAACAB2SAAACABKSAAACAC+SAAACAAdSAAACAAQSAAACACuSAAACAAFSAAACACxSAAACACBSAAACAA/SAAACABxSAAACABjSAAACAAfSAAACAChSAAACABMSAAACAD2SAAACAAiSAAACADTSAAACAANSAAACAA8SAAACABESAAACADPSAAACACgSAAACABBSAAACABvSAAACABSSAAACAClSAAACABDSAAACACpSAAACADhSAAACAA5SAAACABwSAAACAD0SAAACACbSAAACAAzSAAACADsSAAACADISAAACADpSAAACAA6SAAACAA9SAAACAAvSAAACABkSAAACACJSAAACAC5SAAACABASAAACAARSAAACABGSAAACADqSAAACACjSAAACADbSAAACABsSAAACACqSAAACACmSAAACAA7SAAACACVSAAACAA0SAAACABpSAAACAAYSAAACADUSAAACABOSAAACACtSAAACAAtSAAACAAASAAACAB0SAAACADiSAAACAB3SAAACACISAAACADOSAAACACHSAAACACvSAAACADDSAAACAAZSAAACABcSAAACAB5SAAACADQSAAACAB+SAAACACLSAAACAADSAAACABLSAAACACNSAAACAAVSAAACACCSAAACABiSAAACADxSAAACAAoSAAACACaSAAACABCSAAACAC4SAAACAAxSAAACAC1SAAACAAuSAAACADzSAAACABYSAAACABlSAAACAC3SAAACAAISAAACAAXSAAACABISAAACAC8SAAACABoSAAACACzSAAACADSSAAACACGSAAACAD6SAAACADJSAAACACkSAAACABZSAAACADYSAAACADKSAAACADcSAAACAAySAAACADdSAAACACYSAAACACMSAAACAAhSAAACADrSAAACADWSAAAeIAAEAAACAB4SAAACAAySAAACABiSAAACABlSAAACABjSAAACABiSAAACAB3SAAACABkSAAACABnSAAACABrSAAACABjSAAACAB3SAAACABhSAAACABjSAAACABuSAAACABvSAAAeIABEAABCABkSAAACAAzSAAACABkSAAACAAySAAACABlSAAACAA3SAAACAAySAAACAA2SAAACABmSAAACAA1SAAACAAwSAAACABkSAAACAA0SAAACAAxSAAACAAwSAAACAAxSAAAeIABEAACCAAgSAAATgACVAAAQAAGEwADDAADSAAADAACSAAADAAASAAACANcIAADDAADSAAASAAATgADVAAATgAEUAAATgAFUAAATgAGUgAADAAASAAASAAATgADVAAATgAEUAAATgAFUAAATgAHUgAADAABSAAASAAATgADVAAATgAEUAAATgAFUAAATgAIUgAAcAgUSMAATgAJVAAATgAKUgAAAAAADAABSAAADAAAUAAACID/GwQPCAAYG2AREwAGDAABCIABGwQASMAADAAAUAAACID/GwQPCAAQG2AREwAHDAABCIACGwQASMAADAAAUAAACID/GwQPCAAIG2AREwAIDAABCIADGwQASMAADAAAUAAACID/GwQPEwAJDYAGDAAHG2ATDAAIG2ATDAAJG2ATKAAACAD/DIAACQAYGygSGwwPSMAASMAADAACSAAADAABUgAACAD/DIAACQAQGygSGwwPSMAASMAADAACCIABGwQASMAADAABUgAACAD/DIAACQAIGygSGwwPSMAASMAADAACCIACGwQASMAADAABUgAACAD/DIAAGwQPSMAASMAADAACCIADGwQASMAADAABUgAAKAAACAAgDIABGwQBEwANDAAAWQALGwQPDAABG2AREwAODAAODIAADQANGygSGwwTEwAPDYAPKAAACAAESAAATgACVAAAQAAGEwAQCAAESAAATgACVAAAQAAGEwAFDAAASAAADAAQSAAACAAASAAACAKsIAADCAAASAAADAAQUAAACID/GwQPSMAADAABUAAASAAASAAACAAASAAADAAFUgAACAABSAAADAAQUAAACID/GwQPSMAADAABUAAASAAASAAACAABSAAADAAFUgAACAACSAAADAAQUAAACID/GwQPSMAADAABUAAASAAASAAACAACSAAADAAFUgAACAADSAAADAAQUAAACID/GwQPSMAADAABUAAASAAASAAACAADSAAADAAFUgAADAAFSAAACAAASAAACAJ8IAACEwARDAARSAAACAANSAAACALdIAACEwASDAARSAAACAAXSAAACALdIAACEwATDAARDIASGwQQDAATG2AQEwAUDYAUKAAAWAAMSAAAWAANSAAAWAAOSAAAWAAPSAAAWAAQSAAAWAARSAAAWAASSAAAWAATSAAAWAAUSAAAWAAVSAAAWAAWSAAAWAAXSAAAWAAYSAAAWAAZSAAAWAAaSAAAWAAbSAAAWAAcSAAAWAAdSAAAWAAeSAAAWAAfSAAAWAAgSAAAWAAhSAAAWAAiSAAAWAAjSAAAWAAkSAAAWAAlSAAAWAAmSAAAWAAnSAAAWAAoSAAAWAApSAAAWAAqSAAAWAArSAAAeIAsEAAXWAAtSAAAWAAuSAAAWAAvSAAAWAAwSAAAeIAxEAAYCAAESAAATgACVAAAQAAGEwAZCAAkSAAATgACVAAAQAAGEwAaDAABSAAACAAASAAACAJ8IAACSMAASMAACAAASAAADAAZUgAADAABSAAACAAESAAACAJ8IAACSMAASMAACAABSAAADAAZUgAADAABSAAACAAISAAACAJ8IAACSMAASMAACAACSAAADAAZUgAADAABSAAACAAMSAAACAJ8IAACSMAASMAACAADSAAADAAZUgAACAAASAAADAAZUAAACIAASEAADIAYUEgAGwQQSMAASMAACAAASAAADAAaUgAACAABSAAADAAZUAAACIABSEAADIAYUEgAGwQQSMAASMAACAABSAAADAAaUgAACAACSAAADAAZUAAACIACSEAADIAYUEgAGwQQSMAASMAACAACSAAADAAaUgAACAADSAAADAAZUAAACIADSEAADIAYUEgAGwQQSMAASMAACAADSAAADAAaUgAACAAAEAAJDAAJCIAgGwQOMwAGOBG2DAAJCIABGwQASMAADAAaUAAAEAAbDAAJCIACGwQASMAADAAaUAAAEAAcDAAJCIADGwQASMAADAAaUAAAEAAdDAAbDIAcGwQQDAAdG2AQDAAJSAAADAAXUAAAG2AQEwAeDAAeSAAADAACSAAACALvIAACEwAfDAAJSAAADAAaUAAADIAfGwQQSMAASMAADAAJCIAEGwQASMAADAAaUgAADAAJCIAEGwQASMAADAAaUAAASAAASAAADAAJSAAADAAAUgAADAAJCIABGQQAEQAJOBCIKAAADAABTgAyUAAACIAQGwQEEwAVCAAQDIAVGwQBEwAKCAAAEAAhDAAhDIAKGwQOMwAGOBImDAAKSAAADAABTgAzQAAFDAAhCIABGQQAEQAhOBHoCAAASAAACAAQSAAADAABTgA0QAAJEwAiCAAQSAAATgACVAAAQAAGEwAjCAAAEAALDAALCIAQGwQOMwAGOBLSDAALSAAADAAiUAAADIALSEAADIAAUEgAGwQQCAAqG2AQSMAASMAADAALSAAADAAjUgAA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"));
-var D = function (e) {
-    return __g._encrypt(encodeURIComponent(e))
+var D = function (tt) {
+    return __g._encrypt(encodeURIComponent(tt))
 };
-exports.ENCRYPT_VERSION = A
-exports.default = D
+exports.XL = A,
+exports.ZP = D
+console.log(D('a'))
 
 
-function encryptCookie(cookie) {
-    const K = new RegExp("d_c0=([^;]+)")
-    const Q = function (string) {
-        const e = K.exec(string);
-        return e && e[1]
-    }
-    return Q(cookie)
-}
+entcrypt_v3 = D
 
+//导出函数
 
-function getZse96(cookie, url, zse93, x81) {
-    let s = `${zse93}+${url}+${encryptCookie(cookie)}`
-    if (x81) {
-        s = s + `+${x81}`
-    }
-    let e = md5.md5(s)
-    return `2.0_${D(e)}`
-}
-
-
-const cookie = `_zap=bb92d33c-0a9e-425b-ae72-a9fb9a574e54; _xsrf=7376f3b1-9f13-4c3b-8d57-ed1a118a143e; d_c0=ANCW96oK1BWPTsvJdsswa5U5WLIBChsm4js=|1667787128; KLBRSID=d017ffedd50a8c265f0e648afe355952|1667787128|1667787127; SESSIONID=tn6WdE87SB0SsVGvtdqIMm6ly3jjB6hcpPo3H3mMFAG`
-const url = "/api/v4/search_v3?gk_version=gz-gaokao&t=general&q=%E7%8B%BC%E7%9A%84%E5%AD%A9%E5%AD%90%E9%9B%A8%E5%92%8C%E9%9B%AA&correction=1&offset=0&limit=20&filter_fields=&lc_idx=0&show_all_topics=0&search_source=Normal"
-const zse93 = "101_3_3.0"
-const x81 = ''
-console.log(getZse96(cookie, url, zse93, x81))
+module.exports = entcrypt_v3;

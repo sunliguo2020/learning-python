@@ -1,11 +1,18 @@
 // Credit: RSSHub  部分代码参考的 RSSHub
-var crypto = require('crypto');
-var md5 = crypto.createHash("md5");
+// var crypto = require('crypto');
+// var md5 = crypto.createHash("md5");
+//
+// function get_md5(s) {
+//     md5.update(s);
+//     var strs = md5.digest('hex');
+//     return strs
+// }
 
-function get_md5(s) {
-    md5.update(s);
-    var strs = md5.digest('hex');
-    return strs
+
+const CryptoJS = require("crypto-js");
+
+const get_md5 = (aaa) => {
+    return CryptoJS.MD5(aaa).toString();
 }
 
 

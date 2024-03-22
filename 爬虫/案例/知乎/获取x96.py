@@ -19,7 +19,7 @@ def get_x96(tt, tu):
 
     jj = execjs.compile(js_content)
 
-    return jj.call('x93', tt, tu)
+    return jj.call('x96', tt, tu)
 
 
 if __name__ == '__main__':
