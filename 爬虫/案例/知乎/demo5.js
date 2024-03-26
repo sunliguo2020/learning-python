@@ -17,8 +17,9 @@ function get_tp(tt, tu) {
     var tf = t4(tt);
     console.log("tf:", tf)
     // tp = [ta, tf, tu, false, null].filter(Boolean).join("+");
-    tp = [ta, tf, tu].filter(Boolean).join("+");
-
+    // console.log('[ta,tf,tu]',[ta,tf,tu])
+    let tp = [ta, tf, tu].filter(Boolean).join("+");
+    // console.log('tp.length',tp.length)
     return tp
 }
 
@@ -39,7 +40,11 @@ function x96(tt, tu) {
     return '2.0_' + entcrypt_v3(md5(get_tp(tt, tu)))
 }
 
-tt = 'https://www.zhihu.com/api/v4/comment_v5/questions/616391683/root_comment?limit=10&offset=457158625_10644363034_0&order_by=score'
+tt = 'https://www.zhihu.com/api/v4/comment_v5/questions/616391683/root_comment?order_by=score&limit=20&offset=457158625_10644363034_0'
+tu = 'ADDSD-j4lRePTsK721fRFrWpxQLGjfijbjo=|1697981461'
 
-console.log('tp', get_tp(tt, 'ADDSD-j4lRePTsK721fRFrWpxQLGjfijbjo=|1697981461'))
-console.log('x96',x96(tt, 'ADDSD-j4lRePTsK721fRFrWpxQLGjfijbjo=|1697981461'))
+tp = get_tp(tt,tu)
+console.log('tp\n', tp,tp.length)
+console.log("md5(tp)",md5(tp))
+console.log('x96',x96(tt,tu))
+
