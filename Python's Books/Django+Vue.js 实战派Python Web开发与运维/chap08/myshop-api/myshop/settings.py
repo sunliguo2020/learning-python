@@ -69,6 +69,7 @@ CORS_ALLOW_HEADERS = [
 
 ROOT_URLCONF = 'myshop.urls'
 AUTH_USER_MODEL = "users.MyUser"
+
 # LOGIN_URL = '/diy_login/'  #这个路径需要根据你网站的实际登陆地址来设置
 TEMPLATES = [
     {
@@ -192,7 +193,7 @@ REST_FRAMEWORK_EXTENSIONS = {
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=30000),  # Token 过期时间为一周
     'JWT_AUTH_HEADER_PREFIX': 'JWT',  # Token的头为：JWT XXXXXXXXXXXXXXXXXXXXXX
-    'JWT_ALLOW_REFRESH': False,
+    'JWT_ALLOW_REFRESH': False, # 不允许刷新
     # 自定义返回认证信息
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'common.jwt_utils.jwt_response_payload_handler'
 }
