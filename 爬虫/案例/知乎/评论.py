@@ -14,12 +14,20 @@ ua = fake_useragent.UserAgent()
 
 
 def get_x96(tt, tu):
+    """
+
+    @param tt:
+    @param tu:
+    @return:
+    """
     print('tt', tt)
     print('tu', tu)
-    with open('demo5.js', encoding='utf-8') as fp:
+
+    with open('./demo5.js',encoding='utf-8') as fp:
         js_content = fp.read()
 
     jj = execjs.compile(js_content)
+    print(jj)
 
     return jj.call('x96', tt, tu)
 
@@ -29,6 +37,7 @@ session = requests.session()
 cookies = {
     '_zap': '29b22fff-b6af-4976-a07c-d25650ac4773',
     'd_c0': 'ADDSD-j4lRePTsK721fRFrWpxQLGjfijbjo=|1697981461',
+    # 'd_c0': '"AGAS71rcFxWPTgKbwOWJ5lOixIy7shJ89DA=|1655158521"',
     'YD00517437729195%3AWM_TID': 'LuLH7LZ%2FK%2BNBBRERVRLFyyI6032kauLu',
     '_xsrf': 'obSsNmCr73VUbekodsFvwlVW1ZxbC69C',
     '__snaker__id': 'OVEO9dZEKxmWl8qP',
@@ -80,6 +89,7 @@ response = session.get(
 result = response.json()
 print(result)
 print(response.cookies)
+
 for item in result.get('data'):
     print(item.get('author').get('name'), item.get('content'))
 

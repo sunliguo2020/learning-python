@@ -11,9 +11,13 @@ const alert = window.alert
 
 self = window
 
-Math.random = function(){
+// 改为固定值
+Math.random = function () {
     return 0.5
 };
+
+// require('./1514')
+
 !function (s) {
     "use strict";
     var e, a, c, d, f, b, t, r, o, n, i, l = {};
@@ -31,8 +35,6 @@ Math.random = function(){
             c.loaded = !0,
             c.exports
     }
-    //hook
-    window.loader = u;
 
     u.m = s,
         u.amdD = function () {
@@ -838,6 +840,11 @@ Math.random = function(){
         ,
         (i = self.webpackChunkheifetz = self.webpackChunkheifetz || []).forEach(n.bind(null, 0)),
         i.push = n.bind(null, i.push.bind(i))
+
+    //hook
+    window.loader = u;
+    console.log('s:',s)
+
 }({
 
     1514: function (__unused_webpack_module, exports, __webpack_require__) {
@@ -1365,12 +1372,13 @@ Math.random = function(){
 
         te._ = te._type_of = tr
     },
+    test:function(){console.log('sucess!')}
 
 });
 //# sourceMappingURL=runtime.app.a1f18ca1e59804d899ab.js.map
 
+// window.loader("test")
 // window.loader(1514)
-
 // console.log(window.loader(1514))
 
 entcrypt_v3 = window.loader(1514).ZP
