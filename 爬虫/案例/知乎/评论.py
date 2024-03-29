@@ -23,7 +23,7 @@ def get_x96(tt, tu):
     print('tt', tt)
     print('tu', tu)
 
-    with open('./demo5.js',encoding='utf-8') as fp:
+    with open('./demo5.js', encoding='utf-8') as fp:
         js_content = fp.read()
 
     jj = execjs.compile(js_content)
@@ -51,7 +51,7 @@ cookies = {
     'KLBRSID': 'd6f775bb0765885473b0cba3a5fa9c12|1711018325|1711017078',
 }
 
-requests.utils.add_dict_to_cookiejar(session.cookies, cookies)
+# requests.utils.add_dict_to_cookiejar(session.cookies, cookies)
 
 headers = {
     'authority': 'www.zhihu.com',
@@ -88,20 +88,20 @@ response = session.get(
 
 result = response.json()
 print(result)
-print(response.cookies)
-
-for item in result.get('data'):
-    print(item.get('author').get('name'), item.get('content'))
+# print(response.cookies)
+#
+# for item in result.get('data'):
+#     print(item.get('author').get('name'), item.get('content'))
 
 next_url = result.get('paging').get('next')
 print('下一页:', next_url)
 
 if next_url:
-    # print(session.cookies)
-    # for item in session.cookies:
-    #     print(item)
+    print(session.cookies)
+    for item in session.cookies:
+        print(item)
     # 更新header的 x-zse-96值
-    print("cookies['d_co']", cookies.get('d_c0'))
+    print("cookies['d_co']:", cookies.get('d_c0'))
     x96 = get_x96(next_url, cookies.get('d_c0'))
     headers['x-zse-96'] = x96
     print("headers,x-zse-96", headers.get('x-zse-96'))

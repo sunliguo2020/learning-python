@@ -1,13 +1,13 @@
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
-const dom = new JSDOM(`<!DOCTYPE html><html lang="cn"><head></head><body></body></html>`, {url: 'https://www.zhihu.com/search'});
-const window = dom.window;
-const document = window.document;
-const navigator = window.navigator
-const location = window.location
-const history = window.history
-const screen = window.screen
-const alert = window.alert
+var dom = new JSDOM(`<!DOCTYPE html><html lang="cn"><head></head><body></body></html>`, {url: 'https://www.zhihu.com/search'});
+var window = dom.window;
+var document = window.document;
+var navigator = window.navigator
+var location = window.location
+var history = window.history
+var screen = window.screen
+var alert = window.alert
 
 self = window
 
@@ -16,8 +16,58 @@ Math.random = function () {
     return 0.5
 };
 
-// require('./1514')
+//修改原型方法
+let ccc = Object.prototype.toString
+Object.prototype.toString = function () {
+    if (this.constructor.name === 'Document') {
+        return '[object HTMLDocument]'
+    }
+    else if (this.constructor.name === 'CanvasRenderingContext2D') {
+        return '[object CanvasRenderingContext2D]'
+    }
+    return ccc.call(this, arguments)
 
+}
+
+window._sessionHistory = undefined
+window._resourceLoader = undefined
+
+var Function_tostring = Function.prototype.toString
+Function.prototype.toString = function () {
+    let _sss = Function_tostring.call(this, arguments);
+    if (this.name === 'Window') {
+        return 'function Window() { [native code] }'
+    }
+    return _sss
+}
+
+
+
+
+//代理
+proxy_ = function(func){
+    return new Proxy(func,{
+        set(target,property,value){
+            console.table([{"类型":"set","调用者":target,"调用属性":property,"设置值":value}]);
+            return Reflect.set(...arguments)
+        },
+        get(target,property,receiver){
+            console.table([{"类型":"get","调用者":target,"调用属性":property,"获取值":target[property]}]);
+            return target[property]
+        },
+    })
+}
+
+window = proxy_(window)
+// location = proxy_(location)
+// navigator = proxy_(navigator)
+// document = proxy_(document)
+// history = proxy_(history)
+// screen = proxy_(screen)
+
+
+
+//加载器
 !function (s) {
     "use strict";
     var e, a, c, d, f, b, t, r, o, n, i, l = {};
@@ -1371,8 +1421,7 @@ Math.random = function () {
         }
 
         te._ = te._type_of = tr
-    },
-    test:function(){console.log('sucess!')}
+    }
 
 });
 //# sourceMappingURL=runtime.app.a1f18ca1e59804d899ab.js.map
@@ -1383,7 +1432,7 @@ Math.random = function () {
 
 entcrypt_v3 = window.loader(1514).ZP
 
-// console.log(entcrypt_v3('1'))
+console.log(entcrypt_v3('681317461fe9f7f45dd39842269d23ce'))
 
 // export  default  entcrypt_v3
 //导出函数
