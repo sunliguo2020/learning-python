@@ -1,7 +1,8 @@
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 var dom = new JSDOM(`<!DOCTYPE html><html lang="cn"><head></head><body></body></html>`, {url: 'https://www.zhihu.com/search'});
-var window = dom.window;
+// var window = dom.window;
+var window = global;
 var document = window.document;
 var navigator = window.navigator
 var location = window.location
@@ -42,8 +43,6 @@ Function.prototype.toString = function () {
 }
 
 
-
-
 //代理
 proxy_ = function(func){
     return new Proxy(func,{
@@ -64,7 +63,6 @@ window = proxy_(window)
 // document = proxy_(document)
 // history = proxy_(history)
 // screen = proxy_(screen)
-
 
 
 //加载器

@@ -35,7 +35,7 @@ function get_tp(tt, tu) {
     }
 
     var tf = t4(tt);
-    console.log("tf:相对URL", tf)
+    console.log("tf:URL", tf)
     // tp = [ta, tf, tu, false, null].filter(Boolean).join("+");
     // console.log('[ta,tf,tu]',[ta,tf,tu])
     let tp = [ta, tf, tu].filter(Boolean).join("+");

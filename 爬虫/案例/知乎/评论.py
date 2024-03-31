@@ -5,7 +5,10 @@
 @Created on: 2024-03-19 13:16
 """
 import pprint
+import subprocess
+from functools import partial  # 用来固定某个参数的固定值
 
+subprocess.Popen = partial(subprocess.Popen, encoding='utf-8')
 import execjs
 import fake_useragent
 import requests
@@ -95,7 +98,6 @@ print(result)
 
 next_url = result.get('paging').get('next')
 print('下一页:', next_url)
-
 if next_url:
     print(session.cookies)
     for item in session.cookies:
