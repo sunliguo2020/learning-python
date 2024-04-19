@@ -6,7 +6,10 @@
 """
 import pprint
 from urllib.parse import urlencode
+import subprocess
+from functools import partial
 
+subprocess.Popen = partial(subprocess.Popen, encoding='utf-8')
 import execjs
 import requests
 
@@ -47,6 +50,17 @@ proxy = {
     'http': 'http://127.0.0.1:8888',
     'https': 'http://127.0.0.1:8888'
 }
-resp = requests.post(url, headers=headers, data=rest.get('data'), proxies=proxy, verify=False)
-print(resp.request.headers)
+resp = requests.post(url, headers=headers,
+                     data=rest.get('data'),
+                     # proxies=proxy,
+                     verify=False)
+# print(resp.request.headers)
 pprint.pprint(resp.json())
+
+# 解密数据
+with open('demo2.js', encoding='utf-8') as fp:
+    js_code = fp.read()
+
+js_exec = execjs.compile(js_code)
+rest = js_exec.call('parseData', resp.json())
+print(rest)
