@@ -11,13 +11,15 @@ from pygame.locals import QUIT
 from image import Image
 from const import *
 
-from objectBase import ObjectBase
-
+from objectbase import ObjectBase
+from zombiebase import ZombieBase
+from peabullet import PeaBulletBase
 pygame.init()
 
 DS = pygame.display.set_mode(GAME_SIZE)
 back_image = Image(PATH_BACK, 0, (0, 0), GAME_SIZE, 0)
-zom = ObjectBase('../pic/zombie/0/%d.png', 0, (1080, 200), (100, 128), 15)
+zom = ZombieBase(1, (1080, 200))
+pb = PeaBulletBase(0, (0, 200))
 
 while True:
     for event in pygame.event.get():
@@ -29,4 +31,7 @@ while True:
     back_image.draw(DS)
     zom.draw(DS)
     zom.update()
+
+    pb.draw(DS)
+    pb.update()
     pygame.display.update()
