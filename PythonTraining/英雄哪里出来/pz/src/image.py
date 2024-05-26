@@ -8,7 +8,19 @@ import pygame
 
 
 class Image(pygame.sprite.Sprite):
-    def __init__(self, pathFmt, pathIndex, pos, size=None, pathIndexCount=0):
+    """
+
+    """
+
+    def __init__(self, pathFmt: str, pathIndex, pos: tuple, size: tuple = None, pathIndexCount=0):
+        """
+
+        @param pathFmt: 图片路径模版
+        @param pathIndex: 图片路径索引
+        @param pos: 位置
+        @param size: 大小，元组
+        @param pathIndexCount: 图片总数
+        """
         self.pathFmt = pathFmt
         self.pathIndex = pathIndex
         self.pos = list(pos)
@@ -18,12 +30,21 @@ class Image(pygame.sprite.Sprite):
         self.updateImage()
 
     def updateImage(self):
+        """
+        更新
+        1、如果pahtIndexCount为0,则直接使用pathFmt为图片路径
+        2、不为0,则为路径格式字符串。
+        @return:
+        """
         path = self.pathFmt
         if self.pathIndexCount != 0:
             path = path % self.pathIndex
             print(f"path:{path}")
+
         self.image = pygame.image.load(path)
+
         if self.size:
+            # 改变图片大小
             self.image = pygame.transform.scale(self.image, self.size)
 
     def updateSize(self, size):
@@ -43,10 +64,12 @@ class Image(pygame.sprite.Sprite):
         """
         # 调用get_rect()方法，并返回一个矩形区域（rect），该区域与图像的尺寸相同，但默认位置是(0, 0)。
         rect = self.image.get_rect()
+        # 指定位置
         rect.x, rect.y = self.pos
         return rect
 
     def doLeft(self):
+        # 往左移动
         self.pos[0] -= 1
 
     def draw(self, ds: pygame.display):

@@ -4,3 +4,8 @@
  @Author : sunliguo
  @Email : sunliguo2006@qq.com
 """
+from src import objectbase
+
+
+class SunFlower(objectbase.ObjectBase):
+    pass

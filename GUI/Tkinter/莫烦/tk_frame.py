@@ -11,10 +11,10 @@ window.geometry('400x400')
 
 tk.Label(window, text='on the window', bg='red', fg='white').pack()
 
-frm = tk.Frame(window)
+frm = tk.Frame(window, bg='yellow', borderwidth=10)
 frm.pack()
 
-frm_l = tk.Frame(frm)
+frm_l = tk.Frame(frm, bg='green', borderwidth=1, height=100)
 frm_r = tk.Frame(frm)
 
 frm_l.pack(side='left')
