@@ -8,5 +8,5 @@ import objectbase
 from const import *
 
 
-class PeaBulletBase(objectbase.ObjectBase):
+class PeaBullet(objectbase.ObjectBase):
    pass

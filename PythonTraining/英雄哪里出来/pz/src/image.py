@@ -15,11 +15,11 @@ class Image(pygame.sprite.Sprite):
     def __init__(self, pathFmt: str, pathIndex, pos: tuple, size: tuple = None, pathIndexCount=0):
         """
 
-        @param pathFmt: 图片路径模版
-        @param pathIndex: 图片路径索引
-        @param pos: 位置
-        @param size: 大小，元组
-        @param pathIndexCount: 图片总数
+        @param pathFmt:         图片路径模版
+        @param pathIndex:       图片路径索引
+        @param pos:             图片位置
+        @param size:            大小，元组
+        @param pathIndexCount:  图片总数
         """
         self.pathFmt = pathFmt
         self.pathIndex = pathIndex
@@ -39,7 +39,7 @@ class Image(pygame.sprite.Sprite):
         path = self.pathFmt
         if self.pathIndexCount != 0:
             path = path % self.pathIndex
-            print(f"path:{path}")
+            # print(f"path:{path}")
 
         self.image = pygame.image.load(path)
 
@@ -52,7 +52,7 @@ class Image(pygame.sprite.Sprite):
         self.updateImage()
 
     def updateIndex(self, pathIndex):
-        print(f"调用updateIndex：{pathIndex}")
+        # print(f"调用updateIndex：{pathIndex}")
         self.pathIndex = pathIndex
         self.updateImage()
 
@@ -68,6 +68,28 @@ class Image(pygame.sprite.Sprite):
         rect.x, rect.y = self.pos
         return rect
 
+    def get_non_transparent_rect(self):
+        # 初始化矩形的位置和大小为整个图片
+        rect = self.getRect()
+
+        # 遍历图片的每个像素
+        for x in range(rect.width):
+            for y in range(rect.height):
+                # 获取像素的 RGBA 值
+                r, g, b, a = self.image.get_at((x, y))
+
+                # 检查 alpha 值是否大于 0（即非透明）
+                if a > 0:
+                    # 更新矩形的边界
+                    rect.left = min(rect.left, x)
+                    rect.right = max(rect.right, x)
+                    rect.top = min(rect.top, y)
+                    rect.bottom = max(rect.bottom, y)
+
+                    # 返回包含非透明像素的最小矩形
+        rect.x,rect.y = self.pos
+        return rect
+
     def doLeft(self):
         # 往左移动
         self.pos[0] -= 1
@@ -79,5 +101,11 @@ class Image(pygame.sprite.Sprite):
         @param ds:
         @return:
         """
-        print(f"正在绘制：{self.image},位置：{self.getRect()}")
+        # print(f"正在绘制：{self.image},位置：{self.getRect()}")
         ds.blit(self.image, self.getRect())
+        # 绘制边框
+        pygame.draw.rect(ds, (255, 0, 0), self.getRect(), 2)
+
+    def draw_border(self, surface, color=(255, 0, 0), width=2):
+        # 在 Sprite 的矩形区域周围绘制一个边框
+        pygame.draw.rect(surface, color, self.getRect(), width)
