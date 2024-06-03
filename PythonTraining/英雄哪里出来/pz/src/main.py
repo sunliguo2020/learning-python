@@ -26,7 +26,7 @@ while True:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             game.mouseClickHandler(event.button)
 
-    DS.fill((255, 255, 255))
+    # DS.fill((255, 255, 255))
     game.draw()
     game.update()
     pygame.display.update()
