@@ -39,6 +39,7 @@ class Game:
         self.zombie = 0
         self.zombieFont = pygame.font.Font(None, 60)
 
+        # 是否能种植植物的二维数组
         for i in range(GRID_COUNT[0]):
             col = []
             for j in range(GRID_COUNT[1]):
@@ -109,7 +110,11 @@ class Game:
                     self.fight(zombie, plant)
                 if plant.hp <= 0:
                     print(f'僵尸吃掉植物')
+                    print(f"被吃掉植物的位置{plant.pos},{self.getIndexBypos(plant.pos)},{plant.getRect()}")
+                    x,y = self.getIndexBypos(plant.pos)
                     self.plants.remove(plant)
+                    # 是否能种植植物标记
+                    self.hasPlant[x][y] = 0
                     break
 
     def renderFont(self):
