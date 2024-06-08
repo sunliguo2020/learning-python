@@ -4,16 +4,20 @@
  @Author : sunliguo
  @Email : sunliguo2006@qq.com
 """
+"""
+SUMMON_CD 召唤物冷却时间
+CAN_LOOT 是否能捡起
+"""
 data = {
     # 子弹
     0: {
         'PATH': '../pic/other/peabullet.png',
         'IMAGE_INDEX_MAX': 0,
         'IMAGE_INDEX_CD': 0,
-        'POSITION_CD': 0.008,
+        'POSITION_CD': 0.0008,
         'SIZE': (44, 44),
         'SPEED': (4, 0),
-        'SUMMON_CD': -1,
+        'SUMMON_CD': 1,
         'CAN_LOOT': False,
         'PRICE': 0,
         'HP': 1,
@@ -51,11 +55,11 @@ data = {
     3: {
         'PATH': '../pic/plant/sunflower/%d.png',
         'IMAGE_INDEX_MAX': 19,
-        'IMAGE_INDEX_CD': 0.06,
+        'IMAGE_INDEX_CD': 0.05,
         'POSITION_CD': 100000,
         "SIZE": (76, 100),
         'SPEED': (0, 2),
-        'SUMMON_CD': 8,
+        'SUMMON_CD': 5,
         'CAN_LOOT': False,
         'PRICE': 20,
         'HP': 5,

@@ -16,6 +16,8 @@ from src.image import Image
 from const import *
 from src.sunflower import SunFlower
 from zombiebase import ZombieBase
+import asyncclient
+import asyncio
 
 
 class Game:
@@ -39,12 +41,15 @@ class Game:
         self.zombie = 0
         self.zombieFont = pygame.font.Font(None, 60)
 
+        # 子弹数目
+        self.PeaBulletFont = pygame.font.Font(None, 60)
         # 是否能种植植物的二维数组
         for i in range(GRID_COUNT[0]):
             col = []
             for j in range(GRID_COUNT[1]):
                 col.append(0)
             self.hasPlant.append(col)
+        self.client = asyncclient.AsyncClient(SERVER_IP, SERVER_PORT)
 
     def update(self):
         """
@@ -82,6 +87,41 @@ class Game:
 
         # print(f"僵尸数目：{len(self.zombies)}")
         # print(f"子弹数目：{len(self.summons)}")
+        self.autoLoot()
+        self.printSummonPos()
+
+    @property
+    def countPeaBullet(self):
+        """
+        统计子弹数目
+        @return:
+        """
+        count = 0
+        for summon in self.summons:
+            if summon.id == 0:
+                count += 1
+        # print(f"子弹总数：{count}")
+        return count
+
+    def autoLoot(self):
+        """
+        自动捡阳光
+        @return:
+        """
+        for summon in self.summons:
+            if not summon.canLoot():
+                continue
+            if summon.pos[1] > 500:
+                self.gold += summon.getPrice()
+                self.summons.remove(summon)
+
+    def printSummonPos(self):
+        """
+        输出召唤物位置
+        """
+        for summon in self.summons:
+            if summon.id == 0:
+                print(f"子弹pos:{summon.pos[0]}")
 
     def checkSummonVSZombie(self):
         """
@@ -111,7 +151,7 @@ class Game:
                 if plant.hp <= 0:
                     print(f'僵尸吃掉植物')
                     print(f"被吃掉植物的位置{plant.pos},{self.getIndexBypos(plant.pos)},{plant.getRect()}")
-                    x,y = self.getIndexBypos(plant.pos)
+                    x, y = self.getIndexBypos(plant.pos)
                     self.plants.remove(plant)
                     # 是否能种植植物标记
                     self.hasPlant[x][y] = 0
@@ -119,7 +159,7 @@ class Game:
 
     def renderFont(self):
         """
-
+        绘制文字
         @return:
         """
         textImage = self.goldFont.render(f"Gold:{str(self.gold)}", True, (0, 0, 0))
@@ -131,6 +171,11 @@ class Game:
         self.ds.blit(textImage, (13, 83))
         textImage = self.zombieFont.render(f"Score:{str(self.zombie)}", True, (255, 255, 255))
         self.ds.blit(textImage, (10, 80))
+
+        textImage = self.PeaBulletFont.render(f"PeaBullet:{str(self.countPeaBullet)}", True, (0, 0, 0))
+        self.ds.blit(textImage, (13, 143))
+        textImage = self.PeaBulletFont.render(f"PeaBullet:{str(self.countPeaBullet)}", True, (255, 255, 255))
+        self.ds.blit(textImage, (10, 140))
 
     def draw(self):
         """
@@ -195,7 +240,7 @@ class Game:
 
         sf = SunFlower(SUNFLOWER_ID, pos)
 
-        print(f"向日葵位置:{pos},x:{x},y:{y}")
+        # print(f"向日葵位置:{pos},x:{x},y:{y}")
 
         self.plants.append(sf)
 
@@ -213,13 +258,13 @@ class Game:
 
         sf = peashooter.PeaShooter(PEASHOOTER_ID, pos)
 
-        print(f"豌豆射手位置:{pos},x:{x},y:{y}")
+        # print(f"豌豆射手位置:{pos},x:{x},y:{y}")
 
         self.plants.append(sf)
 
     def addZombie(self, x, y):
         """
-        僵尸
+        产生僵尸
         @param x:
         @param y:
         @return:
@@ -228,7 +273,7 @@ class Game:
         pos = LEFT_TOP[0] + x * GRID_SIZE[0], LEFT_TOP[1] + y * GRID_SIZE[1]
         sf = ZombieBase(ZOMBIE_ID, pos)
 
-        print(f"僵尸位置:{pos},x:{x},y:{y}")
+        # print(f"僵尸位置:{pos},x:{x},y:{y}")
 
         self.zombies.append(sf)
 
@@ -306,5 +351,6 @@ class Game:
         if not self.checkLoot(mousePos):
             if btn == 1:
                 self.checkAddPlant(mousePos, SUNFLOWER_ID)
+                asyncio.run(self.client.c2s({'type': 0, 'pos': self.getIndexBypos(mousePos)}))
             elif btn == 3:
                 self.checkAddPlant(mousePos, PEASHOOTER_ID)

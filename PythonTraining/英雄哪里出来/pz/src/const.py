@@ -15,10 +15,13 @@ LEFT_TOP = (230, 73)
 PATH_BACK = '../pic/other/back.png'
 PATH_LOSE = '../pic/other/lose.png'
 
-
 SUNFLOWER_ID = 3
 PEASHOOTER_ID = 4
 ZOMBIE_ID = 1
 
 ZOMBIE_BORN_X = 14
+# 僵尸产生频率
 ZOMBIE_BORN_CD = 3
+
+SERVER_IP = '127.0.0.1'
+SERVER_PORT = 8888
