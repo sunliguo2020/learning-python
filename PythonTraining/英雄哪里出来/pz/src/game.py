@@ -18,9 +18,13 @@ from src.sunflower import SunFlower
 from zombiebase import ZombieBase
 import asyncclient
 import asyncio
+from share.const import *
 
 
 class Game:
+    """
+
+    """
     def __init__(self, ds):
         self.ds = ds
         self.isGameOver = False
@@ -351,6 +355,6 @@ class Game:
         if not self.checkLoot(mousePos):
             if btn == 1:
                 self.checkAddPlant(mousePos, SUNFLOWER_ID)
-                asyncio.run(self.client.c2s({'type': 0, 'pos': self.getIndexBypos(mousePos)}))
+                asyncio.run(self.client.c2s({'type': C2S_ADD_FLOWER, 'pos': self.getIndexBypos(mousePos)}))
             elif btn == 3:
                 self.checkAddPlant(mousePos, PEASHOOTER_ID)

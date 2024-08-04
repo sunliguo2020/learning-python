@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "node-fetch": "^3.3.2",
+    "node-jsencrypt": "^1.0.0"
+  }
+}

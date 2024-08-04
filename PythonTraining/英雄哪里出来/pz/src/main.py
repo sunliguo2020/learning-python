@@ -5,12 +5,13 @@
  @Email : sunliguo2006@qq.com
 """
 import sys
-
+import os
 import pygame
 from pygame.locals import QUIT
+top = os.path.abspath(__file__).split('\\')[:-2]
+sys.path.append(top)
 
 from const import *
-
 from game import Game
 
 pygame.init()
