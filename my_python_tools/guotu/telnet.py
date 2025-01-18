@@ -16,6 +16,9 @@ logging.basicConfig(filename='telnet.log',
 
 
 class TelnetClient(object):
+    """
+
+    """
     def __init__(self):
         self.tn = telnetlib.Telnet()
 
