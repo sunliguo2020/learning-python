@@ -25,7 +25,7 @@ if __name__ == '__main__':
             os.makedirs(folder_path)
 
         # 文件名包含时间戳
-        mytime = time.strftime('%H%M%S', time.localtime())
+        mytime = time.strftime('%Y%m%d%H%M%S', time.localtime())
 
         file_path = os.path.join(folder_path, "10.155.88.254_{}_arp.log".format(mytime))
 
