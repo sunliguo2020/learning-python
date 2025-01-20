@@ -132,3 +132,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 **/node_modules/
+/Python's Books/Django+Vue.js 实战派Python Web开发与运维/chap08/myshop-api/media/

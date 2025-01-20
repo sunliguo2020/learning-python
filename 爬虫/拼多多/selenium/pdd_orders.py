@@ -5,7 +5,7 @@
 @Created on: 2024-08-27 18:28
 手动登录拼多多后，找到cookie，然后将cookie添加到代码中，实现自动登录拼多多。
 实现功能
-1、采集订单信息，导出到csv文件中
+1、采集订单信息，导出到csv或excel文件中
 """
 import csv
 import os
@@ -19,8 +19,6 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
 
 def save2csv(orders):
@@ -37,18 +35,21 @@ def save2csv(orders):
         writer.writerows(orders)
 
 
-def save2xls(orders):
+def save2xls(pdd_orders, save_file_name='orders.xlsx'):
+    """
+    将订单数据保存到Excel文件中
+    """
     # 保存到Excel文件中
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.append(['商品名称', '商品图片', '商品属性', '商品数量', '商品价格', '实付金额'])
+    ws.append(['商品名称', '商品属性', '商品数量', '商品价格', '实付金额'])
 
-    for order in orders:
+    for order in pdd_orders:
         # 注意：Excel中不直接存储图片，但我们可以存储图片的路径
         # img_path = f"{os.path.basename(img_folder)}/{order[1].split('/')[-1]}"
-        ws.append([order[0], order[1], order[2], order[3], order[4], order[5]])
+        ws.append(order)
 
-    wb.save('orders.xlsx')
+    wb.save(save_file_name)
 
 
 def scroll_until_element_visible(driver, element_selector, timeout=600):
@@ -85,16 +86,29 @@ def download_img(img_url, img_folder, img_name):
     下载图片并保存到指定的文件夹。
 
     :param img_url: 图片的URL地址
+    :param img_name:
     :param img_folder: 保存图片的文件夹路径
     :
     """
+    # 确保文件夹存在
+    os.makedirs(img_folder, exist_ok=True)
     # 下载图片
     response = requests.get(img_url)
     img_data = BytesIO(response.content)
     img = Image.open(img_data)
-    if img.mode == 'RGBA':
+
+    # 检查并转换图像模式
+    print(f"Original mode: {img.mode}")  # 打印原始模式
+
+    # 检查图像模式，如果不是'RGB'或'L',则转换为'RGB'
+    if img.mode not in ['RGB', 'L']:
         img = img.convert('RGB')
+    # 构造图像文件名和路径
     img_filename = f"{img_folder}/{img_name}.jpg"
+
+    # 保存图像之前再次打印模式以确保
+    print(f"Final mode before saving: {img.mode}")
+    # 保存图像
     img.save(img_filename)
 
 
@@ -103,9 +117,11 @@ def scroll_to_bottom(driver):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 
+# chrome 驱动
 service = Service(r'd:/chromedriver-win64/chromedriver.exe')
 browser = webdriver.Chrome(service=service)
 
+# 我的订单页面
 order_url = 'https://mobile.yangkeduo.com/orders.html'
 
 browser.get(order_url)
@@ -116,13 +132,12 @@ cookies = browser.get_cookies()
 # for cookie in cookies:
 #     print(f"{cookie['name']}={cookie['value']}")
 
-# 添加cookie
+# 要添加的多个 cookie 需要先手动登录pdd，获取cookie
 
-# 要添加的多个 cookie
 cookies = [
-    {'name': 'JSESSIONID', 'value': '3724CA69FE445C374F0493EFC4978A2E', 'domain': 'mobile.yangkeduo.com',
+    {'name': 'JSESSIONID', 'value': '6A982A26D8ABF34AC9DB46828CE1C8AB', 'domain': 'mobile.yangkeduo.com',
      'path': '/'},
-    {'name': 'PDDAccessToken', 'value': '3B6MZR2YC67OG66BVW3BBZXQLRG3LOSUONHX4UPH6TCY6TSPDYXA1209d00',
+    {'name': 'PDDAccessToken', 'value': '5LPOIJ2KTPB54J5QNTU5ZV6TMUKU7ALB2FWBDD4WBFI4Y7QCC7AQ1209d00',
      'domain': 'mobile.yangkeduo.com', 'path': '/'}
 ]
 
@@ -136,9 +151,9 @@ browser.get(order_url)
 # 向下滚动
 # <div class="loading-text">您已经没有更多的订单了</div>
 #
-# for _ in range(100):
-#     time.sleep(0.5)  # 0.5s 防止被识别为 bot
-#     browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+for _ in range(200):
+    time.sleep(0.5)  # 0.5s 防止被识别为 bot
+    browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 # 调用函数滚动页面直到找到元素
 # element_selector = (By.CLASS_NAME, 'loading-text')
@@ -155,13 +170,16 @@ img_folder = 'order_images'
 if not os.path.exists(img_folder):
     os.makedirs(img_folder)
 
-for order_div in order_list_div:
+for no, order_div in enumerate(order_list_div):
     product_name = order_div.find_element(By.XPATH, './/span[@data-test="商品名称"]').text
     if product_name:  # 确保找到了商品名称
         # 商品图片
         product_img_div = order_div.find_element(By.XPATH, './/div[@data-test="商品图片"]')
         product_img = product_img_div.find_element(By.TAG_NAME, 'img').get_attribute('src')
         product_img_url = product_img.split('?')[0]
+        img_name = os.path.basename(product_img_url)
+        # 下载图片
+        download_img(product_img_url, img_folder, img_name)
 
         # 商品属性  //p[@class="_3CQR8Qs3"]
         product_attribute = order_div.find_element(By.CLASS_NAME, '_3CQR8Qs3').text
@@ -174,8 +192,9 @@ for order_div in order_list_div:
 
         # 实付金额
         total = order_div.find_element(By.CLASS_NAME, '_2hfIDJ43').text
-        print(f"商品名称: {product_name},商品价格: {product_price},实付金额: {total}")
+        print(f"{no}:商品名称: {product_name},商品价格: {product_price},实付金额: {total}")
 
+        """
         # 定位并点击进入详情页
         detail_em = order_div.find_element(By.XPATH, './/span[@data-test="商品名称"]')
         detail_em.click()
@@ -199,22 +218,19 @@ for order_div in order_list_div:
         order_time = order_time_element.text  # 提取下单时间文本
         print(f"订单号: {order_sn},下单时间: {order_time}")
 
-        # 下载图片
-        download_img(product_img_url, img_folder, f"{order_sn}.jpg")
-
-        orders.append((order_time,
-                       order_sn,
-                       product_name,
-                       product_img_url,
-                       product_attribute,
-                       product_quantity,
-                       product_price,
-                       total))
+        
+"""
+        orders.append((
+            product_name,
+            product_attribute,
+            product_quantity,
+            product_price,
+            total))
 
         # 返回原窗口
         # 使用JavaScript回到上一页
-        browser.execute_script("window.history.go(-1)")
+        # browser.execute_script("window.history.go(-1)")
 
-save2xls(orders)
+save2xls(orders, "pdd_orders-20241118.xls")
 
 time.sleep(2000)
