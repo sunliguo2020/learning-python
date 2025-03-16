@@ -2,6 +2,7 @@
 *.csv
 *.exe
 *.ts
+*.mp4
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
