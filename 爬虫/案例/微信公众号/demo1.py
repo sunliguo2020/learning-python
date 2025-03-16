@@ -30,7 +30,7 @@ def download_wechat_video(video_url, output_path):
 # 示例使用
 if __name__ == "__main__":
     # 替换为实际的微信公众号视频链接
-    video_url = ""
+    video_url = "https://mpvideo.qpic.cn/0b786aaaeaaam4ad3235prpfb4gdalyaaaqa.f10002.mp4?dis_k=ab6692e4d80c32f61cb69fb25d6b9904&dis_t=1738473254&play_scene=10120&auth_info=GrTzw/YjT2oG6JfWtAgpPz9uZU45ME9pSVs9a0hWUnwiLQYmcG0wEHdiNk0EMCUc&auth_key=6ec1b665875ee2c9848da44aafd53886&vid=wxv_1269604293192105984&format_id=10002&support_redirect=0&mmversion=false"
     # 替换为保存视频的路径
     output_path = "wechat_video.mp4"
 
